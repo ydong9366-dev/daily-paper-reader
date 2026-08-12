@@ -1,0 +1,497 @@
+Title: A Taxonomy of Cognitive Capability Gaps in Generative and Agentic AI
+
+URL Source: https://arxiv.org/pdf/2608.02553v1
+
+Published Time: Tue, 04 Aug 2026 02:46:40 GMT
+
+Number of Pages: 15
+
+Markdown Content:
+> 1
+
+# A Taxonomy of Cognitive Capability Gaps in Generative and Agentic AI 
+
+Taye Akinrele ∗, Sindhuja Penchala †, Noorbakhsh Amiri Golilarz ‡, Sudip Mittal § Shahram Rahimi ¶
+
+Department of Computer Science, The University of Alabama, Tuscaloosa, Alabama, USA. 
+
+{toakinrele ∗, spenchala †, namirigolilarz ‡, smittal § srahimi1 ¶}@ua.edu 
+
+Abstract —Cognitive AI seeks to move beyond language gener-ation and autonomous task execution toward systems capable of sustained reasoning, adaptive behavior, persistent memory, and self-regulation. While generative and agentic AI have demon-strated impressive capabilities across a wide range of tasks, many fundamental cognitive functions remain fragmented or weakly developed, limiting reliable operation over extended time horizons. This paper presents a taxonomy-driven survey of the major cognitive capability gaps that continue to constrain the development of Cognitive AI. The literature is organized around five dimensions: persistent state modeling, goal-directed autonomy, self-monitoring and control, environment interaction, and learning and adaptation. For each dimension, we review recent advances, identify recurring limitations, and discuss open research challenges. Building on these insights, we outline a con-ceptual Adaptive Cognitive Intelligence Architecture (ACIA) and examine emerging directions in cognition-centric evaluation. The proposed taxonomy provides a unified framework for organizing existing research, identifying unresolved challenges, and guiding the design of future cognitively capable systems. Together, the tax-onomy, architectural perspective, and evaluation framework offer a roadmap for advancing AI systems that exhibit more reliable long-term reasoning, adaptive decision-making, and continual learning. The survey highlights key research opportunities toward more adaptive, reliable, and cognitively capable AI systems, providing a foundation for future progress toward Cognitive AI and, ultimately, Artificial General Intelligence (AGI). 
+
+Index Terms —Cognitive AI, Artificial General Intelligence (AGI), Generative AI, Agentic AI, Cognitive Architectures, Tax-onomy. 
+
+I. I NTRODUCTION 
+
+# ARTIFICIAL intelligence (AI) systems are increasingly be-ing deployed in complex, dynamic, and high-stakes environments, including healthcare, finance, scientific discov-ery, cybersecurity, and autonomous systems. Recent advances in large language models (LLMs), foundation models, and agentic AI have enabled systems capable of language un-derstanding, reasoning, planning, tool use, and autonomous task execution across a wide range of domains [1], [2]. These developments have created the impression that AI systems are progressing toward increasingly intelligent and autonomous behavior. However, strong performance on reasoning benchmarks, in-struction following, and task execution should not be conflated with cognition. Human cognition extends beyond generating correct outputs and includes persistent memory, adaptive learn-ing, self-monitoring, goal maintenance, environmental ground-ing, and the ability to continuously revise beliefs and behavior in response to experience. While contemporary generative and agentic systems exhibit impressive task-level capabilities, many of these fundamental cognitive properties remain weakly developed or entirely absent [3], [4], [5]. This distinction becomes increasingly important as AI sys-tems move beyond isolated interactions and are expected to operate autonomously over extended time horizons. Long-term autonomous behavior requires maintaining internal state across interactions, adapting to changing environments, monitoring reasoning processes, and sustaining coherent objectives despite evolving conditions. Yet most modern AI systems remain fundamentally reactive, relying on next-token prediction and static training data rather than continuously evolving internal representations [6], [7]. Although these systems can solve many short-horizon tasks, they often struggle to maintain per-sistent memory, preserve long-term goals, reason consistently under changing information, and adapt reliably over time [5], [8]. Several limitations contribute to this broader cognitive gap. Current systems exhibit weak persistent memory and limited mechanisms for maintaining coherent state across extended interactions, often requiring information to be repeatedly reintroduced through prompts or external memory systems [4]. In addition, attention-control mechanisms remain limited for dynamically prioritizing relevant information across long-horizon tasks. While transformer attention enables context-dependent processing, it does not provide persistent cognitive attention capable of selectively focusing on goals, beliefs, memories, and environmental signals over time. Consequently, important information may be overlooked or inconsistently integrated during reasoning and decision-making [9], [10]. Reasoning and world modeling also remain brittle. While models can retrieve facts and perform localized reasoning, they frequently fail to propagate updates consistently across related beliefs and internal representations, resulting in logical inconsistencies, unstable world models, and unreliable behav-ior [11], [12]. Similarly, self-monitoring and metacognitive capabilities remain limited, reducing the ability of systems to recognize uncertainty, detect reasoning failures, evaluate their own performance, or reliably self-correct [13], [14]. Fur-thermore, many agentic systems exhibit weak environmental grounding and adaptive autonomy, relying heavily on exter-nally defined goals and workflows rather than restructuring internal representations in response to changing conditions [15], [16]. arXiv:2608.02553v1 [cs.AI] 3 Aug 2026 2Pattern 
+
+Learning 
+
+> Learns patterns from large
+> amounts of data
+
+Content 
+
+Creation 
+
+> Produces text, images, code
+> and other outputs
+
+Language 
+
+Generation 
+
+> Generates coherent text and
+> natural language
+
+GENERATIVE AI 
+
+Planning 
+
+> Breaks goals into
+> steps and plans
+> execution
+
+Tool Use 
+
+> Uses external tools
+> and API to act in the
+> world
+
+Decision 
+
+Making 
+
+> Evaluates options
+> and selects the best
+> course of action
+
+Task Autonomy 
+
+> Operates with a degree
+> of independence to
+> achieve goals
+
+AGENTIC AI 
+
+Goal-Directed 
+
+Action 
+
+> Executes actions in
+> the environment to
+> achieve goals
+
+COGNITIVE AI 
+
+> Maintains an internal
+> model of the world
+
+Belief 
+
+Formation 
+
+Persistent 
+
+Memory 
+
+> Working, episodic,
+> and long-term
+> memory
+
+Executive 
+
+Control 
+
+> Allocates resources,
+> makes decisions and
+> regulates behavior
+
+Attention 
+
+Control 
+
+> Selects what to focus
+> on from complex
+> inputs
+
+Metacognition 
+
+(Self-Monitoring) 
+
+> Monitors and evaluates
+> its own thinking and
+> confidence
+
+Uncertainty 
+
+Estimation 
+
+> Represents and
+> reasons with uncertainty
+> and ambiguity
+
+Continual Learning 
+
+& Adaptation 
+
+> Continuously learns
+> and adapts from
+> experience
+
+Robust & Adaptive 
+
+Reasoning 
+
+> Integrates knowledge,
+> memory, experience and
+> goals for reliable decision
+> Environment
+> External world,
+> users, systems
+> Perception
+> Senses and
+> collects data
+> Belief State
+> Maintains beliefs,
+> memory, goals,
+> and uncertainty
+> Reasoning
+> Infers, plans,
+> decides
+> Action
+> Acts in the
+> world
+> Attention
+> Select relevant
+> information
+> Feedback
+
+Cognitive AI (Closed Loop Interaction with the Environment)  
+
+> Text summarization
+> Translation
+> Question answering
+> Code generation
+> Image generation
+> Data-to-text
+> Task planning
+> Decision making
+> Web search & retrieval
+> API/tool invocation
+> Workflow execution
+> Autonomous task
+> completion
+> Long-term memory
+> Belief revision
+> Self assessment
+> Adaptive planning
+> Lifelong learning
+> Context-aware
+> reasoning
+> Robust decision-
+> making
+
+Fig. 1. Conceptual evolution from Generative AI to Agentic AI and Cognitive AI, highlighting the additional cognitive capabilities introduced at each stage and the closed-loop perception–reasoning–action cycle underlying sustained cognitive behavior. 
+
+These limitations present significant challenges for real-world deployment. In safety-critical domains, an inability to maintain persistent state, adapt to distribution shifts, re-vise beliefs, or recognize uncertainty can result in degraded performance and unreliable behavior [17], [16]. Moreover, continual retraining, knowledge editing, and evolving data streams introduce additional risks of instability, inconsistency, and catastrophic forgetting [18], [19]. As a result, current systems remain heavily dependent on external supervision and human intervention despite increasing levels of operational autonomy. These challenges have motivated growing interest in cogni-tive AI, which seeks to move beyond probabilistic generation toward systems capable of sustained reasoning, adaptive learn-ing, persistent memory, self-regulation, and continuous inter-action with dynamic environments [20]. Achieving this vision likely requires architectures that integrate memory, reasoning, goal management, metacognitive monitoring, environmental interaction, and adaptive learning within a unified cognitive framework [15], [16]. As illustrated in Figure 1, cognitive AI extends beyond content generation and autonomous task execution by maintaining an evolving internal cognitive state composed of beliefs, memory, goals, and self-monitoring mechanisms that support continual adaptation in dynamic envi-ronments. While recent surveys have examined important areas such as autonomous agents, continual learning, uncertainty estimation, and agentic AI [6], [21], [2], these efforts are typically organized around individual research domains rather than the broader cognitive capabilities required for robust intelligence. Consequently, a unified understanding of the major cognitive limitations that continue to constrain current AI systems remains underdeveloped. To address this gap, this paper presents a taxonomy-driven analysis of the core cognitive limitations of modern generative and agentic AI systems and discusses their implications for Cognitive AI. The proposed taxonomy organizes these limita-tions into five interconnected cognitive components: persistent state modeling, goal-directed autonomy, self-monitoring and control, environment interaction, and learning and adaptation (Fig. 3). These components represent the fundamental capa-bilities required for sustained cognitive behavior and highlight recurring limitations that continue to constrain the develop-ment of more adaptive, autonomous, and cognitively capable AI systems. 3
+
+The primary contributions of this survey are as follows:  
+
+> •
+
+We propose a taxonomy of core cognitive capability gaps in contemporary generative and agentic AI systems, orga-nized around five fundamental dimensions of cognition.  
+
+> •
+
+We synthesize existing research on memory, reasoning, autonomy, metacognition, environmental grounding, and adaptation, highlighting persistent limitations that remain unresolved.  
+
+> •
+
+We present a recommended Adaptive Cognitive Intel-ligence Architecture (ACIA) that integrates memory, reasoning, metacognition, action, and adaptive learning within a unified cognitive framework.  
+
+> •
+
+We examine current evaluation methodologies and dis-cuss cognition-centric evaluation strategies for assessing persistent memory, adaptive behavior, and cognitive con-sistency beyond conventional benchmark performance.  
+
+> •
+
+We identify key research challenges and future directions toward the development of more adaptive, reliable, and cognitively capable AI systems. The remainder of this paper is organized as follows. Section II introduces Cognitive AI and its core capability requirements. Section III presents the survey methodology and taxonomy overview. Section IV discusses the proposed cognitive capa-bility gaps and associated limitations in current AI systems. Section V presents the recommended Adaptive Cognitive Intelligence Architecture (ACIA), while Section VI examines evaluation strategies and challenges. Section VII discusses open research questions and future directions, and Section VIII concludes the paper. II. B ACKGROUND 
+
+This section establishes the conceptual foundation for the survey. We first define Cognitive AI and distinguish it from related paradigms, then discuss the evolution of AI systems toward increasingly autonomous and adaptive behavior. Fi-nally, we introduce the core cognitive capability dimensions that motivate the taxonomy used throughout the remainder of this paper. 
+
+A. Cognitive Artificial Intelligence 
+
+Artificial General Intelligence (AGI) is often described as the ability of an intelligent system to understand, learn, reason, and adapt across a broad range of tasks and envi-ronments with a level of flexibility comparable to human intelligence [28]. Achieving this objective requires capabili-ties that extend beyond task-specific performance, including persistent memory, adaptive learning, goal-directed behavior, self-monitoring, and the ability to continuously interact with and learn from dynamic environments. These capabilities are commonly associated with cognition and are widely regarded as fundamental requirements for the development of more general and autonomous forms of intelligence. Within this context, Cognitive Artificial Intelligence has emerged as a research direction focused on developing systems that exhibit persistent, adaptive, and self-regulating behavior. Cognitive AI seeks to integrate perception, memory, reasoning, learning, action, and metacognitive control within a unified feedback-driven framework [27], [26]. Unlike systems that treat interactions as isolated events, cognitive systems maintain internal state, accumulate experience over time, revise beliefs in response to new information, and adapt their behavior based on environmental feedback. The objective is to support sus-tained intelligence capable of operating effectively in complex and evolving environments. The emergence of generative and agentic AI has brought the field closer to this objective. Generative AI has demonstrated remarkable capabilities in language understanding, content generation, and knowledge synthesis, while agentic AI extends these capabilities through planning, tool use, and autonomous task execution [26]. Despite these advances, many existing systems remain dependent on external orchestration and con-tinue to exhibit limitations in memory persistence, long-term adaptation, self-monitoring, and autonomous decision-making [15], [5]. Cognitive AI seeks to address these limitations by integrating cognitive capabilities within a cohesive architecture that supports continual adaptation, self-regulation, and long-horizon autonomy. As such, Cognitive AI may be viewed as an important step toward the development of more robust, adaptive, and generally intelligent systems. 
+
+B. Evolution of Artificial Intelligence to Cognitive Intelligence 
+
+The development of Cognitive AI can be viewed as part of a broader progression in artificial intelligence (see Fig 2). Early AI systems relied primarily on symbolic reasoning and predefined rules to perform deterministic tasks [22]. The emer-gence of machine learning shifted the focus toward data-driven pattern recognition and statistical inference, while deep learn-ing enabled increasingly sophisticated representation learning from large-scale data [23], [24]. More recently, foundation models and generative AI systems demonstrated remarkable capabilities in language understanding, multimodal processing, reasoning, and content generation [29], [25]. The rise of Agentic AI further expanded these capabilities by incorporating planning, tool use, and autonomous task execution [26]. Despite these advances, important challenges related to memory persistence, continual adaptation, self-monitoring, and long-term autonomy remain unresolved [16], [5]. Cognitive AI represents the next stage in this evolution by emphasizing persistent cognition rather than short-term task completion. In this paradigm, intelligence emerges from the interaction of memory, reasoning, learning, self-regulation, and environmental feedback rather than from generation alone [27]. Table I summarizes the progression of AI paradigms and highlights how Cognitive AI extends previous approaches by integrating capabilities necessary for sustained autonomous behavior. III. S URVEY METHODOLOGY AND TAXONOMY OVERVIEW 
+
+This survey adopts a narrative synthesis approach to ex-amine the cognitive limitations of contemporary generative and agentic AI systems. Rather than organizing the literature by model family or application domain, we analyze existing 4Rules Data Network Create Act Cognition    
+
+> Follow Rules and
+> Logic Learn from Data Understand
+> Patterns Create and generate
+> content Plan, Act & Execute Autonomously Think, Learn & Adapt Continuously
+
+Fig. 2. Evolution of artificial intelligence paradigms from rule-based systems to Cognitive AI. TABLE I EVOLUTION OF ARTIFICIAL INTELLIGENCE TOWARD COGNITIVE AI 
+
+AI Paradigm Timeline Core Function Potential Applications Major Limitations Rule-Based AI 
+
+[22] 1950s-1980s Follows predefined sym-bolic rules and logical rea-soning. Expert systems, rule en-gines, and decision support systems. Cannot learn, brittle be-havior, and limited adapt-ability. 
+
+Machine Learning [23] 1990s-2000s Learns statistical patterns from structured data. Spam filtering, recommen-dation systems, fraud detec-tion, and prediction tasks. Requires feature engineer-ing and struggles with complex relationships. 
+
+Deep Learning 
+
+[24] 2010s Learn hierarchical representations from large-scale data using neural networks. Image recognition, speech processing, machine transla-tion, and autonomous per-ception. High computational cost, large data requirements, and limited interpretabil-ity. 
+
+Generative AI 
+
+[25] Late 2010s-Early 2020s Generates text, images, code, audio, and multi-modal content. Chatbots, copilots, content generation, and summariza-tion. Hallucinations, weak rea-soning, and limited con-textual understanding. 
+
+Agentic AI [26] From 2024 Plans, decides, and exe-cutes tasks autonomously using tools and APIs. AI assistants, workflow or-chestration, and task au-tomation. Goal misalignment, lim-ited long-term memory, and need for human over-sight. 
+
+Cognitive AI [27] Emerging Integrates reasoning, memory, adaptive learning, and self-monitoring. Autonomous systems, sci-entific discovery, and com-plex decision-making. Challenges in alignment, safety, trust, and integrat-ing cognitive capabilities. 
+
+research through the lens of cognitive capabilities and opera-tional behavior. The surveyed literature spans cognitive architectures, foun-dation models, agentic AI, memory systems, reasoning and planning, metacognition, environment interaction, world mod-eling, and continual learning. Particular attention is given to recurring limitations that affect long-term autonomy, includ-ing memory degradation, reasoning inconsistency, goal drift, weak environmental grounding, uncertainty management, and continual adaptation. Through this synthesis, five recurring dimensions of cog-nitive capability emerged across the surveyed literature: Persistent State Modeling, Goal-Directed Autonomy, Self-Monitoring and Control, Environment Interaction, and Learn-ing and Adaptation. These dimensions form the taxonomy used throughout the remainder of this survey. IV. T AXONOMY OF CORE COGNITIVE CAPABILITY GAPS 
+
+This section presents the proposed taxonomy of the core cognitive capability gaps in modern generative and agentic AI systems, as illustrated in Fig. 3. Table II provides a summary of the proposed taxonomy. The following subsections discuss each cognitive capability component, its associated objectives, limitations, and representative approaches from the literature. 
+
+A. Persistent State Modeling 
+
+Similar to human working memory, which supports sophis-ticated reasoning, persistent state modeling describes an AI system’s capacity to preserve, update, and modify internal representations across time [5]. While large language models (LLMs) excel at immediate text generation, they typically lack stable internal representations of the world and instead operate as reactive, post hoc solvers rather than proactive planners. This limitation becomes particularly pronounced in long-horizon tasks, where earlier context must be revised or integrated with new information. This subsection outlines the key limitations of persistent state modeling, along with representative approaches proposed to address them and the gaps that remain. 
+
+Persistent Memory : A core requirement of cognitive AI is the ability to retain and integrate information across interac-tions, tasks, and time horizons, enabling behavior that extends beyond reactive inference [30]. However, fixed context win-dows and stateless interactions often cause prior information to be displaced as new content arrives, limiting the ability of current systems to accumulate experience over time [31]. Recent work has explored a range of approaches to ad-dress this limitation. Architectures such as Transformer-XL [32] and Compressive Transformers [33] improve long-range dependency modeling, while frameworks such as MemGPT [34] augment LLMs with hierarchical memory management. Other systems, including AriGraph [15], MemoryBank [35], and SYNAPSE [36], organize experiences through structured memory representations and associative retrieval mechanisms. These methods substantially improve memory retention, 5Core Cognitive Gaps   
+
+> Persistent State
+> Modeling
+> Goal Directed
+> Autonomy
+> Self-monitoring &
+> Control
+> Environment
+> Interaction
+> Learning &
+> Adaptation
+> Latent State
+> Modeling
+> Persistent Memory
+> State Revision
+> Goal Persistence
+> Planning &
+> adaptation
+> Goal formation Metacognitive
+> Monitoring
+> Uncertainty & OOD
+> detection
+> Abstention &
+> Control decisions
+> World Modeling
+> Tool-Augmented
+> Reasoing
+> Environment
+> Feedback Loops
+> Continual Learning
+> Safe Knowledge
+> Updates
+> Policy Adaptation
+> Fig. 3. Taxonomy of core cognitive capability gaps in modern AI systems, organized into five cognitive components: persistent state modeling, goal-directed autonomy, self-monitoring and control, environment interaction, and learning and adaptation.
+
+retrieval accuracy, and long-horizon interaction capabilities. However, memory remains largely external to the model rather than maintained as a continuously evolving cognitive state. The resulting challenges in long-term state management are further exacerbated by the “curse of memory,” where modeling long-term dependencies becomes increasingly costly as task complexity grows [37]. 
+
+State Revision : Beyond retaining information, cognitive systems must be capable of revising beliefs in response to new or conflicting evidence. While LLMs often appear to update their reasoning during chain-of-thought generation, empirical studies suggest that these revisions are frequently shallow and inconsistent. For example, the Belief-R benchmark demon-strates that many models struggle to reliably update conclu-sions when presented with new information, often exhibiting trade-offs between adaptability and stability [4]. Current approaches address this challenge through knowl-edge editing, reflective reasoning, and search-based refine-ment. Knowledge editing methods such as LTE [19] and BaFT [18] selectively update stored knowledge, while self-reflection and self-correction methods attempt to refine outputs through iterative feedback [17]. Search and backtracking approaches further seek to improve reasoning through exploration of alternative solution paths [38]. These findings point to a deeper structural gap: current systems can retrieve or modify information, but they do not reliably revise beliefs in a coherent and stable manner under uncertainty. In other words, updating outputs or accessing new knowledge does not amount to maintaining a consistent, revisable internal belief state [39], [13], [14]. 
+
+Latent State Modeling : Robust cognition depends not only on explicit reasoning but also on the ability to maintain stable internal representations that preserve commitments, track evolving conditions, and support consistent behavior over time. Current AI systems rely heavily on language-based reasoning, requiring intermediate reasoning states to be expressed explicitly rather than maintained internally [40]. This contributes to the latent state persistence gap, where models fail to maintain stable hidden commitments across related interactions, resulting in inconsistency and concept drift [5]. Recent approaches attempt to shift part of the reasoning process into latent space. Approaches such as Coconut [41] perform reasoning through continuous hidden representations, while CTRLS [42] models reasoning as latent state transitions under uncertainty. Related work connecting State Space Mod-els and Hidden Markov Models further highlights the potential of latent-state representations for reasoning and decision-making [43]. While these approaches expand the representational space available for reasoning, most remain confined to within-sequence inference and do not maintain persistent latent state across interactions. Consequently, current systems continue to reason primarily over generated traces rather than stable internal commitments, limiting their ability to sustain coherent world models over time. 
+
+B. Goal Directed Autonomy 
+
+Goal-directed autonomy refers to the ability of an AI system to formulate objectives, plan and adapt actions, and sustain goal pursuit over time. In contrast, most current AI systems operate reactively, responding to prompts without maintaining stable goals across interactions. While recent agentic systems incorporate capabilities such as planning, tool use, and task decomposition [26], they remain dependent on externally specified instructions and lack the ability to autonomously maintain and pursue goals over extended interactions. This limitation becomes particularly evident in multi-step or open-ended settings, where sustained goal commitment is required. This subsection examines the key limitations of goal-directed autonomy, organized around goal formulation, plan-ning and adaptation, and goal persistence, along with repre-sentative approaches and the gaps that remain. 
+
+Goal Formulation : A key aspect of autonomy is the ability to generate and refine goals rather than simply executing externally specified instructions. Current AI systems remain predominantly reactive, with behavior driven by prompts, predefined objectives, or reward functions [27]. As a result, they struggle to initiate exploration, restructure priorities, or pursue self-directed objectives. Current methods generally focus on subgoal discovery and hierarchical planning. In reinforcement learning, subgoals can 6
+
+emerge through trajectory analysis, clustering, and anomaly detection, allowing agents to identify intermediate objectives that support learning [44]. Other frameworks employ hierar-chical planners and task decomposition mechanisms to bridge high-level goals and executable actions [45]. While these approaches improve task decomposition and local autonomy, goal formulation remains largely domain-specific and lacks the intrinsic drives required for open-ended exploration, un-certainty reduction, and self-directed learning. 
+
+Planning and Adaptation : Effective autonomy requires agents to translate goals into coherent action sequences and adapt those plans as conditions evolve [46]. Although modern AI systems can generate plausible plans, they often struggle to maintain consistency, satisfy constraints, and adapt reliably over long horizons [47]. Current approaches generally fall into three categories: reasoning-based planning, hierarchical planning, and adaptive planning. Reasoning-based methods such as Chain-of-Thought [48], Tree of Thoughts [49], and Graph of Thoughts [50] improve planning through explicit reasoning, exploration, and backtracking. Hierarchical frameworks such as HiPlan [51] support long-horizon planning through multi-level guidance, while adaptive approaches including AdaPlanner [52], Reflex-ion [53], and Self-Refine [54] incorporate feedback to revise plans and recover from failures. Despite these advances, planning remains brittle in dynamic environments. Methods that improve adaptability often intro-duce significant computational overhead, while systems that generate effective plans frequently struggle to preserve con-sistency across extended reasoning chains. Balancing planning reliability, adaptability, and efficiency therefore remains an open challenge. 
+
+Goal Persistence : Beyond generating and executing plans, autonomous systems must maintain commitment to long-term objectives despite environmental changes and competing influ-ences. A common failure mode is goal drift, where an agent gradually deviates from its intended objective as interactions accumulate or conditions evolve [16]. Existing work has explored several mechanisms for im-proving goal stability. Goal-driven autonomy frameworks em-phasize sustained goal management rather than isolated task completion [3], while strong goal elicitation methods seek to suppress competing objectives and reinforce alignment with intended outcomes [16]. Other approaches include coherence-based alignment [55], embodied autonomy frameworks such as PEPA [56], and formal measures such as Maximum Entropy Goal-Directedness [57] that quantify consistency in objective pursuit. Although these approaches improve goal stability, main-taining long-term goal commitment remains difficult. Agents remain vulnerable to inherited goal drift, environmental dis-tractions, and accumulated errors over extended interactions [58]. Consequently, the ability to follow instructions or opti-mize short-term objectives does not necessarily translate into persistent autonomy over long time horizons. 
+
+C. Self-Monitoring and Control 
+
+One of the defining characteristics of cognition is the ability to reflect on and regulate one’s own behavior. Effec-tive decision-making requires systems to monitor reasoning processes, estimate uncertainty, identify errors, and adjust actions when conditions change. While recent AI systems exhibit increasingly sophisticated reasoning capabilities, they remain limited in their ability to evaluate the reliability of their own outputs and dynamically regulate behavior without external intervention [59], [60]. This subsection examines key limitations in self-monitoring and control and the extent to which current approaches address them. 
+
+Metacognitive Monitoring : Robust intelligence requires the ability to evaluate ongoing reasoning, identify potential errors, and revise conclusions when necessary. Current AI systems, however, typically proceed directly to generation without critically assessing intermediate reasoning states, often producing confident outputs despite flawed reasoning [39]. This limitation is particularly problematic in high-stakes set-tings, where users may interpret fluent responses as evidence of correctness. Research on metacognitive monitoring has largely focused on three directions: reasoning verification, self-correction, and reflective reasoning. Verification-based methods such as PROCO [61], Step CoT Check, and VeriFY [62] seek to identify logical inconsistencies in intermediate reasoning steps. Other approaches, including ProgCo [63], augment linguistic reasoning with symbolic verification, while reflective frame-works attempt to improve outputs through iterative self-evaluation and revision. While these techniques improve error detection in con-strained settings, they fall short of providing robust metacog-nitive monitoring. Token-level probabilities remain weak in-dicators of semantic correctness, and models frequently fail to recognize reasoning errors without external guidance. As a result, self-correction remains limited and fragile. 
+
+Uncertainty and Out-of-Distribution Detection : Effective self-monitoring also requires the ability to estimate confidence and recognize situations where available knowledge may be in-sufficient. In practice, AI systems often exhibit overconfidence, particularly on difficult or out-of-distribution (OOD) tasks, and struggle to distinguish uncertainty arising from ambiguous inputs, missing knowledge, or distributional shifts [64]. Efforts to improve uncertainty awareness have centered on confidence estimation, semantic uncertainty, and out-of-distribution detection. Methods such as Answer-Free Confi-dence Estimation (AFCE) [60] estimate confidence indepen-dently of answer generation, while Semantic Entropy and Kernel Language Entropy measure uncertainty through se-mantic variation across outputs [64]. In multimodal settings, approaches such as EOE leverage generated outlier examples to improve OOD detection [65]. Nevertheless, reliable uncertainty estimation remains elusive across domains and prompting conditions. Small changes in wording can substantially alter confidence estimates without corresponding changes in correctness [66]. More fundamen-tally, expressions of confidence often reflect learned linguistic 7
+
+patterns rather than calibrated assessments of underlying un-certainty [67]. 
+
+Abstention and Control Decisions : An important aspect of cognitive control is recognizing when available evidence is insufficient to support a reliable conclusion. Current AI systems are often optimized to provide answers rather than acknowledge uncertainty, increasing the risk of generating plausible but unsupported responses [68]. This limitation is compounded by coarse control mechanisms that frequently reduce decisions to either full compliance or complete refusal. Several strategies have been proposed to improve absten-tion behavior, including selective prediction, refusal-aware training, and uncertainty-based control mechanisms. Selective prediction methods such as SelectiveNet and RISAN introduce reject options that balance risk and coverage [69], [70]. Other approaches, including R-Tuning [71], encourage explicit expressions of uncertainty, while methods such as ABCA [72] and Seal [20] use knowledge consistency and uncertainty signals to determine when abstention is appropriate. These strategies reduce unsupported responses but do not fully address the underlying challenge. Models often strug-gle to generalize abstention decisions across domains, and efforts to improve refusal behavior can introduce excessive conservatism. More importantly, abstention remains a learned response pattern rather than a grounded decision derived from an explicit understanding of what information is missing and why a reliable answer cannot be provided. 
+
+D. Environment Interaction 
+
+Intelligent behavior depends on the ability to perceive, act within, and adapt to dynamic environments. While modern AI systems can generate plans, invoke tools, and interact with external systems, these capabilities are often only loosely connected to the environments in which actions occur [5]. Consequently, many agentic systems operate through prede-fined workflows and reactive interactions rather than through a grounded understanding of environmental dynamics. This limitation becomes particularly evident in open-ended settings, where successful behavior depends on maintaining coherent representations of the world, integrating external resources into reasoning, and adapting behavior based on feedback. 
+
+World Modeling : Effective interaction requires more than observing the environment; it requires maintaining internal models that capture entities, relationships, constraints, and causal dynamics over time. Yet many AI systems continue to rely primarily on statistical associations learned from data rather than explicit models of environmental structure [73]. This limits their ability to anticipate consequences, generalize to unfamiliar situations, and adapt when environmental condi-tions change. Research in this area has focused on causal world modeling, language-guided environment representations, and structured reasoning frameworks. Approaches that combine causal rep-resentation learning with language models seek to capture un-derlying environmental structure [74], while Language-Guided World Models use language to modify and refine internal dynamics [75]. Other frameworks, such as CausalARC, em-ploy structural causal models to support abstract reasoning and generalization under limited supervision [76]. While these methods improve environmental reasoning, robust world modeling remains an open challenge. Many sys-tems continue to struggle with compositional generalization, changing dynamics, and maintaining coherent internal repre-sentations over extended interactions. As a result, reasoning often remains grounded in observations rather than in stable, evolving models of the world. 
+
+Tool-Augmented Reasoning : Tool use has become a pri-mary mechanism for extending the capabilities of AI systems beyond their parametric knowledge. Modern agents can access search engines, databases, APIs, code interpreters, and robotic interfaces, allowing them to retrieve information and perform actions that would otherwise be impossible. However, access to tools alone does not guarantee effective reasoning. A central challenge is determining when external resources are needed, how retrieved information should influence reasoning, and how actions should be coordinated with ongoing decision-making. Several frameworks have explored tighter integration be-tween reasoning and tool use. ChatCoT [77] models interaction as a multi-turn reasoning process, while RecThinker [78] intro-duces an Analyze–Plan–Act paradigm for more autonomous decision-making. Iterative systems such as DELI [79] further support verification and refinement of intermediate reasoning steps. Nevertheless, tool use remains weakly integrated with cog-nition. Models frequently struggle to determine when external information is necessary, how tool outputs should update inter-nal reasoning, and when failures should trigger plan revision. Consequently, external capabilities often function as add-on utilities rather than components of a unified cognitive process. 
+
+Environment Feedback Loops : Adaptive behavior requires agents to incorporate environmental feedback into future de-cisions. Although many systems can observe outcomes and react to new information, feedback is often represented as static interaction history rather than as an evolving internal state [80]. This limits the ability of agents to learn from experience, recover from errors, and adapt behavior over extended interactions. Work in this area has focused on metacognitive feedback mechanisms, reflective architectures, and closed-loop control systems. Metacognitive frameworks enable agents to evaluate and revise their behavior based on observed outcomes [81], while architectures such as BrainBody-LLM introduce hierar-chical feedback loops that support error detection and recovery during execution [80]. These approaches move beyond one-pass generation toward more adaptive interaction. However, reliable feedback-driven adaptation remains diffi-cult to achieve. Online adaptation introduces challenges related to safety, validation, and robustness, particularly in environ-ments where errors can have significant consequences [82]. Moreover, feedback loops do not always improve performance and may reinforce biases or amplify errors over time [83]. As a result, many systems remain far from the stable, feedback-grounded interaction required for cognitive autonomy. 8                               
+
+> TABLE II SUMMARY OF CORE COGNITIVE CAPABILITY GAPS IN MODERN GENERATIVE AND AGENTIC AI SYSTEMS .
+> Component Subcomponent Objective Key Limitation Persistent State Modeling
+> Persistent Memory Maintain long-term state Memory remains externalized; weakly integrated into core reasoning State Revision Update beliefs consistently Poor belief propagation; unstable self-correction Latent State Modeling Maintain hidden commitments No persistent latent state across interactions
+> Goal-Directed Autonomy
+> Goal Formulation Generate internal goals au-tonomously No intrinsic drives; goal generation remains domain-specific and non-generalizing Planning & Adaptation Decompose and adapt action sequences Brittle over long horizons; adaptability gains incur high computational overhead Goal Persistence Sustain objectives over time Susceptible to goal drift; instruction-following does not guarantee long-term consistency
+> Self-Monitoring & Control
+> Metacognitive Monitor-ing Detect and repair reasoning er-rors Token probabilities do not reflect semantic correct-ness; self-correction remains fragile Uncertainty & OOD De-tection Calibrate confidence to correct-ness Confidence is prompt-sensitive; linguistic certainty weakly aligned with model probability structure Abstention & Control Decline unsupported or uncer-tain claims Abstention does not generalize across domains; re-fusal improvements introduce over-abstention
+> Environment Interaction
+> World Modeling Maintain causal environmental models Poor compositional generalization; systems reason over observations rather than coherent world models Tool-Augmented Reasoning Integrate external tools into rea-soning Tool use remains loosely coupled to reasoning; mod-els cannot reliably determine when or how to invoke tools Environment Feedback Loops Incorporate feedback into inter-nal state Feedback loops may reinforce bias; online adaptation is difficult to validate in safety-critical settings
+> Learning & Adaptation
+> Policy Adaptation Revise decisions under non-stationary conditions Adaptation is local and reactive; lacks system-level self-monitoring for persistent, safe policy revision Continual Learning Accumulate knowledge without forgetting Assumes fixed task boundaries; forward transfer re-mains limited in open-ended environments Safe Knowledge Updates Update facts without inducing inconsistency Local edits degrade global coherence; repeated up-dates increase hallucination risk over time
+
+E. Learning and Adaptation 
+
+Adaptation remains one of the most significant challenges in modern AI systems. While contemporary models can perform effectively on a wide range of tasks, they often struggle to incorporate new experience, revise behavior, and update knowledge after deployment without compromising previously acquired capabilities [84], [6]. As a result, many systems remain dependent on retraining or human intervention when operating in changing environments. Consequently, adaptation in current systems is often localized, brittle, and dependent on retraining or external intervention. 
+
+Policy Adaptation : Effective adaptation requires agents to modify decision-making strategies as environmental condi-tions change. However, most AI systems remain optimized for static distributions and struggle to revise policies when reward structures, user preferences, or environmental dynamics evolve [9]. This limitation becomes particularly evident in long-term deployments, where behavior must remain effective under continual change. Research in this area has focused on reinforcement learn-ing, test-time adaptation, and meta-learning. Reinforcement learning methods such as PPO and Deep Q-Learning enable policies to improve through reward-driven interaction, with applications spanning robotics and educational systems [85], [86]. Test-time adaptation techniques, including AdaContrast, modify representations during inference using self-supervised signals [87], while meta-learning seeks model initializations that support rapid adaptation to new tasks with limited data [88]. While these techniques improve responsiveness to changing conditions, adaptation is typically treated as a local optimiza-tion problem rather than a broader cognitive process. As a result, systems can adjust behavior in the short term but often lack the higher-level monitoring needed to ensure that adaptations remain coherent, stable, and aligned over time. 
+
+Continual Learning : A defining characteristic of cognition is the ability to accumulate knowledge over time without losing previously acquired capabilities. Modern AI systems, however, remain vulnerable to catastrophic forgetting, where learning new tasks interferes with existing knowledge and degrades performance on earlier tasks [6]. Closely related is the alignment tax, where adaptation to specific domains or objectives can reduce broader reasoning and generalization capabilities [89]. Researchers have primarily pursued three strategies to ad-dress these challenges: replay-based, regularization-based, and architecture-based methods [7]. Replay strategies such as I-LoRA [90] preserve prior knowledge by interleaving historical examples during training. Regularization techniques, including Elastic Weight Consolidation (EWC), constrain updates to parameters important for previous tasks [91], while approaches such as CURLoRA [92] seek to balance plasticity and stability through parameter-efficient adaptation mechanisms. These methods improve retention under controlled condi-tions but remain limited in open-ended environments where 9
+
+task boundaries are unclear and learning objectives continu-ously evolve. Moreover, forward transfer remains inconsistent, preventing previously acquired knowledge from reliably accel-erating future learning [7]. 
+
+Safe Knowledge Updates : Adaptation also requires the abil-ity to update knowledge while preserving consistency across related beliefs and representations. In practice, factual infor-mation is embedded within interconnected networks of associ-ations, making localized updates difficult to perform without introducing unintended side effects [93]. Consequently, sys-tems may appear to incorporate new information successfully while retaining inconsistencies within their broader knowledge structures. Model editing and external memory mechanisms have emerged as two major directions for addressing this challenge. Approaches such as ROME [94] and MEMIT [95] identify and modify parameter regions associated with specific facts, while methods such as AlphaEdit [96] seek to reduce interference by constraining updates to minimize disruption of unrelated knowledge. These techniques improve the precision and effi-ciency of factual modification without requiring full retraining. Nevertheless, maintaining global consistency after repeated updates remains difficult. Local edits can introduce unintended distortions, alter related knowledge, and gradually degrade the coherence of internal representations [97]. Until update mechanisms can propagate changes consistently across inter-connected beliefs, dynamically adapting AI systems will con-tinue to face challenges in maintaining reliable and coherent knowledge over time. V. R ECOMMENDED ARCHITECTURE FOR COGNITIVE AI SYSTEMS 
+
+Over the past four decades, cognitive architectures such as ACT-R, Soar, CLARION, LIDA, EPIC, and ICARUS have provided important foundations for modeling reasoning, memory, learning, perception, and autonomous behavior [98]. While modern generative and agentic AI systems demonstrate strong capabilities in language understanding and task execu-tion, many of the cognitive limitations identified throughout this survey remain unresolved.In this section, we propose an Adaptive Cognitive Intelligence Architecture (ACIA) (Fig. 4), whose components and their relationship to the identified cognitive capability gaps are summarized in Table III. The proposed architecture is organized as a closed-loop cognitive system composed of Perception and Attention , Mem-ory , Reasoning and Planning , Metacognition , Action , and 
+
+Learning and Adaptation . Together, these components enable continuous interaction between the system and its environment through perception, reasoning, action, feedback, and adapta-tion.  
+
+> •
+
+Perception and Attention : Perception and Attention serves as the interface between the architecture and its external environment. It processes multimodal inputs from users, tools, agents, and information sources while prioritizing relevant information and filtering irrelevant stimuli. By maintaining situational awareness and selectively allocating computational resources, this component supports grounded interaction with dynamic environments. It directly addresses limitations in environment interaction by enabling the sys-tem to continuously perceive and respond to changing external conditions [27], [3], [36].  
+
+> •
+
+Memory : Memory maintains and organizes information re-quired for reasoning, planning, and decision-making. The architecture incorporates working memory for short-term task execution, episodic memory for storing experiences and interactions, and semantic memory for long-term conceptual knowledge. By preserving information across interactions and supporting retrieval, revision, and contextual grounding, memory provides the persistent internal state required for long-horizon cognition. This component directly addresses the persistent state modeling limitations identified in current AI systems [84], [99].  
+
+> •
+
+Reasoning and Planning : Reasoning and Planning is re-sponsible for inference, problem-solving, decision-making, and goal-directed behavior. It integrates environmental ob-servations with information retrieved from memory to gen-erate plans, evaluate alternatives, and adapt actions as conditions change. Through this process, the architecture can sustain objectives over extended interactions rather than reacting solely to immediate prompts. This component addresses limitations in goal-directed autonomy, particularly in planning, adaptation, and long-term goal maintenance [8], [13].  
+
+> •
+
+Metacognition : Metacognition provides self-monitoring and self-regulation capabilities. It evaluates confidence, consis-tency, uncertainty, and reasoning quality while monitoring the effectiveness of ongoing cognitive processes. When errors, contradictions, or uncertainty are detected, metacog-nitive control can trigger re-planning, memory revision, or additional information gathering. This component ad-dresses the self-monitoring and control limitations discussed throughout the survey [13], [14], [12].  
+
+> •
+
+Action : Action translates cognitive decisions into executable behavior. This includes generating responses, invoking tools, interacting with external systems, coordinating with other agents, and performing autonomous actions. Through con-tinuous interaction with the environment, action closes the perception–reasoning–execution loop and enables the archi-tecture to operate beyond passive generation [84], [16].  
+
+> •
+
+Learning and Adaptation : Learning and Adaptation enables the architecture to improve through experience. Feedback from actions, environmental responses, and task outcomes is used to refine internal representations, update policies, and improve future decision-making. This component supports continual learning, safe knowledge revision, and adaptation to changing environments, addressing the learning and adap-tation limitations identified in current AI systems [61], [9], [4]. Unlike contemporary generative and agentic AI systems, which often rely on loosely connected memory, planning, and tool-use mechanisms, ACIA integrates these capabilities within a unified cognitive loop. Persistent memory supports state continuity, reasoning and planning enable goal-directed behavior, metacognition provides self-monitoring and con-10 Perception & Attention 
+
+> Multi-modal perception, attention
+> allocation, filtering, and feature
+> extraction
+
+Feedback 
+
+Action/Output 
+
+> Action selection, decision execution,
+> physical and digital interaction
+
+Environment 
+
+> Users
+> Agents
+> Tools
+> Information
+> sources
+> External world
+
+Memory Systems 
+
+> Stores and retrieves knowledge
+
+Reasoning & Planning 
+
+> Performs inference and decision-
+> making
+> ...
+
+Learning & Adaptation 
+
+> Updates representations, policies, and
+> behaviors from experience
+
+Metacognition 
+
+> Monitors and regulates cognition
+> through self-evaluation and uncertainty
+> assessment
+
+ADAPTIVE COGNITIVE ENGINE 
+
+Fig. 4. Proposed Adaptive Cognitive Intelligence Architecture (ACIA). The framework models a closed-loop cognitive system consisting of Perception and Attention, Memory, Reasoning and Planning, Metacognition, Action, and Learning and Adaptation TABLE III MAPPING OF ACIA COMPONENTS TO THE COGNITIVE CAPABILITY GAPS IDENTIFIED IN THIS SURVEY .
+
+Component Function Cognitive Domain Gap Addressed 
+
+Perception & Attention Environmental awareness and context prioritization Environment Interaction Grounding, world modeling, contextual integration Memory Maintains persistent state and contextual knowledge Persistent State Modeling Persistent memory, state revision, latent state persistence Reasoning & Planning Goal-oriented decision making and strategic planning Goal-Directed Autonomy Goal formulation, planning and adapta-tion, goal persistence Metacognition Self-monitoring, uncertainty assessment, and control Self-Monitoring & Control Metacognitive monitoring, uncertainty es-timation, abstention and control Action External execution and interac-tion with tools and systems Environment Interaction Tool-augmented reasoning, feedback loops, environment engagement Learning & Adaptation Continuous improvement through feedback and experience Learning & Adaptation Policy adaptation, continual learning, safe knowledge updates 
+
+trol, and learning mechanisms facilitate continual adaptation. These components address the five cognitive capability gaps identified throughout this survey and provide a conceptual foundation for more adaptive, autonomous, and cognitively capable AI systems. VI. E VALUATION STRATEGIES AND CHALLENGES 
+
+A. Existing Evaluation Strategies 
+
+The methodologies used to evaluate AI systems have evolved alongside advances in model capabilities. Human eval-uation remains one of the most widely adopted approaches for assessing qualities such as coherence, relevance, helpfulness, and alignment with human expectations [100]. Benchmark-based evaluation provides a complementary approach by en-abling standardized comparison across models. Frameworks such as BIG-bench [101] and HELM [102] evaluate capabil-ities including language understanding, reasoning, knowledge recall, robustness, and safety across diverse tasks and domains. As AI systems have become increasingly autonomous, specialized benchmarks have emerged to assess capabilities beyond traditional language generation. These include evalu-ations of belief revision, planning, tool use, adaptation, and autonomous task execution [4], [26]. To improve scalability, LLM-as-a-Judge paradigms use large language models to evaluate generated responses through ranking and preference modeling, providing an alternative to costly human assess-ment [103]. Additional evaluation methodologies focus on retrieval and grounding, measuring factual consistency and hallucination behavior [104], [105], while red-teaming and adversarial testing assess robustness, safety, and failure modes under challenging conditions [106], [102]. Collectively, these approaches provide valuable insights into model performance, reliability, and safety. However, they remain largely focused on outputs, task success, and short-horizon behavior rather than the cognitive processes required for long-term autonomous operation. 
+
+B. Challenges in Evaluating Cognitive AI 
+
+Evaluating Cognitive AI extends beyond traditional mea-sures of accuracy and task completion because many cog-nitive capabilities emerge over extended interactions rather 11                               
+
+> TABLE IV ILLUSTRATIVE COGNITION -CENTRIC EVALUATION METRICS FOR ASSESSING LONG -TERM COGNITIVE BEHAVIOR .
+> Metric Evaluation Objective Illustrative Formula Notation
+> Cognitive Persistence Index (CPI) Does the agent retain and ac-curately retrieve relevant infor-mation across extended inter-actions?
+> CPI =
+> f(Tret , P mem , R mem )
+> Tret :temporal memory retention rate;
+> Pmem : memory precision; Rmem : mem-ory recall Cognitive Adaptation Rate (CAR) Does the agent successfully adapt to new information while preserving prior knowledge?
+> CAR = f(Asucc , A opp )Asucc :adaptation success rate; Aopp :adaptation opportunity coverage Cognitive Consistency Score (CCS) Does the agent maintain coher-ent beliefs, goals, and reason-ing over time?
+> CCS = f
+
+ 1 − Ncontra 
+
+> Nreason
+
+ Ncontra : number of contradictions; 
+
+> Nreason : number of reasoning episodes
+
+than within isolated tasks. This challenge is particularly evi-dent across the five cognitive capability dimensions discussed throughout this survey. Persistent state modeling requires assessing whether a sys-tem can retain, update, and consistently utilize information over time. However, many contemporary models exhibit lim-itations in memory persistence and latent state maintenance that are often overlooked by benchmarks operating within a single context window [5], [31]. Similarly, goal-directed autonomy is difficult to evaluate because failures such as goal drift emerge gradually during long-horizon operation and may not be apparent in short-term tasks [16], [3]. Self-monitoring and control present additional challenges because internal reasoning processes are difficult to observe directly. Apparent self-correction may reflect unstable infer-ence rather than genuine metacognitive reasoning, while uncer-tainty estimation and confidence calibration remain inconsis-tent across domains [12], [13], [14]. Environment interaction is similarly difficult to assess using static benchmarks, as grounded behavior depends on maintaining coherent world models and adapting to environmental feedback over time [15]. Learning and adaptation introduce further complexity. Con-tinual learning systems must incorporate new information while preserving previously acquired knowledge, yet knowl-edge updates often introduce unintended side effects and inconsistencies that are rarely captured by conventional eval-uation methodologies [18], [19]. Taken together, these challenges highlight a fundamental limitation of existing evaluation frameworks: they primarily assess what a system can do at a particular moment, whereas Cognitive AI requires evaluating the consistency of cognition over time, including whether systems can maintain memory, preserve goals, adapt to new information, and regulate behav-ior across extended periods of operation. 
+
+C. Toward Cognition-Centric Evaluation 
+
+A cognition-centric evaluation framework should align with the five cognitive capability dimensions discussed throughout this survey. This includes evaluating memory retention and belief revision for persistent state modeling, goal persistence and planning stability for autonomy, uncertainty calibration and abstention behavior for self-monitoring, grounding and feedback utilization for environment interaction, and continual learning and knowledge update consistency for adaptation. Emerging directions such as belief revision benchmarks, la-tent state persistence tasks, uncertainty-aware reasoning frame-works, and long-horizon agent evaluations provide promising foundations for such assessments [4], [5], [42]. More broadly, future evaluation frameworks should emphasize longitudinal assessment, dynamic environments, and adaptive behavior. For example, cognition-centric metrics may evaluate memory retention across extended interactions, the ability to maintain objectives under changing conditions, and the consistency of belief updates throughout long-horizon reasoning. Table IV presents illustrative cognition-centric evaluation metrics for long-term cognitive capabilities. Each metric is expressed as a function of lower-level measures related to memory, adaptation, or reasoning consistency, where f (·) indicates that the specific formulation may vary across applications and evaluation protocols. These metrics provide a broader assessment of whether AI systems can retain knowledge, adapt to changing information, and maintain coherent reasoning over time, complementing conventional task-level benchmarks. VII. R ESEARCH CHALLENGES AND FUTURE DIRECTIONS 
+
+The cognitive capability gaps identified throughout this survey suggest that progress toward Cognitive AI will re-quire advances beyond scaling model parameters or improving benchmark performance. Although modern generative and agentic systems demonstrate strong capabilities in language understanding, reasoning, and task execution, they continue to exhibit limitations in persistent state modeling, goal-directed autonomy, self-monitoring and control, environmental inter-action, and continual adaptation. A central challenge is the development of persistent cognitive state. Current systems primarily rely on finite context windows or external retrieval mechanisms that provide access to historical information without maintaining stable, evolving internal representations. Future research should investigate architectures capable of maintaining persistent memory, revising beliefs in response to new evidence, and constructing grounded world models that evolve continuously through interaction. Another important direction concerns autonomous reasoning and metacognitive control. Beyond generating plans or actions, cognitive sys-tems must be able to monitor their own reasoning, estimate uncertainty, recognize failures, and revise decisions when nec-essary. Developing reliable mechanisms for self-monitoring, 12 
+
+uncertainty calibration, and adaptive control remains essential for improving robustness in long-horizon tasks. Continual learning and adaptation remain equally important challenges. Future Cognitive AI systems must integrate new knowledge while preserving previously acquired information and maintaining behavioral consistency over time. Addressing catastrophic forgetting, unstable belief updates, and conflicting knowledge representations will be critical for enabling lifelong learning. Progress will also require evaluation methodologies that measure cognitive capabilities directly rather than relying primarily on task-level performance. Emerging benchmarks for belief revision, latent state persistence, uncertainty-aware reasoning, and long-horizon agents represent promising first steps, but broader evaluation frameworks are needed to assess persistent memory, adaptation, reasoning consistency, and goal stability across extended interactions and dynamic environ-ments. Finally, increasing levels of autonomy place greater emphasis on safety, transparency, and human oversight. Future cognitive systems must balance adaptive decision making with interpretability, controllability, and alignment, ensuring that autonomous behavior remains reliable while operating in open-ended environments. Addressing these challenges will require closer integration of advances in artificial intelligence, cognitive science, neu-roscience, and related disciplines. Progress toward Cognitive AI is therefore likely to depend not only on increasingly capable foundation models, but also on principled cognitive architectures that support persistent state, adaptive learning, metacognitive control, and robust long-term behavior. VIII. C ONCLUSION 
+
+This paper examined the major cognitive capability gaps that continue to limit contemporary generative and agentic AI systems, including persistent state modeling, goal-directed au-tonomy, self-monitoring and control, environment interaction, and learning and adaptation. Through a taxonomy-driven re-view, we synthesized recent advances, identified recurring lim-itations, and discussed their implications for the development of Cognitive AI. We further outlined a conceptual Adaptive Cognitive Intelligence Architecture (ACIA) and highlighted the need for cognition-centric evaluation strategies that extend beyond conventional benchmark performance. These perspec-tives suggest that achieving Cognitive AI will require moving beyond task-oriented intelligence toward systems capable of sustained cognition, adaptive autonomy, and continual learn-ing. By identifying the major cognitive capability gaps and organizing existing research through a unified taxonomy, this survey provides a foundation for future research on cognitively capable AI systems. REFERENCES [1] S. Wang, Y. Zhu, H. Liu, Z. Zheng, C. Chen, and J. Li, “Knowledge editing for large language models: A survey,” ACM Computing Surveys ,vol. 57, no. 3, pp. 1–37, 2024. [2] A. Plaat, M. Van Duijn, N. Van Stein, M. Preuss, P. Van der Putten, and K. J. Batenburg, “Agentic large language models, asurvey,” Journal of Artificial Intelligence Research , vol. 84, Dec. 2025. [Online]. Available: http://dx.doi.org/10.1613/jair.1.18675 [3] M. Paisner, M. Cox, M. Maynord, and D. Perlis, “Goal-driven auton-omy for cognitive systems,” in Proceedings of the Annual Meeting of the Cognitive Science Society , vol. 36, no. 36, 2014. [4] B. Wilie, S. Cahyawijaya, E. Ishii, J. He, and P. Fung, “Belief revision: The adaptability of large language models reasoning,” in Proceedings of the 2024 Conference on Empirical Methods in Natural Language Processing , Y. Al-Onaizan, M. Bansal, and Y.-N. Chen, Eds. Miami, Florida, USA: Association for Computational Linguistics, Nov. 2024, pp. 10 480–10 496. [Online]. Available: https://aclanthology.org/2024.emnlp-main.586/ [5] J. tse Huang, K. Sun, W. Wang, and M. Dredze, “On the failure of latent state persistence in large language models,” 2026. [Online]. Available: https://arxiv.org/abs/2505.10571 [6] H. Shi, Z. Xu, H. Wang, W. Qin, W. Wang, Y. Wang, Z. Wang, S. Ebrahimi, and H. Wang, “Continual learning of large language models: A comprehensive survey,” ACM Computing Surveys , vol. 58, no. 5, pp. 1–42, 2025. [7] H. Salwa, N. Burhan, and E. Rahel, “Continual learning: overcoming catastrophic forgetting for adaptive ai systems,” Authorea Preprints ,2025. [8] E. Y. Chang and L. Geng, “Alas: A stateful multi-llm agent framework for disruption-aware planning,” 2025. [Online]. Available: https://arxiv.org/abs/2505.12501 [9] S. K. K. Parimi, “Adaptation and learning in ai agents,” Authorea Preprints , 2025. [10] T. Wu, L. Luo, Y.-F. Li, S. Pan, T.-T. Vu, and G. Haffari, “Con-tinual learning for large language models: A survey,” arXiv preprint arXiv:2402.01364 , 2024. [11] Y. Luo, Z. Zhou, H. Chen, K. Qiu, M. Savvides, S. Li, and J. Wang, “Knowledgesmith: Uncovering knowledge updating in llms with model editing and unlearning,” 2025. [Online]. Available: https://arxiv.org/abs/2510.02392 [12] L. G. d’Aliberti and M. H. Ribeiro, “The illusion of insight in reasoning models,” arXiv preprint arXiv:2601.00514 , 2026. [13] R. Kamoi, Y. Zhang, N. Zhang, J. Han, and R. Zhang, “When can LLMs actually correct their own mistakes? a critical survey of self-correction of LLMs,” Transactions of the Association for Computational Linguistics , vol. 12, pp. 1417–1440, 2024. [Online]. Available: https://aclanthology.org/2024.tacl-1.78/ [14] Y. Yang and R. Jia, “When do llms admit their mistakes? understanding the role of model belief in retraction,” 2026. [Online]. Available: https://arxiv.org/abs/2505.16170 [15] P. Anokhin et al. , “Arigraph: Learning knowledge graph world models with episodic memory for llm agents,” arXiv preprint arXiv:2407.04363 , 2025. [16] R. Arike, E. Donoway, H. Bartsch, and M. Hobbhahn, “Technical report: Evaluating goal drift in language model agents,” 2025. [Online]. Available: https://arxiv.org/abs/2505.02709 [17] Z. Ji, T. Yu, Y. Xu, N. Lee, E. Ishii, and P. Fung, “Towards mitigating LLM hallucination via self reflection,” in Findings of the Association for Computational Linguistics: EMNLP 2023 ,H. Bouamor, J. Pino, and K. Bali, Eds. Singapore: Association for Computational Linguistics, Dec. 2023, pp. 1827–1843. [Online]. Available: https://aclanthology.org/2023.findings-emnlp.123/ [18] T. Liu, R. Li, Y. Qi, H. Liu, X. Tang, T. Zheng, Q. Yin, M. X. Cheng, J. Huan, H. Wang, and J. Gao, “Unlocking efficient, scalable, and continual knowledge editing with basis-level representation fine-tuning,” 2025. [Online]. Available: https://arxiv.org/abs/2503.00306 [19] Y. Jiang, Y. Wang, C. Wu, W. Zhong, X. Zeng, J. Gao, L. Li, X. Jiang, L. Shang, R. Tang, Q. Liu, and W. Wang, “Learning to edit: Aligning LLMs with knowledge editing,” in Proceedings of the 62nd Annual Meeting of the Association for Computational Linguistics (Volume 1: Long Papers) , L.-W. Ku, A. Martins, and V. Srikumar, Eds. Bangkok, Thailand: Association for Computational Linguistics, Aug. 2024, pp. 4689–4705. [Online]. Available: https://aclanthology.org/2024.acl-long.258/ [20] L. Huang, X. Feng, W. Ma, Y. Fan, X. Feng, Y. Gu, Y. Ye, L. Zhao, W. Zhong, B. Wang, D. Wu, G. Hu, L. Kong, T. Xiao, T. Liu, and B. Qin, “Alleviating hallucinations from knowledge misalignment in large language models via selective abstention learning,” in Proceedings of the 63rd Annual Meeting of the Association for Computational Linguistics (Volume 1: Long Papers) ,W. Che, J. Nabende, E. Shutova, and M. T. Pilehvar, Eds. Vienna, Austria: Association for Computational Linguistics, Jul. 2025, pp. 24 564–24 579. [Online]. Available: https://aclanthology.org/2025.acl-long.1199/ 13 
+
+[21] W. He, Z. Jiang, T. Xiao, Z. Xu, and Y. Li, “A survey on uncertainty quantification methods for deep learning,” ACM Comput. Surv. , vol. 58, no. 7, Feb. 2026. [Online]. Available: https://doi.org/10.1145/3786319 [22] P. N. Russell, “Artificial intelligence: a modern approach by stuart,” 
+
+Russell and Peter Norvig contributing writers, Ernest Davis...[et al.] ,p. 22, 2010. [23] A. L. Fradkov, “Early history of machine learning,” IFAC-PapersOnLine , vol. 53, no. 2, pp. 1385–1390, 2020. [24] S. Pouyanfar, S. Sadiq, Y. Yan, H. Tian, Y. Tao, M. P. Reyes, M.-L. Shyu, S.-C. Chen, and S. S. Iyengar, “A survey on deep learning: Algorithms, techniques, and applications,” ACM computing surveys (CSUR) , vol. 51, no. 5, pp. 1–36, 2018. [25] S. Bubeck, V. Chandrasekaran, R. Eldan, J. Gehrke, E. Horvitz, E. Kamar, P. Lee, Y. T. Lee, Y. Li, S. Lundberg et al. , “Paper review:’sparks of artificial general intelligence: Early experiments with gpt-4’,” 2023. [26] D. B. Acharya, K. Kuppan, and B. Divya, “Agentic ai: Autonomous in-telligence for complex goals—a comprehensive survey,” IEEE Access ,vol. 13, pp. 18 912–18 936, 2025. [27] N. A. Golilarz, S. Penchala, and S. Rahimi, “Bridging the gap: Toward cognitive autonomy in artificial intelligence,” arXiv preprint arXiv:2512.02280 , 2025. [28] B. Goertzel, “Artificial general intelligence: concept, state of the art, and future prospects,” Journal of Artificial General Intelligence , vol. 5, no. 1, pp. 1–48, 2014. [29] R. Bommasani, D. A. Hudson, E. Adeli, R. Altman, S. Arora, S. von Arx, M. S. Bernstein, J. Bohg, A. Bosselut, E. Brunskill et al. , “On the opportunities and risks of foundation models,” arXiv preprint arXiv:2108.07258 , 2021. [30] J. S. Park, J. C. O’Brien, C. J. Cai, M. R. Morris, P. Liang, and M. S. Bernstein, “Generative agents: Interactive simulacra of human behavior,” 2023. [Online]. Available: https://arxiv.org/abs/2304.03442 [31] Y. Hu, S. Liu, Y. Yue, G. Zhang, B. Liu, F. Zhu, J. Lin, H. Guo, S. Dou, Z. Xi et al. , “Memory in the age of ai agents,” arXiv preprint arXiv:2512.13564 , 2025. [32] Z. Dai, Z. Yang, Y. Yang, J. Carbonell, Q. Le, and R. Salakhutdinov, “Transformer-XL: Attentive language models beyond a fixed-length context,” in Proceedings of the 57th Annual Meeting of the Association for Computational Linguistics , A. Korhonen, D. Traum, and L. M` arquez, Eds. Florence, Italy: Association for Computational Linguistics, Jul. 2019, pp. 2978–2988. [Online]. Available: https://aclanthology.org/P19-1285/ [33] J. W. Rae, A. Potapenko, S. M. Jayakumar, and T. P. Lillicrap, “Compressive transformers for long-range sequence modelling,” 2019. [Online]. Available: https://arxiv.org/abs/1911.05507 [34] C. Packer, S. Wooders, K. Lin, V. Fang, S. G. Patil, I. Stoica, and J. E. Gonzalez, “Memgpt: Towards llms as operating systems,” 2024. [Online]. Available: https://arxiv.org/abs/2310.08560 [35] W. Zhong, L. Guo, Q. Gao, H. Ye, and Y. Wang, “Memorybank: Enhancing large language models with long-term memory,” in Proceed-ings of the AAAI conference on artificial intelligence , vol. 38, no. 17, 2024, pp. 19 724–19 731. [36] H. Jiang, J. Chen, Y. Pan, L. Chen, W. You, Y. Zhou, R. Zhang, A. Sikora, L. Zhao, Y. Abate, and T. Liu, “Synapse: Empowering llm agents with episodic-semantic memory via spreading activation,” 2026. [Online]. Available: https://arxiv.org/abs/2601.02744 [37] Z. Li, J. Han, W. E, and Q. Li, “On the curse of memory in recurrent neural networks: Approximation and optimization analysis,” 2024. [Online]. Available: https://arxiv.org/abs/2009.07799 [38] T. Qin, D. Alvarez-Melis, S. Jelassi, and E. Malach, “To backtrack or not to backtrack: When sequential search limits model reasoning,” 2025. [Online]. Available: https://arxiv.org/abs/2504.07052 [39] J. Huang, X. Chen, S. Mishra, H. S. Zheng, A. W. Yu, X. Song, and D. Zhou, “Large language models cannot self-correct reasoning yet,” 2024. [Online]. Available: https://arxiv.org/abs/2310.01798 [40] X. Chen, A. Zhao, H. Xia, X. Lu, H. Wang, Y. Chen, W. Zhang, J. Wang, W. Li, and X. Shen, “Reasoning beyond language: Acomprehensive survey on latent chain-of-thought reasoning,” 2025. [Online]. Available: https://arxiv.org/abs/2505.16782 [41] S. Hao, S. Sukhbaatar, D. Su, X. Li, Z. Hu, J. Weston, and Y. Tian, “Training large language models to reason in a continuous latent space,” 2025. [Online]. Available: https://arxiv.org/abs/2412.06769 [42] J. Wu, Y. Xiong, X. Li, S. Yu, Z. Hu, T. Yu, R. Wang, X. Chen, J. Shang, and J. McAuley, “Ctrls: Chain-of-thought reasoning via latent state-transition,” 2026. [Online]. Available: https://arxiv.org/abs/2507.08182 [43] A. Ghojogh, M. H. Sepanj, and B. Ghojogh, “On the relation of state space models and hidden markov models,” 2026. [Online]. Available: https://arxiv.org/abs/2601.13357 [44] J. Rafati and D. C. Noelle, “Unsupervised methods for subgoal discov-ery during intrinsic motivation in model-free hierarchical reinforcement learning.” in KEG@ AAAI , 2019, pp. 17–25. [45] T. Webb, S. S. Mondal, and I. Momennejad, “A brain-inspired agentic architecture to improve planning with LLMs,” Nat. Commun. , vol. 16, no. 1, p. 8633, Sep. 2025. [46] H. Wei, Z. Zhang, S. He, T. Xia, S. Pan, and F. Liu, “Plangenllms: A modern survey of llm planning capabilities,” in Proceedings of the 63rd Annual Meeting of the Association for Computational Linguistics (Volume 1: Long Papers) , 2025, pp. 19 497–19 521. [47] X. Li, “Task planning and decision-making methods for intelligent agents based on large language models,” ser. AIIIP ’25. New York, NY, USA: Association for Computing Machinery, 2026, p. 817–822. [Online]. Available: https://doi.org/10.1145/3778534.3778661 [48] J. Wei, X. Wang, D. Schuurmans, M. Bosma, B. Ichter, F. Xia, E. Chi, Q. Le, and D. Zhou, “Chain-of-thought prompting elicits reasoning in large language models,” 2023. [Online]. Available: https://arxiv.org/abs/2201.11903 [49] S. Yao, D. Yu, J. Zhao, I. Shafran, T. L. Griffiths, Y. Cao, and K. Narasimhan, “Tree of thoughts: Deliberate problem solving with large language models,” 2023. [Online]. Available: https://arxiv.org/abs/2305.10601 [50] M. Besta, N. Blach, A. Kubicek, R. Gerstenberger, M. Podstawski, L. Gianinazzi, J. Gajda, T. Lehmann, H. Niewiadomski, P. Nyczyk 
+
+et al. , “Graph of thoughts: Solving elaborate problems with large language models,” in Proceedings of the AAAI conference on artificial intelligence , vol. 38, no. 16, 2024, pp. 17 682–17 690. [51] Z. Li, Y. Chang, G. Yu, and X. Le, “Hiplan: Hierarchical planning for llm-based agents with adaptive global-local guidance,” arXiv preprint arXiv:2508.19076 , 2025. [52] H. Sun, Y. Zhuang, L. Kong, B. Dai, and C. Zhang, “Adaplanner: Adaptive planning from feedback with language models,” in Advances in Neural Information Processing Systems , A. Oh, T. Naumann, A. Globerson, K. Saenko, M. Hardt, and S. Levine, Eds., vol. 36. Curran Associates, Inc., 2023, pp. 58 202–58 245. [53] N. Shinn, F. Cassano, E. Berman, A. Gopinath, K. Narasimhan, and S. Yao, “Reflexion: Language agents with verbal reinforcement learning,” 2023. [Online]. Available: https://arxiv.org/abs/2303.11366 [54] A. Madaan, N. Tandon, P. Gupta, S. Hallinan, L. Gao, S. Wiegreffe, U. Alon, N. Dziri, S. Prabhumoye, Y. Yang, S. Gupta, B. P. Majumder, K. Hermann, S. Welleck, A. Yazdanbakhsh, and P. Clark, “Self-refine: Iterative refinement with self-feedback,” 2023. [Online]. Available: https://arxiv.org/abs/2303.17651 [55] A. Abdi, “Coherence-based alignment: A structural architecture for preventing goal drift in agentic ai systems.” [56] K. Liu, Y. Li, L. Zhu, and W. Zhang, “Pepa: a persistently autonomous embodied agent with personalities,” 2026. [Online]. Available: https://arxiv.org/abs/2603.00117 [57] M. MacDermott, J. Fox, F. Belardinelli, and T. Everitt, “Measuring goal-directedness,” in Advances in Neural Information Processing Systems , A. Globerson, L. Mackey, D. Belgrave, A. Fan, U. Paquet, J. Tomczak, and C. Zhang, Eds., vol. 37. Curran Associates, Inc., 2024, pp. 11 412–11 431. [58] A. Menon, M. Saebo, T. Crosse, S. Gibson, E. Jang, and D. Cruz, “Inherited goal drift: Contextual pressure can undermine agentic goals,” 2026. [Online]. Available: https://arxiv.org/abs/2603.03258 [59] L. Tankelevitch, V. Kewenig, A. Simkute, A. E. Scott, A. Sarkar, A. Sellen, and S. Rintel, “The metacognitive demands and opportunities of generative ai,” in Proceedings of the 2024 CHI Conference on Human Factors in Computing Systems , ser. CHI ’24. New York, NY, USA: Association for Computing Machinery, 2024. [Online]. Available: https://doi.org/10.1145/3613904.3642902 [60] B. Wen, C. Xu, B. HAN, R. Wolfe, L. L. Wang, and B. Howe, “From human to model overconfidence: Evaluating confidence dynamics in large language models,” in NeurIPS 2024 Workshop on Behavioral Machine Learning , 2024. [61] Z. Wu, Q. Zeng, Z. Zhang, Z. Tan, C. Shen, and M. Jiang, “Large language models can self-correct with minimal effort,” in AI for Math Workshop@ ICML 2024 , 2024. [62] E. Altinisik, M. Fatehkia, F. Deniz, N. Durrani, M. Hawasly, M. Raza, and H. T. Sencar, “Do i really know? learning factual self-verification for hallucination reduction,” 2026. [Online]. Available: https://arxiv.org/abs/2602.02018 14 
+
+[63] X. Song, Y. Wu, W. Wang, J. Liu, W. Su, and B. Zheng, “ProgCo: Program helps self-correction of large language models,” in Proceedings of the 63rd Annual Meeting of the Association for Computational Linguistics (Volume 2: Short Papers) , W. Che, J. Nabende, E. Shutova, and M. T. Pilehvar, Eds. Vienna, Austria: Association for Computational Linguistics, Jul. 2025, pp. 944–959. [Online]. Available: https://aclanthology.org/2025.acl-short.73/ [64] X. Liu, T. Chen, L. Da, C. Chen, Z. Lin, and H. Wei, “Uncertainty quantification and confidence calibration in large language models: A survey,” ser. KDD ’25. New York, NY, USA: Association for Computing Machinery, 2025, p. 6107–6117. [Online]. Available: https://doi.org/10.1145/3711896.3736569 [65] C. Cao, Z. Zhong, Z. Zhou, Y. Liu, T. Liu, and B. Han, “Envisioning outlier exposure by large language models for out-of-distribution detection,” 2024. [Online]. Available: https://arxiv.org/abs/2406.00806 [66] Z. He, C. Zhao, M. Shao, X. Wu, X. Zhao, D. Li, Q. Tian, and L. Yu, “Out-of-distribution detection with positive and negative prompt super-vision using large language models,” arXiv preprint arXiv:2511.10923 ,2025. [67] J. Liu, Q. Zong, W. Wang, and Y. Song, “Revisiting epistemic markers in confidence estimation: Can markers accurately reflect large language models’ uncertainty?” in Proceedings of the 63rd Annual Meeting of the Association for Computational Linguistics (Volume 2: Short Papers) , W. Che, J. Nabende, E. Shutova, and M. T. Pilehvar, Eds. Vienna, Austria: Association for Computational Linguistics, Jul. 2025, pp. 206–221. [Online]. Available: https://aclanthology.org/2025.acl-short.18/ [68] B. Wen, J. Yao, S. Feng, C. Xu, Y. Tsvetkov, B. Howe, and L. L. Wang, “Know your limits: A survey of abstention in large language models,” 
+
+Transactions of the Association for Computational Linguistics , vol. 13, pp. 529–556, 2025. [69] Y. Geifman and R. El-Yaniv, “Selectivenet: A deep neural network with an integrated reject option,” in International conference on machine learning . PMLR, 2019, pp. 2151–2159. [70] B. Kalra, K. Shah, and N. Manwani, “Risan: Robust instance specific abstention network,” arXiv preprint arXiv:2107.03090 , 2021. [71] H. Zhang, S. Diao, Y. Lin, Y. Fung, Q. Lian, X. Wang, Y. Chen, H. Ji, and T. Zhang, “R-tuning: Instructing large language models to say ‘i don’t know’,” in Proceedings of the 2024 Conference of the North American Chapter of the Association for Computational Linguistics: Human Language Technologies (Volume 1: Long Papers) , 2024, pp. 7113–7139. [72] V. Nguyen, Z. Xu, J. Chan, E. He, F. Xia, and X. Zhang, “Halluci-nate less by thinking more: Aspect-based causal abstention for large language models,” arXiv preprint arXiv:2511.17170 , 2025. [73] T. Gupta and D. Pruthi, “Beyond world models: Rethinking understanding in ai models,” 2025. [Online]. Available: https://arxiv.org/abs/2511.12239 [74] J. Gkountouras, M. Lindemann, P. Lippe, E. Gavves, and I. Titov, “Language agents meet causality – bridging llms and causal world models,” 2024. [Online]. Available: https://arxiv.org/abs/2410.19923 [75] A. Zhang, K. Nguyen, J. Tuyls, A. Lin, and K. Narasimhan, “Language-guided world models: A model-based approach to AI control,” in Proceedings of the 4th Workshop on Spatial Language Understanding and Grounded Communication for Robotics (SpLU-RoboNLP 2024) , P. Kordjamshidi, X. E. Wang, Y. Zhang, Z. Ma, and M. Inan, Eds. Bangkok, Thailand: Association for Computational Linguistics, Aug. 2024, pp. 1–16. [Online]. Available: https://aclanthology.org/2024.splurobonlp-1.1/ [76] J. Maasch, J. Kalantari, and K. Khezeli, “Causalarc: Abstract reasoning with causal world models,” 2026. [Online]. Available: https://arxiv.org/abs/2509.03636 [77] Z. Chen, K. Zhou, B. Zhang, Z. Gong, X. Zhao, and J.-R. Wen, “ChatCoT: Tool-augmented chain-of-thought reasoning on chat-based large language models,” in Findings of the Association for Computational Linguistics: EMNLP 2023 , H. Bouamor, J. Pino, and K. Bali, Eds. Singapore: Association for Computational Linguistics, Dec. 2023, pp. 14 777–14 790. [Online]. Available: https://aclanthology.org/2023.findings-emnlp.985/ [78] H. Zhang, Y. Zhu, K. Mao, T. Li, and Z. Dou, “Recthinker: An agentic framework for tool-augmented reasoning in recommendation,” 2026. [Online]. Available: https://arxiv.org/abs/2603.09843 [79] B. Zhang, K. Zhou, X. Wei, X. Zhao, J. Sha, S. Wang, and J.-R. Wen, “Evaluating and improving tool-augmented computation-intensive math reasoning,” in Advances in Neural Information Processing Systems ,A. Oh, T. Naumann, A. Globerson, K. Saenko, M. Hardt, and S. Levine, Eds., vol. 36. Curran Associates, Inc., 2023, pp. 23 570–23 589. [80] V. Bhat, A. U. Kaypak, P. Krishnamurthy, R. Karri, and F. Khorrami, “Grounding large language models for robot task planning using closed-loop state feedback,” Advanced Robotics Research , Nov. 2025. [Online]. Available: http://dx.doi.org/10.1002/adrr.202500072 [81] J. Kim, M. Islam, and A. Goel, “A metacognitive architecture for cor-recting llm errors in ai agents,” in Proceedings of the AAAI Conference on Artificial Intelligence , 2026. [82] J. Sch¨ oning, A. Riechmann, and H.-J. Pfisterer, “Ai for closed-loop control systems: New opportunities for modeling, designing, and tuning control systems,” in Proceedings of the 2022 14th International Conference on Machine Learning and Computing ,ser. ICMLC ’22. New York, NY, USA: Association for Computing Machinery, 2022, p. 318–323. [Online]. Available: https://doi.org/10.1145/3529836.3529952 [83] M. Glickman and T. Sharot, “How human–ai feedback loops alter human perceptual, emotional and social judgements,” Nature Human Behaviour , vol. 9, no. 2, pp. 345–359, 2025. [84] Y. Cai, Y. Hao, J. Zhou, H. Yan, Z. Lei, R. Zhen, Z. Han, Y. Yang, J. Li, Q. Pan et al. , “Building self-evolving agents via experience-driven lifelong learning: A framework and benchmark,” arXiv preprint arXiv:2508.19005 , 2025. [85] C. Tang, B. Abbatematteo, J. Hu, R. Chandra, R. Mart´ ın-Mart´ ın, and P. Stone, “Deep reinforcement learning for robotics: A survey of real-world successes,” Annual Review of Control, Robotics, and Autonomous Systems , vol. 8, no. 1, pp. 153–188, 2025. [86] C. Wu, D. Liang, B. Yang, L. Xu, and Y. Li, “A proximal policy optimization-based reinforcement learning framework for real-time personalized endurance training,” Informatica , vol. 50, no. 8, 2026. [87] D. Chen, D. Wang, T. Darrell, and S. Ebrahimi, “Contrastive test-time adaptation,” in Proceedings of the IEEE/CVF conference on computer vision and pattern recognition , 2022, pp. 295–305. [88] J. Liu, H. Liu, L. Xiao, S. Liu, T. Zhang, Z. Ma, S. Zhang, and K. Chen, “Reasoning as meta-learning: An optimization perspective to decipher long cot reasoning in llms.” [89] Y. Lin, H. Lin, W. Xiong, S. Diao, J. Liu, J. Zhang, R. Pan, H. Wang, W. Hu, H. Zhang, H. Dong, R. Pi, H. Zhao, N. Jiang, H. Ji, Y. Yao, and T. Zhang, “Mitigating the alignment tax of rlhf,” 2024. [Online]. Available: https://arxiv.org/abs/2309.06256 [90] W. Ren, X. Li, L. Wang, T. Zhao, and W. Qin, “Analyzing and reducing catastrophic forgetting in parameter efficient tuning,” 2024. [Online]. Available: https://arxiv.org/abs/2402.18865 [91] J. Kirkpatrick, R. Pascanu, N. Rabinowitz, J. Veness, G. Desjardins, A. A. Rusu, K. Milan, J. Quan, T. Ramalho, A. Grabska-Barwinska 
+
+et al. , “Overcoming catastrophic forgetting in neural networks,” Pro-ceedings of the national academy of sciences , vol. 114, no. 13, pp. 3521–3526, 2017. [92] M. Fawi, “Curlora: Stable llm continual fine-tuning and catastrophic forgetting mitigation,” arXiv preprint arXiv:2408.14572 , 2024. [93] R. Cohen, E. Biran, O. Yoran, A. Globerson, and M. Geva, “Eval-uating the ripple effects of knowledge editing in language models,” 
+
+Transactions of the Association for Computational Linguistics , vol. 12, pp. 283–298, 2024. [94] K. Meng, D. Bau, A. Andonian, and Y. Belinkov, “Locating and editing factual associations in gpt,” Advances in neural information processing systems , vol. 35, pp. 17 359–17 372, 2022. [95] K. Meng, A. S. Sharma, A. Andonian, Y. Belinkov, and D. Bau, “Mass-editing memory in a transformer,” 2023. [Online]. Available: https://arxiv.org/abs/2210.07229 [96] J. Fang, H. Jiang, K. Wang, Y. Ma, S. Jie, X. Wang, X. He, and T.-S. Chua, “Alphaedit: Null-space constrained knowledge editing for language models,” arXiv preprint arXiv:2410.02355 , 2024. [97] Z. Li, N. Zhang, Y. Yao, M. Wang, X. Chen, and H. Chen, “Unveiling the pitfalls of knowledge editing for large language models,” arXiv preprint arXiv:2310.02129 , 2023. [98] I. Kotseruba and J. K. Tsotsos, “40 years of cognitive architectures: core cognitive abilities and practical applications,” Artificial Intelli-gence Review , vol. 53, no. 1, pp. 17–94, 2020. [99] L. Liu, X. Yang, Y. Shen, B. Hu, Z. Zhang, J. Gu, and G. Zhang, “Think-in-memory: Recalling and post-thinking enable llms with long-term memory,” 2023. [Online]. Available: https://arxiv.org/abs/2311.08719 [100] L. Ouyang, J. Wu, X. Jiang, D. Almeida, C. Wainwright, P. Mishkin, C. Zhang, S. Agarwal, K. Slama, A. Ray et al. , “Training language models to follow instructions with human feedback,” Advances in neural information processing systems , vol. 35, pp. 27 730–27 744, 2022. 15 
+
+[101] A. Srivastava, A. Rastogi, A. Rao, A. A. M. Shoeb, A. Abid, A. Fisch, A. R. Brown, A. Santoro, A. Gupta, A. Garriga-Alonso et al. , “Beyond the imitation game: Quantifying and extrapolating the capabilities of language models,” Transactions on machine learning research , 2023. [102] P. Liang, R. Bommasani, T. Lee, D. Tsipras, D. Soylu, M. Yasunaga, Y. Zhang, D. Narayanan, Y. Wu, A. Kumar et al. , “Holistic evaluation of language models,” arXiv preprint arXiv:2211.09110 , 2022. [103] L. Zheng, W.-L. Chiang, Y. Sheng, S. Zhuang, Z. Wu, Y. Zhuang, Z. Lin, Z. Li, D. Li, E. Xing et al. , “Judging llm-as-a-judge with mt-bench and chatbot arena,” Advances in neural information processing systems , vol. 36, pp. 46 595–46 623, 2023. [104] Z. Ji, N. Lee, R. Frieske, T. Yu, D. Su, Y. Xu, E. Ishii, Y. J. Bang, A. Madotto, and P. Fung, “Survey of hallucination in natural language generation,” ACM computing surveys , vol. 55, no. 12, pp. 1–38, 2023. [105] S. Lin, J. Hilton, and O. Evans, “Truthfulqa: Measuring how models mimic human falsehoods,” in Proceedings of the 60th annual meeting of the association for computational linguistics (volume 1: long papers) ,2022, pp. 3214–3252. [106] E. Perez, S. Huang, F. Song, T. Cai, R. Ring, J. Aslanides, A. Glaese, N. McAleese, and G. Irving, “Red teaming language models with language models,” in Proceedings of the 2022 Conference on Empirical Methods in Natural Language Processing , 2022, pp. 3419–3448.

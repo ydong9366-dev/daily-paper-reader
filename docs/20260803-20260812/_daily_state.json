@@ -1,0 +1,553 @@
+{
+  "date": "20260803-20260812",
+  "date_label": "2026-08-03 ~ 2026-08-12",
+  "generated_at": "2026-08-12 07:40:39 UTC",
+  "recommend_exists": true,
+  "run_count": 1,
+  "papers": [
+    {
+      "paper_id": "2608.01636v1",
+      "route": "20260803-20260812/2608.01636v1-a-forward-inverse-dynamic-game-framework-for-enhanced-multi-agent-trajectory-planning",
+      "title": "A Forward-Inverse Dynamic Game Framework for Enhanced Multi-Agent Trajectory Planning",
+      "section": "deep",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "agents"
+        }
+      ],
+      "score": 9.0,
+      "evidence": "基于动态博弈均衡的多智能体轨迹规划与协调",
+      "first_seen_at": "2026-08-12 07:40:39 UTC",
+      "updated_at": "2026-08-12 07:40:39 UTC"
+    },
+    {
+      "paper_id": "2608.01652v1",
+      "route": "20260803-20260812/2608.01652v1-syncplan-long-horizon-llm-coordination-with-explicit-synchronization-and-adaptive-correction",
+      "title": "SyncPlan: Long-Horizon LLM Coordination with Explicit Synchronization and Adaptive Correction",
+      "section": "deep",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "agents"
+        }
+      ],
+      "score": 9.0,
+      "evidence": "面向长程多智能体协调的计划-执行-纠正框架",
+      "first_seen_at": "2026-08-12 07:40:39 UTC",
+      "updated_at": "2026-08-12 07:40:39 UTC"
+    },
+    {
+      "paper_id": "2608.02358v1",
+      "route": "20260803-20260812/2608.02358v1-scrambletoolbench-agents-search-exhaustively-even-when-their-own-map-points-to-the-next-step",
+      "title": "ScrambleToolBench: Agents Search Exhaustively Even When Their Own Map Points to the Next Step",
+      "section": "deep",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "agents"
+        }
+      ],
+      "score": 9.0,
+      "evidence": "通过交互自主发现工具行为的代理基准",
+      "first_seen_at": "2026-08-12 07:40:39 UTC",
+      "updated_at": "2026-08-12 07:40:39 UTC"
+    },
+    {
+      "paper_id": "2608.02713v1",
+      "route": "20260803-20260812/2608.02713v1-quo-vadis-world-modeling",
+      "title": "Quo Vadis, World Modeling?",
+      "section": "deep",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "agents"
+        }
+      ],
+      "score": 9.0,
+      "evidence": "世界模型作为智能体与环境的交互代理",
+      "first_seen_at": "2026-08-12 07:40:39 UTC",
+      "updated_at": "2026-08-12 07:40:39 UTC"
+    },
+    {
+      "paper_id": "2608.03502v1",
+      "route": "20260803-20260812/2608.03502v1-hybrid-llm-augmented-reinforcement-learning-agents-for-complex-sequential-decision-tasks",
+      "title": "Hybrid LLM-Augmented Reinforcement Learning Agents for Complex Sequential Decision Tasks",
+      "section": "deep",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "agents"
+        }
+      ],
+      "score": 9.0,
+      "evidence": "LLM与强化学习混合的智能体训练方法",
+      "first_seen_at": "2026-08-12 07:40:39 UTC",
+      "updated_at": "2026-08-12 07:40:39 UTC"
+    },
+    {
+      "paper_id": "2608.03735v1",
+      "route": "20260803-20260812/2608.03735v1-an-actionable-diagnosis-of-multilingual-multi-agent-planning-failures",
+      "title": "An Actionable Diagnosis of Multilingual, Multi-Agent Planning Failures",
+      "section": "deep",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "agents"
+        }
+      ],
+      "score": 9.0,
+      "evidence": "将多智能体规划接地失败诊断为协调挑战",
+      "first_seen_at": "2026-08-12 07:40:39 UTC",
+      "updated_at": "2026-08-12 07:40:39 UTC"
+    },
+    {
+      "paper_id": "2608.03833v1",
+      "route": "20260803-20260812/2608.03833v1-history-matters-meta-policy-delegation-with-heterogeneous-multi-agent-reinforcement-learning",
+      "title": "History Matters: Meta-policy Delegation with Heterogeneous Multi-agent Reinforcement Learning",
+      "section": "deep",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "agents"
+        }
+      ],
+      "score": 9.0,
+      "evidence": "面向任务委派与协调的多智能体强化学习",
+      "first_seen_at": "2026-08-12 07:40:39 UTC",
+      "updated_at": "2026-08-12 07:40:39 UTC"
+    },
+    {
+      "paper_id": "2608.04634v1",
+      "route": "20260803-20260812/2608.04634v1-helenahierarchical-sparse-coordination-over-a-union-of-complementary-topologies-for-mas",
+      "title": "HELENA:Hierarchical Sparse Coordination over a Union of Complementary Topologies for MAS",
+      "section": "deep",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "agents"
+        }
+      ],
+      "score": 9.0,
+      "evidence": "面向多智能体系统的层级稀疏协调框架",
+      "first_seen_at": "2026-08-12 07:40:39 UTC",
+      "updated_at": "2026-08-12 07:40:39 UTC"
+    },
+    {
+      "paper_id": "2608.04905v1",
+      "route": "20260803-20260812/2608.04905v1-primal3-pathfinding-via-reinforcement-and-imitation-multi-agent-learning---leveraging-lacam3",
+      "title": "PRIMAL3: Pathfinding via Reinforcement and Imitation Multi-Agent Learning - Leveraging LaCAM3",
+      "section": "deep",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "agents"
+        }
+      ],
+      "score": 9.0,
+      "evidence": "多智能体路径规划、强化与模仿学习",
+      "first_seen_at": "2026-08-12 07:40:39 UTC",
+      "updated_at": "2026-08-12 07:40:39 UTC"
+    },
+    {
+      "paper_id": "2608.04934v1",
+      "route": "20260803-20260812/2608.04934v1-state2state-environment-derived-mid-training-for-llm-agents",
+      "title": "State2State: Environment-Derived Mid-Training for LLM Agents",
+      "section": "deep",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "agents"
+        }
+      ],
+      "score": 9.0,
+      "evidence": "通过直接环境交互训练智能体",
+      "first_seen_at": "2026-08-12 07:40:39 UTC",
+      "updated_at": "2026-08-12 07:40:39 UTC"
+    },
+    {
+      "paper_id": "2608.05013v1",
+      "route": "20260803-20260812/2608.05013v1-onedayagent-towards-a-long-horizon-harness-for-autonomous-agents",
+      "title": "OneDayAgent: Towards a Long-Horizon Harness for Autonomous Agents",
+      "section": "deep",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "agents"
+        }
+      ],
+      "score": 9.0,
+      "evidence": "长时程自主智能体、目标保持和子任务分解",
+      "first_seen_at": "2026-08-12 07:40:39 UTC",
+      "updated_at": "2026-08-12 07:40:39 UTC"
+    },
+    {
+      "paper_id": "2608.05346v1",
+      "route": "20260803-20260812/2608.05346v1-multi-agent-reinforcement-learning-for-online-traffic-scheduling-in-time-sensitive-application",
+      "title": "Multi-Agent Reinforcement Learning for Online Traffic Scheduling in Time-Sensitive Application",
+      "section": "deep",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "agents"
+        }
+      ],
+      "score": 9.0,
+      "evidence": "用于协调TSN队列的多智能体强化学习调度",
+      "first_seen_at": "2026-08-12 07:40:39 UTC",
+      "updated_at": "2026-08-12 07:40:39 UTC"
+    },
+    {
+      "paper_id": "2608.05588v1",
+      "route": "20260803-20260812/2608.05588v1-search-aided-joint-agent-environment-reinforcement-learning-for-robust-lifelong-multi-agent-path-finding-with-rotations",
+      "title": "Search-Aided Joint Agent-Environment Reinforcement Learning for Robust Lifelong Multi-Agent Path Finding with Rotations",
+      "section": "deep",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "agents"
+        }
+      ],
+      "score": 9.0,
+      "evidence": "多智能体路径规划、强化学习训练与协调",
+      "first_seen_at": "2026-08-12 07:40:39 UTC",
+      "updated_at": "2026-08-12 07:40:39 UTC"
+    },
+    {
+      "paper_id": "2608.06227v1",
+      "route": "20260803-20260812/2608.06227v1-from-passive-mirrors-to-active-agents-holonic-digital-twins-for-physical-ai-over-networks",
+      "title": "From Passive Mirrors to Active Agents: Holonic Digital Twins for Physical AI over Networks",
+      "section": "deep",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "agents"
+        }
+      ],
+      "score": 9.0,
+      "evidence": "主动智能体、共享时空上下文的感知与交互",
+      "first_seen_at": "2026-08-12 07:40:39 UTC",
+      "updated_at": "2026-08-12 07:40:39 UTC"
+    },
+    {
+      "paper_id": "2608.06420v1",
+      "route": "20260803-20260812/2608.06420v1-risk-aware-decision-policies-for-agents-under-noisy-perception",
+      "title": "Risk-Aware Decision Policies for Agents Under Noisy Perception",
+      "section": "deep",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "agents"
+        }
+      ],
+      "score": 9.0,
+      "evidence": "噪声感知下的自主智能体决策策略",
+      "first_seen_at": "2026-08-12 07:40:39 UTC",
+      "updated_at": "2026-08-12 07:40:39 UTC"
+    },
+    {
+      "paper_id": "2608.07775v1",
+      "route": "20260803-20260812/2608.07775v1-androidreality-how-far-are-mobile-agents-from-the-real-world",
+      "title": "AndroidReality: How Far Are Mobile Agents from the Real World?",
+      "section": "deep",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "agents"
+        }
+      ],
+      "score": 9.0,
+      "evidence": "基于MDP扰动分类评估和提升移动智能体真实世界鲁棒性的框架",
+      "first_seen_at": "2026-08-12 07:40:39 UTC",
+      "updated_at": "2026-08-12 07:40:39 UTC"
+    },
+    {
+      "paper_id": "2608.08045v1",
+      "route": "20260803-20260812/2608.08045v1-lingjing-a-simulation-testbed-for-multi-agent-embodied-tasks-in-open-ended-cities",
+      "title": "Lingjing: A Simulation Testbed for Multi-Agent Embodied Tasks in Open-Ended Cities",
+      "section": "deep",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "agents"
+        }
+      ],
+      "score": 9.0,
+      "evidence": "面向城市多智能体具身协同的仿真测试平台",
+      "first_seen_at": "2026-08-12 07:40:39 UTC",
+      "updated_at": "2026-08-12 07:40:39 UTC"
+    },
+    {
+      "paper_id": "2608.08255v1",
+      "route": "20260803-20260812/2608.08255v1-learning-from-environmental-feedback-credit-assignment-across-multiple-timescales-for-agentic-reinforcement-learning",
+      "title": "Learning from Environmental Feedback: Credit Assignment across Multiple Timescales for Agentic Reinforcement Learning",
+      "section": "deep",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "agents"
+        }
+      ],
+      "score": 9.0,
+      "evidence": "用于智能体强化学习训练的信用分配方法",
+      "first_seen_at": "2026-08-12 07:40:39 UTC",
+      "updated_at": "2026-08-12 07:40:39 UTC"
+    },
+    {
+      "paper_id": "2608.08392v1",
+      "route": "20260803-20260812/2608.08392v1-cap-a-scalable-benchmark-for-evaluating-cross-site-browser-agents-with-complex-actions-and-perception",
+      "title": "CAP: A Scalable Benchmark for Evaluating Cross-Site Browser Agents with Complex Actions and Perception",
+      "section": "deep",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "agents"
+        }
+      ],
+      "score": 9.0,
+      "evidence": "浏览器代理的复杂UI交互与视觉感知基准",
+      "first_seen_at": "2026-08-12 07:40:39 UTC",
+      "updated_at": "2026-08-12 07:40:39 UTC"
+    },
+    {
+      "paper_id": "2608.08523v1",
+      "route": "20260803-20260812/2608.08523v1-discovering-diverse-planning-policies-for-multimodal-embodied-agents-with-quality-diversity-optimization",
+      "title": "Discovering Diverse Planning Policies for Multimodal Embodied Agents with Quality-Diversity Optimization",
+      "section": "deep",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "agents"
+        }
+      ],
+      "score": 9.0,
+      "evidence": "面向多模态具身智能体任务完成的多策略规划发现",
+      "first_seen_at": "2026-08-12 07:40:39 UTC",
+      "updated_at": "2026-08-12 07:40:39 UTC"
+    },
+    {
+      "paper_id": "2608.08604v1",
+      "route": "20260803-20260812/2608.08604v1-multi-agent-reinforcement-learning-via-agent-specific-preference",
+      "title": "Multi-Agent Reinforcement Learning via Agent-Specific Preference",
+      "section": "deep",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "agents"
+        }
+      ],
+      "score": 9.0,
+      "evidence": "基于智能体个性化偏好的多智能体强化学习，无需全局奖励即可协调异构智能体",
+      "first_seen_at": "2026-08-12 07:40:39 UTC",
+      "updated_at": "2026-08-12 07:40:39 UTC"
+    },
+    {
+      "paper_id": "2608.09251v1",
+      "route": "20260803-20260812/2608.09251v1-morse-task-oriented-multi-agent-system-with-mixture-of-role-subtask-experts",
+      "title": "MoRSE: Task-Oriented Multi-Agent System with Mixture of Role-Subtask Experts",
+      "section": "deep",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "agents"
+        }
+      ],
+      "score": 9.0,
+      "evidence": "基于角色与子任务专家的任务导向多智能体协作方法",
+      "first_seen_at": "2026-08-12 07:40:39 UTC",
+      "updated_at": "2026-08-12 07:40:39 UTC"
+    },
+    {
+      "paper_id": "2608.10366v1",
+      "route": "20260803-20260812/2608.10366v1-dsagentbench-can-agents-automate-end-to-end-data-science-workflows-in-real-computer-environments",
+      "title": "DSAgentBench: Can Agents Automate End-to-End Data-Science Workflows in Real Computer Environments?",
+      "section": "deep",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "agents"
+        }
+      ],
+      "score": 9.0,
+      "evidence": "面向任务型智能体完成端到端数据科学流程的评测基准",
+      "first_seen_at": "2026-08-12 07:40:39 UTC",
+      "updated_at": "2026-08-12 07:40:39 UTC"
+    },
+    {
+      "paper_id": "2608.02005v1",
+      "route": "20260803-20260812/2608.02005v1-evolving-in-the-agent-jungle-via-history-informed-opponent-awareness",
+      "title": "Evolving in the Agent Jungle via History-Informed Opponent Awareness",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "agents"
+        }
+      ],
+      "score": 8.0,
+      "evidence": "在多智能体环境中适应动态对手的演化方法",
+      "first_seen_at": "2026-08-12 07:40:39 UTC",
+      "updated_at": "2026-08-12 07:40:39 UTC"
+    },
+    {
+      "paper_id": "2608.02101v1",
+      "route": "20260803-20260812/2608.02101v1-cross-domain-hybrid-opd-for-generalizable-search-agents",
+      "title": "Cross-Domain Hybrid OPD for Generalizable Search Agents",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "agents"
+        }
+      ],
+      "score": 8.0,
+      "evidence": "面向可泛化搜索智能体的强化学习训练框架，融合智能体RL与跨领域专家策略",
+      "first_seen_at": "2026-08-12 07:40:39 UTC",
+      "updated_at": "2026-08-12 07:40:39 UTC"
+    },
+    {
+      "paper_id": "2608.02291v1",
+      "route": "20260803-20260812/2608.02291v1-shared-prefixes-better-credit-adaptive-routing-for-multi-agent-reasoning",
+      "title": "Shared Prefixes, Better Credit: Adaptive Routing for Multi-Agent Reasoning",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "agents"
+        }
+      ],
+      "score": 8.0,
+      "evidence": "面向自适应多智能体推理协调的信用分配方法",
+      "first_seen_at": "2026-08-12 07:40:39 UTC",
+      "updated_at": "2026-08-12 07:40:39 UTC"
+    },
+    {
+      "paper_id": "2608.03076v1",
+      "route": "20260803-20260812/2608.03076v1-ai-agent-economics-can-autonomous-economic-behavior-emerge-among-ai-agents-under-minimal-external-conditions",
+      "title": "AI Agent Economics: Can Autonomous Economic Behavior Emerge among AI Agents under Minimal External Conditions?",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "agents"
+        }
+      ],
+      "score": 8.0,
+      "evidence": "AI智能体之间自主经济行为的涌现",
+      "first_seen_at": "2026-08-12 07:40:39 UTC",
+      "updated_at": "2026-08-12 07:40:39 UTC"
+    },
+    {
+      "paper_id": "2608.02171v1",
+      "route": "20260803-20260812/2608.02171v1-from-profiling-to-synthesis-benchmarking-implicit-behavioral-alignment-in-personalized-llm-agents",
+      "title": "From Profiling to Synthesis: Benchmarking Implicit Behavioral Alignment in Personalized LLM Agents",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "agents"
+        }
+      ],
+      "score": 7.0,
+      "evidence": "评估个性化LLM智能体隐式行为对齐与偏好条件任务执行的基准",
+      "first_seen_at": "2026-08-12 07:40:39 UTC",
+      "updated_at": "2026-08-12 07:40:39 UTC"
+    },
+    {
+      "paper_id": "2608.02553v1",
+      "route": "20260803-20260812/2608.02553v1-a-taxonomy-of-cognitive-capability-gaps-in-generative-and-agentic-ai",
+      "title": "A Taxonomy of Cognitive Capability Gaps in Generative and Agentic AI",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "agents"
+        }
+      ],
+      "score": 7.0,
+      "evidence": "关于自主智能体在目标导向自主与环境交互等方面能力缺口的综述",
+      "first_seen_at": "2026-08-12 07:40:39 UTC",
+      "updated_at": "2026-08-12 07:40:39 UTC"
+    },
+    {
+      "paper_id": "2608.04148v1",
+      "route": "20260803-20260812/2608.04148v1-agentforge-an-immersive-role-playing-platform-for-learning-agentic-software-engineering",
+      "title": "AgentForge: An Immersive Role-Playing Platform for Learning Agentic Software Engineering",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "agents"
+        }
+      ],
+      "score": 7.0,
+      "evidence": "多智能体代码修复流程、角色扮演学习协作",
+      "first_seen_at": "2026-08-12 07:40:39 UTC",
+      "updated_at": "2026-08-12 07:40:39 UTC"
+    },
+    {
+      "paper_id": "2608.05791v1",
+      "route": "20260803-20260812/2608.05791v1-a-two-tier-perspective-on-inference-time-parallelism-in-multi-agent-llm-systems",
+      "title": "A Two-Tier Perspective on Inference-Time Parallelism in Multi-Agent LLM Systems",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "agents"
+        }
+      ],
+      "score": 7.0,
+      "evidence": "研究多智能体LLM推理期协调与并行机制",
+      "first_seen_at": "2026-08-12 07:40:39 UTC",
+      "updated_at": "2026-08-12 07:40:39 UTC"
+    },
+    {
+      "paper_id": "2608.01938v1",
+      "route": "20260803-20260812/2608.01938v1-d-mutra-dlt-based-mutual-remote-attestation-for-multi-agent-systems",
+      "title": "D-MUTRA: DLT-based MUTual Remote Attestation for Multi-Agent Systems",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "agents"
+        }
+      ],
+      "score": 6.0,
+      "evidence": "面向可信多智能体协调的相互证明方法",
+      "first_seen_at": "2026-08-12 07:40:39 UTC",
+      "updated_at": "2026-08-12 07:40:39 UTC"
+    },
+    {
+      "paper_id": "2608.05201v1",
+      "route": "20260803-20260812/2608.05201v1-asteld-a-six-axis-classification-framework-for-autonomous-ai-agents---design-evaluation-and-an-openclaw-case-study",
+      "title": "ASTELD: A Six-Axis Classification Framework for Autonomous AI Agents - Design, Evaluation, and an OpenClaw Case Study",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "agents"
+        }
+      ],
+      "score": 6.0,
+      "evidence": "面向自主AI智能体平台比较的六轴分类框架",
+      "first_seen_at": "2026-08-12 07:40:39 UTC",
+      "updated_at": "2026-08-12 07:40:39 UTC"
+    },
+    {
+      "paper_id": "2608.05495v1",
+      "route": "20260803-20260812/2608.05495v1-promptshield-home-ambient-multimodal-prompt-injection-defense-for-smart-home-agents",
+      "title": "PromptShield Home: Ambient Multimodal Prompt Injection Defense for Smart-Home Agents",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "agents"
+        }
+      ],
+      "score": 6.0,
+      "evidence": "面向智能家居智能体多模态感知与提示注入防御的基准",
+      "first_seen_at": "2026-08-12 07:40:39 UTC",
+      "updated_at": "2026-08-12 07:40:39 UTC"
+    }
+  ]
+}
