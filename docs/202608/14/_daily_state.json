@@ -1,0 +1,361 @@
+{
+  "date": "20260814",
+  "date_label": "",
+  "generated_at": "2026-08-14 21:11:35 UTC",
+  "recommend_exists": true,
+  "run_count": 1,
+  "papers": [
+    {
+      "paper_id": "2608.05587v1",
+      "route": "202608/14/2608.05587v1-stepreflect-structured-ui-transition-reflection-for-mobile-gui-agents",
+      "title": "StepReflect: Structured UI Transition Reflection for Mobile GUI Agents",
+      "section": "deep",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "agents"
+        }
+      ],
+      "score": 9.0,
+      "evidence": "通过结构化动作反射提升长时程任务完成能力",
+      "first_seen_at": "2026-08-14 21:11:35 UTC",
+      "updated_at": "2026-08-14 21:11:35 UTC"
+    },
+    {
+      "paper_id": "2608.05956v1",
+      "route": "202608/14/2608.05956v1-certifying-collective-reasoning-in-multi-agent-systems-via-koopman-spectral-analysis",
+      "title": "Certifying Collective Reasoning in Multi-Agent Systems via Koopman Spectral Analysis",
+      "section": "deep",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "agents"
+        }
+      ],
+      "score": 9.0,
+      "evidence": "基于Koopman谱分析的多智能体辩论投票集体推理认证框架",
+      "first_seen_at": "2026-08-14 21:11:35 UTC",
+      "updated_at": "2026-08-14 21:11:35 UTC"
+    },
+    {
+      "paper_id": "2608.06197v1",
+      "route": "202608/14/2608.06197v1-envace-internalizing-environment-dynamics-via-world-rehearsal-for-agentic-reinforcement-learning",
+      "title": "EnvACE: Internalizing Environment Dynamics via World Rehearsal for Agentic Reinforcement Learning",
+      "section": "deep",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "agents"
+        }
+      ],
+      "score": 9.0,
+      "evidence": "通过世界排演进行智能体强化学习，无需外部环境",
+      "first_seen_at": "2026-08-14 21:11:35 UTC",
+      "updated_at": "2026-08-14 21:11:35 UTC"
+    },
+    {
+      "paper_id": "2608.08035v1",
+      "route": "202608/14/2608.08035v1-decentralized-multi-agent-urban-traffic-management-via-spatio-temporal-mobility-profile-planning",
+      "title": "Decentralized Multi-Agent Urban Traffic Management via Spatio-Temporal Mobility Profile Planning",
+      "section": "deep",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "agents"
+        }
+      ],
+      "score": 9.0,
+      "evidence": "面向城市交通的分散式多智能体协同，解决可扩展性与全局效率问题",
+      "first_seen_at": "2026-08-14 21:11:35 UTC",
+      "updated_at": "2026-08-14 21:11:35 UTC"
+    },
+    {
+      "paper_id": "2608.08236v1",
+      "route": "202608/14/2608.08236v1-latticemind-a-conflict-aware-memory-primitive-for-multi-agent-systems",
+      "title": "LatticeMind: A Conflict-Aware Memory Primitive for Multi-Agent Systems",
+      "section": "deep",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "agents"
+        }
+      ],
+      "score": 9.0,
+      "evidence": "面向多智能体LLM系统信任协调的冲突感知记忆原语",
+      "first_seen_at": "2026-08-14 21:11:35 UTC",
+      "updated_at": "2026-08-14 21:11:35 UTC"
+    },
+    {
+      "paper_id": "2608.08605v1",
+      "route": "202608/14/2608.08605v1-forestbench-a-unified-graph-framework-for-evaluating-multi-agent-collaboration",
+      "title": "ForestBench: A Unified Graph Framework for Evaluating Multi-Agent Collaboration",
+      "section": "deep",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "agents"
+        }
+      ],
+      "score": 9.0,
+      "evidence": "用于评估多智能体协作的统一图框架",
+      "first_seen_at": "2026-08-14 21:11:35 UTC",
+      "updated_at": "2026-08-14 21:11:35 UTC"
+    },
+    {
+      "paper_id": "2608.09256v1",
+      "route": "202608/14/2608.09256v1-distributed-team-orchestration-via-supervisor-networks-convergence-optimality-and-resilience",
+      "title": "Distributed Team Orchestration via Supervisor Networks: Convergence, Optimality, and Resilience",
+      "section": "deep",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "agents"
+        }
+      ],
+      "score": 9.0,
+      "evidence": "通过监督者网络的分布式团队编排应对含拜占庭智能体的协调挑战",
+      "first_seen_at": "2026-08-14 21:11:35 UTC",
+      "updated_at": "2026-08-14 21:11:35 UTC"
+    },
+    {
+      "paper_id": "2608.09816v1",
+      "route": "202608/14/2608.09816v1-hierarchical-fast--slow-react-agent-for-zero-shot-object-goal-navigation",
+      "title": "Hierarchical Fast--Slow ReAct Agent for Zero-Shot Object-Goal Navigation",
+      "section": "deep",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "agents"
+        }
+      ],
+      "score": 9.0,
+      "evidence": "具身智能体的感知-行动回路；零样本目标物体导航",
+      "first_seen_at": "2026-08-14 21:11:35 UTC",
+      "updated_at": "2026-08-14 21:11:35 UTC"
+    },
+    {
+      "paper_id": "2608.11658v1",
+      "route": "202608/14/2608.11658v1-is-per-agent-policy-composition-safe-rethinking-successor-feature-transfer-in-cooperative-multi-agent-reinforcement-learning",
+      "title": "Is Per-Agent Policy Composition Safe? Rethinking Successor-Feature Transfer in Cooperative Multi-Agent Reinforcement Learning",
+      "section": "deep",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "agents"
+        }
+      ],
+      "score": 9.0,
+      "evidence": "探讨协作多智能体强化学习中策略迁移的安全挑战",
+      "first_seen_at": "2026-08-14 21:11:35 UTC",
+      "updated_at": "2026-08-14 21:11:35 UTC"
+    },
+    {
+      "paper_id": "2608.12534v1",
+      "route": "202608/14/2608.12534v1-entropy-augmented-multi-objective-policy-optimization-in-multiagent-systems",
+      "title": "Entropy-Augmented Multi-Objective Policy Optimization in Multiagent Systems",
+      "section": "deep",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "agents"
+        }
+      ],
+      "score": 9.0,
+      "evidence": "面向多智能体团队协作的熵增广多目标策略优化",
+      "first_seen_at": "2026-08-14 21:11:35 UTC",
+      "updated_at": "2026-08-14 21:11:35 UTC"
+    },
+    {
+      "paper_id": "2608.12921v1",
+      "route": "202608/14/2608.12921v1-discovering-efficient-and-explainable-communication-topologies-for-llm-based-multi-agent-systems-via-causal-inference",
+      "title": "Discovering Efficient and Explainable Communication Topologies for LLM-based Multi-Agent Systems via Causal Inference",
+      "section": "deep",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "agents"
+        }
+      ],
+      "score": 9.0,
+      "evidence": "面向LLM多智能体协调的高效可解释通信拓扑",
+      "first_seen_at": "2026-08-14 21:11:35 UTC",
+      "updated_at": "2026-08-14 21:11:35 UTC"
+    },
+    {
+      "paper_id": "2608.03239v1",
+      "route": "202608/14/2608.03239v1-relational-priors-as-convergence-pressure-in-llm-based-multi-agent-systems",
+      "title": "Relational Priors as Convergence Pressure in LLM-Based Multi-Agent Systems",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "agents"
+        }
+      ],
+      "score": 8.0,
+      "evidence": "关系先验、多智能体协作与收敛",
+      "first_seen_at": "2026-08-14 21:11:35 UTC",
+      "updated_at": "2026-08-14 21:11:35 UTC"
+    },
+    {
+      "paper_id": "2608.03403v1",
+      "route": "202608/14/2608.03403v1-towards-robust-tool-use-in-agents-via-experience-driven-adaptive-guidance",
+      "title": "Towards Robust Tool Use in Agents via Experience-Driven Adaptive Guidance",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "agents"
+        }
+      ],
+      "score": 8.0,
+      "evidence": "面向智能体与环境交互的工具使用鲁棒性自适应引导",
+      "first_seen_at": "2026-08-14 21:11:35 UTC",
+      "updated_at": "2026-08-14 21:11:35 UTC"
+    },
+    {
+      "paper_id": "2608.04341v1",
+      "route": "202608/14/2608.04341v1-continuous-improvement-and-parallel-autonomous-exploration-an-llm-agent-framework-for-searching-large-solution-spaces",
+      "title": "Continuous Improvement and Parallel Autonomous Exploration: An LLM-Agent Framework for Searching Large Solution Spaces",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "agents"
+        }
+      ],
+      "score": 8.0,
+      "evidence": "LLM智能体借助奖励反馈自主优化与探索解空间",
+      "first_seen_at": "2026-08-14 21:11:35 UTC",
+      "updated_at": "2026-08-14 21:11:35 UTC"
+    },
+    {
+      "paper_id": "2608.04588v1",
+      "route": "202608/14/2608.04588v1-easy-towards-efficient-llm-based-agentic-system",
+      "title": "EASy: Towards Efficient LLM-Based Agentic System",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "agents"
+        }
+      ],
+      "score": 8.0,
+      "evidence": "通过强化学习实现专业LLM智能体的高效协调",
+      "first_seen_at": "2026-08-14 21:11:35 UTC",
+      "updated_at": "2026-08-14 21:11:35 UTC"
+    },
+    {
+      "paper_id": "2608.05792v1",
+      "route": "202608/14/2608.05792v1-when-agentic-ai-meets-integrated-sensing-and-communication",
+      "title": "When Agentic AI Meets Integrated Sensing and Communication",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "agents"
+        }
+      ],
+      "score": 7.0,
+      "evidence": "面向通感一体化的智能体AI闭环感知-行动框架",
+      "first_seen_at": "2026-08-14 21:11:35 UTC",
+      "updated_at": "2026-08-14 21:11:35 UTC"
+    },
+    {
+      "paper_id": "2608.06033v1",
+      "route": "202608/14/2608.06033v1-asge-rr-agentic-service-graph-embedding-with-revisable-reservations-for-dynamic-ai-agent-calls",
+      "title": "ASGE-RR: Agentic Service Graph Embedding with Revisable Reservations for Dynamic AI-Agent Calls",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "agents"
+        }
+      ],
+      "score": 7.0,
+      "evidence": "面向动态AI智能体工作流优化资源分配，在约束下完成目标任务",
+      "first_seen_at": "2026-08-14 21:11:35 UTC",
+      "updated_at": "2026-08-14 21:11:35 UTC"
+    },
+    {
+      "paper_id": "2608.06699v1",
+      "route": "202608/14/2608.06699v1-agentpatch-coarse-to-fine-weak-task-repair-for-merging-agentic-multimodal-large-language-models",
+      "title": "AgentPatch: Coarse-to-Fine Weak-Task Repair for Merging Agentic Multimodal Large Language Models",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "agents"
+        }
+      ],
+      "score": 7.0,
+      "evidence": "面向智能体多模态大模型合并的无训练修复框架，构建通用智能体",
+      "first_seen_at": "2026-08-14 21:11:35 UTC",
+      "updated_at": "2026-08-14 21:11:35 UTC"
+    },
+    {
+      "paper_id": "2608.07949v1",
+      "route": "202608/14/2608.07949v1-guixu-valuation-driven-data-discovery-for-autonomous-ai-agents-with-on-chain-attestation",
+      "title": "Guixu: Valuation-Driven Data Discovery for Autonomous AI Agents with On-Chain Attestation",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "agents"
+        }
+      ],
+      "score": 7.0,
+      "evidence": "面向自主智能体的数据发现系统，在预算约束下支持任务决策",
+      "first_seen_at": "2026-08-14 21:11:35 UTC",
+      "updated_at": "2026-08-14 21:11:35 UTC"
+    },
+    {
+      "paper_id": "2608.05797v1",
+      "route": "202608/14/2608.05797v1-predicting-task-difficulty-without-rollouts",
+      "title": "Predicting Task Difficulty Without Rollouts",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "agents"
+        }
+      ],
+      "score": 6.0,
+      "evidence": "面向智能体基准的无需rollout任务难度预测，用于渐进训练课程",
+      "first_seen_at": "2026-08-14 21:11:35 UTC",
+      "updated_at": "2026-08-14 21:11:35 UTC"
+    },
+    {
+      "paper_id": "2608.07639v1",
+      "route": "202608/14/2608.07639v1-skillconsist-detecting-inconsistencies-in-agent-skills-via-bidirectional-graph-alignment",
+      "title": "SkillConsist: Detecting Inconsistencies in Agent Skills via Bidirectional Graph Alignment",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "agents"
+        }
+      ],
+      "score": 6.0,
+      "evidence": "检测智能体技能不一致性以支持可靠的任务完成",
+      "first_seen_at": "2026-08-14 21:11:35 UTC",
+      "updated_at": "2026-08-14 21:11:35 UTC"
+    },
+    {
+      "paper_id": "2608.10934v1",
+      "route": "202608/14/2608.10934v1-understanding-the-architecture-of-coding-agents-an-exploratory-study-using-a-research-prototype",
+      "title": "Understanding the Architecture of Coding Agents: An Exploratory Study Using a Research Prototype",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "agents"
+        }
+      ],
+      "score": 6.0,
+      "evidence": "系统记录编码智能体的主要架构组件及其交互",
+      "first_seen_at": "2026-08-14 21:11:35 UTC",
+      "updated_at": "2026-08-14 21:11:35 UTC"
+    }
+  ]
+}
