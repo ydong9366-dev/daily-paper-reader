@@ -1,0 +1,409 @@
+{
+  "date": "20260815",
+  "date_label": "",
+  "generated_at": "2026-08-15 19:51:21 UTC",
+  "recommend_exists": true,
+  "run_count": 1,
+  "papers": [
+    {
+      "paper_id": "2608.06756v1",
+      "route": "202608/15/2608.06756v1-capek-05-an-execution-centric-vision-language-model-for-embodied-intelligence",
+      "title": "Capek 0.5: An Execution-Centric Vision-Language Model for Embodied Intelligence",
+      "section": "deep",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "agents"
+        }
+      ],
+      "score": 9.0,
+      "evidence": "具身智能体的感知与执行",
+      "first_seen_at": "2026-08-15 19:51:21 UTC",
+      "updated_at": "2026-08-15 19:51:21 UTC"
+    },
+    {
+      "paper_id": "2608.08036v1",
+      "route": "202608/15/2608.08036v1-compiling-and-benchmarking-task-state-horizons-for-embodied-agents",
+      "title": "Compiling and Benchmarking Task-State Horizons for Embodied Agents",
+      "section": "deep",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "agents"
+        }
+      ],
+      "score": 9.0,
+      "evidence": "面向具身智能体的长时程任务与世界状态追踪基准",
+      "first_seen_at": "2026-08-15 19:51:21 UTC",
+      "updated_at": "2026-08-15 19:51:21 UTC"
+    },
+    {
+      "paper_id": "2608.08277v1",
+      "route": "202608/15/2608.08277v1-wirelessopsagent-a-benchmark-and-agent-design-for-action-assurance-in-wireless-networks",
+      "title": "WirelessOpsAgent: A Benchmark and Agent Design for Action Assurance in Wireless Networks",
+      "section": "deep",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "agents"
+        }
+      ],
+      "score": 9.0,
+      "evidence": "面向无线运维动作保证的自主LLM智能体决策",
+      "first_seen_at": "2026-08-15 19:51:21 UTC",
+      "updated_at": "2026-08-15 19:51:21 UTC"
+    },
+    {
+      "paper_id": "2608.08895v1",
+      "route": "202608/15/2608.08895v1-latent-semantic-state-estimation-for-reliable-swarming-of-uavs-under-intermittent-connectivity",
+      "title": "Latent Semantic State Estimation for Reliable Swarming of UAVs under Intermittent Connectivity",
+      "section": "deep",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "agents"
+        }
+      ],
+      "score": 9.0,
+      "evidence": "多无人机在间歇连接下的协同",
+      "first_seen_at": "2026-08-15 19:51:21 UTC",
+      "updated_at": "2026-08-15 19:51:21 UTC"
+    },
+    {
+      "paper_id": "2608.09258v1",
+      "route": "202608/15/2608.09258v1-task-oriented-formation-decision-via-reinforcement-learning-herding-an-attacking-swarm",
+      "title": "Task-Oriented Formation Decision via Reinforcement Learning: Herding an Attacking Swarm",
+      "section": "deep",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "agents"
+        }
+      ],
+      "score": 9.0,
+      "evidence": "强化学习驱动的任务导向智能体编队决策",
+      "first_seen_at": "2026-08-15 19:51:21 UTC",
+      "updated_at": "2026-08-15 19:51:21 UTC"
+    },
+    {
+      "paper_id": "2608.10299v1",
+      "route": "202608/15/2608.10299v1-co-evolution-in-agentic-systems-toward-self-directed-evolution-beyond-human-design",
+      "title": "Co-Evolution in Agentic Systems: Toward Self-Directed Evolution Beyond Human Design",
+      "section": "deep",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "agents"
+        }
+      ],
+      "score": 9.0,
+      "evidence": "多智能体与环境的共同进化机制",
+      "first_seen_at": "2026-08-15 19:51:21 UTC",
+      "updated_at": "2026-08-15 19:51:21 UTC"
+    },
+    {
+      "paper_id": "2608.10504v1",
+      "route": "202608/15/2608.10504v1-mega-self-evolving-agent-optimization-infrastructure-via-wisdom-graph",
+      "title": "MEGA: Self-Evolving Agent Optimization Infrastructure via Wisdom Graph",
+      "section": "deep",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "agents"
+        }
+      ],
+      "score": 9.0,
+      "evidence": "智能体优化的自进化基础设施",
+      "first_seen_at": "2026-08-15 19:51:21 UTC",
+      "updated_at": "2026-08-15 19:51:21 UTC"
+    },
+    {
+      "paper_id": "2608.10618v1",
+      "route": "202608/15/2608.10618v1-toward-the-cognitive--physical-limits-of-embodied-intelligence-through-a-world-model-centric-autonomous-racing-agent",
+      "title": "Toward the Cognitive--Physical Limits of Embodied Intelligence through a World-Model-Centric Autonomous Racing Agent",
+      "section": "deep",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "agents"
+        }
+      ],
+      "score": 9.0,
+      "evidence": "基于世界模型的自动驾驶竞速智能体，探索具身智能的感知与交互",
+      "first_seen_at": "2026-08-15 19:51:21 UTC",
+      "updated_at": "2026-08-15 19:51:21 UTC"
+    },
+    {
+      "paper_id": "2608.10915v2",
+      "route": "202608/15/2608.10915v2-combodied-agents-a-new-paradigm-of-human-centric-agentic-ai",
+      "title": "ComBodied Agents: a New Paradigm of Human-Centric Agentic AI",
+      "section": "deep",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "agents"
+        }
+      ],
+      "score": 9.0,
+      "evidence": "提出以人为中心的Combodied智能体范式，融合数字与具身智能体",
+      "first_seen_at": "2026-08-15 19:51:21 UTC",
+      "updated_at": "2026-08-15 19:51:21 UTC"
+    },
+    {
+      "paper_id": "2608.11350v1",
+      "route": "202608/15/2608.11350v1-self-evolving-embodied-agents-via-skill-harness-evolution",
+      "title": "Self-Evolving Embodied Agents via Skill-Harness Evolution",
+      "section": "deep",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "agents"
+        }
+      ],
+      "score": 9.0,
+      "evidence": "提出SHAPER，通过技能与上下文代码演化实现免训练具身智能体自适应",
+      "first_seen_at": "2026-08-15 19:51:21 UTC",
+      "updated_at": "2026-08-15 19:51:21 UTC"
+    },
+    {
+      "paper_id": "2608.12564v1",
+      "route": "202608/15/2608.12564v1-scaling-automatic-research-agents-via-world-models",
+      "title": "Scaling Automatic Research Agents via World Models",
+      "section": "deep",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "agents"
+        }
+      ],
+      "score": 9.0,
+      "evidence": "用世界模型解决自动研究智能体强化学习训练的扩展瓶颈",
+      "first_seen_at": "2026-08-15 19:51:21 UTC",
+      "updated_at": "2026-08-15 19:51:21 UTC"
+    },
+    {
+      "paper_id": "2608.12683v1",
+      "route": "202608/15/2608.12683v1-fuse-active-functional-affordance-grounding-through-adaptive-semantic-geometric-evidence-acquisition",
+      "title": "FUSE: Active Functional Affordance Grounding through Adaptive Semantic-Geometric Evidence Acquisition",
+      "section": "deep",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "agents"
+        }
+      ],
+      "score": 9.0,
+      "evidence": "具身智能体主动感知与交互以接地功能可供性",
+      "first_seen_at": "2026-08-15 19:51:21 UTC",
+      "updated_at": "2026-08-15 19:51:21 UTC"
+    },
+    {
+      "paper_id": "2608.12995v1",
+      "route": "202608/15/2608.12995v1-ogr-marl-option-guided-residual-multi-agent-reinforcement-learning-for-heterogeneous-usv-cooperative-pursuit-in-constrained-port-waterways",
+      "title": "OGR-MARL: Option-Guided Residual Multi-Agent Reinforcement Learning for Heterogeneous USV Cooperative Pursuit in Constrained Port Waterways",
+      "section": "deep",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "agents"
+        }
+      ],
+      "score": 9.0,
+      "evidence": "异构无人艇协同追捕的多智能体强化学习",
+      "first_seen_at": "2026-08-15 19:51:21 UTC",
+      "updated_at": "2026-08-15 19:51:21 UTC"
+    },
+    {
+      "paper_id": "2608.13456v1",
+      "route": "202608/15/2608.13456v1-a-unifying-perspective-on-causal-world-models-from-observations-to-representations-to-structure",
+      "title": "A Unifying Perspective on Causal World Models: From Observations to Representations to Structure",
+      "section": "deep",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "agents"
+        }
+      ],
+      "score": 9.0,
+      "evidence": "从因果视角研究世界模型，支持智能体预测、规划与分布外行动",
+      "first_seen_at": "2026-08-15 19:51:21 UTC",
+      "updated_at": "2026-08-15 19:51:21 UTC"
+    },
+    {
+      "paper_id": "2608.04626v1",
+      "route": "202608/15/2608.04626v1-blockchain-empowered-trustworthy-agent-networks-foundations-taxonomy-and-future-directions",
+      "title": "Blockchain Empowered Trustworthy Agent Networks: Foundations, Taxonomy, and Future Directions",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "agents"
+        }
+      ],
+      "score": 8.0,
+      "evidence": "开放代理网络与多代理互操作综述",
+      "first_seen_at": "2026-08-15 19:51:21 UTC",
+      "updated_at": "2026-08-15 19:51:21 UTC"
+    },
+    {
+      "paper_id": "2608.05446v1",
+      "route": "202608/15/2608.05446v1-evoharness-rl-learning-self-evolving-runtime-harness-for-long-horizon-llm-agents",
+      "title": "EvoHarness-RL: Learning Self-Evolving Runtime Harness for Long-Horizon LLM Agents",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "agents"
+        }
+      ],
+      "score": 8.0,
+      "evidence": "提出用强化学习训练长程LLM智能体的外部环境策略",
+      "first_seen_at": "2026-08-15 19:51:21 UTC",
+      "updated_at": "2026-08-15 19:51:21 UTC"
+    },
+    {
+      "paper_id": "2608.05479v1",
+      "route": "202608/15/2608.05479v1-ai-farol-co-evolutionary-dynamics-in-a-multi-agent-two-sided-learning-framework",
+      "title": "AI-Farol: Co-Evolutionary Dynamics in a Multi-Agent Two-Sided Learning Framework",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "agents"
+        }
+      ],
+      "score": 8.0,
+      "evidence": "不确定性下多智能体协调，包含双边学习与部分可观测性",
+      "first_seen_at": "2026-08-15 19:51:21 UTC",
+      "updated_at": "2026-08-15 19:51:21 UTC"
+    },
+    {
+      "paper_id": "2608.05729v1",
+      "route": "202608/15/2608.05729v1-unified-agent-managing-interactions-across-devices",
+      "title": "Unified Agent: Managing Interactions across Devices",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "agents"
+        }
+      ],
+      "score": 8.0,
+      "evidence": "设计紧凑且可行动的状态以支持智能体的行为决策",
+      "first_seen_at": "2026-08-15 19:51:21 UTC",
+      "updated_at": "2026-08-15 19:51:21 UTC"
+    },
+    {
+      "paper_id": "2608.08600v1",
+      "route": "202608/15/2608.08600v1-population-scalable-multi-agent-world-modeling",
+      "title": "Population-Scalable Multi-Agent World Modeling",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "agents"
+        }
+      ],
+      "score": 7.0,
+      "evidence": "通过共享世界状态实现任意智能体数量扩展的多智能体世界模型",
+      "first_seen_at": "2026-08-15 19:51:21 UTC",
+      "updated_at": "2026-08-15 19:51:21 UTC"
+    },
+    {
+      "paper_id": "2608.09828v1",
+      "route": "202608/15/2608.09828v1-multi-agent-ai-safety-as-an-institutional-design-problem",
+      "title": "Multi-Agent AI Safety as an Institutional Design Problem",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "agents"
+        }
+      ],
+      "score": 7.0,
+      "evidence": "研究多智能体系统中制度规则如何带来安全，涉及委托与协作挑战",
+      "first_seen_at": "2026-08-15 19:51:21 UTC",
+      "updated_at": "2026-08-15 19:51:21 UTC"
+    },
+    {
+      "paper_id": "2608.10669v1",
+      "route": "202608/15/2608.10669v1-redagentbench-executable-red-teaming-and-faithful-measurement-of-llm-agent-systems",
+      "title": "REDAgentBench: Executable Red Teaming and Faithful Measurement of LLM Agent Systems",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "agents"
+        }
+      ],
+      "score": 7.0,
+      "evidence": "对LLM智能体环境交互进行可执行红队测试与可靠测量",
+      "first_seen_at": "2026-08-15 19:51:21 UTC",
+      "updated_at": "2026-08-15 19:51:21 UTC"
+    },
+    {
+      "paper_id": "2608.11386v1",
+      "route": "202608/15/2608.11386v1-the-devil-is-in-the-interface-evaluating-how-tool-architecture-shapes-coding-agent-behavior",
+      "title": "The Devil Is in the Interface: Evaluating How Tool Architecture Shapes Coding Agent Behavior",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "agents"
+        }
+      ],
+      "score": 7.0,
+      "evidence": "工具架构如何影响智能体对环境的感知与交互",
+      "first_seen_at": "2026-08-15 19:51:21 UTC",
+      "updated_at": "2026-08-15 19:51:21 UTC"
+    },
+    {
+      "paper_id": "2608.06926v1",
+      "route": "202608/15/2608.06926v1-tribe-predicting-team-performance-via-communication-behavior-ensembles",
+      "title": "TRIBE: Predicting Team Performance via Communication Behavior Ensembles",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "agents"
+        }
+      ],
+      "score": 6.0,
+      "evidence": "通过通信模式预测团队表现的领域无关方法",
+      "first_seen_at": "2026-08-15 19:51:21 UTC",
+      "updated_at": "2026-08-15 19:51:21 UTC"
+    },
+    {
+      "paper_id": "2608.07642v1",
+      "route": "202608/15/2608.07642v1-contextual-value-alignment-via-multilayer-combinatorial-fusion",
+      "title": "Contextual Value Alignment via Multilayer Combinatorial Fusion",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "agents"
+        }
+      ],
+      "score": 6.0,
+      "evidence": "通过多个微调道德智能体与组合融合，刻画多智能体道德推理动态",
+      "first_seen_at": "2026-08-15 19:51:21 UTC",
+      "updated_at": "2026-08-15 19:51:21 UTC"
+    },
+    {
+      "paper_id": "2608.08413v1",
+      "route": "202608/15/2608.08413v1-tangent-an-empirical-study-of-testing-practices-for-llm-based-agent-applications",
+      "title": "Tangent: An Empirical Study of Testing Practices for LLM-Based Agent Applications",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "agents"
+        }
+      ],
+      "score": 6.0,
+      "evidence": "对基于LLM的智能体应用测试实践进行实证研究",
+      "first_seen_at": "2026-08-15 19:51:21 UTC",
+      "updated_at": "2026-08-15 19:51:21 UTC"
+    }
+  ]
+}

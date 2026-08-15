@@ -1,0 +1,1188 @@
+TRIBE: Predicting Team Performance via Communication Behavior Ensembles
+Ali Jalal-Kamali1, Nikolos Gurney1, David V. Pynadath2, Fred Morstatter3
+1USC Institute for Creative Technologies
+2Rice University Ken Kennedy Institute
+3USC Information Sciences Institute
+Abstract
+Designing autonomous agents that effectively assist human
+teams hinges on understanding team dynamics, often with-
+out task specific knowledge. We present TRIBE, a domain
+independent approach that reveals team behavioral dynam-
+ics invisible to traditional performance metrics. We show
+that communication patterns can categorize teams into per-
+formance predictive behavioral tribes, as early as 10% into
+the task, enabling timely interventions. We test TRIBE on
+four diverse datasets and demonstrate that communication pat-
+terns predict team performance while the prediction strength
+varies by the degree a task structure allows for behavioral
+freedom. Our temporal analysis reveals that AI agents signifi-
+cantly alter team behavioral trajectories while human advisors
+align with natural dynamics, and that teams maintain behav-
+ioral flexibility throughout collaboration. Further, we compare
+TRIBE to Llama and optimize the pipeline, achieving signif-
+icant speedup with performance improvement.
+Introduction
+Autonomous agents increasingly support human teams in
+complex, real time tasks through automated assessment and
+assistance during task performance (Sukthankar et al. 2007;
+Webber et al. 2019; Seo et al. 2021). However, their ability to
+understand the people they help often limits the usefulness
+of agents. The problem is even harder when interacting with
+teams, since the agent needs to model the communication
+and behavioral patterns among them.
+Research in human agent interaction has long recognized
+the importance and difficulty of maintaining accurate models
+of individuals in collaboration (Albrecht and Stone 2018).
+When multiple people work together, communication be-
+comes an integral part of their behavior, a reality documented
+in diverse domains (Emmitt and Gorse 2006; Marlow, Lac-
+erenza, and Salas 2017; Stempfle and Badke-Schaub 2002).
+This is advantageous for autonomous agents because com-
+munication has proven to be a valuable source of information
+about the characteristics and processes that underlie team per-
+formance (Tiferes and Bisantz 2018). For an agent seeking
+to improve team performance, the question is: can we predict
+which teams struggle, early enough to intervene effectively?
+We present TRIBE (Team based Raw Interactions to Be-
+havioral Ensembles), a pipeline that addresses this challenge.
+We demonstrate that topic modeling combined with cluster-
+ing extracts meaningful patterns from team communication
+that are strongly correlated with performance outcomes, en-
+abling early interventions. Through temporal analysis, we
+show how pre-existing AI agent interventions impact team
+behavioral dynamics. Lastly, we validate TRIBE across mul-
+tiple domains and systematically optimize the pipeline for
+practical deployment.
+Related Work
+Traditional team assessment relies on outcome metrics such
+as task completion time and success rates, which provide
+clear signals but only after events conclude, limiting utility
+in ad hoc, high stakes contexts requiring real time inter-
+vention. Recent work has shifted toward process oriented ap-
+proaches using communication patterns (Marlow, Lacerenza,
+and Salas 2017; Tiferes and Bisantz 2018). (O’Neill et al.
+2022) provide a comprehensive review of the human auton-
+omy teaming literature, highlighting the importance of mu-
+tual understanding between humans and AI agents. (Zhang
+et al. 2021) explore expectations of AI teammates in human
+AI collaboration, emphasizing that effective teaming requires
+agents to adapt to human behavioral patterns rather than im-
+posing rigid protocols. (Zijlstra, Waller, and Phillips 2012)
+identified early interaction patterns in swift starting teams,
+finding that specific communication patterns emerge very
+quickly and predict effectiveness in ad hoc teams like aviation
+crews. More recently, (Bisberg et al. 2025) demonstrated that
+communication patterns in multiplayer online games achieve
+meaningful predictive power for team skill levels. Entropy
+based approaches (Engome Tchupo and Macht 2023) use
+sliding window entropy to analyze team coordination dy-
+namics, showing that communication entropy can differenti-
+ate stable from unstable team communications.
+Successful agent intervention hinges on identifying when
+and how to intervene in human teamwork. Examples from
+the literature include: (Seo et al. 2021) propose AI coaches
+to infer team mental model alignment in healthcare settings.
+(Myers et al. 2018) develop autonomous intelligent agents
+for team training that must understand team state to provide
+appropriate guidance. Recent work by (Li, Lu, and Yin 2023)
+introduces Markovian approaches to modeling human trust
+and reliance in AI assisted decision making that can cap-
+ture dynamic human AI interaction patterns. Further work
+shows effective human-AI teaming requires behavior-aware
+design (Mahmood, Lu, and Yin 2024), learned interaction
+arXiv:2608.06926v1  [cs.AI]  7 Aug 2026
+
+
+rules (Mozannar et al. 2023), and explanation (Schleibaum
+et al. 2024). These works collectively suggest that agent in-
+tervention requires understanding team behavioral states.
+The approaches outlined have four key limitations. First,
+they rely on retrospective analysis where the patterns are
+identified after performance concludes. This limits their ap-
+plicability in early real time interventions. Second, they are
+often domain specific: metrics calibrated for gaming com-
+munities do not generalize to planning or reasoning tasks.
+Third, they identify coarse grained patterns without parti-
+tioning teams into behavioral categories with clear perfor-
+mance implications. Fourth, agent monitoring frameworks
+track agent reliability but cannot show how various agents
+with different logics affect the team behavioral trajectories.
+TRIBE addresses all four limitations mentioned above:
+it enables early prediction, operates domain independently
+across diverse collaborative contexts, partitions teams into
+performance predictive behavioral ensembles (tribes), and
+directly quantifies intervention impact through temporal
+analysis, revealing how different agents impact the team dy-
+namics independent of proprietary intervention logic.
+Data and Task Environments
+We analyze team communication from the publicly avail-
+able (third party) datasets of ASIST program (Artificial So-
+cial Intelligence for Successful Teams) (Huang et al. 2021),
+which developed Minecraft task environments to study hu-
+man teamwork and AI agent intervention. The data was col-
+lected at Arizona State University with full IRB approval.
+Study 3: Urban Search and Rescue
+ASIST Study 3 (Huang et al. 2021) involved teams of three
+participants performing collaborative urban search and res-
+cue missions in a Minecraft based environment (Corral et al.
+2021; Freeman et al. 2022). Each team member had a unique
+role: Engineer, Medic, and Transporter. Teams underwent
+hands-on training followed by two consecutive 17 minute
+trials. Each trial began with a mandatory 2 minute planning
+phase where teams remained at the entrance, followed by 15
+minutes of gameplay where communication continued. The
+score is based on the number of rescues in each trial.
+Study 3 involved multiple research teams developing dif-
+ferent AI agent systems with proprietary intervention logic
+and strategies. The teams were distributed across these AI
+agents: Univ. of Southern California: USC agent (Pynadath
+et al. 2023), CMU Robotics Institute: CMURI agent (Sycara,
+Lewis, and Hughes 2021), Charles River Analytics: CRA
+agent (Charles River Analytics 2024), Smart Information
+Flow Technologies: SIFT agent (Kuter and Miller 2022),
+Univ. of Arizona: UAZ agent (Pyarelal et al. 2023), MIT:
+DOLL agent (Simon-Dempsey, Huang et al. 2023); plus two
+categories for a Human-Advisor and No-Advisor, for a to-
+tal of 8 intervention categories. It is worth mentioning that
+TRIBE has no information about or access to the inner logic
+of any AI agent, and it only observes the interactions.
+To inform TRIBE, we analyze only the natural language
+transcripts of team communications, excluding other teleme-
+try data from the testbed logs.
+The TRIBE Pipeline
+Preprocessing of Transcripts
+We implemented a comprehensive preprocessing pipeline to
+prepare transcripts for analysis. We removed all annotations,
+encodings, and administrator messages, retaining only team
+communication transcripts. Since each team performed two
+trials, we split each team file into two separate trials. After
+removing duplicates, we obtained 222 trials from 111 teams,
+with trial transcripts with 80 to 370 lines.
+We created Document-Term Matrix (DTM) representa-
+tions for each trial using the textmineR package (Jones 2021).
+This process involved converting text to lowercase, removing
+punctuation and numbers, and filtering standard stopwords.
+We used unigram models throughout our analysis.
+Topic Modeling
+From an agent’s perspective, determining which teams may
+need assistance requires understanding how team communi-
+cation patterns relate to performance. TRIBE leverages topic
+modeling to extract latent themes from team conversations,
+then uses clustering to identify behavioral ensembles (tribes)
+that correlate with performance outcomes.
+Latent Dirichlet Allocation
+After preprocessing, we ap-
+ply topic modeling to discover the content structure of team
+communications. Topic modeling is an unsupervised method
+that extracts latent topics from text, where topics represent
+recurring themes characterized by word distributions. Latent
+Dirichlet Allocation (LDA) 1 (Blei, Ng, and Jordan 2003) is
+the standard method for topic modeling and we used the R
+package textmineR (Jones 2021).
+The first step was to determine the optimal number of top-
+ics. To do so, we evaluated average probabilistic coherence
+(Mimno et al. 2011), a metric of topic quality. To ensure
+stability, we evaluated coherence per topic count (2-20) by
+averaging 100 runs, yielding k=12 as optimal.
+Behavioral Clustering
+To identify potential behavioral categories among teams that
+indicate different performance levels, we perform clustering
+over the topic probability distributions. To do so, each trial is
+represented by its topic distribution vector (the theta matrix
+from LDA), which captures the proportional probability of
+each topic in each trial’s transcript.
+We used gap statistics (Tibshirani, Walther, and Hastie
+2001) with 500 iterations to determine the optimal cluster
+count, yielding 8 clusters. We then applied k-means cluster-
+ing to assign each of the 222 trials to one of these 8 clusters,
+representing distinct behavioral patterns.
+Performance Prediction
+To evaluate whether TRIBE’s behavioral clusters relate to
+trial scores, linear regression revealed a significant relation-
+ship between cluster assignment and trial scores, indicating
+strong correlation between communication patterns captured
+by clusters and performance outcomes. Table 1 contains the
+1Due to space constraints, for all statistical, AI, and machine
+learning methods, we provide citations for detailed descriptions.
+
+
+cluster sorted by their mean score, how they are split between
+first and second trials, and the significance of that split.
+Table 1: Cluster trial separation, ranked by score mean.
+Cluster Score (Mean±SD) 1st Trial 2nd Trial
+p
+1
+635 ±131
+14%
+86%
+<0.001
+2
+617 ±128
+29%
+71%
+0.024
+3
+614 ±170
+29%
+71%
+0.036
+4
+608 ±149
+11%
+89%
+0.001
+5
+554 ±133
+91%
+9%
+<0.001
+6
+502 ±147
+84%
+16%
+<0.001
+7
+470 ±123
+84%
+16%
+0.001
+8
+421 ±116
+53%
+47%
+1.00
+As shown in the table, seven of eight clusters show a
+significant trial skew (binomial p < 0.05), meaning TRIBE
+differentiates trial order from communications alone, with
+no knowledge of trial order, semantic content, or scores.
+This is not simply tracking the score increase between trials
+since scores alone poorly separate 1st and 2nd trials (pseudo-
+R2=0.08), while TRIBE clusters do so far more strongly
+(pseudo-R2=0.31). Only the worst performing cluster shows
+no skew (53%, 47%; p = 1.00) indicating poor team behavior
+is trial agnostic, which is a strong signal for intervention if
+we can predict it early on.
+Early Prediction: Real Time Viability
+A critical capability for any intervention system is the ability
+to assess team status early enough to enable timely assis-
+tance. To test TRIBE’s viability for real time monitoring, we
+evaluated prediction accuracy when classifying teams based
+on progressively larger transcript segments.
+The methodology: for each trial, we extracted cumulative
+10% increments of the transcript and inferred each segment’s
+topic distribution via fold-in Gibbs sampling against the orig-
+inal model’s fixed topic-word distribution, rather than refit-
+ting a new topic model per segment. This way we ensured that
+the segment and the full trial theta vectors share an identical
+topic space. Each segment was then assigned to its nearest
+of the 8 original cluster centroids and compared against the
+trial’s full transcript cluster assignment.
+Results: TRIBE achieves 47% prediction accuracy at 10%
+of the transcript, a 3.0x improvement over the majority clus-
+ter baseline of 15.8% (and 3.76x over uniform random of
+12.5%), rising to 76% at 30%, and 90% at 50%.
+These results establish proof of concept that early commu-
+nication patterns can predict behavioral cluster membership
+with substantial accuracy. Given that a team starting in a
+high performing cluster at 10% may migrate to lower perfor-
+mance by 50%, such checkpoints represent potential inter-
+vention opportunities where an external agent could detect
+and respond to behavioral degradation.
+Behavioral Dynamics Under Various
+Intervention Strategies
+The previous section demonstrated the proof of concept:
+TRIBE captures meaningful performance clusters and en-
+ables early prediction. We now investigate deeper questions:
+What happens when the agents intervene? Do different agent
+designs produce different impacts? Can we characterize the
+temporal dynamics of behavioral change?
+To answer these questions, we analyze the (pre-existing)
+intervention metadata embedded in Study 3: teams were as-
+signed to 8 different intervention conditions, the 6 different
+AI agents, Human-Advisor, and No-Advisor. We apply tem-
+poral analyses namely survival analysis, intervention effec-
+tiveness quantification, and Markov chain modeling to reveal
+how each agent shapes team behavioral trajectory. A critical
+emphasis of this work is that TRIBE assesses intervention
+impact regardless of each agent’s underlying intervention
+logic. We do not validate or compare the proprietary mech-
+anisms by which these agents decide to intervene. Rather,
+we demonstrate that TRIBE can reveal the behavioral con-
+sequences of interventions across different agent systems,
+enabling a domain independent approach to understanding
+how various AI architectures affect team dynamics.
+Survival Analysis: Behavioral Stability
+Survival analysis (Kalbfleisch and Prentice 2002) provides a
+framework for understanding team behavioral stability over
+time. To perform survival analysis, we split trials into 10%
+segments and model cluster persistence as a survival prob-
+lem, where the event is the transition from initial cluster.
+Of the 8 intervention categories, No-Advisor, SIFT agent,
+and CRA agent resulted in 100% of teams changing clus-
+ters, and for the remaining 5, most teams changed cluster in
+the 2 first segments. The universal median survival time of
+1.0 window revealed that most teams abandon initial com-
+munication patterns between 10% and 20% marks of trials.
+This timing aligns with Study 3’s task structure: each 17
+minute trial begins with a 2 minute planning phase followed
+by 15 minutes of field execution. The cluster change at 10-
+20% indicates that TRIBE accurately captures the shift from
+planning to action which is the real communication behavior
+shift rather than just being noise in communication patterns.
+Intervention Effectiveness Analysis
+Beyond understanding when interventions cause teams to
+change clusters, we evaluate whether these impacts improve
+or degrade team performance. We classified all cluster tran-
+sitions into four categories: Positive Change (transition to
+higher ranked cluster), Negative Change (transition to lower
+ranked cluster), Good Stable (remaining in the same high
+performing cluster), and Bad Stable (remaining in the same
+low performing cluster). We calculate Net Change as the dif-
+ference between Positive and Negative changes, providing a
+single metric for intervention impact. Table 2 presents the
+percentage breakdown.
+TRIBE exposes two distinctive patterns in interventions:
+• Although CMURI agent interventions have the largest
+impact (37.8%) keeping good teams stable in their clus-
+ter, when CMURI interventions do change team behav-
+iors, they have a negative net effect (-1.8%), suggesting
+successful teams may dismiss interventions.
+
+
+Table 2: Intervention outcome percentages by agent.
+Agent
+Bad
+Good
+Neg.
+Pos.
+Net
+Stable Stable
+Change Change Change
+USC
+22.5%
+25.0%
+20.0%
+32.5%
+12.5
+Human
+15.7%
+28.3%
+25.2%
+30.7%
+5.5
+CRA
+15.1%
+20.2%
+32.5%
+32.1%
+-0.4
+UAZ
+13.8%
+28.9%
+28.0%
+29.4%
+-1.4
+DOLL
+26.5%
+13.7%
+30.8%
+29.1%
+-1.7
+CMURI
+15.2%
+37.8%
+24.4%
+22.6%
+-1.8
+SIFT
+13.1%
+18.8%
+35.0%
+33.1%
+-1.9
+• USC agent interventions, while less frequent (80 total
+vs. CMURI’s 217), demonstrate positive impact when
+changing team behavior (12.5% net positive), more than
+twice the positive impact of Human-Advisor (5.5%).
+To quantify intervention impact depth, we examined clus-
+ter rank change post intervention. While two interventions
+could both have positive effects, one may improve cluster
+rank more substantially. Figure 1 shows that USC rank im-
+provement is even more impactful, 3x the Human-Advisor
+impact and more than 4x the UAZ agent.
+Figure 1: Average rank improvement. n is the number of
+interventions that triggered changes, not the total count.
+To determine statistical significance of observed differ-
+ences, we compared each agent’s transition patterns to No-
+Advisor baseline using chi square tests, see Table 3.
+Table 3: Statistical comparison to No-Advisor baseline. Tests
+compare flattened 8×8 transition matrices. df ranges 53–59
+among tests with exact p, varying because cluster-pair cells
+unobserved in both conditions are excluded.
+Agent
+χ2
+p-value
+Significant
+DOLL
+121.64
+<0.0001
+Yes
+USC
+120.68
+<0.0001
+Yes
+CRA
+118.69
+<0.0001
+Yes
+SIFT
+102.88
+0.0001
+Yes
+UAZ
+97.41
+0.0009
+Yes
+CMURI
+85.92
+0.0126
+Yes
+Human
+57.53
+0.3113
+No
+Notably, Human-Advisor shows no significant difference
+from No-Advisor (χ2=57.53, p=0.31), although a larger sam-
+ple could show a real difference. By contrast, all AI agents
+show significant divergence (p<0.05).
+Markov Chain Analysis
+A Markov chain (Norris 1998) models a system transitioning
+between discrete states according to fixed probabilities. In our
+context, states are the 8 communication clusters identified by
+TRIBE, transitions represent movement between clusters at
+each 10% segment, and the Markov property assumes future
+cluster depends only on current cluster, not history.
+Each agent’s influence on team dynamics is represented
+as an 8×8 transition probability matrix, where P[i,j] is the
+probability of transitioning from cluster i to cluster j.
+Analysis of 252 transitions (28 trials per agent × 9 tran-
+sitions) per agent reveals several patterns. Surprisingly, no
+clusters showed absorption behavior (>90% self transition
+probability), indicating teams remain behaviorally dynamic
+throughout trials, no communication pattern becomes stuck,
+even poor performing clusters.
+Figure 2: Good cluster evolution over 10 time slots.
+Every cluster can reach every other cluster, with varying
+probabilities, revealing that no behavioral states are isolated
+and improvement is always possible from any starting point.
+Figure 2 shows how the probability of being in good clusters
+(3 best performing clusters: 1, 2, 3) evolves.
+No-Advisor starts at 77% and stabilizes around 78%,
+showing natural dynamics favor good clusters. CMURI,
+UAZ, and Human-Advisor start around 66-67% and improve
+to 70%. USC, SIFT, and DOLL start and remain in 63-66%
+range. CRA starts lowest at approximately 58% with minimal
+improvement. Most changes occur by step 2-3, confirming
+that the teams quickly establish behavioral patterns persist-
+ing throughout trials. We calculate Mean First Passage Time
+(MFPT) (Feller 1968) to quantify the average steps needed
+to transition from worst to best cluster; as shown in Table 4.
+The fact that No-Advisor provides the fastest path from
+worst to best performance is striking, yet, it does raise ques-
+tions about the fairness of team quality distribution over the
+agent cases vs. the No-Advisor case. We checked whether
+team quality was fairly distributed across the 8 categories.
+Table 5 shows the distribution of trial quality per category
+and reveals that No-Advisor received disproportionately high
+
+
+Table 4: Average steps to reach best cluster from worst.
+Agent
+MFPT (steps)
+No-Advisor
+8.1
+USC
+11.2
+Human
+12.7
+CMURI
+20.1
+quality teams while USC received low quality teams, explain-
+ing why No-Advisor achieved faster MFPT.
+Table 5: Trial count by agent, based on cluster ranking.
+Cluster CMURI CRA DOLL SIFT UAZ USC Human No-Adv
+1
+5
+5
+5
+2
+2
+5
+4
+7
+2
+4
+6
+2
+9
+3
+3
+4
+3
+3
+4
+4
+5
+1
+6
+1
+1
+6
+4
+3
+1
+0
+3
+3
+2
+3
+3
+5
+5
+1
+6
+2
+4
+4
+6
+4
+6
+0
+6
+5
+8
+3
+4
+3
+2
+7
+5
+3
+1
+2
+2
+5
+4
+3
+8
+2
+2
+4
+1
+5
+4
+1
+0
+No-Advisor has 0 trials in worst performing cluster and
+largest number in best cluster. Aggregating clusters into three
+performance tiers (top: 1,2,3; middle: 4,5; low: 6,7,8) we ar-
+rive at the distributions in Table 6 which indicate that No-
+Advisor and CMURI were assigned disproportionately high
+quality teams, whereas USC received predominantly low per-
+forming teams. Such allocation bias in Study 3 dataset, rather
+than inherent differences in natural team dynamics, can ex-
+plain the counterintuitive finding that unguided teams out-
+performed those with AI assistance in MFPT.
+Table 6: Trial count by agent and performance group.
+Tier CMURI CRA DOLL SIFT UAZ USC Human No-Adv
+Top
+13
+15
+12
+12
+11
+9
+9
+16
+Mid
+8
+2
+6
+5
+7
+6
+9
+7
+Low
+7
+11
+10
+11
+10
+13
+8
+5
+Starting tier distributions differ across agents, so cross
+agent comparisons should be read jointly with the rank im-
+provement analysis. Critically, because clusters derive purely
+from communication and are independent of trial score, de-
+tecting this imbalance by score alone would be circular;
+meaning labeling high scoring teams as better and citing
+those same scores as evidence of bias explains nothing about
+why they scored well. Was it that stronger teams were as-
+signed to No-Advisor; or was it that withholding intervention
+improving performance. TRIBE resolves this: the imbalance
+is attributable to team composition, not intervention effect.
+Method Comparison and Optimization
+Having established that TRIBE works for performance pre-
+diction and intervention analysis, we now ask two comple-
+mentary questions: (1) Does a general purpose LLM, deploy-
+able locally within an agent, extract performance-predictive
+behavioral patterns without task specific fitting? We test
+whether a modern Large Language Model with vast semantic
+knowledge can extract meaningful behavioral patterns from
+team communication, potentially improving on ourapproach.
+(2) Can we optimize the pipeline beyond the baseline? The
+baseline TRIBE uses LDA for topic modeling and k-means
+for clustering. We systematically test alternative methods
+for each component to determine whether different combi-
+nations might achieve better performance prediction. (All
+temporal analysis in previous section employed the LDA+k-
+means configuration to ensure fair intervention assessment.)
+Llama Behavioral Extraction
+We tested whether Llama 3.3 70B via Ollama (Dubey et al.
+2024), a modern LLM with extensive training on collabora-
+tive task data, could extract behavioral patterns from team
+communication. At Stage 0, we provided the LLM with the
+dataset, without any mention of clusters and asked for be-
+havioral patterns that could predict the performance, but the
+outcomes were uninformative. Then, we proceeded in three
+stages with progressively more specific prompts.
+Stage 1 - Free labeling prompt: We let the LLM label
+freely with the prompt: "Based on team communication pat-
+terns, create a 2 word label for each cluster that reflects its
+behavioral patterns." The labels were too generic and all
+clusters received positive labels regardless of performance.
+Stage 2 - Domain informed prompt: We gave Llama do-
+main information and made it clear that we were looking for
+labels based on behaviors and performances, asking for dif-
+ferentiation and uniqueness. The labels were still extremely
+generic and not indicating anything about performance as the
+worst cluster was labeled "Good Communication."
+Stage 3 - Performance informed prompt: We provided
+all detailed information about the task and data, crucially
+provided the cluster score means along with cluster perfor-
+mance rankings, and asked for behavior and performance
+based labeling. Only the explicit ranking of the cluster made
+the LLM come up with somewhat relevant labels, and yet,
+Cluster 4 was labeled "Rank-4 Team" (Table 7), meaning it
+failed to extract meaningful behavioral information.
+Table 7: Llama behavioral labeling based on cluster ranking.
+Cl. 1- Free Labeling
+2- Domain informed
+3- Performance informed
+1
+Specialized Coordination Strong Collaboration
+Strategic Execution
+2
+Highly Coordinated
+High Quality
+Effective Coordination
+3
+Efficient Rescue
+Outstanding Performance Focused Approach
+4
+Dynamic Teamwork
+Exceptional Coordination Rank-4 Team
+5
+Strategic Prioritization
+Above Average
+Limited Progress
+6
+Role Based Comm.
+Excellent Teamwork
+Inefficient Response
+7
+Real time Collaboration
+Very Effective
+Disorganized Rescue
+8
+Task Oriented Dialogue
+Good Communication
+Chaotic Efforts
+Even with explicit performance rankings and detailed task
+information, Llama did not identify meaningful behavioral
+patterns, despite its vast training on collaborative language.
+This comparison is deliberately scoped as one open weight
+model under three prompting regimes. Frontier models, fine
+tuning, or embedding based pipelines may perform better.
+Our claim is therefore narrower than "TRIBE outperforms
+
+
+LLMs": for real time, on device deployment within agents
+that must analyze team communications and deliver timely
+interventions, our lightweight statistical pipeline extracted
+performance-predictive structure that this LLM configura-
+tion did not, despite its vastly greater scale and compute.
+Topic Modeling Alternative Methods
+LDA’s main limitation is the computational cost ( > 2 hours
+for 100 runs with reproducibility challenges). We evaluated
+NMF (Lee and Seung 1999, 2000), Top2Vec (Angelov 2020),
+DTM (Blei and Lafferty 2006), and STM (Roberts et al. 2014)
+as alternatives. (LSA/LSI lacks topic structure; HDP over
+fragments small corpora; BERTopic’s density based clus-
+tering is unreliable below 1k documents.) NMF emerged
+as the most promising alternative. With optimal configura-
+tion (6 topics), NMF finished in just 5 minutes achieving a
+24x speedup over LDA which took 120 minutes. Top2Vec
+consistently discovered only 2-3 topics (insufficient for com-
+munication granularity). DTM and STM showed promise
+theoretically but didn’t improve the performance prediction.
+Unigram based NMF with k=6 topics, also outperformed
+bigram variants, becoming optimal topic modeling method
+for the combined pipeline optimization.
+Clustering Alternative Methods
+All clustering methods in this comparison operate on the
+NMF (k=6) topic-distribution vectors identified as optimal
+in the previous subsection. Beyond k-means, we tested: Gaus-
+sian Mixture Models (GMM) (Reynolds 2015) with 4 covari-
+ance types, Bayesian GMM (BGMM) (Bishop 2006), hier-
+archical clustering (4 linkage methods) (Ward Jr 1963), and
+Dynamic Time Warping (DTW)(Sakoe and Chiba 1978).
+Internal vs. external validation disconnect: Standard clus-
+tering metrics (BIC, silhouette, gap statistics) suggested k=3-
+4 as optimal cluster counts. However, external validation
+against team performance revealed the opposite that more
+granular clustering (k=9-16) actually predicted performance
+better (Table 8). Since R2 increases with the number of clus-
+ters and each additional cluster adds a regression degree of
+freedom, to have a fair comparison across configurations with
+different k, we report ¯R2 (adjusted R2) instead of R2.
+To ensure reported values reflect stable estimates rather
+than a single favorable initialization, each stochastic clus-
+tering method (K-means, GMM, BGMM) was refit across
+100 random seeds, with hyperparameters selected per fit via
+unsupervised criteria (BIC or Calinski-Harabasz score), not
+against trial score. We report the mean ¯R2 across 100 seeds.
+Table 8: Clustering method comparison.
+Method
+k
+¯R2
+K-means
+12
+21.8%
+GMM
+16
+25.4%
+BGMM
+10
+20.1%
+Hierarchical
+3
+18.3%
+DTW
+6-20
+14.7–15.1%
+GMM with k=16 and BGMM with k=9 were the top
+performers. GMM(16) achieved 25.4% ¯R2 and became
+our optimal clustering component. To confirm the cluster-
+ing–performance relationship is not an artifact of chance, we
+ran a permutation test at our selected configuration (GMM,
+k=16): shuffling trial scores 1,000 times and refitting on each
+which yielded a ¯R2 that never exceeded 0.152 (mean 0.028),
+far below the observed 0.254 (p < 0.001).
+The Optimal Pipeline
+The first thing we tested, before the baseline TRIBE (LDA
+12+K-means 8), was TF-IDF (SVD-reduced to 12 dims, k=8)
+which produced ¯R2=0.067. The baseline TRIBE achieved
+¯R2= 0.185, confirming LDA’s topic structure captures sig-
+nals beyond raw lexical features. Our optimization analysis
+showed that NMF achieves the best performance amongst
+topic modeling methods and GMM amongst clustering meth-
+ods, meaning NMF(6)+GMM(16) is the overall optimal
+TRIBE pipeline with ¯R2=0.254. Comparing the baseline
+TRIBE to the optimal TRIBE, we see a 37.3% improvement
+in performance, along with 24x speedup (120m vs. 5m).
+Domain Independence
+A critical test for TRIBE is whether insights generalize be-
+yond Study 3. This section examines domain independence
+by applying TRIBE to four diverse datasets. To ensure fair
+cross domain comparison, all analyses in this section use the
+LDA+K-means pipeline.
+Cross Domain Methodology
+Each dataset underwent identical processing to ensure fair
+comparison. The standardized pipeline involved: preprocess-
+ing data by cleaning utterances, setting minimum document
+length thresholds, and matching team data across trials; then
+performing topic model evaluation with topic counts ranging
+from 2 to 25 to find optimal configurations and similarly for
+clustering configurations.
+We selected 4 datasets representing various collaborative
+tasks with team conversations and performance measures.
+Study 3 (Huang et al. 2022): detailed in Data section.
+Study 4 (Huang et al. 2024): involves teams of 3 for a
+virtual search and defusal task in an environment where the
+team score goes down if an explosive explodes. Unlike Study
+3, teams in Study 4 can only communicate during planning
+phases when gathered in a shop. Once they enter the field to
+defuse explosives, verbal communication is disabled. Teams
+can return to the shop multiple times to replan as needed,
+allowing for extended discussions. We chose minimum of 40
+lines per trial, leading to 231 trials from 30 teams.
+DELI dataset (Karadzhov, Stafford, and Vlachos 2023):
+involves teams solving logical reasoning tasks (Wason se-
+lection task) through discussion. In this task design, there is
+one correct answer that can be logically deduced. Teams of
+3-5 people deliberate to identify which cards to check to test
+logical rules. Dataset contains 333 team deliberations.
+GAP dataset (Braley and Murray 2018): involves teams
+ranking 15 survival items by importance after a hypothetical
+plane crash. The items are then ranked by domain experts for
+score allocation. The dataset contains 28 team discussions.
+
+
+Performance Prediction
+The key test of TRIBE is how it performs across these 4
+different domains. Table 9 presents the results:
+Table 9: Statistical performance of clustering.
+Domain ANOVA F p-value
+¯R2
+Best-Worst Cohen’s d
+Study 4
+11.95
+<0.001 44.3%
+610 pts
+1.82
+Study 3
+8.27
+<0.001 18.5%
+214 pts
+0.94
+DELI
+4.10
+<0.001 14.8%
+28.3%
+0.51
+GAP
+1.42
+0.253 28.6%
+23 pts
+0.68
+ANOVA F-tests assess variance across clusters; Cohen’s
+d (Cohen 1988) quantifies effect size. Study 3 achieved
+¯R2= 18.5% with clear cluster differentiation. Cohen’s d =
+0.94 indicates a large effect size, with 82% of worst cluster
+teams scoring below average of best cluster. Study 4’s setting
+yielded more dramatic results with ¯R2= 44.3%. Cohen’s d =
+1.82 represents a very large effect size, with 97% of worst
+cluster teams scoring below average of best cluster.
+Study 4’s "unlimited" time communication structure al-
+lowed for more re-strategizing and behavioral expressions to
+surface, whereas Study 3’s 17 minute time limit for planning
+and execution combined might have created the urgency for
+taking quick actions to increase the score, limiting the op-
+portunity for behavioral expression.
+DELI achieved a modest ¯R2= 14.8% with limited differ-
+entiation. Cohen’s d = 0.51 represents a medium effect size,
+with approximately 69% of the worst cluster teams scoring
+below the average of the best cluster. DELI’s finite answer
+structure limits behavioral variation, explaining the low ¯R2.
+While GAP dataset does allow for more behavioral ex-
+pressions with ¯R2 = 28.6%, it failed the significance test
+(p = 0.253), reflecting small sample inflation. However, this
+is promising for a similar task with larger data collections.
+The cross domain analysis, not only showcases the do-
+main independence capabilities of TRIBE, but also reveals
+that the task design determines the capacity for behavioral
+expressions. Consequently, TRIBE’s effectiveness depends
+on the degree that a task allows for behavioral variation.
+Principal Component Analysis of Study 4
+To understand Study 4’s superior predictive power, we per-
+formed PCA on its topic distributions. Study 4’s LDA model
+discovered 13 topics from planning phase communications.
+Each team’s communication pattern can be represented as a
+13 dimensional vector showing emphasis on each topic. PCA
+transforms this 13 dimensional space into a new coordinate
+system where the first principal component (PC1) captures
+the maximum variance.
+The analysis revealed a striking finding: At the cluster
+level, PC1 explained R2 = 0.927 of the variance in mean
+cluster performance (p = 0.002) and at the trial level, PC1
+explained R2 = 0.49 (p < 0.001). This result reveals that
+Study 4’s performance is substantially explained by a single
+behavioral dimension, where teams can be positioned on a
+performance continuum of communication patterns.
+PC1 represents a weighted combination of all 13 topics,
+with topics 9 and 7 having strong negative loadings (−0.427
+Table 10: PC1 vs. Cluster Performance
+Rank Average Score
+SD
+Teams PC1 Position
+1
+941
+152
+45
+-1.33
+2
+876
+228
+40
+-1.49
+3
+657
+236
+30
+-0.53
+4
+629
+296
+51
++0.61
+5
+449
+249
+17
++1.46
+6
+402
+174
+48
++1.64
+and −0.393 respectively) and topic 11 having strong posi-
+tive loading (+0.481), at the cluster level. This means teams
+emphasizing topics 9 and 7 receive negative PC1 values (as-
+sociated with higher performance), while teams emphasizing
+topic 11 receive positive PC1 values (associated with lower
+performance). In other words, PC1 provides a continuous
+spectrum from high to low performance communication pat-
+terns, enabling real time monitoring for intervention design.
+Conclusion
+This work introduced TRIBE, a domain independent ap-
+proach for understanding and predicting team performance
+through communication patterns. By applying topic model-
+ing and clustering to team conversations, we demonstrated
+that behavioral dynamics invisible to traditional performance
+metrics can be extracted for early intervention. Teams can be
+classified into performance predictive behavioral clusters as
+early as 10% into the task, enabling timely support.
+Our analysis revealed several counterintuitive findings.
+While teams without advisors outperformed those with AI
+guidance due to bias in team quality assignment, TRIBE’s
+ability to detect this bias validates its capacity to identify
+meaningful performance related patterns. Human advisors
+produced patterns statistically indistinguishable from natu-
+ral team evolution, whereas all AI agents significantly altered
+behavioral trajectories, showing how TRIBE can evaluate the
+impact of interventions. TRIBE’s survival and Markov anal-
+yses revealed behavioral flexibility throughout trials.
+Cross domain validation established TRIBE’s generaliz-
+ability, while task characteristics determine how much behav-
+ioral patterns emerge. Study 4’s planning structure achieved
+44.3% predictive power, with PC1 alone explaining 49% of
+trial level performance variance, a continuum enabling real
+time intervention triggers; whereas DELI’s finite answer task
+reached only 14.8%.
+Method optimization improved predictive power by 37.3%
+with a 24x speedup. TRIBE’s comparison to a contemporary
+LLM showed that, despite the LLM’s semantic knowledge,
+it could not identify meaningful behavioral patterns, sug-
+gesting the statistical structure of interaction patterns reveals
+team behavioral signatures. Overall, TRIBE offers a scalable,
+domain independent approach for team performance predic-
+tion where task design allows sufficient behavioral expres-
+sion, providing actionable insights for autonomous agents
+supporting teams.
+
+
+References
+Albrecht, S. V.; and Stone, P. 2018. Autonomous agents
+modelling other agents: A comprehensive survey and open
+problems. Artificial Intelligence, 258: 66–95.
+Angelov, D. 2020. Top2Vec: Distributed representations of
+topics. arXiv preprint arXiv:2008.09470.
+Bisberg, A. J.; Shaikh, S. J.; Zeng, Y.; Morstatter, F.; Chen,
+E.; Ferrara, E.; and Williams, D. 2025.
+Communication
+Patterns Predict Team Skill in Multiplayer Online Games.
+Proceedings of the ACM on Human-Computer Interaction,
+9(7). CSCW388.
+Bishop, C. M. 2006. Pattern recognition and machine learn-
+ing, volume 4. New York: Springer.
+Blei, D. M.; and Lafferty, J. D. 2006. Dynamic topic mod-
+els. In Proceedings of the 23rd international conference on
+machine learning, 113–120. ACM.
+Blei, D. M.; Ng, A. Y.; and Jordan, M. I. 2003.
+Latent
+Dirichlet allocation. Journal of Machine Learning Research,
+3: 993–1022.
+Braley, M.; and Murray, G. 2018. The Group Affect and
+Performance (GAP) Corpus. In Proceedings of the Group
+Interaction Frontiers in Technology. ACM.
+Charles River Analytics. 2024.
+Using AI to Under-
+stand and Assist Human Teams: Charles River Analytics
+Develops Foundational AI Technology to Understand
+Human
+Behavior
+and
+Improve
+Team
+Performance.
+https://cra.com/using-ai-to-understand-and-assist-human-
+teams-charles-river-analytics-develops-foundational-ai-
+technology-to-understand-human-behavior-and-improve-
+team-performance/.
+Cohen, J. 1988. Statistical Power Analysis for the Behavioral
+Sciences. Lawrence Erlbaum Associates, 2nd edition.
+Corral, C. C.; Tatapudi, K. S.; Buchanan, V.; Huang, L.; and
+Cooke, N. J. 2021. Building a synthetic task environment
+to support artificial social intelligence research. In Proceed-
+ings of the Human Factors and Ergonomics Society Annual
+Meeting, volume 65, 660–664.
+Dubey, A.; Jauhri, A.; Pandey, A.; et al. 2024. The Llama 3
+Herd of Models. arXiv:2407.21783.
+Emmitt, S.; and Gorse, C. 2006. Communication in con-
+struction teams. Routledge.
+Engome Tchupo, D.; and Macht, G. A. 2023.
+Entropy
+for team communication pattern recognition. Applied Er-
+gonomics, 111. 104038.
+Feller, W. 1968. An introduction to probability theory and
+its applications. John Wiley & Sons, 3rd edition.
+Freeman, J. T.; Huang, L.; Wood, M.; and Cauffman, S. J.
+2022. Evaluating artificial social intelligence in an urban
+search and rescue task environment. In Gurney, N.; and Suk-
+thankar, G., eds., Computational Theory of Mind for Human-
+Machine Teams, 72–84. Springer.
+Huang, L.; Cooke, N. J.; Gutzwiller, R. S.; Berman, S.;
+Chiou, E. K.; Demir, M.; and Zhang, W. 2021. Distributed
+Dynamic Team Trust in Human, Artificial Intelligence, and
+Robot Teaming. In Nam, C. S.; and Lyons, J. B., eds., Trust
+in Human-Robot Interaction, 301–319. Academic Press.
+Huang, L.; Fouse, A.; Cooke, N.; and Weiss, E. 2024. Artifi-
+cial Social Intelligence for Successful Teams (ASIST) Study
+4 Dragon Testbed Dataset.
+Huang, L.; Freeman, J.; Cooke, N.; Colonna-Romano, J. J.;
+Wood, M.; Buchanan, V.; and Caufman, S. 2022. Artificial
+Social Intelligence for Successful Teams (ASIST) Study 3.
+Jones, T. 2021. textmineR: Functions for Text Mining and
+Topic Modeling. R package version 3.0.5.
+Kalbfleisch, J. D.; and Prentice, R. L. 2002. The Statistical
+Analysis of Failure Time Data. Wiley, 2nd edition.
+Karadzhov, G.; Stafford, T.; and Vlachos, A. 2023. DeliData:
+A Dataset for Deliberation in Multi-party Problem Solving.
+In Proceedings of the ACM on Human-Computer Interaction,
+volume 7, 1–25. ACM.
+Kuter, U.; and Miller, C. 2022. Artificial Social Intelligence
+for Successful Teams (ASIST): SIFT Team Project. https:
+//www.sift.net/research/artificial-intelligence/asist.
+Lee, D. D.; and Seung, H. S. 1999.
+Learning the parts
+of objects by non-negative matrix factorization.
+Nature,
+401(6755): 788–791.
+Lee, D. D.; and Seung, H. S. 2000. Algorithms for non-
+negative matrix factorization. In Advances in neural infor-
+mation processing systems, volume 13, 556–562.
+Li, Z.; Lu, Z.; and Yin, M. 2023. Modeling Human Trust and
+Reliance in AI-Assisted Decision Making: A Markovian Ap-
+proach. In Proceedings of the AAAI Conference on Artificial
+Intelligence, volume 37, 6056–6064.
+Mahmood, S. H. A.; Lu, Z.; and Yin, M. 2024. Designing
+Behavior-Aware AI to Improve the Human-AI Team Perfor-
+mance in AI-Assisted Decision Making. In Proceedings of
+the Thirty-Third International Joint Conference on Artificial
+Intelligence (IJCAI), 3106–3114.
+Marlow, S. L.; Lacerenza, C. N.; and Salas, E. 2017. Com-
+munication in virtual teams: A conceptual framework and
+research agenda.
+Human Resource Management Review,
+27(4): 575–589.
+Mimno, D.; Wallach, H.; Talley, E.; and Leenders, M. 2011.
+Optimizing semantic coherence in topic models. In Pro-
+ceedings of the Conference on Empirical Methods in Natural
+Language Processing, 262–272.
+Mozannar, H.; Lee, J. J.; Wei, D.; Sattigeri, P.; Das, S.; and
+Sontag, D. 2023. Effective Human-AI Teams via Learned
+Natural Language Rules and Onboarding. In Advances in
+Neural Information Processing Systems 36 (NeurIPS 2023).
+ArXiv:2311.01007.
+Myers, C.; Ball, J.; Cooke, N.; Freiman, M.; Caisse, M.;
+Rodgers, S.; Demir, M.; and McNeese, N. 2018. Autonomous
+intelligent agents for team training. IEEE Intelligent Systems,
+34(2): 3–14.
+Norris, J. R. 1998. Markov chains. Cambridge University
+Press.
+O’Neill, T.; McNeese, N.; Barron, A.; and Schelble, B. 2022.
+Human–autonomy teaming: A review and analysis of the
+empirical literature. Human Factors, 64(5): 904–938.
+
+
+Pyarelal, A.; Ashton, S.; Astier, J.; Champlin, L.; Barnard,
+K.; Butler, E.; Huang, R.; Jeong, C.; Kim, S.; Morrison, C.;
+et al. 2023. UAZ Study 3 Results.
+Pynadath, D. V.; Gurney, N.; Kenny, S.; Kumar, R.; Marsella,
+S. C.; Matuszak, H.; Mostafa, H.; Sequeira, P.; Ustun, V.; and
+Wu, P. 2023.
+Effectiveness of Teamwork-Level Interven-
+tions Through Decision-Theoretic Reasoning in a Minecraft
+Search-and-Rescue Task. In Proceedings of the 2023 Inter-
+national Conference on Autonomous Agents and Multiagent
+Systems (AAMAS), 2334–2336.
+Reynolds, D. A. 2015. Gaussian mixture models. Encyclo-
+pedia of Biometrics, 741: 659–663.
+Roberts, M. E.; Stewart, B. M.; Tingley, D.; Lucas, C.;
+Leder-Luis, J.; Gadarian, S. K.; Albertson, B.; and Rand,
+D. G. 2014. Structural topic models for open-ended survey
+responses.
+American Journal of Political Science, 58(4):
+1064–1082.
+Sakoe, H.; and Chiba, S. 1978. Dynamic programming al-
+gorithm optimization for spoken word recognition. IEEE
+Transactions on Acoustics, Speech and Signal Processing,
+26(1): 43–49.
+Schleibaum, S.; Feng, L.; Kraus, S.; and Müller, J. P.
+2024.
+ADESSE: Advice Explanations in Complex Re-
+peated Decision-Making Environments. In Proceedings of
+the Thirty-Third International Joint Conference on Artificial
+Intelligence (IJCAI), 7904–7912.
+Seo, S.; Kennedy-Metz, L. R.; Zenati, M. A.; Shah, J. A.;
+Dias, R. D.; and Unhelkar, V. V. 2021. Towards an AI coach
+to infer team mental model alignment in healthcare. In Pro-
+ceedings of the IEEE Conference on Cognitive and Compu-
+tational Aspects of Situation Management, 39–44.
+Simon-Dempsey, H.; Huang, R.; et al. 2023. DOLL Agent
+for ASIST Study 3: Team Intervention Through Dynamic
+Observation and Learning. https://osf.io/mtqkb.
+Stempfle, J.; and Badke-Schaub, P. 2002. Thinking in design
+teams-an analysis of team communication. Design Studies,
+23(5): 473–496.
+Sukthankar, G.; Sycara, K.; Giampapa, J. A.; Burnett, C.;
+and Preece, A. 2007. Towards a model of agent-assisted
+team search. In Proceedings of the First Annual Conference
+of the International Technology Alliance in Network and In-
+formation Science.
+Sycara, K.; Lewis, M.; and Hughes, D. 2021. DARPA ASIST
+Study 3 Preregistration: CMU-RI Team. https://osf.io/yj52e/.
+Tibshirani, R.; Walther, G.; and Hastie, T. 2001. Estimating
+the number of clusters in a data set via the gap statistic.
+Journal of the Royal Statistical Society: Series B (Statistical
+Methodology), 63(2): 411–423.
+Tiferes, J.; and Bisantz, A. M. 2018. The impact of team
+characteristics and context on team communication: An inte-
+grative literature review. Applied Ergonomics, 68: 146–159.
+Ward Jr, J. H. 1963. Hierarchical grouping to optimize an
+objective function. Journal of the American statistical asso-
+ciation, 58(301): 236–244.
+Webber, S. S.; Detjen, J.; MacLean, T. L.; and Thomas, D.
+2019. Team challenges: Is artificial intelligence the solution?
+Business Horizons, 62(6): 741–750.
+Zhang, R.; McNeese, N. J.; Freeman, G.; and Musick, G.
+2021. "An ideal human" expectations of AI teammates in
+human-AI teaming. In Proceedings of the ACM on Human-
+Computer Interaction, volume 4, 1–25.
+Zijlstra, F. R. H.; Waller, M. J.; and Phillips, S. I. 2012.
+Setting the tone: Early interaction patterns in swift-starting
+teams as a predictor of effectiveness. European Journal of
+Work and Organizational Psychology, 21: 749–777.
