@@ -1,0 +1,672 @@
+{
+  "mode": "standard",
+  "generated_at": "2026-08-16T19:46:03.300859+00:00",
+  "stats": {
+    "mode": "standard",
+    "tag_count": 1,
+    "deep_divecandidates": 24,
+    "deep_cap": 6,
+    "deep_selected": 6,
+    "quick_candidates": 29,
+    "quick_skim_target": 11,
+    "quick_selected": 11
+  },
+  "deep_dive": [
+    {
+      "id": "2608.09333v1",
+      "source": "arxiv",
+      "title": "DH-VLM: Dual-Horizon Cooperative Latent Reasoning for Autonomous Driving",
+      "abstract": "Large-scale language models for autonomous driving enable enhanced global understanding and long-horizon planning. However, when deployed in isolated vehicles, limited sensing range and occlusions restrict reliable decision-making, and the substantial computational and latency overhead makes on-board deployment impractical. Cooperative driving provides a potential solution by leveraging external agents for information exchange, but existing methods remain limited in semantic reasoning capability under practical constraints. To address these challenges, we propose DH-VLM, a dual-horizon cooperative latent reasoning framework that enables asymmetric semantic cooperation between the infrastructure and ego vehicle. The infrastructure aggregates multi-layer hidden states to form a global-reasoning horizon latent guidance, which is integrated into the ego model through an Infrastructure-Driven Latent Evolution mechanism for conditional latent refinement. This enables the ego vehicle to leverage long-range contextual understanding while preserving autonomous decision-making within its local planning horizon. Furthermore, we construct a cooperation-oriented question-answer (QA) dataset covering fundamental scene understanding and ego-personalized comprehension to support counterfactual and safety-aware reasoning. Extensive experiments demonstrate that DH-VLM achieves state-of-the-art planning performance, outperforming the previous state of the art by 14.6% in L2 error and 26.9% in collision rate. Compared with query-based end-to-end cooperative driving methods, our approach reduces the communication cost by 57.3% and GPU memory usage by 25.5%, while maintaining strong robustness against infrastructure guidance errors, providing a practical and robust paradigm for cooperative autonomous driving.",
+      "authors": [
+        "Ziyi Song",
+        "Chen Xia",
+        "Hang Yu",
+        "Sheng Zhou",
+        "Zhisheng Niu"
+      ],
+      "primary_category": "cs.RO",
+      "categories": [
+        "cs.RO"
+      ],
+      "published": "2026-08-10T09:11:50+00:00",
+      "link": "https://arxiv.org/pdf/2608.09333v1",
+      "tags": [
+        "keyword:agents",
+        "query:agents"
+      ],
+      "llm_score": 9.0,
+      "llm_evidence_en": "cooperative driving as multi-agent coordination between infrastructure and ego vehicle",
+      "llm_evidence_cn": "基础设施与自车间的协同驾驶即多智能体协调",
+      "llm_evidence": "基础设施与自车间的协同驾驶即多智能体协调",
+      "canonical_evidence": "基础设施与自车间的协同驾驶即多智能体协调",
+      "llm_tldr_en": "DH-VLM enables asymmetric semantic cooperation between infrastructure and ego vehicle via dual-horizon latent reasoning, improving autonomous driving decision-making under limited sensing and computing.",
+      "llm_tldr_cn": "针对单车部署大模型存在的感知范围受限、遮挡及计算延迟问题，论文提出DH-VLM双视界协同潜在推理框架，由基础设施聚合多视角信息并与自车进行非对称语义协同。该方法在不增加车上计算开销的情况下增强了全局理解和长时程规划能力。实验验证了协同驾驶场景下决策可靠性的提升，为自动驾驶的实用化部署提供了新思路。",
+      "llm_tldr": "针对单车部署大模型存在的感知范围受限、遮挡及计算延迟问题，论文提出DH-VLM双视界协同潜在推理框架，由基础设施聚合多视角信息并与自车进行非对称语义协同。该方法在不增加车上计算开销的情况下增强了全局理解和长时程规划能力。实验验证了协同驾驶场景下决策可靠性的提升，为自动驾驶的实用化部署提供了新思路。",
+      "llm_tags": [
+        "query:agents"
+      ],
+      "matched_query_tag": "query:agents",
+      "matched_query_text": "multi-agent system coordination",
+      "matched_requirement_id": "req-3",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2608.11596v1",
+      "source": "arxiv",
+      "title": "Small Language Model enabled Autonomous agent for Language-Conditioned Cognitive Radar",
+      "abstract": "Modern radar systems require adapting their processing strategies in response to changing interference, clutter, and data availability. This paper introduces a framework for a small language model (SLM)-driven autonomous agent designed for language-conditioned cognitive radar, functioning as an intelligent controller for a suite of array signal processing tools. Given a natural-language command, the agent extracts radar-operation-related cues, selects an appropriate sequence of signal-processing methods, configures parameters, and invokes executable tools for numerical computation. Experiments with a synthetic uniform linear array (ULA) radar demonstrate that, given a natural-language command, the agent performs meaningful algorithm selection across diverse scenarios for sidelobe control, jammer suppression, multiple-null beamforming, coherent-source handling, and low-snapshot direction-of-arrival (DOA) estimation. Ablation results show that radar-specific prompting and physics-grounded tool execution are both required for reliable decisions and hallucination-free numerical results.",
+      "authors": [
+        "Minhaj Uddin Ahmad",
+        "Zakia Zaman",
+        "Shunqiao Sun",
+        "Mizanur Rahman"
+      ],
+      "primary_category": "eess.SP",
+      "categories": [
+        "eess.SP"
+      ],
+      "published": "2026-08-12T03:08:40+00:00",
+      "link": "https://arxiv.org/pdf/2608.11596v1",
+      "tags": [
+        "keyword:agents",
+        "query:agents"
+      ],
+      "llm_score": 9.0,
+      "llm_evidence_en": "SLM-driven autonomous agent for language-conditioned cognitive radar",
+      "llm_evidence_cn": "面向认知雷达的小语言模型自主智能体",
+      "llm_evidence": "面向认知雷达的小语言模型自主智能体",
+      "canonical_evidence": "面向认知雷达的小语言模型自主智能体",
+      "llm_tldr_en": "An SLM-driven autonomous agent for cognitive radar extracts radar-operation cues from natural-language commands, selects and configures signal-processing methods, and invokes tools. Synthetic ULA experiments show meaningful algorithm selection, demonstrating SLMs as autonomous radar controllers.",
+      "llm_tldr_cn": "现代雷达系统需要随环境变化自适应调整信号处理策略。该论文提出一种小语言模型驱动的自主智能体，作为认知雷达的智能控制器，根据自然语言指令提取操作线索、选择并配置信号处理算法、调用数值计算工具。在合成均匀线阵雷达上的实验表明，智能体能根据语言命令完成有意义的算法选择。该工作展示了小语言模型在自主雷达控制中的潜力，为认知雷达的人机交互操作提供了新途径。",
+      "llm_tldr": "现代雷达系统需要随环境变化自适应调整信号处理策略。该论文提出一种小语言模型驱动的自主智能体，作为认知雷达的智能控制器，根据自然语言指令提取操作线索、选择并配置信号处理算法、调用数值计算工具。在合成均匀线阵雷达上的实验表明，智能体能根据语言命令完成有意义的算法选择。该工作展示了小语言模型在自主雷达控制中的潜力，为认知雷达的人机交互操作提供了新途径。",
+      "llm_tags": [
+        "query:agents"
+      ],
+      "matched_query_tag": "query:agents",
+      "matched_query_text": "autonomous agent autonomous decision making",
+      "matched_requirement_id": "req-2",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2608.11895v1",
+      "source": "arxiv",
+      "title": "Scalable Multi-Agent Maze Traversal with Local Communication",
+      "abstract": "Cave networks, pipe systems, and similar maze-like environments pose significant challenges for multi-agent navigation in unknown settings with limited communication. We propose a distributed algorithm that enables agents to collectively traverse an unknown, possibly cyclic graph. Agents enter sequentially at a designated start node and are tasked to localize and reach an undisclosed goal while avoiding collisions. They coordinate via local communication using leader-follower relationships and leader switching. At any moment in time, exploration is performed by only one of the agents, which runs a single-agent maze solver. We prove that the algorithm is complete, that its makespan is asymptotically equivalent (in the number of agents) to that of an optimal full-knowledge strategy, and derive its time and space complexity. Simulations with up to $625$ agents show a decreasing average sum-of-fuels as the number of agents increases and demonstrate that the proposed approach outperforms a naïve baseline in which all agents independently execute the single-agent solver.",
+      "authors": [
+        "Julian Rau",
+        "Jahir Argote-Gerald",
+        "Grace McFassel",
+        "Genki Miyauchi",
+        "Paul Trodden",
+        "Roderich Groß"
+      ],
+      "primary_category": "cs.RO",
+      "categories": [
+        "cs.RO",
+        "cs.MA"
+      ],
+      "published": "2026-08-12T10:21:26+00:00",
+      "link": "https://arxiv.org/pdf/2608.11895v1",
+      "tags": [
+        "keyword:agents",
+        "query:agents"
+      ],
+      "llm_score": 9.0,
+      "llm_evidence_en": "Distributed multi-agent maze traversal with local leader-follower coordination",
+      "llm_evidence_cn": "基于局部通信与领导者跟随的多智能体迷宫遍历分布式算法",
+      "llm_evidence": "基于局部通信与领导者跟随的多智能体迷宫遍历分布式算法",
+      "canonical_evidence": "基于局部通信与领导者跟随的多智能体迷宫遍历分布式算法",
+      "llm_tldr_en": "The paper proposes a complete distributed algorithm for multi-agent traversal of unknown cyclic graphs using local communication, leader-follower switching, and single-agent exploration, with asymptotically optimal makespan.",
+      "llm_tldr_cn": "洞穴、管道等未知迷宫环境为多智能体导航带来挑战，尤其是通信受限和碰撞避免。本文提出一种分布式算法，使智能体在未知图上逐个进入并通过局部通信与领导者-跟随者切换协作遍历，任一时刻仅一个智能体执行单智能体探索。作者证明算法完备且其完工时间在智能体数量意义下渐进等价于全协作最优方案。该方法为有限通信环境下的多智能体协调提供了可证明的分布式策略。",
+      "llm_tldr": "洞穴、管道等未知迷宫环境为多智能体导航带来挑战，尤其是通信受限和碰撞避免。本文提出一种分布式算法，使智能体在未知图上逐个进入并通过局部通信与领导者-跟随者切换协作遍历，任一时刻仅一个智能体执行单智能体探索。作者证明算法完备且其完工时间在智能体数量意义下渐进等价于全协作最优方案。该方法为有限通信环境下的多智能体协调提供了可证明的分布式策略。",
+      "llm_tags": [
+        "query:agents"
+      ],
+      "matched_query_tag": "query:agents",
+      "matched_query_text": "multi-agent system coordination",
+      "matched_requirement_id": "req-3",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2608.11949v1",
+      "source": "arxiv",
+      "title": "ExRole: From Team Trajectories to Executable Roles in Multi-Agent Language Models",
+      "abstract": "Roles provide an interpretable interface for organizing language-model agents, yet most multi-agent systems treat them as hand-written prompt labels disconnected from learned behavior and parameter updates. We argue that a useful role should instead be an executable control variable: it should summarize behavior predictive of future utility, guide subsequent interaction, and identify the trainable capacity responsible for that behavior. We introduce ExRole, a trajectory-to-role framework that learns future-aware role prototypes from prefix-local team traces, resolves them into readable instructions and token-aligned role markers, and optionally routes shared LoRA rank slots with turn-aligned credit. Across MuSiQue and 2WikiMultiHopQA, ExRole improves over single-agent search by 15.0/14.4 and 13.5/16.1 EM/F1 points, respectively. Against the strongest non-ExRole controls, the corresponding gains remain 11.5/11.6 and 7.7/9.7 points. Across both benchmarks, the controlled results consistently favor trajectory-induced role conditioning over role-free, manual, random, and shuffled alternatives. Role-Agent-Turn interventions further show that the induced roles capture transferable behavioral specialization beyond fixed agent identities or turn positions.",
+      "authors": [
+        "Zhou Liu",
+        "Chaoyang Han",
+        "Zewei Pan",
+        "Zeli Su",
+        "Wentao Zhang"
+      ],
+      "primary_category": "cs.AI",
+      "categories": [
+        "cs.AI"
+      ],
+      "published": "2026-08-12T11:35:31+00:00",
+      "link": "https://arxiv.org/pdf/2608.11949v1",
+      "tags": [
+        "keyword:agents",
+        "query:agents"
+      ],
+      "llm_score": 9.0,
+      "llm_evidence_en": "Learning executable roles for multi-agent coordination",
+      "llm_evidence_cn": "学习可执行角色以协调多智能体",
+      "llm_evidence": "学习可执行角色以协调多智能体",
+      "canonical_evidence": "学习可执行角色以协调多智能体",
+      "llm_tldr_en": "ExRole learns executable role prototypes from multi-agent team traces, parsing them into readable instructions and token-aligned markers, and routing shared LoRA slots with credit. On MuSiQuE and 2WikiMultiHopQA, it improves collaboration, treating roles as executable control variables.",
+      "llm_tldr_cn": "多智能体语言模型中的角色一般是手工编写的提示标签，与行为数据和学习参数脱节。该论文提出ExRole，一个将团队轨迹转化为可执行角色的框架：它从前缀局部轨迹中学习未来感知的角色原型，解析成可读指令和令牌对齐的角色标记，并用回合对齐信用路由LoRA槽位。在MuSiQuE和2WikiMultiHopQA上的实验验证了该方法的有效性，说明角色应作为可执行控制变量来预测效用、指导交互并定位可训练能力，为多智能体系统协调提供新机制。",
+      "llm_tldr": "多智能体语言模型中的角色一般是手工编写的提示标签，与行为数据和学习参数脱节。该论文提出ExRole，一个将团队轨迹转化为可执行角色的框架：它从前缀局部轨迹中学习未来感知的角色原型，解析成可读指令和令牌对齐的角色标记，并用回合对齐信用路由LoRA槽位。在MuSiQuE和2WikiMultiHopQA上的实验验证了该方法的有效性，说明角色应作为可执行控制变量来预测效用、指导交互并定位可训练能力，为多智能体系统协调提供新机制。",
+      "llm_tags": [
+        "query:agents"
+      ],
+      "matched_query_tag": "query:agents",
+      "matched_query_text": "multi-agent system coordination",
+      "matched_requirement_id": "req-3",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2608.08037v1",
+      "source": "arxiv",
+      "title": "SkillSmith: Enhancing Locally Deployed Agents via Automatic Skill Construction and Evolution",
+      "abstract": "LLM-based agent frameworks now act as personal assistants for multi-step tasks. Existing agent frameworks such as OpenClaw commonly follow the Cloud Agent depolyment mode using closed-source cloud LLMs as backbone model, which may expose private user information and incur repeated LLM-calling costs. Local Agents address these deployment concerns by depolying frontier open-source SLMs on user-controlled devices, but their task effectiveness still lags far behind Cloud Agents. Through diagnostic analysis, we reveal that the limited effectiveness of Local Agents with frontier SLM backbones mainly comes from missing environment knowledge caused by limited backbone model scale including environment rules and operation procedures. To supply such knowledge non-parametrically, context-efficiently, and without expert authoring, we present SkillSmith, a Cloud--Local Agent collaboration framework that uses Skill as a context-efficient knowledge carrier, automatic constructs Skill from Cloud Agent task exploration and evolves Skill using Local Agent execution feedback to enhance a frozen Local Agent. Experiments on daily agent task datasets AppWorld and WorkBench show that the automatically generated Skill enables the Local Agent with Qwen3.6-27B(SLM) to achieve task effectiveness comparable to Cloud Agents with frontier LLMs, outperform the strongest non-parametric baselines, reduce average actions per task from 36.1 to 9.9 on AppWorld-Normal, and generalize to other SLM backbone models without rerunning Skill construction.",
+      "authors": [
+        "Xinle Jiang",
+        "Remy Xie",
+        "Ming Tang"
+      ],
+      "primary_category": "cs.AI",
+      "categories": [
+        "cs.AI"
+      ],
+      "published": "2026-08-08T09:48:21+00:00",
+      "link": "https://arxiv.org/pdf/2608.08037v1",
+      "tags": [
+        "keyword:agents",
+        "query:agents"
+      ],
+      "llm_score": 8.0,
+      "llm_evidence_en": "Enhances locally deployed LLM agents through automatic skill construction and evolution for multi-step tasks",
+      "llm_evidence_cn": "通过自动技能构建与演化提升本地部署的LLM智能体在多步任务中的表现",
+      "llm_evidence": "通过自动技能构建与演化提升本地部署的LLM智能体在多步任务中的表现",
+      "canonical_evidence": "通过自动技能构建与演化提升本地部署的LLM智能体在多步任务中的表现",
+      "llm_tldr_en": "SkillSmith enhances locally deployed LLM agents by automatically constructing and evolving skills that supply missing environment knowledge, such as environment rules and operation procedures, significantly boosting multi-step task effectiveness without switching backbone models.",
+      "llm_tldr_cn": "本地部署的LLM智能体使用开源小型模型能保护隐私并降低成本，但任务效果远落后于云端智能体。作者诊断发现主要原因是本地模型缺少环境知识，包括环境规则和操作流程。为此提出SkillSmith，自动构建并演化这些环境相关技能，在不更换骨干模型的情况下显著增强本地智能体的多步任务完成能力，缩小了本地与云端智能体之间的性能差距。",
+      "llm_tldr": "本地部署的LLM智能体使用开源小型模型能保护隐私并降低成本，但任务效果远落后于云端智能体。作者诊断发现主要原因是本地模型缺少环境知识，包括环境规则和操作流程。为此提出SkillSmith，自动构建并演化这些环境相关技能，在不更换骨干模型的情况下显著增强本地智能体的多步任务完成能力，缩小了本地与云端智能体之间的性能差距。",
+      "llm_tags": [
+        "query:agents"
+      ],
+      "matched_query_tag": "query:agents",
+      "matched_query_text": "task-oriented agent goal completion",
+      "matched_requirement_id": "req-4",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2608.06587v1",
+      "source": "arxiv",
+      "title": "SyncSBC: Decentralized Swarm Behavior Prediction for Synchronized Autonomous Control",
+      "abstract": "Robot swarms utilize many independent limited-sensing agents to produce complex emergent behaviors without requiring centralized control. However, little research explores how agents can infer swarm-level behavior from purely local perception, a capability critical for detecting faults and behavior changes. In this paper, we introduce Synchronized Swarm Behavior Classification (SyncSBC), which combines improvements in machine learning and distributed consensus to classify collective swarm behavior and synchronize swarm decision-making in an entirely decentralized manner. We show that SyncSBC achieves high classification accuracy and low synchronization delay, making it suitable for real-world deployment. Finally, we use SyncSBC to demonstrate two promising swarm applications on real robots where we show that swarms utilizing SyncSBC can accurately identify anomalies in robot behavior and autonomously coordinate collective changes in swarm behavior. Videos, code and supplemental experiments are available at https://sites.google.com/view/sync-sbc/home.",
+      "authors": [
+        "Varun Raveendra",
+        "Connor Mattson",
+        "Daniel S. Brown"
+      ],
+      "primary_category": "cs.RO",
+      "categories": [
+        "cs.RO",
+        "cs.AI"
+      ],
+      "published": "2026-08-06T20:59:04+00:00",
+      "link": "https://arxiv.org/pdf/2608.06587v1",
+      "tags": [
+        "keyword:agents",
+        "query:agents"
+      ],
+      "llm_score": 8.0,
+      "llm_evidence_en": "SyncSBC enables decentralized swarm behavior classification and synchronized decision-making for multi-agent swarms",
+      "llm_evidence_cn": "SyncSBC实现分布式群体行为分类与同步决策，支撑多智能体协同",
+      "llm_evidence": "SyncSBC实现分布式群体行为分类与同步决策，支撑多智能体协同",
+      "canonical_evidence": "SyncSBC实现分布式群体行为分类与同步决策，支撑多智能体协同",
+      "llm_tldr_en": "Proposes SyncSBC, which combines machine learning and distributed consensus to classify collective swarm behavior and synchronize decision-making in a fully decentralized manner.",
+      "llm_tldr_cn": "机器人集群依赖大量具有局部感知能力的独立智能体产生涌现行为，但智能体很难从局部信息推断集群整体行为，这给故障检测与行为变化识别带来困难。本文提出SyncSBC，将机器学习与分布式共识相结合，以完全分布式的方式对集体行为进行分类，并同步集群的决策。实验表明SyncSBC具有较高的分类精度和较低的同步延迟，适合真实部署，为去中心化集群的自主控制提供了关键能力。",
+      "llm_tldr": "机器人集群依赖大量具有局部感知能力的独立智能体产生涌现行为，但智能体很难从局部信息推断集群整体行为，这给故障检测与行为变化识别带来困难。本文提出SyncSBC，将机器学习与分布式共识相结合，以完全分布式的方式对集体行为进行分类，并同步集群的决策。实验表明SyncSBC具有较高的分类精度和较低的同步延迟，适合真实部署，为去中心化集群的自主控制提供了关键能力。",
+      "llm_tags": [
+        "query:agents"
+      ],
+      "matched_query_tag": "query:agents",
+      "matched_query_text": "multi-agent system coordination",
+      "matched_requirement_id": "req-3",
+      "selection_source": "carryover_cache",
+      "paper_id": "2608.06587v1"
+    }
+  ],
+  "quick_skim": [
+    {
+      "id": "2608.06871v1",
+      "source": "arxiv",
+      "title": "CEDAR: Agent-Orchestrated Tree Search for Goal-Directed Optimization of Complex Systems",
+      "abstract": "Complex systems, core objects of study in artificial life, model diverse phenomena through nonlinear, feedback-driven interactions that produce emergent behavior, with applications from population dynamics and biology to economic policy and strategic decision-making. Yet the difficulty of predicting how feedback structure gives rise to emergent behavior, a central open problem in artificial life, makes goal-directed design exceptionally challenging. In established practice, system structures are written in specialized modeling languages such as DYNAMO or STELLA, compounding the challenge with labor-intensive workflows that limit adoption and hinder timely decision-making. To address these challenges, we introduce CEDAR, an autonomous method that uses Large Language Model (LLM) agents to discover complex systems satisfying user-specified behavioral goals. Our key innovation is an LLM-driven Monte Carlo Tree Search (MCTS) deeply coupled with complex systems: at each iteration, an LLM Judge evaluates emergent behavior against specified goals and an LLM Editor proposes improved variants, with the Judge acting as a fitness function and the Editor as a variation operator, akin to a generate-and-evaluate loop in evolutionary computation. We represent complex systems as a restricted, runnable subset of Python with domain-specific primitives, letting LLMs modify system dynamics directly. CEDAR formalizes this as an MCTS variant with an LLM-parameterized transition kernel and value function, enabling goal-directed discovery of complex system behaviors while preserving solution diversity, and its LLM-based interpretability reveals how structural changes drive emergent behavior. CEDAR reduces human effort while enabling capabilities difficult to achieve with existing approaches, facilitating broader adoption of complex systems across domains.",
+      "authors": [
+        "Yingtao Tian"
+      ],
+      "primary_category": "cs.AI",
+      "categories": [
+        "cs.AI"
+      ],
+      "published": "2026-08-07T06:54:58+00:00",
+      "link": "https://arxiv.org/pdf/2608.06871v1",
+      "tags": [
+        "keyword:agents",
+        "query:agents"
+      ],
+      "llm_score": 8.0,
+      "llm_evidence_en": "CEDAR is an autonomous method for goal-directed optimization of complex systems using agent-orchestrated tree search",
+      "llm_evidence_cn": "CEDAR利用智能体编排的树搜索实现复杂系统目标导向优化",
+      "llm_evidence": "CEDAR利用智能体编排的树搜索实现复杂系统目标导向优化",
+      "canonical_evidence": "CEDAR利用智能体编排的树搜索实现复杂系统目标导向优化",
+      "llm_tldr_en": "Introduces CEDAR, an autonomous method for goal-directed optimization of complex systems, using agent-orchestrated tree search to overcome the difficulty of predicting emergent behavior.",
+      "llm_tldr_cn": "复杂系统的目标导向优化因反馈结构与涌现行为难以预测而极具挑战，传统上依赖DYNAMO或STELLA等专业建模语言，工作流程劳动密集且制约决策时效。本文提出CEDAR，一种由智能体编排的树搜索方法，将系统结构设计视为自主搜索问题，以目标为导向自动探索并优化复杂系统结构。该方法减少了人工建模负担，有望在种群动力学、生物、经济政策与战略决策等领域提升目标导向设计的效率与可及性。",
+      "llm_tldr": "复杂系统的目标导向优化因反馈结构与涌现行为难以预测而极具挑战，传统上依赖DYNAMO或STELLA等专业建模语言，工作流程劳动密集且制约决策时效。本文提出CEDAR，一种由智能体编排的树搜索方法，将系统结构设计视为自主搜索问题，以目标为导向自动探索并优化复杂系统结构。该方法减少了人工建模负担，有望在种群动力学、生物、经济政策与战略决策等领域提升目标导向设计的效率与可及性。",
+      "llm_tags": [
+        "query:agents"
+      ],
+      "matched_query_tag": "query:agents",
+      "matched_query_text": "autonomous agent autonomous decision making",
+      "matched_requirement_id": "req-2",
+      "selection_source": "carryover_cache",
+      "paper_id": "2608.06871v1",
+      "quick_tier": "8plus"
+    },
+    {
+      "id": "2608.07734v1",
+      "source": "arxiv",
+      "title": "Complete, Scalable, and Robust Prioritized Planning for Multi-Robot Ordered Storage and Retrieval at Maximum Capacity",
+      "abstract": "Automated warehouses face a fundamental trade-off between maximizing storage density and achieving high retrieval throughput. While puzzle-based storage (PBS) architectures increase capacity by eliminating aisles, coordinating multiple robots in these high-density spaces is computationally challenging due to the potential for deadlocks. This paper introduces a novel multi-robot formulation for the ``ordered storage and retrieval problem at maximum capacity''. The focus is on rectangular grids accessible from a single boundary, where loads need to be first stored up to full capacity and then efficiently retrieved, given a planned departure sequence. This work bridges the gap between geometric feasibility and execution efficiency by leveraging the properties of relocation-free arrangements. These properties guide an online, prioritized multi-agent path-finding algorithm, which is the main contribution of this work. Unlike general centralized planners, the approach exploits the specific invariants of the storage arrangement to guarantee completeness and prevent deadlocks, enabling scalability. Experiments demonstrate that the method achieves near-linear improvement in makespan with respect to the number of robots, up to $m = C$, where $C$ is the grid width. Crucially, the algorithmic overhead of supporting robustness is negligible; the system handles uncertainty in departure sequences using robust storage arrangements with no significant penalty in execution speed compared to the non-robust baseline.",
+      "authors": [
+        "William Zhang",
+        "Tzvika Geft",
+        "Jingjin Yu",
+        "Kostas Bekris"
+      ],
+      "primary_category": "cs.RO",
+      "categories": [
+        "cs.RO",
+        "cs.AI",
+        "cs.MA"
+      ],
+      "published": "2026-08-07T19:55:58+00:00",
+      "link": "https://arxiv.org/pdf/2608.07734v1",
+      "tags": [
+        "keyword:agents",
+        "query:agents"
+      ],
+      "llm_score": 7.0,
+      "llm_evidence_en": "Multi-robot coordination planning for high-density storage and retrieval with deadlock avoidance",
+      "llm_evidence_cn": "面向高密度仓储的多机器人协调规划，避免死锁",
+      "llm_evidence": "面向高密度仓储的多机器人协调规划，避免死锁",
+      "canonical_evidence": "面向高密度仓储的多机器人协调规划，避免死锁",
+      "llm_tldr_en": "Introduces a novel multi-robot formulation for ordered storage and retrieval at maximum capacity in puzzle-based storage, addressing deadlock-free prioritized planning on rectangular grids with a single boundary, bridging geometric feasibility and efficient retrieval.",
+      "llm_tldr_cn": "针对自动化仓库在最大存储密度与高吞吐之间的矛盾，该文提出最大容量下的有序存取货多机器人新形式化，重点研究单边界可达矩形网格中避免死锁的优先级规划。方法在保证几何可行性的同时，高效支持按计划离场顺序的存储与检索，为高密度仓储机器人协调提供了可扩展且鲁棒的规划方案。",
+      "llm_tldr": "针对自动化仓库在最大存储密度与高吞吐之间的矛盾，该文提出最大容量下的有序存取货多机器人新形式化，重点研究单边界可达矩形网格中避免死锁的优先级规划。方法在保证几何可行性的同时，高效支持按计划离场顺序的存储与检索，为高密度仓储机器人协调提供了可扩展且鲁棒的规划方案。",
+      "llm_tags": [
+        "query:agents"
+      ],
+      "matched_query_tag": "query:agents",
+      "matched_query_text": "multi-agent system coordination",
+      "matched_requirement_id": "req-3",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "7"
+    },
+    {
+      "id": "2608.08175v1",
+      "source": "arxiv",
+      "title": "AOC-CBS: Anytime-Optimal Continuous-time Conflict-Based Search for Generalised Multi-Agent Path Finding",
+      "abstract": "Many research fields share a common structure: a set of agents, each pursuing its own goal, whose actions must be coordinated so that no two of them conflict. Multi-Agent Path Finding (MAPF) is a concrete instance of this structure, with applications from warehouses to road traffic and airports. Much of MAPF research assumes discrete time, circular agents sharing one spatial graph, a single goal per agent, and that an agent must remain at its goal once reached, precluding heterogeneous fleets, non-geometric conflicts, task sequences, and agents that move on after completing them. We generalise the MAPF formulation to lift these assumptions, and present Anytime-Optimal Continuous-time Conflict-Based Search (AOC-CBS), an exact and solution-complete solver for it. AOC-CBS guarantees the eventual return of an optimal solution, while reporting an incumbent with a known optimality gap upper bound throughout its runtime; it is configurable with a portfolio of repair functions, one of which we introduce (Tier-Prioritized Safe Interval Path Planning), and can exploit multiple processor cores. We demonstrate AOC-CBS on a mixed fleet of non-convex agents moving along smooth, kinodynamically feasible trajectories. Preliminary experiments against the exact solver OC-CBS, on well-known benchmarks and roadmaps we sample from them, show AOC-CBS is comparable at finding optimal solutions while extending scalability from the tens to the hundreds of agents when a bounded optimality gap is accepted.",
+      "authors": [
+        "Alvin Combrink",
+        "Sabino Francesco Roselli",
+        "Martin Fabian"
+      ],
+      "primary_category": "cs.MA",
+      "categories": [
+        "cs.MA"
+      ],
+      "published": "2026-08-08T15:11:32+00:00",
+      "link": "https://arxiv.org/pdf/2608.08175v1",
+      "tags": [
+        "keyword:agents",
+        "query:agents"
+      ],
+      "llm_score": 8.0,
+      "llm_evidence_en": "generalised multi-agent path finding with anytime-optimal continuous-time conflict-based search",
+      "llm_evidence_cn": "推广多智能体路径规划，提出任意时刻最优的连续时间冲突搜索",
+      "llm_evidence": "推广多智能体路径规划，提出任意时刻最优的连续时间冲突搜索",
+      "canonical_evidence": "推广多智能体路径规划，提出任意时刻最优的连续时间冲突搜索",
+      "llm_tldr_en": "Presents AOC-CBS, an anytime-optimal continuous-time conflict-based search algorithm for generalized Multi-Agent Path Finding that lifts restrictive assumptions like discrete time, single goals, and static agents, enabling heterogeneous fleets and task sequences.",
+      "llm_tldr_cn": "多智能体路径规划（MAPF）长期受离散时间、单目标、圆形智能体等假设限制。本文推广MAPF以支持异构车队、非几何冲突、任务序列等实际需求，并提出AOC-CBS（任意时刻最优连续时间冲突搜索）算法。该方法在连续时间下结合冲突消解与任意时刻最优机制，可处理更广泛的协调问题，具有较好扩展性。",
+      "llm_tldr": "多智能体路径规划（MAPF）长期受离散时间、单目标、圆形智能体等假设限制。本文推广MAPF以支持异构车队、非几何冲突、任务序列等实际需求，并提出AOC-CBS（任意时刻最优连续时间冲突搜索）算法。该方法在连续时间下结合冲突消解与任意时刻最优机制，可处理更广泛的协调问题，具有较好扩展性。",
+      "llm_tags": [
+        "query:agents"
+      ],
+      "matched_query_tag": "query:agents",
+      "matched_query_text": "multi-agent system coordination",
+      "matched_requirement_id": "req-3",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "8plus"
+    },
+    {
+      "id": "2608.09044v1",
+      "source": "arxiv",
+      "title": "Tree-of-Experience: Hierarchical Experience Management for Self-Evolving Agents",
+      "abstract": "Continual self-evolution requires LLM agents to transform environmental interactions into reliable and reusable experience. Existing methods typically refine individual trajectories or abstract shared knowledge from related trajectories, but their experience representations are often disconnected from the underlying reasoning process. This limits feedback attribution, cross-task transfer, and update and retrieval efficiency, particularly in complex reasoning tasks with outcome-level feedback. To overcome this limitation, we propose \\textbf{T}ree-\\textbf{o}f-\\textbf{E}xperience (ToE), a structured experience-management framework that aligns experience organization with the hierarchical reasoning process of LLM agents. Specifically, ToE organizes the experience into a shared tree of analytical perspectives and reasoning paths, whose reliability is calibrated through environmental outcomes to support systematic updating, transfer, and efficient retrieval. The experimental results on \\textsc{Game of 24} and \\textsc{FinEvolveBench} show that ToE substantially improves both problem-solving performance and efficiency. On \\textsc{Game of 24}, ToE achieves a 31.4\\% relative improvement in accuracy over the experience-free ToT baseline. On \\textsc{FinEvolveBench}, ToE improves tsIC by an average of 41.24\\% over the experience-free pipeline across 12 evaluation settings, whereas conventional experience-management methods often underperform experience-free baselines.",
+      "authors": [
+        "Zihao Deng",
+        "Yining Zhu",
+        "Leiming Wang",
+        "Jingfei Lu",
+        "Junbo Wang",
+        "Chuncheng Ran",
+        "Yu Yang",
+        "Dixuan Yang",
+        "Jikun Shen"
+      ],
+      "primary_category": "cs.CL",
+      "categories": [
+        "cs.CL"
+      ],
+      "published": "2026-08-10T02:49:38+00:00",
+      "link": "https://arxiv.org/pdf/2608.09044v1",
+      "tags": [
+        "keyword:agents",
+        "query:agents"
+      ],
+      "llm_score": 7.0,
+      "llm_evidence_en": "Hierarchical experience management for self-evolving agents",
+      "llm_evidence_cn": "面向自进化智能体的分层经验管理",
+      "llm_evidence": "面向自进化智能体的分层经验管理",
+      "canonical_evidence": "面向自进化智能体的分层经验管理",
+      "llm_tldr_en": "Tree-of-Experience (ToE) is a structured experience-management framework that aligns experience organization with the hierarchical reasoning process of LLM agents. It improves feedback attribution, cross-task transfer, and update/retrieval efficiency for self-evolving agents, addressing limitations of existing trajectory-based experience methods.",
+      "llm_tldr_cn": "LLM智能体的持续自进化要求把环境交互转化为可靠可复用的经验，但已有方法常将经验表示与推理过程割裂，导致反馈归因和跨任务迁移受限。该论文提出Tree-of-Experience（ToE），一种将经验组织与LLM分层推理过程对齐的结构化经验管理框架。该方法能够更高效地进行反馈归因、跨任务迁移以及经验更新与检索。在复杂推理任务中的实验验证了其有效性，为自进化智能体提供了更好的经验积累机制。",
+      "llm_tldr": "LLM智能体的持续自进化要求把环境交互转化为可靠可复用的经验，但已有方法常将经验表示与推理过程割裂，导致反馈归因和跨任务迁移受限。该论文提出Tree-of-Experience（ToE），一种将经验组织与LLM分层推理过程对齐的结构化经验管理框架。该方法能够更高效地进行反馈归因、跨任务迁移以及经验更新与检索。在复杂推理任务中的实验验证了其有效性，为自进化智能体提供了更好的经验积累机制。",
+      "llm_tags": [
+        "query:agents"
+      ],
+      "matched_query_tag": "query:agents",
+      "matched_query_text": "autonomous agent autonomous decision making",
+      "matched_requirement_id": "req-2",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "7"
+    },
+    {
+      "id": "2608.08545v1",
+      "source": "arxiv",
+      "title": "Curriculum Generation under Structured Parametric Environments for Robust Navigation Policies",
+      "abstract": "Robust navigation policies for autonomous agents must generalize across continuously varying environmental conditions such as turn rates, obstacles, friction, pits, and slopes. Curriculum generation provides a principled mechanism for improving generalization by progressively adapting training environments, but designing such curricula in a sample-efficient and automated manner remains challenging. This paper proposes a reparameterized curriculum generation framework for structured continuous environment parameters using unidirectional gradient-based optimization. To improve robustness in multimodal observation spaces consisting of image-based and scalar inputs, a distribution-shift regularization objective is incorporated to encourage the learning of finer-grained latent representations. The proposed method is evaluated across two continuous-control OpenAI Gym environments: a 2D obstacle-based Car Racing variant and Bipedal Walker variant, where coupled environment parameters jointly influence policy performance. Across five random seeds, our method consistently outperforms vanilla policy training, random parameter sampling, manual curricula, frontier-based methods, Self-Paced Reinforcement Learning (SPRL), Absolute Learning Progress with Gaussian Mixture Models (ALP-GMM), and reverse curriculum learning baselines. Ablation studies further demonstrate the effectiveness of the reparameterized curriculum mechanism across both environments, while highlighting environment-dependent benefits of the auxiliary regularization objective.",
+      "authors": [
+        "Prishita Ray"
+      ],
+      "primary_category": "cs.RO",
+      "categories": [
+        "cs.RO",
+        "cs.LG"
+      ],
+      "published": "2026-08-09T07:45:21+00:00",
+      "link": "https://arxiv.org/pdf/2608.08545v1",
+      "tags": [
+        "keyword:agents",
+        "query:agents"
+      ],
+      "llm_score": 8.0,
+      "llm_evidence_en": "Curriculum generation to train robust navigation policies for autonomous agents",
+      "llm_evidence_cn": "面向自主智能体鲁棒导航策略的课程生成",
+      "llm_evidence": "面向自主智能体鲁棒导航策略的课程生成",
+      "canonical_evidence": "面向自主智能体鲁棒导航策略的课程生成",
+      "llm_tldr_en": "To help autonomous agents generalize, this paper proposes reparameterized curriculum generation over structured continuous environment parameters, using gradient-based optimization and distribution-shift regularization for multimodal observations.",
+      "llm_tldr_cn": "自主导航策略需要在转弯率、障碍、摩擦等持续变化的环境中泛化，人工设计课程代价高。本文提出面向结构化连续环境参数的重参数化课程生成框架，用单向梯度优化自动调整训练环境，并用分布偏移正则化增强多模态观测下的鲁棒性。该方法在保持采样效率的同时提升了导航策略在不同环境条件下的泛化能力。",
+      "llm_tldr": "自主导航策略需要在转弯率、障碍、摩擦等持续变化的环境中泛化，人工设计课程代价高。本文提出面向结构化连续环境参数的重参数化课程生成框架，用单向梯度优化自动调整训练环境，并用分布偏移正则化增强多模态观测下的鲁棒性。该方法在保持采样效率的同时提升了导航策略在不同环境条件下的泛化能力。",
+      "llm_tags": [
+        "query:agents"
+      ],
+      "matched_query_tag": "query:agents",
+      "matched_query_text": "reinforcement learning agent training",
+      "matched_requirement_id": "req-5",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "8plus"
+    },
+    {
+      "id": "2608.09096v2",
+      "source": "arxiv",
+      "title": "Evo-Bench: Can Language Models Improve Agent Harness?",
+      "abstract": "Large Language Models (LLMs) have driven rapid progress in autonomous agents, yet standard evaluations remain confined to static task solving. An emerging frontier is harness evolution---the agent's capacity to autonomously optimize its own operating harness. However, systematically benchmarking this capability remains challenging, as existing evaluations fail to isolate harness improvements from base model strength, prevent task-specific overfitting, or capture long-horizon iterative research. To address these challenges, we introduce Evo-Bench, the first benchmark designed to evaluate models' intrinsic harness-evolving capabilities across Search, Office, and General agent domains. To rigorously isolate this capability, Evo-Bench employs a novel harness-guided construction framework: it leverages auxiliary-task evolution to identify tasks genuinely sensitive to framework improvements, followed by sensitivity-aware stratified splitting to ensure robust cross-suite generalization. Extensive evaluations across nine frontier and open-weight models reveal that top models achieve massive absolute gains reaching 16.6 points, closely approaching state-of-the-art human-engineered baselines. Crucially, while autonomous evolution outpeforms artificial harness in General tasks and excels in Search tasks, it struggles in Office tasks that demand highly specific processing workflows. Furthermore, our analysis exposes critical temporal anomalies like early saturation, while demonstrating that the synthesized harnesses act as highly transferable reasoning structures, consistently boosting diverse policy models.",
+      "authors": [
+        "Lisheng Huang",
+        "Chen Yang",
+        "Hao Zhou",
+        "Huatong Song",
+        "Zongchao Chen",
+        "Ran Le",
+        "Yang Song",
+        "Wayne Xin Zhao",
+        "Tao Zhang"
+      ],
+      "primary_category": "cs.CL",
+      "categories": [
+        "cs.CL"
+      ],
+      "published": "2026-08-10T03:49:28+00:00",
+      "link": "https://arxiv.org/pdf/2608.09096v2",
+      "tags": [
+        "keyword:agents",
+        "query:agents"
+      ],
+      "llm_score": 7.0,
+      "llm_evidence_en": "Benchmark for evaluating agent harness evolution",
+      "llm_evidence_cn": "评估智能体运行框架演化的基准",
+      "llm_evidence": "评估智能体运行框架演化的基准",
+      "canonical_evidence": "评估智能体运行框架演化的基准",
+      "llm_tldr_en": "Evo-Bench evaluates models' intrinsic harness-evolving capabilities across Search, Office, and General agent domains, isolating harness improvement from base strength and capturing long-horizon iterative research. It is the first benchmark for agent harness evolution.",
+      "llm_tldr_cn": "现有智能体评估关注静态任务求解，没有评测智能体自主优化自身运行框架的能力。该论文提出Evo-Bench，这是首个评估模型内在框架演化能力的基准，覆盖搜索、办公和通用智能体领域，并通过新颖的框架引导构建方式隔离基座模型强度的影响。该基准能够捕捉长期迭代的自我完善过程，为自主智能体运行框架改进能力的研究提供了标准评测工具，推动智能体自我进化领域的发展。",
+      "llm_tldr": "现有智能体评估关注静态任务求解，没有评测智能体自主优化自身运行框架的能力。该论文提出Evo-Bench，这是首个评估模型内在框架演化能力的基准，覆盖搜索、办公和通用智能体领域，并通过新颖的框架引导构建方式隔离基座模型强度的影响。该基准能够捕捉长期迭代的自我完善过程，为自主智能体运行框架改进能力的研究提供了标准评测工具，推动智能体自我进化领域的发展。",
+      "llm_tags": [
+        "query:agents"
+      ],
+      "matched_query_tag": "query:agents",
+      "matched_query_text": "intelligent agent technology",
+      "matched_requirement_id": "req-1",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "7"
+    },
+    {
+      "id": "2608.09029v1",
+      "source": "arxiv",
+      "title": "Physically Constrained Agentic AI for Energy Scheduling",
+      "abstract": "Agentic AI extends energy management beyond fixed-form interaction by translating natural-language requests into coordinated scheduling actions. We present a hierarchical ReAct Energy Management System (EMS) in which one orchestrator coordinates specialist agent types for shiftable appliances, EV charging, and thermal control. Physical authorization is separated from language generation: a deterministic critic reconstructs each integrated day-ahead candidate and checks its schema, appliance cycles, device power, thermal comfort, and, when active, the whole power feeder limit. Across Qwen 3.5 checkpoints, single-appliance mixed-integer schedules were feasible in 83.3 percent of runs. Localized feedback produced no accepted coupled schedule, whereas a multi-step policy authorized 6/6 current coupled runs: 3/3 for 27B and 3/3 for 35B-A3B. The standard occupied-window policy permits pre-conditioning, enforces comfort from 09:00-18:00. Every accepted schedule passed an independent final replay. Feasible costs were 2522.499 JPY for 27B and 1592.697 JPY for 35B-A3B, which are slightly higher than the mathematical optimization optimum of 1343.380 JPY. These results establish a fail-closed workflow for agentic MIP and MILP energy scheduling under the declared physical model.",
+      "authors": [
+        "Dafnag Zhao",
+        "Yang Deng",
+        "Zhengmao Li"
+      ],
+      "primary_category": "eess.SY",
+      "categories": [
+        "eess.SY"
+      ],
+      "published": "2026-08-10T02:28:58+00:00",
+      "link": "https://arxiv.org/pdf/2608.09029v1",
+      "tags": [
+        "keyword:agents",
+        "query:agents"
+      ],
+      "llm_score": 8.0,
+      "llm_evidence_en": "Hierarchical agentic AI with orchestrator and specialist agents for constrained energy scheduling",
+      "llm_evidence_cn": "采用编排器与专家智能体的分层智能体AI，处理受限能源调度",
+      "llm_evidence": "采用编排器与专家智能体的分层智能体AI，处理受限能源调度",
+      "canonical_evidence": "采用编排器与专家智能体的分层智能体AI，处理受限能源调度",
+      "llm_tldr_en": "Presents a hierarchical ReAct energy management system with an orchestrator coordinating specialist agents and a deterministic critic enforcing physical constraints; across Qwen 3.5 checkpoints, 83.3% of single-appliance schedules were feasible.",
+      "llm_tldr_cn": "面向智能体能源调度，提出分层ReAct能源管理系统，由一个编排器协调可转移电器、EV充电和热控专家智能体。语言生成与物理授权分离，确定性评论家重建并校验候选日前计划的模式与安全约束。在Qwen 3.5检查点上，单设备混合整数调度可行率达83.3%，局部反馈未产生可接受的耦合计划，而多步策略进一步改进。",
+      "llm_tldr": "面向智能体能源调度，提出分层ReAct能源管理系统，由一个编排器协调可转移电器、EV充电和热控专家智能体。语言生成与物理授权分离，确定性评论家重建并校验候选日前计划的模式与安全约束。在Qwen 3.5检查点上，单设备混合整数调度可行率达83.3%，局部反馈未产生可接受的耦合计划，而多步策略进一步改进。",
+      "llm_tags": [
+        "query:agents"
+      ],
+      "matched_query_tag": "query:agents",
+      "matched_query_text": "multi-agent system coordination",
+      "matched_requirement_id": "req-3",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "8plus"
+    },
+    {
+      "id": "2608.09130v1",
+      "source": "arxiv",
+      "title": "MARA: Flow-Matching-Guided Multi-Agent Resource Allocation for Computational Resource Efficient Learning",
+      "abstract": "Allocating limited computation among concurrent learning tasks is difficult when each task must reach a target loss before a deadline but its required training effort is unknown. Existing approaches combine online loss prediction with adaptive resource allocation, yet commonly treat computation as continuously divisible throughput. We instead study a practical setting in which tasks arrive over time and computation is provided by discrete nodes. This setting introduces both uncertain demand and constrained sequential decisions. We propose MARA, which predicts future loss trajectories with conditional flow matching and coordinates compute nodes through a cooperative multi-agent autoregressive policy. A potential-based progress reward supplies intermediate training feedback while preserving the undiscounted task-completion objective. Across in-distribution, reinforcement-learning, and vision workloads, flow matching reduces remaining-resource prediction error relative to weighted least squares. At the scheduler's training load, MARA completes 63.46% of tasks on average, 8.54 percentage points above strong baseline Learning with Adaptive Resource Allocation (LARA), and remains ahead under unseen heavier workloads.",
+      "authors": [
+        "Hanye Zhao",
+        "Muning Wen",
+        "Yong Yu",
+        "Weinan Zhang"
+      ],
+      "primary_category": "cs.LG",
+      "categories": [
+        "cs.LG",
+        "cs.AI"
+      ],
+      "published": "2026-08-10T05:13:56+00:00",
+      "link": "https://arxiv.org/pdf/2608.09130v1",
+      "tags": [
+        "keyword:agents",
+        "query:agents"
+      ],
+      "llm_score": 7.0,
+      "llm_evidence_en": "flow-matching-guided cooperative multi-agent policy for computational resource allocation",
+      "llm_evidence_cn": "基于流匹配引导的合作多智能体策略用于计算资源分配",
+      "llm_evidence": "基于流匹配引导的合作多智能体策略用于计算资源分配",
+      "canonical_evidence": "基于流匹配引导的合作多智能体策略用于计算资源分配",
+      "llm_tldr_en": "Proposes MARA, which predicts future loss trajectories via conditional flow matching and coordinates compute nodes through a cooperative multi-agent autoregressive policy for allocating limited computation among online learning tasks with unknown effort.",
+      "llm_tldr_cn": "在多个学习任务共享有限计算资源且任务需求未知的场景下，现有方法通常把计算视为连续可分割吞吐量，不适用于离散节点。本文提出MARA，用条件流匹配预测未来损失轨迹，并采用合作多智能体自回归策略协调计算节点，配合基于势函数的奖励。实验表明MARA能有效应对不确定需求，提高资源分配效率。",
+      "llm_tldr": "在多个学习任务共享有限计算资源且任务需求未知的场景下，现有方法通常把计算视为连续可分割吞吐量，不适用于离散节点。本文提出MARA，用条件流匹配预测未来损失轨迹，并采用合作多智能体自回归策略协调计算节点，配合基于势函数的奖励。实验表明MARA能有效应对不确定需求，提高资源分配效率。",
+      "llm_tags": [
+        "query:agents"
+      ],
+      "matched_query_tag": "query:agents",
+      "matched_query_text": "multi-agent system coordination",
+      "matched_requirement_id": "req-3",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "7"
+    },
+    {
+      "id": "2608.09848v1",
+      "source": "arxiv",
+      "title": "CEAA: A Cognitive Embodied Agents Architecture for Interactive Computing Systems",
+      "abstract": "The development of embodied Intelligent Virtual Agents (IVAs) that have cognitive capabilities in real-time interactive virtual environments remains a challenge, even with today's advancements in technology. Existing architectures are often focused on either the implementation of low-level reactive control systems that are constrained by commercial game engines, or high-level representations of reasoning models that can be difficult to implement in virtual worlds. This paper builds on that notion and proposes a modular cognitive architecture for deploying embodied IVAs. This architecture builds on existing, pre-established frameworks such as the Sense-Think-Act paradigm and the Belief-Desire-Intention cognitive model, among others, and aims to provide a reusable implementation-oriented framework as a template for deploying IVA \"brains\" in interactive 3D computing systems. The proposed architecture contributes by providing a modular, implementation-oriented framework for the deployment of embodied, cognitive-capable IVAs and bridges the gap between high-level agent reasoning models with real-time embodied execution, for scalable, adaptive, and explainable agents in complex interactive virtual environments.",
+      "authors": [
+        "Aimilios Hadjiliasi",
+        "Louis Nisiotis"
+      ],
+      "primary_category": "cs.AI",
+      "categories": [
+        "cs.AI"
+      ],
+      "published": "2026-08-10T17:07:41+00:00",
+      "link": "https://arxiv.org/pdf/2608.09848v1",
+      "tags": [
+        "keyword:agents",
+        "query:agents"
+      ],
+      "llm_score": 8.0,
+      "llm_evidence_en": "modular cognitive architecture for embodied intelligent virtual agents using Sense-Think-Act and BDI",
+      "llm_evidence_cn": "结合感知-思考-行动范式和BDI认知模型的具身智能虚拟体模块化架构",
+      "llm_evidence": "结合感知-思考-行动范式和BDI认知模型的具身智能虚拟体模块化架构",
+      "canonical_evidence": "结合感知-思考-行动范式和BDI认知模型的具身智能虚拟体模块化架构",
+      "llm_tldr_en": "Proposes CEAA, a modular cognitive architecture for embodied intelligent virtual agents built on Sense-Think-Act and BDI models, addressing the gap between low-level reactive control and high-level reasoning.",
+      "llm_tldr_cn": "在实时交互式虚拟环境中开发具备认知能力的具身智能虚拟体仍是挑战，现有架构要么偏向低层反应式控制，要么偏向难以落地的抽象推理模型。本文提出CEAA，一种模块化认知架构，在Sense-Think-Act范式和信念-期望-意图（BDI）模型等已有框架基础上构建，用于部署具身智能虚拟体。该架构为统一感知、推理与行动提供可实现的模块化方案，推动认知能力与虚拟环境部署的结合。",
+      "llm_tldr": "在实时交互式虚拟环境中开发具备认知能力的具身智能虚拟体仍是挑战，现有架构要么偏向低层反应式控制，要么偏向难以落地的抽象推理模型。本文提出CEAA，一种模块化认知架构，在Sense-Think-Act范式和信念-期望-意图（BDI）模型等已有框架基础上构建，用于部署具身智能虚拟体。该架构为统一感知、推理与行动提供可实现的模块化方案，推动认知能力与虚拟环境部署的结合。",
+      "llm_tags": [
+        "query:agents"
+      ],
+      "matched_query_tag": "query:agents",
+      "matched_query_text": "intelligent agent technology",
+      "matched_requirement_id": "req-1",
+      "selection_source": "carryover_cache",
+      "paper_id": "2608.09848v1",
+      "quick_tier": "8plus"
+    },
+    {
+      "id": "2608.09857v1",
+      "source": "arxiv",
+      "title": "Agentic Harnesses: LLM-Driven Verification Layers for Robot Autonomy",
+      "abstract": "Advances in advanced artificial intelligence tools have sparked research in robot autonomy, but the development of such systems has largely focused on execution rather than verifying the feasibility actions planning models propose. Like general-purpose LLMs, robotics planning models carry risks: biased toward user-specified goals, they may suggest actions misaligned with scientific ethics, they may be unsafe due to an inability to \"remember\" prior safety risks, or they may be vulnerable to adversarial attacks on the autonomy ecosystem. We propose a LLM-driven verification layer between planning and execution to evaluate action permissibility. Our LLM-as-a-Judge ensemble combines chain-of-thought reasoning across models and synthesizes those expert judge outputs, mirroring a combination of a mixture of experts and self-consistency approach. This layer serves as middleware, gating plans from the server's planning module before they reach the MCP server and therefore the robot's low-level controls: plans are approved, rejected for reformulation, or escalated for human review. With this system, we achieve near 85% precision across accept/escalate/reject categories 97% containment of adversarial attacks, with negligible errors between accepting and rejecting tasks, and errors mostly manifesting at the escalate boundary.",
+      "authors": [
+        "Rohan Bhagra",
+        "Mahantesh Halapannavar",
+        "Uddhav Bhattarai"
+      ],
+      "primary_category": "cs.RO",
+      "categories": [
+        "cs.RO",
+        "cs.AI"
+      ],
+      "published": "2026-08-10T17:15:55+00:00",
+      "link": "https://arxiv.org/pdf/2608.09857v1",
+      "tags": [
+        "keyword:agents",
+        "query:agents"
+      ],
+      "llm_score": 8.0,
+      "llm_evidence_en": "LLM-driven verification layer for robot action permissibility",
+      "llm_evidence_cn": "面向机器人动作容许性的LLM验证层",
+      "llm_evidence": "面向机器人动作容许性的LLM验证层",
+      "canonical_evidence": "面向机器人动作容许性的LLM验证层",
+      "llm_tldr_en": "This paper proposes an LLM-driven verification layer between planning and execution for robot autonomy. It uses an LLM-as-a-Judge ensemble with chain-of-thought reasoning to evaluate action permissibility, addressing safety, ethical alignment, and adversarial vulnerabilities in autonomous robot decision-making.",
+      "llm_tldr_cn": "机器人自主系统多关注执行而忽略了验证规划动作的可行性。该论文提出在规划与执行之间加入一个LLM驱动的验证层，使用LLM-as-a-Judge集成方法，结合多个模型的链式推理来综合评估动作的容许性。这一机制能够在动作执行前检查其安全性、伦理一致性和对于对抗攻击的鲁棒性，弥补了现有机器人规划不安全的问题，为自主决策提供了可靠的安全保障。",
+      "llm_tldr": "机器人自主系统多关注执行而忽略了验证规划动作的可行性。该论文提出在规划与执行之间加入一个LLM驱动的验证层，使用LLM-as-a-Judge集成方法，结合多个模型的链式推理来综合评估动作的容许性。这一机制能够在动作执行前检查其安全性、伦理一致性和对于对抗攻击的鲁棒性，弥补了现有机器人规划不安全的问题，为自主决策提供了可靠的安全保障。",
+      "llm_tags": [
+        "query:agents"
+      ],
+      "matched_query_tag": "query:agents",
+      "matched_query_text": "autonomous agent autonomous decision making",
+      "matched_requirement_id": "req-2",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "8plus"
+    },
+    {
+      "id": "2608.10224v1",
+      "source": "arxiv",
+      "title": "Self-evolving Agentic Customer Support System at LinkedIn",
+      "abstract": "Enterprise support agents operate in rapidly changing environments where policies, product capabilities, and knowledge bases evolve continuously, making static assistants brittle and costly to maintain. We present LinkedIn's self-evolving agentic support system, which integrates retrieval-augmented generation with evolutionary auto-prompting and a modular, production-aligned evaluation framework to enable safe, continuous improvement without retraining foundation models. The system treats prompts, retrieval, and evaluation as a closed-loop, versioned workflow with operational guardrails. Offline simulations and ablations show clear quality gains over vanilla RAG and baseline agents, including reduced hallucinations and improved response completeness. In a two-week user-randomized A/B test on LinkedIn's production support traffic, the integrated self-evolved workflow increased QA self-serve by 9.0 percentage points, cancellation self-serve by 4.8 points, and routing accuracy by 30.6 points. These results demonstrate a practical path to scalable, self-evolving AI agents in real-world enterprise settings.",
+      "authors": [
+        "Chih Hui Wang",
+        "Mengdie Tu",
+        "Qianyun Zhang",
+        "Wei Wu",
+        "Lili Zhou",
+        "Mingqi Shen",
+        "Changshuai Wei"
+      ],
+      "primary_category": "cs.AI",
+      "categories": [
+        "cs.AI"
+      ],
+      "published": "2026-08-10T20:51:18+00:00",
+      "link": "https://arxiv.org/pdf/2608.10224v1",
+      "tags": [
+        "keyword:agents",
+        "query:agents"
+      ],
+      "llm_score": 8.0,
+      "llm_evidence_en": "Self-evolving agentic system for task-oriented customer support using RAG and evolutionary auto-prompting",
+      "llm_evidence_cn": "面向任务型客服的自我演化智能体系统，结合检索增强生成与进化自动提示",
+      "llm_evidence": "面向任务型客服的自我演化智能体系统，结合检索增强生成与进化自动提示",
+      "canonical_evidence": "面向任务型客服的自我演化智能体系统，结合检索增强生成与进化自动提示",
+      "llm_tldr_en": "Presents LinkedIn's self-evolving agentic support system integrating RAG, evolutionary auto-prompting, and modular evaluation for safe continuous improvement without retraining, showing reduced hallucinations and improved response completeness.",
+      "llm_tldr_cn": "针对企业支持环境快速变化导致静态助手脆弱且维护成本高的问题，LinkedIn提出自我演化的智能体支持系统，将检索增强生成与进化自动提示相结合，并通过模块化生产级评估框架形成闭环，无需重训基础模型即可安全持续改进。离线模拟与消融实验表明，该系统较传统RAG和基线智能体显著降低幻觉并提升回复完整性。",
+      "llm_tldr": "针对企业支持环境快速变化导致静态助手脆弱且维护成本高的问题，LinkedIn提出自我演化的智能体支持系统，将检索增强生成与进化自动提示相结合，并通过模块化生产级评估框架形成闭环，无需重训基础模型即可安全持续改进。离线模拟与消融实验表明，该系统较传统RAG和基线智能体显著降低幻觉并提升回复完整性。",
+      "llm_tags": [
+        "query:agents"
+      ],
+      "matched_query_tag": "query:agents",
+      "matched_query_text": "task-oriented agent goal completion",
+      "matched_requirement_id": "req-4",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "8plus"
+    }
+  ]
+}

@@ -1,0 +1,281 @@
+{
+  "date": "20260816",
+  "date_label": "",
+  "generated_at": "2026-08-16 19:57:57 UTC",
+  "recommend_exists": true,
+  "run_count": 1,
+  "papers": [
+    {
+      "paper_id": "2608.09333v1",
+      "route": "202608/16/2608.09333v1-dh-vlm-dual-horizon-cooperative-latent-reasoning-for-autonomous-driving",
+      "title": "DH-VLM: Dual-Horizon Cooperative Latent Reasoning for Autonomous Driving",
+      "section": "deep",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "agents"
+        }
+      ],
+      "score": 9.0,
+      "evidence": "基础设施与自车间的协同驾驶即多智能体协调",
+      "first_seen_at": "2026-08-16 19:57:57 UTC",
+      "updated_at": "2026-08-16 19:57:57 UTC"
+    },
+    {
+      "paper_id": "2608.11596v1",
+      "route": "202608/16/2608.11596v1-small-language-model-enabled-autonomous-agent-for-language-conditioned-cognitive-radar",
+      "title": "Small Language Model enabled Autonomous agent for Language-Conditioned Cognitive Radar",
+      "section": "deep",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "agents"
+        }
+      ],
+      "score": 9.0,
+      "evidence": "面向认知雷达的小语言模型自主智能体",
+      "first_seen_at": "2026-08-16 19:57:57 UTC",
+      "updated_at": "2026-08-16 19:57:57 UTC"
+    },
+    {
+      "paper_id": "2608.11895v1",
+      "route": "202608/16/2608.11895v1-scalable-multi-agent-maze-traversal-with-local-communication",
+      "title": "Scalable Multi-Agent Maze Traversal with Local Communication",
+      "section": "deep",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "agents"
+        }
+      ],
+      "score": 9.0,
+      "evidence": "基于局部通信与领导者跟随的多智能体迷宫遍历分布式算法",
+      "first_seen_at": "2026-08-16 19:57:57 UTC",
+      "updated_at": "2026-08-16 19:57:57 UTC"
+    },
+    {
+      "paper_id": "2608.11949v1",
+      "route": "202608/16/2608.11949v1-exrole-from-team-trajectories-to-executable-roles-in-multi-agent-language-models",
+      "title": "ExRole: From Team Trajectories to Executable Roles in Multi-Agent Language Models",
+      "section": "deep",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "agents"
+        }
+      ],
+      "score": 9.0,
+      "evidence": "学习可执行角色以协调多智能体",
+      "first_seen_at": "2026-08-16 19:57:57 UTC",
+      "updated_at": "2026-08-16 19:57:57 UTC"
+    },
+    {
+      "paper_id": "2608.06587v1",
+      "route": "202608/16/2608.06587v1-syncsbc-decentralized-swarm-behavior-prediction-for-synchronized-autonomous-control",
+      "title": "SyncSBC: Decentralized Swarm Behavior Prediction for Synchronized Autonomous Control",
+      "section": "deep",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "agents"
+        }
+      ],
+      "score": 8.0,
+      "evidence": "SyncSBC实现分布式群体行为分类与同步决策，支撑多智能体协同",
+      "first_seen_at": "2026-08-16 19:57:57 UTC",
+      "updated_at": "2026-08-16 19:57:57 UTC"
+    },
+    {
+      "paper_id": "2608.06871v1",
+      "route": "202608/16/2608.06871v1-cedar-agent-orchestrated-tree-search-for-goal-directed-optimization-of-complex-systems",
+      "title": "CEDAR: Agent-Orchestrated Tree Search for Goal-Directed Optimization of Complex Systems",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "agents"
+        }
+      ],
+      "score": 8.0,
+      "evidence": "CEDAR利用智能体编排的树搜索实现复杂系统目标导向优化",
+      "first_seen_at": "2026-08-16 19:57:57 UTC",
+      "updated_at": "2026-08-16 19:57:57 UTC"
+    },
+    {
+      "paper_id": "2608.08037v1",
+      "route": "202608/16/2608.08037v1-skillsmith-enhancing-locally-deployed-agents-via-automatic-skill-construction-and-evolution",
+      "title": "SkillSmith: Enhancing Locally Deployed Agents via Automatic Skill Construction and Evolution",
+      "section": "deep",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "agents"
+        }
+      ],
+      "score": 8.0,
+      "evidence": "通过自动技能构建与演化提升本地部署的LLM智能体在多步任务中的表现",
+      "first_seen_at": "2026-08-16 19:57:57 UTC",
+      "updated_at": "2026-08-16 19:57:57 UTC"
+    },
+    {
+      "paper_id": "2608.08175v1",
+      "route": "202608/16/2608.08175v1-aoc-cbs-anytime-optimal-continuous-time-conflict-based-search-for-generalised-multi-agent-path-finding",
+      "title": "AOC-CBS: Anytime-Optimal Continuous-time Conflict-Based Search for Generalised Multi-Agent Path Finding",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "agents"
+        }
+      ],
+      "score": 8.0,
+      "evidence": "推广多智能体路径规划，提出任意时刻最优的连续时间冲突搜索",
+      "first_seen_at": "2026-08-16 19:57:57 UTC",
+      "updated_at": "2026-08-16 19:57:57 UTC"
+    },
+    {
+      "paper_id": "2608.08545v1",
+      "route": "202608/16/2608.08545v1-curriculum-generation-under-structured-parametric-environments-for-robust-navigation-policies",
+      "title": "Curriculum Generation under Structured Parametric Environments for Robust Navigation Policies",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "agents"
+        }
+      ],
+      "score": 8.0,
+      "evidence": "面向自主智能体鲁棒导航策略的课程生成",
+      "first_seen_at": "2026-08-16 19:57:57 UTC",
+      "updated_at": "2026-08-16 19:57:57 UTC"
+    },
+    {
+      "paper_id": "2608.09029v1",
+      "route": "202608/16/2608.09029v1-physically-constrained-agentic-ai-for-energy-scheduling",
+      "title": "Physically Constrained Agentic AI for Energy Scheduling",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "agents"
+        }
+      ],
+      "score": 8.0,
+      "evidence": "采用编排器与专家智能体的分层智能体AI，处理受限能源调度",
+      "first_seen_at": "2026-08-16 19:57:57 UTC",
+      "updated_at": "2026-08-16 19:57:57 UTC"
+    },
+    {
+      "paper_id": "2608.09848v1",
+      "route": "202608/16/2608.09848v1-ceaa-a-cognitive-embodied-agents-architecture-for-interactive-computing-systems",
+      "title": "CEAA: A Cognitive Embodied Agents Architecture for Interactive Computing Systems",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "agents"
+        }
+      ],
+      "score": 8.0,
+      "evidence": "结合感知-思考-行动范式和BDI认知模型的具身智能虚拟体模块化架构",
+      "first_seen_at": "2026-08-16 19:57:57 UTC",
+      "updated_at": "2026-08-16 19:57:57 UTC"
+    },
+    {
+      "paper_id": "2608.09857v1",
+      "route": "202608/16/2608.09857v1-agentic-harnesses-llm-driven-verification-layers-for-robot-autonomy",
+      "title": "Agentic Harnesses: LLM-Driven Verification Layers for Robot Autonomy",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "agents"
+        }
+      ],
+      "score": 8.0,
+      "evidence": "面向机器人动作容许性的LLM验证层",
+      "first_seen_at": "2026-08-16 19:57:57 UTC",
+      "updated_at": "2026-08-16 19:57:57 UTC"
+    },
+    {
+      "paper_id": "2608.10224v1",
+      "route": "202608/16/2608.10224v1-self-evolving-agentic-customer-support-system-at-linkedin",
+      "title": "Self-evolving Agentic Customer Support System at LinkedIn",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "agents"
+        }
+      ],
+      "score": 8.0,
+      "evidence": "面向任务型客服的自我演化智能体系统，结合检索增强生成与进化自动提示",
+      "first_seen_at": "2026-08-16 19:57:57 UTC",
+      "updated_at": "2026-08-16 19:57:57 UTC"
+    },
+    {
+      "paper_id": "2608.07734v1",
+      "route": "202608/16/2608.07734v1-complete-scalable-and-robust-prioritized-planning-for-multi-robot-ordered-storage-and-retrieval-at-maximum-capacity",
+      "title": "Complete, Scalable, and Robust Prioritized Planning for Multi-Robot Ordered Storage and Retrieval at Maximum Capacity",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "agents"
+        }
+      ],
+      "score": 7.0,
+      "evidence": "面向高密度仓储的多机器人协调规划，避免死锁",
+      "first_seen_at": "2026-08-16 19:57:57 UTC",
+      "updated_at": "2026-08-16 19:57:57 UTC"
+    },
+    {
+      "paper_id": "2608.09044v1",
+      "route": "202608/16/2608.09044v1-tree-of-experience-hierarchical-experience-management-for-self-evolving-agents",
+      "title": "Tree-of-Experience: Hierarchical Experience Management for Self-Evolving Agents",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "agents"
+        }
+      ],
+      "score": 7.0,
+      "evidence": "面向自进化智能体的分层经验管理",
+      "first_seen_at": "2026-08-16 19:57:57 UTC",
+      "updated_at": "2026-08-16 19:57:57 UTC"
+    },
+    {
+      "paper_id": "2608.09096v2",
+      "route": "202608/16/2608.09096v2-evo-bench-can-language-models-improve-agent-harness",
+      "title": "Evo-Bench: Can Language Models Improve Agent Harness?",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "agents"
+        }
+      ],
+      "score": 7.0,
+      "evidence": "评估智能体运行框架演化的基准",
+      "first_seen_at": "2026-08-16 19:57:57 UTC",
+      "updated_at": "2026-08-16 19:57:57 UTC"
+    },
+    {
+      "paper_id": "2608.09130v1",
+      "route": "202608/16/2608.09130v1-mara-flow-matching-guided-multi-agent-resource-allocation-for-computational-resource-efficient-learning",
+      "title": "MARA: Flow-Matching-Guided Multi-Agent Resource Allocation for Computational Resource Efficient Learning",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "agents"
+        }
+      ],
+      "score": 7.0,
+      "evidence": "基于流匹配引导的合作多智能体策略用于计算资源分配",
+      "first_seen_at": "2026-08-16 19:57:57 UTC",
+      "updated_at": "2026-08-16 19:57:57 UTC"
+    }
+  ]
+}
