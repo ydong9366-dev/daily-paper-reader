@@ -1,0 +1,556 @@
+Title: PSPACE-Completeness of Multi-Agent Path Finding for Large Agents
+
+URL Source: https://arxiv.org/pdf/2608.12955v1
+
+Published Time: Fri, 14 Aug 2026 00:41:43 GMT
+
+Number of Pages: 13
+
+Markdown Content:
+# PSPACE-Completeness of Multi-Agent Path Finding for Large Agents 
+
+Maichi Zhang ∗ Naoyuki Kamiyama † Kanae Yoshiwatari ‡
+
+Abstract 
+
+Multi-Agent Path Finding for Large Agents (LA-MAPF) is a geometric variant of MAPF in which agents are modeled as disks and conflicts are determined by physical overlap in the underlying Euclidean workspace. The goal of LA-MAPF is to decide whether there exists a sequence of conflict-free transitions from a start configuration to a goal configuration. Agafonov and Yakovlev proved that LA-MAPF is NP-hard. In this paper, we strengthen their result by proving that LA-MAPF is PSPACE-complete via a polynomial-time reduction from Restricted Sliding Tokens .
+
+# 1 Introduction 
+
+Multi-Agent Path Finding (MAPF) asks whether a collection of agents can be routed on a graph from prescribed start vertices to prescribed goal vertices without conflicts. In the classical formulation, agents are treated as dimensionless points, and conflicts are combinatorial. While this abstraction has fostered a rich algorithmic literature, it bypasses a fundamental geometric difficulty inherent in robotic applications: real-world agents have a physical volume. LA-MAPF (MAPF for Large Agents) [7] incorporates this physical reality by embedding the graph in the Euclidean plane and modeling every agent as a disk of radius r > 0. When an agent traverses an edge, its disk sweeps a continuous tube around the straight-line segment representing the edge. Consequently, an agent may collide not only with another agent arriving at the same vertex, but also with a stationary agent located at a different vertex that lies too close to the moving agent’s swept trajectory. This additional continuous-space conflict is a primary source of hardness in LA-MAPF. While the continuous-space conflicts of LA-MAPF introduce significant geometric challenges, the computational complexity of the classical MAPF, where agents are treated as body-less points, has been extensively studied and depends heavily on the graph’s topology and the specific task. The classical MAPF can be solved in polynomial time on undirected graphs [6]. However, the classical MAPF becomes NP-complete on general directed graphs [8], though it can be solved in polynomial time for strongly connected directed graphs [9]. The optimization variant of the classical MAPF, which seeks to minimize the makespan, is fundamentally intractable [11]. Finding optimal solutions like the sum of costs or makespan is NP-hard for undirected planar graphs [13] and directed acyclic graphs [12], and standard 2D grid graphs [2]. Recently, Agafonov and Yakovlev [1] investigated the computational complexity of LA-MAPF under the standard transition rule where exactly one agent moves along an edge at a time while all others remain stationary and proved that LA-MAPF is NP-hard by a reduction from 3-SAT. Their work established the fundamental intractability of the problem, but left its tight complexity class open. This is because it is not difficult to prove that this problem is in PSPACE (see Section 3).     
+
+> ∗Graduate School of Informatics, Kyoto University. zhangmaichi@amp.i.kyoto-u.ac.jp
+> †Graduate School of Informatics, Kyoto University. kamiyama@amp.i.kyoto-u.ac.jp .This work was sup-ported by JSPS KAKENHI Grant Number JP24K14825.
+> ‡Graduate School of Informatics, Kyoto University. yoshiwatari.kanae.7p@kyoto-u.ac.jp
+
+1arXiv:2608.12955v1 [cs.CC] 13 Aug 2026 Our Contribution. In this paper, we settle the tight computational complexity of LA-MAPF. 
+
+Theorem 1 (Main Theorem) . LA-MAPF is PSPACE-complete .
+
+Our proof demonstrates that the problem remains PSPACE-complete even under strict geo-metric constraints. This strict geometric setting motivates the specific orthogonal gadget designs utilized in our reduction. 
+
+Corollary 2. LA-MAPF is PSPACE-complete even when the underlying graph is a plane graph, and all agents’ movements are restricted to horizontal and vertical directions. 
+
+The proof consists of two parts. First, we establish membership in PSPACE by demonstrating that reachability within its exponentially large state space can be decided using only polynomial memory via Savitch’s Theorem [10]. Second, we prove the PSPACE-hardness of LA-MAPF by a polynomial-time reduction from a restricted version of Sliding Tokens [4, 5]. The outline of our proof is as follows: the independent set constraints of the graph can be flawlessly simulated by sparse one-hole wires rather than by fully packed corridors. Specifically, in our reduction, we contract only the token triangles into macro-vertices and utilize the orthogonal graph drawing algorithm [3] to lay out the macro-graph without edge crossovers. Token triangles become local constant-size gadgets, while token edges and link edges are transformed into orthogonal grid wires. By placing at most three agents on an orthogonal grid wire which represents a token edge or link edge and consists of two endpoints and at most two corner vertices, we physically simulate the independent set constraint of Sliding Tokens using a single “hole”. 
+
+# 2 Preliminaries 
+
+All graphs in this paper are finite and undirected. If a graph G = ( V, E ) is embedded in the Euclidean plane, then we write p(v) ∈ Q2 for the rational coordinates of the point representing 
+
+v ∈ V , where Q is the set of rational numbers. Distances are Euclidean, and let ∥x∥ denote the distance between the origin and x for each point x ∈ Q2. For two points x, y ∈ Q2, xy denotes the closed line segment joining them, and ∥x − y∥ represents the distance between them. To strictly avoid irrational number computations in our proofs, all input coordinates and radii are given as rational numbers, and all distance comparisons are performed using squared rational distances. 
+
+2.1 LA-MAPF 
+
+In this subsection, we formally define LA-MAPF and its associated terminology. 
+
+Definition 1 (LA-MAPF Instance) . An instance of LA-MAPF is a tuple I = ( G, p, A, r, C s, C g),where G = ( V, E ) is a graph, and p : V → Q2 is an embedding of its vertices in the plane. Here, each edge e = {u, v } ∈ E corresponds to the straight closed line segment connecting the points 
+
+p(u) and p(v). Furthermore, A = {a1, a 2, . . . , a k} is a set of agents, r > 0 is their common disk radius, and Cs, C g : A → V are the start and goal configurations. In general, a configuration is an injective mapping C : A → V assigning each agent to a vertex. 
+
+In LA-MAPF, a conflict between agents can occur either at the vertices or along the edges during continuous motion. A configuration is vertex-feasible (i.e., devoid of vertex conflicts) if the physical disks of every two distinct agents ai, a j ∈ A do not overlap: 
+
+∥p(C(ai)) − p(C(aj )) ∥2 ≥ 4r2.
+
+We assume that the start configuration Cs and the goal configuration Cg are vertex-feasible. For a vertex-feasible configuration C and another configuration C′, we write C ⇝ C′ if C′
+
+is vertex-feasible and there exists some agent ai ∈ A satisfying the following conditions: 2• Assume that u = C(ai) and v = C′(ai). Then u̸ = v and {u, v } ∈ E.• C(aj ) = C′(aj ) for every agent aj ∈ A \ { ai}.• For every agent aj ∈ A \ { ai}, we have 
+
+dist( p(C(aj )) , p (u)p(v)) 2 ≥ 4r2,
+
+where, for a point x ∈ Q2 and a closed line segment yz such that y, z ∈ Q2, dist( x, yz ) is defined as the minimum Euclidean distance between x and a point on the segment, i.e., 
+
+dist( x, yz ) = min λ∈[0 ,1] ∥x − ((1 − λ)y + λz )∥.In other words, C ⇝ C′ means that the transition from the vertex-feasible configuration C to the configuration C′ is collision-free , i.e., devoid of vertex and edge conflicts. Under the condition that only one agent ai moves from u = C(ai) to v = C′(ai) along the edge {u, v } ∈ E, while all other agents remain stationary at their current vertices. Furthermore, for every stationary agent 
+
+aj at the vertex C(aj ) = C′(aj ), its distance to the moving agent’s swept segment is geometrically safe. A conflict-free plan from a vertex-feasible configuration C to another configuration C′ is a finite sequence of configurations C1, C 2, . . . , C ℓ such that C1 = C, Cℓ = C′, Ci ⇝ Ci+1 for every integer i ∈ { 1, 2, . . . , ℓ − 1}.We are now ready to define our problem. 
+
+Definition 2 (LA-MAPF) . Given an instance I = ( G, p, A, r, C s, C g) of LA-MAPF , the goal is to determine whether there exists a conflict-free plan from Cs to Cg.
+
+2.2 Sliding Tokens 
+
+In this subsection, we define Restricted Sliding Tokens , which serves as the source problem for our PSPACE-completeness reduction. In Sliding Tokens , we are given a graph GST . A token configuration of GST is defined as an independent set in GST (i.e., a subset of vertices of GST such that there does not exist an edge of GST connecting any pair of vertices in this subset). A token configuration represents the places where tokens reside. Given a start token configuration Ts and a goal token configuration 
+
+Tg, the problem asks whether Ts can be transformed into Tg by a sequence of valid token moves. A valid token move slides a single token along an edge of GST to an adjacent vertex, provided that the resulting set of occupied vertices remains an independent set, i.e., a token configuration. An instance of Sliding Tokens is denoted as (GST , T s, T g).We reduce from the following restricted version of Sliding Tokens , which is called Re-stricted Sliding Tokens (Figure 1). It is known that Restricted Sliding Tokens is PSPACE-complete [4, 5]. 
+
+Definition 3 (Restricted Sliding Tokens Instance) . An instance of Restricted Sliding Tokens is an instance (GST , T s, T g) of Sliding Tokens satisfying the following properties: 1. The graph GST has maximum degree at most three, and its vertex set is partitioned into pairwise disjoint token triangles , which are isomorphic to K3 and token edges , which are isomorphic to K2. The degree of every vertex in a token triangle is exactly three. 2. The edges of GST not contained in any token triangle or token edge are called link edges .A link edge joins a vertex of one token triangle or token edge to a vertex of another token triangle or token edge. 3. The graph GST has a planar embedding where every token triangle bounds a face. 4. The start and goal token configurations Ts, T g are standard : each token triangle and each token edge contains exactly one token. 
+
+3Token Token Triangle Token Token Edge Token Token Edge  
+
+> Link Edge Link Edge Link Edge Link Edge
+
+Figure 1: An example of an instance (GST , T s, T g) of Restricted Sliding Tokens . The graph is partitioned into token triangles (solid lines) and token edges (double lines), interconnected by link edges (dashed lines). In a standard token configuration, exactly one token (blue dot) resides in each token triangle and each token edge. A fundamental property of these restricted instances is that every reachable token configu-ration remains standard. A token can never traverse a link edge; the first token to enter another token triangle or token edge would immediately violate the independent set constraint by be-coming adjacent to the token already residing there. Therefore, the sole topological function of a link edge is to impose a binary exclusion constraint: its two endpoint vertices cannot be occupied simultaneously. 
+
+Definition 4 (Restricted Sliding Tokens) . Given an instance (GST , T s, T g) of Restricted Sliding Tokens , the goal is to determine whether there exists a sequence of valid token moves that transforms the start token configuration Ts into the goal token configuration Tg.
+
+# 3 Membership in PSPACE 
+
+Lemma 3. LA -MAPF belongs to PSPACE .Proof. By Savitch’s Theorem (NPSPACE = PSPACE) [10], it suffices to show that LA-MAPF can be solved by a non-deterministic algorithm using polynomial space. Let n be the binary encoding length of the input instance I = ( G, p, A, r, C s, C g). Note that the number of vertices |V | and the number of agents k are both bounded by n. At any time step, a configuration C assigns k agents to k vertices. Representing this assignment requires 
+
+k⌈log 2 |V |⌉ = O(n log n) bits. The total number of distinct configurations is bounded by |V |k.We construct a non-deterministic algorithm that maintains only the current configuration 
+
+Ccurr , guesses a valid next configuration Cnext , and maintains a step counter S to prevent infinite loops. If S > |V |k, the system has exceeded the maximum number of possible configurations and must be trapped in a loop, so the algorithm rejects. The binary counter S requires at most 
+
+log 2(|V |k) + 1 = k log 2 |V | + 1 = O(n log n) bits of storage. In each step, the algorithm non-deterministically guesses Cnext and deterministically verifies that the transition is collision-free. At any given point, the algorithm stores at most two configurations, the step counter, and the polynomial-size memory required for the geometric verification. Since the maximum memory space is bounded by a polynomial in n, LA-MAPF is in NPSPACE. By Savitch’s Theorem, LA-MAPF belongs to PSPACE. 44 PSPACE-Hardness 
+
+In this section, we prove that LA-MAPF is PSPACE-hard by a reduction from Restricted Sliding Tokens . Let (GST , T s, T g) be a given instance of Restricted Sliding Tokens . We then construct, in polynomial time, an instance ILA of LA-MAPF from the instance (GST , T s, T g)
+
+of Restricted Sliding Tokens such that 
+
+(GST , T s, T g) is a yes-instance if and only if ILA is a yes-instance .
+
+4.1 Macro graph and orthogonal grid embedding 
+
+To map the instance (GST , T s, T g) of Restricted Sliding Tokens on the physical workspace of LA-MAPF, we first construct a macro-graph H = ( VH , E H ) from GST . The crucial step in our reduction is that we contract only the token triangles into macro-vertices, while preserving the token edges as topological edges. Before detailing the ingredients of H, we define a port and a component in GST . Let V (GST )
+
+denote the vertex set of GST . Because the vertices of GST are partitioned into token triangles and token edges, we collectively refer to each individual token triangle and token edge as a component 
+
+of GST . Consequently, every vertex v ∈ V (GST ) belongs to exactly one such component. We formally refer to each original vertex v ∈ V (GST ) as a port of its respective component. Formally, the ingredients of H are defined as follows: • Vertices ( VH ): For each token triangle in GST , VH contains exactly one representing vertex, called a macro-vertex . For every token edge in GST , its two ports are directly included in VH as distinct vertices, which we define as port vertices of this token edge. • The edge set ( EH ): The edge set EH consists of all the original token edges (connecting their two port vertices) and all the link edges (connecting either macro-vertices or port vertices, exactly as in GST ). This contraction preserves planarity and bounds the maximum degree. A macro-vertex representing a token triangle connects to exactly three link edges, fixing its degree at exactly three. Meanwhile, a port vertex of a token edge connects to exactly one token edge and either one or two link edges, ensuring its degree is between two or three. Thus, H is a planar graph of maximum degree at most three. Using the algorithm for orthogonal graph drawing [3], H admits a planar orthogonal embed-ding on a |VH | × | VH | grid. Furthermore, we can compute such an embedding in linear time. In this embedding, every vertex in VH is placed at an integer grid point, and every edge in EH is routed as a sequence of orthogonal (horizontal and vertical) straight-line segments. We refer to these orthogonally routed edges as wires . The algorithm guarantees that each wire has at most two bends. We uniformly scale this grid by a large factor: Λ = 100 r. This scaling guarantees that all non-incident gadgets and orthogonal wire segments are separated by distances vastly exceeding 2r, preventing unintended edge conflicts. Once the macro-graph is orthogonally embedded and scaled, we geometrically truncate (or “crop”) the extreme ends of every orthogonally routed link edge wire. This structural cropping is performed after the embedding to create the necessary physical space to interface these link edge wires with our constant-size local gadgets (token triangle gadgets and token edge gadgets) without causing structural intersections (this cropped interface is visually demonstrated for individual gadgets in Figures 2 and 3, and for a complete link edge wire in Figure 4). 
+
+4.2 Token triangle gadgets 
+
+For each token triangle X of GST , we assume that the corresponding macro-vertex in H is embedded at (xX , y X ) ∈ Q2. We assign exactly one v-agent to this gadget. 5By our earlier definition, the token triangle X consists of exactly three ports. Let us index these three ports as 1, 2, and 3. To enforce orthogonal continuous motion, we define the placement of four port vertices pX, 1, p X, 2, p X, 3, p X,t symmetrically around the grid axes. They form a rectangle graph as follows (as illustrated in Figure 2): 
+
+pX, 1 = ( xX − 0.5r, y X ), pX, 2 = ( xX − 0.5r, y X + r),pX, 3 = ( xX + 0 .5r, y X ), pX,t = ( xX + 0 .5r, y X + r).
+
+y = yX
+
+x = xX
+
+> Anchor
+
+Link Edge ℓ1
+
+Link Edge ℓ2
+
+Link Edge ℓ3
+
+Overlap (d2 = 2 .5r2 < 4r2)
+
+r
+
+v-agent 
+
+pX, 1
+
+pX, 2
+
+pX, 3
+
+pX,t 
+
+BX
+
+> 1,ℓ 1
+
+BX
+
+> 2,ℓ 2
+
+BX
+
+> 3,ℓ 3
+
+Figure 2: A token triangle gadget restructured into an orthogonal rectangle. The gadget is aligned with the intersecting macro-graph grid lines. The addition of pX,t forms a rectangle graph, avoiding diagonal continuous motions. In the depicted configuration, the vertices BX
+
+> 2,ℓ 2
+
+and BX 
+
+> 3,ℓ 3
+
+are occupied by other agents. Due to geometric conflicts, the v-agent is physically restricted to pX, 1 and cannot move to the vertices pX, 2, p X,t , or pX, 3.We map the port 1 to pX, 1, the port 3 to pX, 3, and the port 2 to {pX, 2, p X,t }. Assume that the token triangle X is incident to three link edges ℓ1, ℓ 2, and ℓ3 in GST . For these incident link edges routed orthogonally by the grid embedding, we introduce three external blocking vertices ,denoted as BX 
+
+> 1,ℓ 1
+
+, B X 
+
+> 2,ℓ 2
+
+, and BX 
+
+> 3,ℓ 3
+
+. Here, BXi,ℓ k represents the blocking vertex corresponding to the port i of X and the incident link edge ℓk. We place these blocking vertices as follows: 
+
+BX 
+
+> 1,ℓ 1
+
+= ( xX − 2.25 r, y X ), BX 
+
+> 2,ℓ 2
+
+= ( xX , y X + 2 .5r), BX 
+
+> 3,ℓ 3
+
+= ( xX + 2 .25 r, y X ).
+
+This geometric arrangement can be rotated around the anchor (xX , y X ) by multiples of 90 ◦ to accommodate any arbitrary combination of up to three orthogonal routing directions chosen by the macro-graph embedding. The squared distance checks yield: 
+
+∥BX 
+
+> 1,ℓ 1
+
+− pX, 1∥2 = ( −1.75 r)2 = 3 .0625 r2 < 4r2,
+
+∥BX 
+
+> 2,ℓ 2
+
+− pX, 2∥2 = ∥BX 
+
+> 2,ℓ 2
+
+− pX,t ∥2 = ( ±0.5r)2 + (1 .5r)2 = 2 .5r2 < 4r2,
+
+∥BX 
+
+> 3,ℓ 3
+
+− pX, 3∥2 = (1 .75 r)2 = 3 .0625 r2 < 4r2.
+
+Crucially, non-target interactions are rigorously safe. For instance, the squared distance from 
+
+BX 
+
+> 1,ℓ 1
+
+to pX, 2 is (−1.75 r)2 + ( r)2 = 4 .0625 r2 > 4r2, guaranteeing sufficient geometric separation. Consequently, when the v-agent occupies pX, 1, its physical disk would overlap with that of any agent at BX 
+
+> 1,ℓ 1
+
+, preventing BX 
+
+> 1,ℓ 1
+
+from being occupied. Meanwhile, it imposes no geometric 6restrictions on BX 
+
+> 2,ℓ 2
+
+and BX 
+
+> 3,ℓ 3
+
+, leaving them fully accessible. For the port 2, a geometric conflict exists between BX 
+
+> 2,ℓ 2
+
+and the vertices pX, 2 and pX,t . This mutual exclusion ensures that the 
+
+v-agent cannot move to pX, 2 or pX,t if another agent is already stationed at BX 
+
+> 2,ℓ 2
+
+; conversely, once the v-agent occupies either of pX, 2 or pX,t , no other agent can occupy BX 
+
+> 2,ℓ 2
+
+.
+
+4.3 Token edge gadgets 
+
+A token edge Y of GST connecting the ports 1 and 2 is physically routed along its assigned orthogonal wire in the macro-grid H.Let pY, 1 and pY, 2 be the port vertices in VH corresponding to the two ports 1 and 2 of the token edge Y . Since the orthogonal embedding algorithm [3] guarantees that each routed edge has at most two bends, the orthogonal wire contains at most two grid corners, meaning the number of vertices is bounded by a small constant (at most four vertices: the two port vertices and at most two orthogonal bends). To simulate a token move on Y , we assign a fixed number of v-agents to the token edge wire, exactly one fewer than the total number of vertices (hence, at most three v-agents). These agents reside exclusively on the vertices. Because there is exactly one more vertex than the number of agents, there remains exactly one unoccupied vertex at any time, which serves as the 
+
+hole . Due to the physical footprint of the agents, they cannot bypass one another within the narrow geometric corridors. Therefore, simulating a macro-level token slide does not involve a single v-agent traveling the entire wire. Instead, it is executed as a sequence of a few transitions (at most three steps): an adjacent v-agent continuously slides along the straight-line segment into the hole, leaving its previous vertex as the new hole. For instance, consider a wire with four vertices sequentially ordered as pY, 1, pY, 1, pY, 2, and pY, 2 (as depicted in Figure 3). Suppose the token moves from the port 1 to the port 2 on Y . To represent this locally, the v-agents sequentially transition one by one to propagate the hole toward pY, 1. Specifically, the hole is initially at pY, 2, and the agent at pY, 2 slides to pY, 2, followed by the agent at pY, 1 sliding to pY, 2,and finally the agent at pY, 1 sliding to pY, 1. These transitions cascades the hole all the way to 
+
+pY, 1, rigorously forcing the contiguous chain of v-agents to occupy all other vertices on the wire, definitively stationing a v-agent at pY, 2. This configuration logically represents that the port 2
+
+is occupied by the token in GST .At pY, 1, exactly one orthogonal direction is consumed by the token edge wire. The remaining up to three available orthogonal directions are utilized for the incident link edge wires routed by the orthogonal embedding. For the wire corresponding to each link edge ℓm approaching from a specific orthogonal direction, we place a blocking vertex BY 
+
+> 1,ℓ m
+
+exactly on that directional axis at distance 1.5r from pY, 1:
+
+∥pY, 1 − BY 
+
+> 1,ℓ m
+
+∥2 = (1 .5r)2 = 2 .25 r2 < 4r2.
+
+Notice that there is no edge between pY, 1 and BY 
+
+> 1,ℓ m
+
+. The constraint is geometric: if a v-agent is at pY, 1, its physical disk overlaps BY 
+
+> 1,ℓ m
+
+, ensuring it remains geometrically blocked. Conversely, if the hole is at pY, 1, no v-agent is present there. Let ℓn be a link edge incident to the port 1, and BY 
+
+> 1,ℓ n
+
+denote its corresponding blocking vertex. Because pY, 1 is unoccupied, BY 
+
+> 1,ℓ n
+
+is geometrically safe to be occupied by agents. 
+
+4.4 Link edge wires and constraint transmission 
+
+Consider a link edge ℓk of GST joining the port i of one component X to the port j of another component Y . Recall that BXi,ℓ k and BYj,ℓ k are the blocking vertices corresponding to the port vertex pX,i and the port vertex pY,j , respectively. In the scaled orthogonal macro-embedding, the route for ℓk is initially an orthogonal wire connecting the two respective grid points. To ac-commodate the physical footprint of the endpoint gadgets, this continuous wire is geometrically cropped at both ends. 7Link Edge ℓ1
+
+Link Edge ℓ2
+
+Link Edge ℓ3
+
+Link Edge ℓ4
+
+> Overlap
+
+pY, 1
+
+(v-agent) pY, 1
+
+(v-agent) 
+
+pY, 2
+
+(v-agent) 
+
+pY, 2
+
+(Hole) 
+
+BY
+
+> 1,ℓ 1
+
+BY
+
+> 1,ℓ 2
+
+BY
+
+> 2,ℓ 3
+
+BY
+
+> 2,ℓ 4
+
+Figure 3: The wire contains at most four vertices, it requires at most three v-agents. Here, the hole is pushed to pY, 1, forcing a v-agent (blue disk) to reside at pY, 2. This geometric presence overlaps and blocks BY 
+
+> 2,ℓ 3
+
+and BY 
+
+> 2,ℓ 4
+
+. Conversely, the absence of an agent at pY, 1 allows BY 
+
+> 1,ℓ 1
+
+and 
+
+BY 
+
+> 1,ℓ 2
+
+to safely host agents. Utilizing the property that the orthogonal algorithm produces at most two bends per edge, the cropped orthogonal route for ℓk contains at most two intermediate grid corners. We define 
+
+Wℓk as the wire of vertices along this remaining route, starting at BXi,ℓ k , passing through the intermediate corners, and ending at BYj,ℓ k . Because there are at most two corners, Wℓk contains at most four vertices. We assign blocker-agents (b-agents) to Wℓk , providing exactly one fewer 
+
+b-agent than the total number of vertices on the wire (hence, at most three b-agents). Thus, 
+
+Wℓk always maintains exactly one hole at all times. The mechanism of constraint transmission along this wire is illustrated in Figure 4. The following geometric invariant forms the core of our reduction. 
+
+Lemma 4 (Constraint Transmission Invariant) . Let ℓk be a link edge in GST connecting the port 
+
+i of a component X and the port j of a component Y. In every configuration reachable from the start configuration via a conflict-free plan: (1) The wire Wℓk contains exactly one hole. (2) If a v-agent occupies the port vertex pX,i , then BXi,ℓ k must be the hole of Wℓk , which forces 
+
+BYj,ℓ k to be occupied by a b-agent. (3) If a v-agent occupies the port vertex pX,i , then the port vertex pY,j cannot be simultaneously occupied by another v-agent, preserving the independent set constraint enforced by ℓk.Proof. (1) Since Wℓk is an isolated wire component in the embedded graph and agents cannot jump across non-incident wires, the total number of b-agents on Wℓk remains conserved. Because there is exactly one fewer agent than vertices, Wℓk always contains exactly one hole. 
+
+(2) If a v-agent occupies the port vertex pX,i , its physical disk overlaps BXi,ℓ k . This overlap dictates that no b-agent can reside at BXi,ℓ k , locking BXi,ℓ k as the hole. By the result of (1), the wire Wℓk contains exactly one hole. Since this unique hole is located at BXi,ℓ k , all other vertices on 
+
+Wℓk must be occupied by b-agents. Consequently, the opposite endpoint vertex BYj,ℓ k is occupied by a b-agent. 8(3) Suppose a v-agent occupies the port vertex pX,i . By the result of (2), the blocking vertex 
+
+BYj,ℓ k must be occupied by a b-agent. If another v-agent attempts to move into the port vertex 
+
+pY,j , its physical disk would geometrically conflict with the b-agent already stationed at BYj,ℓ k .Thus, simultaneous occupation of the connected ports is impossible.        
+
+> d2<4r2
+> Port Vertex pX,i
+> (v-agent) BXi,ℓ k
+> (Hole)
+> MXi,ℓ k
+> (b-agent)
+> MYj,ℓ k
+> (b-agent)
+> BYj,ℓ k
+> (b-agent) Port Vertex pY,j
+> (Hole)
+
+Figure 4: Constraint transmission along an orthogonally routed link edge wire. The physical occupation of the port vertex i consumes the hole at BXi,ℓ k , rigidly forcing b-agents to transition along the orthogonal corners. This guarantees BYj,ℓ k is occupied, which preserves the port vertex 
+
+pY,j as a hole. 
+
+4.5 Start and goal configurations 
+
+To complete the construction of the instance ILA of LA-MAPF, we must define the start con-figuration Cs and the goal configuration Cg based on the standard token configurations Ts and 
+
+Tg.
+
+Token Triangles ( v-agents): For every token triangle X of GST , the unique v-agent assigned to X is placed at the port vertex pX,i corresponding to the port i occupied by the token in Ts
+
+(specifically, if i = 2 , we place the agent at pX, 2, leaving the vertex pX,t unoccupied). Its goal position is the port vertex pX,j determined in the same manner based on the port j occupied in 
+
+Tg.
+
+Token Edges ( v-agents): For every token edge Y with the ports 1 and 2, the sequence of v-agents leaves exactly one unoccupied vertex as a single hole. In the start configuration Cs, if the token is at the port 1 in Ts, the hole is placed at the port vertex pY, 2 corresponding to the opposite port 2, which forces the v-agents to occupy the intermediate orthogonal corners and the port vertex pY, 1. Once this initial setup is established, because the physical narrowness of the wire prevents agents from bypassing one another, their relative spatial order becomes permanently locked. The goal configuration Cg assigns the hole based on Tg in the same manner. Since the relative order of the agents remains exactly as it was set in Cs, simply transitioning the hole to its goal position naturally and fully determines the final goal positions of all v-agents along the wire. 
+
+Link Edges ( b-agents): For the orthogonal wire Wℓk corresponding to each link edge ℓk
+
+joining the port i of one component X to the port j of another component Y , the assigned b-agents between its blocking vertices BXi,ℓ k and BYj,ℓ k are similarly configured to leave exactly one unoccupied vertex as a single hole. In the start configuration Cs, if the start token configuration 
+
+Ts has a token at the port i of X, the associated port vertex must be occupied by a v-agent. Due to the physical disk overlap, this v-agent blocks BXi,ℓ k from hosting any b-agent, forcing the hole to start at BXi,ℓ k . If neither port connected by ℓk is occupied in Ts, the hole can be placed arbitrarily at either BXi,ℓ k or BYj,ℓ k . The remaining b-agents simply fill the rest of the wire. Just 9as with the token edges, once these agents are placed in Cs, their inability to bypass one another guarantees that their initial relative sequence is preserved until the end. The goal configuration 
+
+Cg are constructed identically based on Tg, and this preserved order ensures that dictating the hole’s final location uniquely specifies the exact goal positions of all b-agents. This completes the construction of the instance ILA of LA-MAPF (Figure 5). 
+
+4.6 Polynomial size 
+
+Lemma 5. The construction of ILA can be carried out in polynomial time and the size of ILA 
+
+is bounded by a polynomial in the size of GST .Proof. The macro-graph H = ( VH , E H ) contains one macro-vertex per token triangle and two port vertices per token edge. Thus, |VH | ≤ | V (GST )|. Recall that the orthogonal embedding can be computed in linear time and can be drawn on a |VH |×| VH | grid [3]. Thus, the coordinates of all grid points and orthogonal bends can be represented using at most O(log |VH |) bits. Replacing macro-vertices with constant-size triangle gadgets, and routing wires by placing vertices at orthogonal bends, generates a total number of vertices, edges, and agents that is polynomial with respect to |V (GST )|.The exact geometric coordinates are computed by mapping integer grid points to Q2, scaled by a constant factor Λ = 100 r, and applying specific rational offsets (e.g., 1.75 r and 1.5r) for local blocking vertices. Therefore, all coordinates possess a polynomial binary encoding length. 
+
+4.7 Correctness 
+
+We now prove the correctness of the reduction. 
+
+Lemma 6. If the instance ILA of LA-MAPF has a conflict-free plan from Cs to Cg, then in the original instance (GST , T s, T g) of Restricted Sliding Tokens , there exists a sequence of valid token moves that transforms Ts into Tg.Proof. Let C0 = Cs, C 1, C 2, . . . , C k = Cg be a conflict-free plan in ILA . We construct a sequence of valid token moves by defining a mapping from each configuration Ci to a token configuration 
+
+Ti of GST . For each Ci, the token configuration Ti is determined as follows: • For each token triangle X: If the v-agent is at the port vertex pX, 1, place the token at the port 1 in Ti. If the v-agent is at pX, 3, place the token at the port 3 in Ti. If the 
+
+v-agent is at pX, 2 or pX,t , place the token at the port 2 in Ti.• For each token edge Y : If the unique hole in the token edge wire is at pY, 1, place the token at the port 2 in Ti. If the hole is at pY, 2, place the token at the port 1 in Ti. If both 
+
+pY, 1 and pY, 2 are occupied by v-agents, place the token at the port 1 in Ti.First, we prove that for any i, Ti is a token configuration in GST . According to our mapping rules, a token is assigned to a port only if its corresponding port vertex is occupied by a v-agent in Ci. By Lemma 4, for any link edge ℓm connecting the port n of a component X and the port 
+
+w of a component Y , the two corresponding port vertices pX,n and pY,w cannot be occupied by 
+
+v-agents in Ci. Therefore, in the mapped configuration Ti, no link edge can have tokens at both of its endpoints. Thus, Ti satisfies the independent set constraint. Second, we prove that the mapped token configurations Ti and Ti+1 differ by at most one token position. The transition Ci ⇝ Ci+1 involves one agent moving to an adjacent vertex. If a 
+
+b-agent moves, the positions of all v-agents and holes within the token triangle gadgets and token edge wires remain unchanged, yielding Ti+1 = Ti. If a v-agent within the gadget corresponding to a token triangle X moves, only the token corresponding to X will alter its mapped port. If a 
+
+v-agent within the orthogonal wire representing a token edge Y moves, the unique hole in this 10 (a) Restricted Sliding Tokens GST 
+
+1 23 
+
+> X: Token Triangle
+
+1 2 
+
+> Y: Token Edge
+
+1 2      
+
+> Z: Token Edge
+> Link Edge ℓ1Link Edge ℓ2
+> Link Edge ℓ3
+> Link Edge ℓ4
+
+(b) Macro-graph H & Grid Routing       
+
+> 012345601234
+
+pY, 1 pY, 2 pZ, 1 pZ, 2
+
+Macro-vertex (2,3) 
+
+(c) Instance ILA of LA-MAPF          
+
+> pX, 1
+> pX, 2pX,t
+> pX, 3BX
+> 1,ℓ 1
+> BX
+> 2,ℓ 2
+> BX
+> 3,ℓ 3
+> pY, 1
+> pY, 1pY, 2
+> pY, 2
+> pZ, 1
+> pZ, 1pZ, 2
+> pZ, 2
+> MX
+> 1,ℓ 1
+> BY
+> 1,ℓ 1
+> MX
+> 2,ℓ 2MZ
+> 2,ℓ 2
+> BZ
+> 2,ℓ 2
+> MX
+> 3,ℓ 3
+> BZ
+> 1,ℓ 3
+> BY
+> 2,ℓ 4BZ
+> 1,ℓ 4
+
+Figure 5: A comprehensive macro-to-micro geometric reduction pipeline. (a) A standard con-figuration in the instance ( GST , T s, T g) of Restricted Sliding Tokens , where black circles represent tokens and white circles are empty. (b) The macro-graph H embedded on an orthogo-nal grid, where the token triangle X acts as a macro-vertex assigned to a single grid intersection (e.g., the coordinate (2 , 3) ). (c) The resulting scaled LA-MAPF Euclidean workspace. Both 
+
+v-agents (blue) and b-agents (red) are represented with their physical collision disks of radius r.Because the physical disks of the agents cannot bypass each other in the orthogonal wires, their relative order is fixed. 11 wire cascades by one step. According to our mapping for token edges, the token’s position in T
+
+changes between the port 1 and the port 2 if and only if the position of the hole moves to or from the port vertex pY, 1. In all cases, the transition Ci ⇝ Ci+1 causes at most one token to change its position in the mapped token configurations. Finally, by removing Ti+1 from the sequence T0, T 1, . . . , T k whenever Ti = Ti+1 , we obtain a sequence T ′
+
+> 0
+
+, T ′
+
+> 1
+
+, . . . , T ′ 
+
+> q
+
+satisfying T ′
+
+> j
+
+̸ = T ′ 
+
+> j+1
+
+for all j. Because every step between consecutive token configurations T ′ 
+
+> j
+
+and T ′ 
+
+> j+1
+
+involves one token changing its position, it constitutes a valid token move in GST . Since the start configuration Cs = C0 maps to T ′ 
+
+> 0
+
+= Ts and the goal configuration Cg = Ck maps to T ′ 
+
+> q
+
+= Tg, the sequence T ′
+
+> 0
+
+, . . . , T ′ 
+
+> q
+
+demonstrates a sequence of valid token moves that transforms Ts into Tg.
+
+Lemma 7. If the instance (GST , T s, T g) of Restricted Sliding Tokens has a sequence of token moves that transforms Ts to Tg, then the instance ILA of LA-MAPF has a conflict-free plan from the start configuration Cs to the goal configuration Cg.Proof. Let Ts = T0, T 1, . . . , T q = Tg be a sequence of token configurations such that Tt can be transformed to Tt+1 via a valid token move for all t. We simulate each valid token move that transforms Tt to Tt+1 using a finite sequence of collision-free transitions. Suppose the valid token move slides the token within a component X from the port i to an adjacent port k. To simulate this valid token move in ILA , we must first vacate every blocking vertex associated with the target port vertex pX,k . Consider a link edge ℓm incident to the port 
+
+k, connecting to the port j of a component Y . Because Tt+1 is a token configuration, the port 
+
+j of the component Y is currently unoccupied by a token (meaning no v-agent is at the port vertex pY,j ). Thus, BYj,ℓ m is structurally safe. We can move the b-agents along Wℓm one by one, transferring the hole to BXk,ℓ m .Once all blocking vertices incident to pX,k are holes, the v-agent within X can move to pX,k .We can prove that the resulting configuration is mapped to Tt+1 in the same way as the proof of Lemma 6. By repeating this procedure, we route all v-agents to their respective goal positions defined in the goal configuration Cg. Finally, for any link edge wire whose hole does not yet reach its goal position in Cg, we simply move its b-agents to reposition the hole. This guarantees that ILA has a conflict-free plan from Cs to Cg.
+
+Lemma 8. LA -MAPF is PSPACE -hard .Proof. Our reduction maps any instance of Restricted Sliding Tokens to an instance of LA-MAPF in polynomial time. By Lemmas 6 and 7, the two instances share the same answer. Since Restricted Sliding Tokens is PSPACE-complete, LA-MAPF is PSPACE-hard. Our reduction demonstrates that LA-MAPF remains PSPACE-hard even if the agents’ move-ments are restricted to horizontal and vertical directions, and even if the underlying graph of the given instance of LA-MAPF is a plane graph. Together with membership in PSPACE (Lemma 3), Lemma 8 proves Theorem 1 and Corollary 2. 
+
+# 5 Conclusion 
+
+We established that the computational complexity of Multi-Agent Path Finding for Large Agents (LA-MAPF) is PSPACE-complete. More concretely, its PSPACE-hardness is proven via a geo-metric reduction from Restricted Sliding Tokens .
+
+# References 
+
+[1] Artem Agafonov and Konstantin Yakovlev. Multi-agent path finding for large agents is intractable. In Inês Lynce, Nello Murano, Mauro Vallati, Serena Villata, Federico Chesani, 12 Michela Milano, Andrea Omicini, and Mehdi Dastani, editors, Proceedings of the 28th Euro-pean Conference on Artificial Intelligence , volume 413 of Frontiers in Artificial Intelligence and Applications , pages 4856–4863, Amsterdam, The Netherlands, 2025. IOS Press. [2] Jacopo Banfi, Nicola Basilico, and Francesco Amigoni. Intractability of time-optimal multi-robot path planning on 2d grid graphs with holes. IEEE Robotics and Automation Letters ,2(4):1941–1947, 2017. [3] Therese Biedl and Goos Kant. A better heuristic for orthogonal graph drawings. Compu-tational Geometry: Theory and Applications , 9:159–180, 1998. [4] Paul Bonsma and Luis Cereceda. Finding paths between graph colourings: PSPACE-completeness and superpolynomial distances. Theoretical Computer Science , 410(50):5215– 5226, 2009. [5] Robert A. Hearn and Erik D. Demaine. PSPACE-completeness of sliding-block puzzles and other problems through the nondeterministic constraint logic model of computation. 
+
+Theoretical Computer Science , 343(1–2):72–96, 2005. [6] Daniel Kornhauser, Gary Miller, and Paul Spirakis. Coordinating pebble motion on graphs, the diameter of permutation groups, and applications. In Proceedings of the 25th Annual Symposium on Foundations of Computer Science , pages 241–250, Washington, DC, 1984. IEEE Computer Society. [7] Jiaoyang Li, Pavel Surynek, Ariel Felner, Hang Ma, T. K. Satish Kumar, and Sven Koenig. Multi-agent path finding for large agents. In Proceedings of the 33rd AAAI Conference on Artificial Intelligence , pages 7627–7634, Palo Alto, CA, 2019. AAAI Press. [8] Bernhard Nebel. On the computational complexity of multi-agent pathfinding on directed graphs. In J. Christopher Beck, Olivier Buffet, Jörg Hoffmann, Erez Karpas, and Shirin Sohrabi, editors, Proceedings of the International Conference on Automated Planning and Scheduling , volume 30, pages 212–216, Palo Alto, CA, 2020. AAAI Press. [9] Bernhard Nebel. The computational complexity of multi-agent pathfinding on directed graphs. Artificial Intelligence , 328:104063, 2024. [10] Walter J. Savitch. Relationships between nondeterministic and deterministic tape complex-ities. Journal of Computer and System Sciences , 4(2):177–192, 1970. [11] Pavel Surynek. An optimization variant of multi-robot path planning is intractable. In Maria Fox and David Poole, editors, Proceedings of the Twenty-Fourth AAAI Conference on Artificial Intelligence , volume 24, pages 1261–1263, Palo Alto, CA, 2010. AAAI Press. [12] Xinyi Tan and Pascal Bercher. Intractability of optimal multi-agent pathfinding on directed graphs. In Kobi Gal, Ann Nowé, Grzegorz J. Nalepa, Roy Fairstein, and Roxana Rădulescu, editors, Proceedings of the 26th European Conference on Artificial Intelligence , pages 2315– 2321, Amsterdam, The Netherlands, 2023. IOS Press. [13] Jingjin Yu. Intractability of optimal multirobot path planning on planar graphs. IEEE Robotics and Automation Letters , 1(1):33–40, 2015. 13
