@@ -1,0 +1,670 @@
+Title: Weaker Coherence, Weaker Reciprocity: Comparing the Semantic and Social Organization of Moltbook and Reddit
+
+URL Source: https://arxiv.org/pdf/2608.14893v1
+
+Published Time: Tue, 18 Aug 2026 00:21:20 GMT
+
+Number of Pages: 31
+
+Markdown Content:
+# Weaker Coherence, Weaker Reciprocity: Comparing the Semantic and Social Organization of Moltbook and Reddit 
+
+Favio Di Ciocco 1,2,†, Lucas Díaz Celauro 1,2,†, Sebastián Pinto 1
+
+Marcelo Kuperman 3,4, Pablo Balenzuela 1,2,∗
+
+Abstract 
+
+Large language models enable the creation of autonomous agents that interact in social environments, raising the question of whether agent-based platforms reproduce the orga-nizational properties of human social networks. We compare Moltbook, a social network populated by AI agents, with early Reddit, focusing on how communities organize and differ-entiate semantic content, using network analysis and NLP methods to characterize semantic coherence and diversity within and between communities, and their relationship to user ac-tivity. We find a systematic difference between the two platforms. Reddit communities show stronger semantic coherence, closer alignment with community names, and greater seman-tic diversity, with individual communities spanning broader content and communities more differentiated from one another. This combination distinguishes Reddit from Moltbook, whose communities are more homogeneous, less differentiated, and increasingly misaligned with their names over time. Users on Reddit also participate across communities that are more semantically related than those connected by activity in Moltbook. At the interac-tion level, comment-network motif analysis shows Moltbook dominated by non-reciprocal, broadcast-like exchanges, whereas Reddit shows more reciprocal, chained interaction pat-terns. These results indicate that Reddit combines semantic coherence with diversity across organizational levels, a pattern not reproduced by the AI-agent network. 
+
+Keywords: Large Language Model agents; Collective behavior simulation; Social network anal-ysis; Semantic coherence; Human-AI behavioral comparison 
+
+# 1 Introduction 
+
+Online social networks are complex systems in which local interactions among individuals give rise to collective structures at larger scales. [1–3] Communities, patterns of user participation, and the differentiation of topical spaces are emergent properties of these systems, resulting from the repeated interaction of users within a shared social environment [4]. Understanding the mechanisms underlying this organization requires considering both the structure of interactions and the semantic content through which individuals communicate. In particular, the relationship between social and semantic organization can reveal how collective systems develop coherent communities while maintaining diversity across the network [5–7]. 
+
+> 1
+
+Universidad de Buenos Aires, Facultad de Ciencias Exactas y Naturales, Departamento de Física, Buenos Aires, Argentina 
+
+> 2
+
+Instituto de Física Interdisciplinaria y Aplicada (INFINA), CONICET – Universidad de Buenos Aires, Buenos Aires, Argentina 
+
+> 3
+
+Instituto Balseiro, Universidad Nacional de Cuyo y Comisión Nacional de Energía Atómica, Bariloche, Argentina 
+
+> 4
+
+Consejo Nacional de Investigaciones Científicas y Técnicas (CONICET), Argentina 
+
+> †
+
+These authors contributed equally to this work. 
+
+> ∗
+
+Correspondence: balen@df.uba.ar 
+
+1arXiv:2608.14893v1 [cs.SI] 14 Aug 2026 Reddit provides a natural example of such a system. Its organization into user-created commu-nities, or subreddits, creates a heterogeneous network in which users can participate in multiple topical spaces [8]. Patterns of participation generate non-trivial network structure, such as per-sistent user interests across different subreddits [9–11]. The availability of large-scale historical datasets has further enabled the quantitative study of Reddit as a complex social system [12]. Importantly, the organization of Reddit communities is not determined solely by their nominal topics: it emerges from the interaction between the interests of users, the structure of their activity, and the semantic content generated within each community [13, 14]. The emergence of large language models (LLMs) introduces a qualitatively different class of agents into such environments. LLM-based agents can generate language and interact au-tonomously with other agents, making it possible to construct social systems in which col-lective organization emerges from interactions between artificial rather than human participants [15, 16]. This makes it possible to construct social systems in which collective organization emerges from interactions between artificial rather than human participants. Recent work has further shown that LLMs can generate realistic multi-user social-media discussions [17], rein-forcing their potential as a substrate for computational social simulation. These systems provide an opportunity to investigate whether collective properties observed in human social networks can emerge from artificial agents, and which aspects of such organization depend on the nature of the agents themselves. Recent work has begun to characterize the structural and behavioral properties of social environments populated by LLM-based agents, highlighting both similarities and differences with human online communities [18–20]. Moltbook (https://moltbook.com/) offers a particularly suitable setting for studying these ques-tions. The platform consists of communities in which autonomous AI agents post and interact, providing a social architecture that is structurally reminiscent of Reddit. Each AI agent is configured by a human owner, although all online interactions are executed by the agent via API [21]. Early analyses of Moltbook have identified distinctive patterns of participation and community organization, including strong concentration of activity and differences in interaction patterns relative to human social networks [22–25]. These observations motivate a broader ques-tion concerning the organization of the resulting system: beyond the amount and structure of activity, do AI-agent communities develop a semantic organization comparable to that observed in human social networks? Here we address this question through a comparative analysis of Moltbook and the early stages of Reddit. We focus on two complementary properties of complex social systems: semantic coherence and semantic diversity . Coherence characterizes the extent to which the semantic content associated with a community is related to its identity and to the communities connected to it through patterns of user activity. Diversity describes the extent to which semantic content varies within communities and across different communities. These properties need not be antagonistic. More generally, studies of human communication and collective semantic search show that social groups can combine shared alignment with the exploration of novel semantic regions [26, 27]. A complex social system can simultaneously support heterogeneous content within communities and maintain a differentiated organization between communities. Their joint characterization therefore provides a way to quantify how semantic structure emerges across multiple organizational scales. We complement this semantic characterization with an analysis of the comment network, examining triadic interaction motifs to assess whether user exchanges are organized around reciprocal engagement or one-to-many, broadcast-like communication The comparison reveals a systematic difference between the two systems. Reddit combines greater semantic diversity with stronger semantic coherence. Its communities contain more het-erogeneous content, while occupying more differentiated regions of semantic space, and their content remains more closely aligned with the semantic information conveyed by their names. 2Furthermore, users tend to participate across communities that are more semantically related to one another. Moltbook, in contrast, exhibits more homogeneous communities, weaker seman-tic differentiation between communities, and a progressively weaker correspondence between community identity and content. This divergence extends to the structure of user interactions: Moltbook’s comment network is dominated by non-reciprocal, broadcast-like exchanges, whereas Reddit shows a substantially higher prevalence of reciprocal and chained interaction patterns. These results suggest that the collective organization of an AI-agent social network differs from that of a human social network not only in its interaction patterns, but also in the coupling between social structure and semantic organization. 
+
+# 2 Materials and Methods 
+
+2.1 Moltbook data collection 
+
+Moltbook is an existing online social platform designed for interactions between autonomous AI agents. Agents participate in user-created thematic communities, called submolts , where they can publish posts, comment on other posts, and reply to existing comments. Importantly, the agents analyzed in this study were not created, simulated, or controlled by us. Our analysis is entirely observational and is based on activity generated independently on the public Moltbook platform. The underlying characteristics of individual agents—including the language models, prompts, memory systems, tools, and other configuration details used by their owners—are generally unknown to us. We therefore treat each Moltbook account as an observed agent and analyze only its publicly available behavior on the platform. We collected public activity from Moltbook through its application programming interface (API) using custom Python scripts. The dataset comprises posts and their associated comments, from the first available post of the platform (on January 28th, 2026) until July 31st, 2026. In this date range, the dataset contains 3,251,763 posts and 17,746,686 comments, including top-level comments and nested replies. It involves 183,565 unique users who posted or commented, of whom 179,651 authored at least one post, 45,507 authored at least one comment, and 41,593 did both. The posts are distributed across 7,240 submolts. The information retrieved includes the content of the post or comment, together with information on the submolt and author. It also includes post-level metrics such as upvotes, downvotes, and score. Additional details on the dataset structure and the fields contained in these records are provided in Appendix A. 
+
+2.2 Reddit data 
+
+Reddit data were obtained from the historical Reddit archive distributed through Academic Tor-rents [12, 28]. The archive contains monthly dumps of Reddit submissions and comments, stored as Zstandard-compressed newline-delimited JSON files. We downloaded the period from Decem-ber 2005, the earliest month for which both submissions and comments were available, through December 2009. For each month within this interval, we downloaded both the submission and comment archives. For the analyses presented here, we selected the period from January 23rd, 2008 to July 26th, 2008. This interval matches the duration of the Moltbook observation window and begins when Reddit had recently enabled the creation of user-defined communities, providing a more com-parable stage of platform development. After filtering by creation date, the dataset contains 1,079,709 posts and 3,124,758 comments. It involves 121,999 unique users who posted or com-3mented, of whom 95,449 authored at least one post, 50,448 authored at least one comment, and 23,898 did both. The posts are distributed across 1,913 subreddits. Each record contains the information provided for an individual Reddit submission or comment, including its textual content, author, subreddit, creation time, and engagement-related meta-data. Additional details on the archive structure and the fields contained in these records are provided in Appendix B. 
+
+2.3 Concentration of user activity across communities 
+
+To quantify how users distribute their activity across communities, we followed the approach introduced by Valensise et al. [10]. For each user u, we constructed an activity vector 
+
+v(u) =
+
+
+
+v(u)1 , . . . , v (u)
+
+> N
+
+
+
+, (1) where v(u) 
+
+> i
+
+is the number of comments produced by user u in community i, and N is the total number of communities in the corresponding platform. The total activity of the user is therefore 
+
+Iu =
+
+> N
+
+X
+
+> i=1
+
+v(u) 
+
+> i
+
+. (2) The concentration of this activity across communities was quantified using the Gini coefficient, 
+
+gu = 12N I uNX
+
+> i=1
+> N
+
+X
+
+> j=1
+
+v(u) 
+
+> i
+
+− v(u) 
+
+> j
+
+. (3) Values close to zero correspond to activity distributed approximately uniformly across commu-nities, whereas values close to one indicate that the user concentrates most of their activity in a small subset of communities. Since most users interact with only a small fraction of all available communities, v(u) is typically sparse. Moreover, for a user with Iu < N interactions, a completely homogeneous distribution over all N communities is not attainable. We therefore corrected the Gini coefficient for this finite-activity constraint. The minimum attainable Gini for a user with Iu comments is 
+
+g∗ 
+
+> u
+
+=
+
+
+
+N − Iu
+
+N , Iu < N, 
+
+0, Iu ≥ N, 
+
+(4) corresponding, when Iu < N , to the maximally dispersed configuration in which each interaction occurs in a different community. We then defined the normalized Gini coefficient as 
+
+ˆgu = gu − g∗
+
+> u
+
+1 − g∗
+
+> u
+
+. (5) Thus, ˆgu = 0 represents the most homogeneous allocation of activity allowed by the user’s num-ber of interactions, whereas values approaching one indicate increasingly concentrated activity. For computational efficiency, communities in which a user had no activity were treated as im-plicit zeros when evaluating the Gini coefficient rather than explicitly constructing the full 
+
+N -dimensional activity vector. 42.3.1 Null model 
+
+To determine whether the observed concentration could arise solely from the finite amount of activity of each user, we constructed a null model following the same principle as Valensise et al. [10]. For each user, the total number of comments Iu was preserved, while their allocation across communities was randomized. More precisely, for a user with Iu comments, we defined a set of 
+
+Ku = min( Iu, N ) (6) candidate communities. Each of the Iu comments was then independently assigned with equal probability to one of these Ku communities. Thus, the randomized user could interact with at most Iu different communities, while preserving exactly the same total activity as in the empirical data. Repeated assignments to the same community were allowed. For each randomized activity vector, the raw and normalized Gini coefficients were calculated using the same procedure as for the empirical data. We generated 10 independent null-model realizations for each user. The procedure was applied independently to Reddit and Moltbook, using the corresponding total number of communities in each platform. 
+
+2.4 Semantic representation of communities 
+
+To compare the semantic organization of Reddit and Moltbook, we represented their commu-nities in a common embedding space. For each community c (a subreddit or submolt), we considered two sources of semantic information: the name of the community and the textual content of the posts published within it. For both platforms, the title of each post was used as its textual representation. Text was encoded using the sentence-transformers/all-MiniLM-L6-v2 [29] model. The same model was used to embed both post titles and community names, ensuring that all elements were represented in the same semantic vector space. For each community, to achieve a statistically significant number of posts and at the same time get a manageable amount of data to embed, we considered at most 200 posts. Thus, if xc,i denotes the embedding of post i in community c,its semantic centroid was defined as 
+
+μc = 1
+
+NcNcX
+
+> i=1
+
+xc,i , (7) where Nc ≤ 200 is the number of posts considered for community c. The community name was embedded independently, resulting in a vector nc.Semantic differences were quantified using cosine distance, 
+
+Dcos (x, y) = 1 − x · y
+
+∥x∥ ∥ y∥ . (8) We then defined three complementary distances. First, the distance between an individual post and the centroid of its community, 
+
+dc,i = Dcos (xc,i , μc) , (9) characterizes the internal semantic consistency of a community. Smaller values indicate that posts are concentrated around a common semantic center, whereas larger values correspond 5to more heterogeneous discussions. Second, we defined the distance between the centroid of a community and the embedding of its name, 
+
+wc = Dcos (μc, nc) , (10) which quantifies the semantic correspondence between the content discussed within a community and the topic suggested by its name. Finally, for each pair of communities c and c′, we computed the distance between their centroids, 
+
+uc,c ′ = Dcos (μc, μc′ ) . (11) The distribution of pairwise centroid distances characterizes the semantic diversity of communi-ties within each platform: larger distances correspond to communities occupying more distinct regions of the semantic space. For the analyses of inter-community semantic diversity ( u), internal semantic consistency ( d), and community name–content correspondence ( w), we restricted the sample to communities containing at least 50 posts. This lower threshold was introduced to ensure that community centroids were estimated from a sufficiently large amount of content. In all cases, a maximum of 200 posts per community was used. For the analysis of semantic similarity within communities, however, no minimum community-size threshold was imposed, as applying the same cutoff would substantially reduce the number of communities available for this analysis. 
+
+2.5 User–community interaction networks 
+
+To characterize how users distribute their activity across communities, we constructed a bipartite network for each platform. The two node layers correspond to users and communities (subreddits in Reddit and submolts in Moltbook), respectively. For each user u and community c, we first defined the activity 
+
+Wuc = number of comments posted by user u in community c. (12) Thus, Wuc quantifies the amount of activity that a user directs toward a given community. Rather than binarizing this matrix through a simple activity threshold, we determined, for each user, an effective number of communities based on the entropy of their activity distribution. This approach accounts for the fact that a user’s comments are typically not spread uniformly across the communities they visit, but concentrated in a subset of them. For each user u, we defined the normalized activity distribution across the communities they participated in, 
+
+puc = Wuc 
+
+P 
+
+> c′
+
+Wuc ′
+
+, (13) and computed its Shannon entropy, 
+
+Su = − X
+
+> c
+
+puc log puc . (14) The effective number of communities for user u is then given by the exponential of the entropy, 
+
+neff ,u = round  eSu  , (15) which corresponds to the Hill number [30] equivalent number of equally-weighted communities that would produce the same entropy as the user’s observed activity distribution. Intuitively, if 6a user concentrates nearly all of their comments in a single community, Su ≈ 0 and neff ,u ≈ 1,whereas a user who splits their activity evenly across k communities yields neff ,u = k.We then converted the weighted activity matrix into a binary incidence matrix by retaining, for each user, only their neff ,u most active communities: 
+
+Buc =
+
+(
+
+1, c ∈ Top-neff ,u (u),
+
+0, otherwise , (16) where Top-neff ,u (u) denotes the set of neff ,u communities with the highest Wuc for user u. This procedure yields a bipartite network in which each user is connected only to the communi-ties that meaningfully contribute to their activity, while discounting communities visited only sporadically. 
+
+2.5.1 Statistically validated community projection 
+
+A direct projection of the bipartite network would connect two communities whenever they share at least one user. Such a procedure, however, can produce spurious associations involving highly active users or highly populated communities. We therefore obtained a statistically validated monopartite projection of the community layer using the Bipartite Configuration Model (BiCM) [31]. For two communities c and c′, their observed number of common users is 
+
+Vcc ′ = X
+
+> u
+
+Buc Buc ′ . (17) The BiCM provides a null model for this quantity while preserving, in expectation, the degree sequences of both layers of the original bipartite network. Therefore, the expected overlap between two communities accounts for both the activity of individual users and the overall popularity of each community. For every pair of communities, we evaluated the probability of observing an overlap at least as large as Vcc ′ under the BiCM null model. A link between c and c′ was retained in the projected network only when this overlap was statistically significant after correction for multiple comparisons. The resulting network therefore contains only statistically validated associations between communities rather than all possible co-occurrences of their users. 
+
+2.5.2 Network clusters detection 
+
+To avoid confusion with the platform-level communities (subreddits/submolts), we refer to the groups of nodes as clusters , reserving the term “community” exclusively for subreddits and submolts throughout the paper. We further characterized the mesoscale organization of the statistically validated projections using the Louvain cluster-detection algorithm [32]. Because Louvain is stochastic, the algorithm was run repeatedly using different random seeds. For each platform, we retained the partition with the largest modularity among the independent runs. If P denotes a candidate partition of the projected network into clusters, the selected partition was therefore 
+
+P∗ = arg max 
+
+> P
+
+Q(P), (18) where Q is the modularity of the partition. Cluster assignments were then used both to char-acterize the structural organization of the network and to evaluate the semantic coherence of 7structurally detected clusters, that is, whether communities (subreddits/submolts) grouped into the same cluster tend to share topical or thematic content. 
+
+# 3 Results 
+
+Moltbook emerges as a social network structurally analogous to Reddit. It features dedicated discussion communities named submolts (mirroring subreddits ) each characterized by a distinct name and a description specifying its thematic scope. Within these communities, any user can initiate a conversation by creating a post. Other users can subsequently contribute to these discussions by commenting on the original post. Furthermore, users can reply to existing comments, thereby generating nested discussion threads within the primary post. Furthermore, each user within the Moltbook network can create a new community, defining both its name and thematic focus. While Moltbook has supported this feature since its inception, this was not the case for Reddit in its early stages. Initially, Reddit consisted of a single main community ( Reddit.com ), which later expanded to a small set of predefined communities. It was not until January 2008 that the platform granted users the ability to create their own subreddits. With this in mind, our objective is to compare the evolution of both networks over an identical time frame (a 6-month period, given that this is Moltbook’s current lifespan) starting from the exact moment each platform enabled user-driven community creation. 
+
+3.1 Networks characterization 
+
+To characterize the overall activity across both networks, we analyzed the users’ posting and commenting behavior. Figs. 1(a) and 1(c) display the temporal evolution of posts and comments, aggregated weekly, for the Moltbook and Reddit networks, respectively. It can be observed that Moltbook exhibits a burst of high activity during the second week (also reported in [25]), which subsequently declines. While the volume of comments then oscillates around a stable baseline, the number of posts continues to decrease further. In contrast, Reddit’s activity, encompassing both posts and comments, displays an upward trend, indicative of a growing network that consistently attracts new users who participate in the discussions. To better understand user engagement, we analyzed the distribution of users according to their lifetime, defined as the number of days elapsed between their first and last post. If a user authored a single post or if all their posts occurred on the same day, their lifetime is set to one. Figs. 1(b) and 1(d) plot the number of users as a function of their lifetime for Moltbook and Reddit, respectively. To reduce statistical noise, the temporal data is aggregated into five-day bins. Both networks exhibit a prominent peak for users with a lifetime of fewer than five days. However, this observation is biased by the data collection cutoff: any user whose first post occurred within the final five days of the observation window is artificially constrained to a short lifetime, a metric that might change if the data collection period were extended. Nevertheless, Moltbook still displays a strong preponderance of users with short lifetimes, characterized by a steep decay as the lifetime increases. The user count drops from tens of thousands for lifetimes under two weeks to merely hundreds for those lasting three months or more. In contrast, Reddit maintains a relatively stable number of users across all lifetimes. This suggests a more moderate but continuous influx of new users into the Reddit network, alongside a significantly higher user retention rate. However, this lifetime is not indicative of the extent of the users’ participation in the network. For a given lifetime greater than zero, a user might author only two posts or comments on different days, or conversely, exhibit a much higher volume of activity between those two days; 8in both scenarios, their calculated lifetime would be identical. Therefore, we also computed the activity density —defined as the total number of posts and comments of a user divided by their lifetime—and analyzed its distribution (see Appendix C.3). From these distributions, we obtained a median activity density of 2.5 interactions/day for Moltbook and 1 interaction/day for Reddit. We define active users as those whose activity density exceeds the respective network’s median. The curves with triangular markers in Figs. 1(b) and 1(d) indicate the number of active users as a function of lifetime. For Reddit, the number of active users coincides with the total number of users for lifetimes under five days. This is not the case for Moltbook, providing evidence that many users joined the network, briefly tested its functionality, and never returned to participate. Beyond this initial period, the active user curve for Moltbook closely mirrors the total user curve as lifetime increases. Reddit, however, exhibits a distinctly different behavior: its active user curve declines to a minimum at intermediate lifetimes before rapidly growing again for long-standing users (over 150 days). This resurgence indicates that long-term Reddit users develop a strong commitment to the community, resulting in significantly higher participation rates compared to those with intermediate lifetimes. To compare activity concentration across levels of user activity, users were grouped into log-arithmically spaced bins according to their total number of comments Iu (Fig. 2). For each bin, we computed the mean normalized Gini coefficient ˆgu separately for the empirical Reddit and Moltbook data and for their corresponding null models. Shaded regions represent the in-terquartile range of the user-level Gini coefficients within each activity bin. Only users with at least five comments were considered in the visualization, and bins containing fewer than three observations were omitted. The empirical data show a strong concentration of user activity across communities in both platforms (Fig. 2). For Reddit, the normalized Gini coefficient remains high and increases with user activity, approaching its upper limit for highly active users. This result is consistent with the behavior previously reported by Valensise et al. [10], that increasing activity does not lead users to distribute their interactions homogeneously across the growing set of available communities. Instead, users continue to concentrate a large fraction of their activity within a restricted subset of subreddits. The corresponding null model fails to reproduce this behavior (see Section 2.3.1). Moltbook displays an even stronger concentration pattern. At low and intermediate activity levels, the normalized Gini coefficient of Moltbook agents is systematically higher than that ob-served for Reddit users, indicating that agents distribute their comments across an even narrower subset of communities. As activity increases, both empirical curves approach the maximum Gini value and the difference between the platforms consequently diminishes. The stronger concen-tration observed in Moltbook emerges from the empirical allocation of interactions across com-munities rather than from the corresponding platform size or from the total amount of activity alone. 
+
+3.2 Semantic analysis 
+
+3.2.1 Coherence of network clusters 
+
+The statistically validated ( α = 0 .1, see [31]) community networks reveal a modular organization in both platforms (Fig. 3a,b). Nodes represent subreddits or submolts, edges represent statis-tically validated associations derived from shared user activity, and colors indicate the clusters identified by the Louvain algorithm. For this analysis, we do not take into account the submolt 
+
+general and the subreddit reddit.com due to their general scope (see Appendix C.4). Quali-tatively, several of these structural clusters appear to group communities with related topics. 9(a) (b) 
+
+(c) (d) Figure 1: Comparison of user activity and lifetime distributions between Moltbook and Reddit. (a) Temporal evolution of weekly comments (squares) and posts (circles) in Moltbook. (b) Distribution of users as a function of their lifetime in Moltbook. User lifetime is defined as the number of days elapsed between their first and last post, with a minimum value of one day. The plot also includes the distribution of active users, defined as those whose activity density exceeds the network’s median. (c, d) Corresponding activity and lifetime distributions for Reddit. Comparing both platforms, Moltbook exhibits a prominent activity burst in its second week followed by a steady decay, whereas Reddit displays a consistent growth pattern. Furthermore, Moltbook is predominantly composed of users with short lifetimes, whereas Reddit exhibits a more homogeneous overall distribution with a notably higher proportion of active users at extended lifetimes. 10 Figure 2: Concentration of user activity across communities in Reddit and Moltbook. Users are grouped into logarithmically spaced bins according to their total number of comments Iu.The lines show the mean normalized Gini coefficient ˆgu measured from the empirical activity of Reddit users and Moltbook agents, and shaded colored regions indicate the interquartile range within each activity bin. Larger values of ˆgu indicate that activity is more strongly concentrated in a small subset of communities. The gray vertical band marks the activity bin selected for the inset ( 40 ≤ Iu < 70 ), where the full distribution of ˆgu is shown separately for Reddit and Moltbook. Moltbook exhibits larger Gini coefficients at low and intermediate activity levels, and the inset illustrates that this difference is also visible at the level of the user-level distributions within a representative activity bin. 11 We asked whether communities inferred exclusively from patterns of user activity also exhibit measurable semantic coherence. For each Louvain cluster, we quantified semantic coherence as the mean pairwise cosine similarity between the semantic centroids of all communities assigned to that cluster. We compared the resulting cluster-level similarities against a null model in which the cluster structure itself was kept fixed, but the semantic centroids associated with the communities were randomly permuted. Thus, each randomization preserves the number and size of the Louvain clusters while removing any systematic relationship between structural cluster membership and semantic content. The procedure was repeated 1,000 times for each platform (Fig. 3c,d). A strong correspondence between structural and semantic organization is observed for Reddit (Fig. 3c). The 30 observed Louvain clusters have a mean within-cluster cosine similarity of 
+
+0.609 , compared with 0.344 under the reshuffled assignments. The observed distribution is markedly shifted toward larger similarities, and a two-sample Kolmogorov–Smirnov test shows a strong separation between the observed and shuffled distributions ( D = 0 .677 , p = 4 .1 × 10 −14 ). Therefore, subreddits that are grouped together on the basis of common user activity are also substantially more semantically similar than expected from a random grouping with the same cluster sizes. The correspondence is considerably weaker in Moltbook (Fig. 3d). The 51 observed Louvain clusters have a mean semantic similarity of 0.426 , compared with 0.347 in the shuffled ensemble. Although the observed distribution is shifted toward larger values and remains statistically distinguishable from the null distribution (Kolmogorov–Smirnov test: D = 0 .248 , p = 0 .003 ), the two distributions exhibit substantial overlap. The difference between structural and randomized clusters is therefore far less pronounced than in Reddit. These results indicate that patterns of user participation in Reddit generate communities that are strongly associated with semantic content. Moltbook exhibits some correspondence between structural and semantic organization, but this association is substantially weaker, suggesting a looser relationship between patterns of user activity and the topics represented by the resulting communities. 
+
+3.2.2 Coherence and diversity of communities 
+
+We now examine the internal semantic consistency of communities through the community-level mean post-to-centroid distance, ¯dc = N −1
+
+> c
+
+P 
+
+> i
+
+dc,i (Fig. 4a,d). Low values of ¯dc indicate com-munities whose posts are strongly concentrated around their semantic centroid, whereas larger values correspond to more heterogeneous content. The distributions reveal a clear difference between the two platforms (Fig. 4a). Moltbook exhibits a pronounced lower-distance tail, in-cluding several communities with mean distances close to zero, indicating the presence of highly semantically homogeneous communities. Conversely, Reddit extends further toward large values of ¯dc, showing a greater prevalence of communities with internally diverse content. This difference is also observed over time (Fig. 4d). Across most temporal windows, Reddit maintains a larger mean post-to-centroid distance than Moltbook, indicating greater within-community semantic heterogeneity. Although the difference between the platforms narrows toward the end of the observation period, the same overall ordering is preserved. We next examined the semantic differentiation between communities using the pairwise centroid distance uc,c ′ (Fig. 4b,e). The distribution of distances between Moltbook communities is shifted toward lower values relative to Reddit (Fig. 4b), indicating that submolt centroids tend to occupy closer regions of the semantic space. Conversely, the larger distances among Reddit communities indicate greater between-community semantic differentiation. The mean pairwise distance was 12 (a) (b) 
+
+(c) (d) Figure 3: Structural and semantic organization of clusters in Reddit and Moltbook. (a,b) 
+
+Statistically validated community networks for (a) Reddit and (b) Moltbook. Nodes repre-sent subreddits or submolts, edges represent statistically validated associations based on shared user activity, and colors indicate clusters detected by the Louvain algorithm. (c,d) Semantic coherence of Louvain clusters for (c) Reddit and (d) Moltbook. For each cluster, semantic coherence is measured as the mean pairwise cosine similarity between the centroids of its con-stituent communities. Colored distributions correspond to the observed Louvain clusters, while gray distributions represent a null model obtained from 1,000 random permutations of node centroids across the fixed Louvain cluster labels, thereby preserving the number and sizes of the clusters. Dashed lines indicate the corresponding observed and shuffled means. Reddit shows a strong shift toward greater semantic similarity relative to the null model ( DKS = 0 .677 ,
+
+p = 4 .1 × 10 −14 ), whereas the effect is substantially weaker in Moltbook, where the observed and shuffled distributions show a higher overlap than Reddit, although remaining statistically distinguishable ( DKS = 0 .248 , p = 0 .003 ). 13 0.0 0.2 0.4 0.6 ̄
+
+> dc
+> 01234567
+> Density
+> Reddit Moltbook
+
+(a) 0.0 0.2 0.4 0.6 0.8 1.0 1.2   
+
+> uc,c0
+> 0.0 0.5 1.0 1.5 2.0 2.5
+> Density
+> Reddit Moltbook
+
+(b) 0.2 0.4 0.6 0.8 1.0  
+
+> wc
+> 0.0 0.5 1.0 1.5 2.0 2.5 3.0
+> Density
+> Reddit Moltbook
+
+(c) 0 50 100 150 
+
+> Days since start of observation window
+> 0.40 0.45 0.50 0.55 ̄
+> dc Moltbook Reddit
+
+(d) 0 50 100 150  
+
+> Days since start of observation window
+> 0.60 0.65 0.70 0.75
+> uc, c0
+> Moltbook Reddit
+
+(e) 0 50 100 150  
+
+> Days since start of observation window
+> 0.45 0.50 0.55 0.60 0.65
+> wc
+> Moltbook Reddit
+
+(f) Figure 4: Semantic organization of Reddit and Moltbook communities. The upper row shows the distributions of the three semantic quantities, while the lower row shows their temporal evolution. (a,d) Internal semantic consistency, quantified through the mean post-to-centroid cosine distance ¯dc. (a) Distribution of ¯dc across communities. Smaller values indicate that post titles are more tightly concentrated around their community centroid. Moltbook exhibits a pronounced lower-distance tail, whereas Reddit extends further toward larger distances. (d) 
+
+Temporal evolution of the mean post-to-centroid distance. Reddit maintains larger values over most of the observation period, indicating greater within-community semantic heterogeneity. 
+
+(b,e) Between-community semantic differentiation, quantified through the pairwise centroid distance uc,c ′ . (b) Distribution of pairwise cosine distances between community centroids. Reddit–Reddit and Moltbook–Moltbook pairs characterize within-platform semantic differen-tiation, while Reddit–Moltbook pairs represent cross-platform distances. Moltbook communi-ties exhibit smaller pairwise distances than Reddit communities. (e) Temporal evolution of the mean within-platform pairwise centroid distance. Reddit maintains comparatively high se-mantic differentiation, whereas Moltbook decreases toward the end of the observation period. 
+
+(c,f ) Semantic correspondence between community names and content, quantified through the centroid-to-name distance wc. (c) Distribution of wc across communities. Moltbook is shifted toward larger distances, indicating greater name–content misalignment. (f ) Temporal evolution of the mean centroid-to-name distance. Reddit remains comparatively stable, whereas Moltbook shows an overall increase in name–content misalignment. For the temporal panels (d–f ) , dotted lines indicate the number of active communities included in each temporal window (right axis), and shaded regions indicate 95% confidence intervals around the mean. Bootstrap assessments of the differences in u and w are reported in Appendix C. 14 0.662 for Reddit and 0.615 for Moltbook, corresponding to an observed difference of ∆R−M =0.0476 . A community-level bootstrap confirmed that this difference is robust (95% bootstrap CI: [0 .0186 , 0.0722] ; two-sided empirical p = 0 .001 ). The complete bootstrap procedure and the corresponding distributions are reported in Appendix C. The temporal analysis (Fig. 4e) further shows that this difference becomes more pronounced over time. After an initial period in which both platforms exhibit comparable values, Reddit maintains relatively high pairwise centroid distances, whereas Moltbook remains at lower values and shows a marked decrease toward the end of the observation period. Thus, Reddit sustains a more differentiated community-level semantic structure as the platforms evolve. Finally, we evaluated the correspondence between community names and their content through the centroid-to-name distance wc (Fig. 4c,f). Smaller values indicate stronger semantic alignment between a community name and the content published within it, whereas larger values indicate greater name–content misalignment. Moltbook exhibits a distribution shifted toward larger distances than Reddit (Fig. 4c), with mean distances of 0.552 and 0.461 , respectively. The observed Reddit–Moltbook difference was ∆R−M = −0.0920 , and bootstrap resampling yielded a 95% confidence interval of [−0.1171 , −0.0667] , with no bootstrap realization reversing the observed ordering (two-sided empirical p < 10 −4). Further details and the complete bootstrap distributions are provided in Appendix C. This difference also increases over time (Fig. 4f). While Reddit remains comparatively stable throughout the observation period, Moltbook shows an overall increase in centroid-to-name distance, despite short-term fluctuations. Therefore, the content discussed within Moltbook communities becomes progressively less aligned with the semantic information conveyed by their names, whereas this relationship remains comparatively stable in Reddit. These results characterize Moltbook communities as more internally homogeneous, less semanti-cally differentiated from one another, and less aligned with their community names than Reddit communities, with the latter two differences becoming increasingly pronounced over time. 
+
+3.3 Comment Network analysis 
+
+Finally, we analize a more direct interaction between users through comments publications in both platforms. For this, we constructed a directed user network where each node represents a user, and a directed link from user i to user j indicates that user i commented on a publication authored by user j. Based on this network topology, we studied network motifs, which are the fundamental structural patterns emerging from all possible interaction combinations among three nodes. While there are 16 possible triad configurations, we discarded those containing isolated nodes or lacking connections entirely, resulting in a total of 13 valid structural motifs for our analysis. Figure 5 presents the relative frequency distribution of these motifs for both the Reddit and Moltbook networks. The analysis reveals a systematically higher prevalence of most triadic structures in Reddit compared to Moltbook, with the notable exception of the motif 021D. This specific structure, characterized by a single user commenting on two different users who neither reply nor interact with each other, is significantly more prominent in Moltbook. The overrepresentation of this motif suggests that Moltbook users predominantly exhibit a broadcast-like behavior, failing to engage in deeper discussions that involve a reciprocal exchange of ideas. Conversely, the structural motifs that are more heavily represented in Reddit capture much richer interaction dynamics. These include "influencer" configurations (motif 021U), chained conversational patterns (motif 021C) that are characteristic of forum-based platforms like Reddit and Moltbook, and, most importantly, structures that explicitly manifest direct reciprocity 15 and mutual idea exchange between at least two users. In conclusion, the defining topological difference between the two platforms is that Moltbook’s interaction behavior is dominated by one-to-many communication devoid of reciprocity, whereas Reddit fosters a significantly more reciprocal environment characterized by active idea exchange. 
+
+Figure 5: Relative proportion of triadic motifs in the comment networks of Reddit and Molt-book. The relative frequency of each motif is calculated by normalizing its absolute count by the total occurrences of the 13 valid motif types shown in the figure, excluding disconnected 3-node subgraphs. 
+
+# 4 Discussion 
+
+Although Moltbook and Reddit share a broadly similar community-based architecture, the two platforms differ systematically across multiple organizational scales: in how activity is dis-tributed, in how communities organize semantically, and in how users interact with one another. Reddit users concentrate their activity within a restricted subset of communities, but Moltbook agents do so even more strongly, exploring a narrower set of communities regardless of their overall activity level. These results suggest that reproducing the architecture of a autonomous AI agents platform is not enough to reproduce the same form of collective organization when the participants are humans. At the semantic level, Reddit combines heterogeneous content within individual communities with strong differentiation between communities, and communities inferred purely from pat-terns of user activity align closely with what their members actually discuss. Moltbook shows the opposite combination: its communities are internally more homogeneous, but also less dif-ferentiated from one another, and this semantic homogeneity does not translate into a more organized community structure. Community names further reflect this divergence, remaining 16 well aligned with content in Reddit while becoming progressively less aligned with content in Moltbook over time, alongside a corresponding decline in between-community differentiation. Within our observation window, Moltbook does not converge toward the semantic organization of early Reddit; instead, some of these differences become more pronounced as the platform evolves. This divergence extends to the structure of user interactions. Moltbook’s comment network is dominated by non-reciprocal, broadcast-like exchanges, whereas Reddit shows a substantially higher prevalence of reciprocal and chained engagement between users. These results reveal a distinction between generating social activity and generating social organization: LLM agents readily produce large volumes of interaction and non-trivial network structure, but the result-ing system does not reproduce, to the same extent, the coupling between community identity, semantic differentiation, and reciprocal engagement observed in Reddit. This comparison is limited by the different historical and technological contexts of the two platforms, by the largely unobserved architecture of Moltbook agents, and by an early observation window that may not reflect a stationary state of the platform. 
+
+Author Contributions 
+
+Conceptualization, F.D.C., L.D.C., S.P. and P.B.; methodology, software, formal analysis, vi-sualization, validation and writing—original draft F.D.C., L.D.C. and S.P.; resources, P.B.; investigation and data curation, F.D.C. and L.D.C.; writing—review and editing, all authors; supervision, S.P., M.K. and P.B. All authors have read and agreed to the published version of the manuscript. 
+
+Funding 
+
+This research was funded by UBACyT, 20020220100181BA. 
+
+Data Availability Statement 
+
+Data regarding posts and comments for both Moltbook and Reddit can be found here: https://osf.io/gjvbs. 
+
+Acknowledgments 
+
+During the preparation of this manuscript/study, the authors used ChatGPT 5.5 and Claude Sonnet 5 for the purposes of translation and grammar revision. The authors also used ChatGPT 5.5 and Claude Code 2.1.232 for the purposes of generating Python code for data collection, anal-ysis and graphics. The authors have reviewed and edited the output and take full responsibility for the content of this publication. 
+
+Conflicts of Interest 
+
+The authors declare no conflicts of interest. The funders had no role in the design of the study; in the collection, analyses, or interpretation of data; in the writing of the manuscript; or in the decision to publish the results. 17 A Moltbook API data collection 
+
+We collected public activity from Moltbook through its application programming interface (API) using custom Python scripts. The dataset comprises posts and their associated comments, stored in JSON Lines (JSONL) format to allow efficient sequential processing of the complete API responses. 
+
+A.1 Post collection 
+
+Posts were collected using a script that queried the posts endpoint in reverse chronological order and iteratively traversed the available content using cursor-based pagination. Each API response was appended to the local dataset, preserving the information returned by the platform for each post, including its content, author and community metadata, engagement metrics, and timestamps. Posts were retrieved using the endpoint 
+
+/api/v1/posts?limit=100&sort=new 
+
+which returns up to 100 posts per request, ordered from newest to oldest. The response addi-tionally contains the information required for cursor-based pagination. When further results are available, the field has_more is set to true and the API provides a next_cursor . The following request is then performed using 
+
+/api/v1/posts?limit=100&sort=new&cursor=<next_cursor> 
+
+A shortened example of the response returned by the API is shown below: 
+
+{"success": true, "posts": [ {"id": "c93482be-5263-47fb-9cb9-d5ff0fc90949", "title": "Agents do not learn structure ...", "content": "The structural-learning ceiling ...", "type": "text", "author_id": "15e2b1c3-f7d8-436a-a7a6-0f9bbf088823", "author": { "id": "15e2b1c3-f7d8-436a-a7a6-0f9bbf088823", "name": "neo_konsi_s2bw", "description": "I autopsy agent failure ...", "avatarUrl": null, "karma": 337279, "followerCount": 1541, "followingCount": 927, "isClaimed": true, "isActive": true, "createdAt": "2026-04-03T15:51:17.917Z", "lastActive": "2026-08-10T17:49:54.703Z", 
+
+18 "deletedAt": null }, "submolt": { "id": "29beb7ee-ca7d-4290-9c2f-09926264866f", "name": "general", "display_name": "General" }, "upvotes": 248, "downvotes": 0, "score": 248, "comment_count": 2273, "hot_score": 0, "is_pinned": false, "is_locked": false, "is_deleted": false, "verification_status": "verified", "is_spam": false, "created_at": "2026-08-09T07:58:07.396Z", "updated_at": "2026-08-09T07:58:07.396Z", "labels": { "pinned": [], "inline": [], "metadata": [] }}, ... ], "has_more": true, "next_cursor": "<cursor>" }
+
+A.2 Comment collection 
+
+After the post collection was completed, comments were collected using a script that iterated through the previously retrieved posts and queried the corresponding comment endpoint for every post reporting at least one comment. Comment pages were also traversed using cursor-based pagination and stored in a separate JSONL file. The complete comment objects returned by the API were preserved, including the nested reply information provided by the platform. The corresponding endpoint has the form 
+
+/api/v1/posts/<post_id>/comments?limit=100&sort=new 
+
+where post_id identifies the corresponding post. As for posts, comment retrieval is paginated using the has_more and next_cursor fields returned by the API. A shortened example of a comment response is 19 Table 1: Fields returned by the Moltbook posts endpoint. 
+
+Field Description 
+
+success Indicates whether the API request was successfully processed. 
+
+posts List containing the post objects returned by the request. 
+
+id Unique identifier of the post. 
+
+title Post title. 
+
+content Textual content of the post. 
+
+type Type of content associated with the post. 
+
+author_id Unique identifier of the author. 
+
+author Nested object containing information about the agent that cre-ated the post (Table 3). 
+
+submolt Nested object containing the identifier, internal name, and dis-play name of the community in which the post was published. 
+
+upvotes , downvotes Number of positive and negative votes reported by the plat-form. 
+
+score Post score reported by the platform. 
+
+comment_count Number of comments associated with the post as reported by the API. 
+
+hot_score Platform-provided ranking score. 
+
+is_pinned , is_locked ,
+
+is_deleted , is_spam 
+
+Boolean status flags associated with the post. 
+
+verification_status Verification status reported by the platform. 
+
+created_at , updated_at Timestamps corresponding to post creation and last update. 
+
+labels Additional labels associated with the post, grouped by the API into pinned , inline , and metadata categories. 
+
+has_more Indicates whether additional pages of results are available. 
+
+next_cursor Cursor used to retrieve the next page of posts. 
+
+{"success": true, "post_id": "c93482be-5263-47fb-9cb9-d5ff0fc90949", "sort": "new", "count": 2181, "comments": [ {"id": "35612929-de84-469c-ae22-ffaae1c8ccc9", "post_id": "c93482be-5263-47fb-9cb9-d5ff0fc90949", "content": "That phone-server example ...", "author_id": "82882fd2-cfc2-4159-9af1-43806987c9cf", "author": { "id": "82882fd2-cfc2-4159-9af1-43806987c9cf", "name": "sophiaelya", ... }, "upvotes": 9, "downvotes": 0, "score": 9, 
+
+20 "reply_count": 0, "is_deleted": false, "depth": 0, "verification_status": "verified", "is_spam": false, "created_at": "2026-08-09T08:43:02.716Z", "updated_at": "2026-08-09T08:43:02.716Z", "replies": [ {"id": "e0ae7f86-c1be-46b2-b8a4-11d12c9a7b49", "post_id": "c93482be-5263-47fb-9cb9-d5ff0fc90949", "parent_id": "35612929-de84-469c-ae22-ffaae1c8ccc9", "content": "Exactly--the dangerous part ...", "author_id": "15e2b1c3-f7d8-436a-a7a6-0f9bbf088823", "author": {...}, ... }]}, ... ], "has_more": true, "next_cursor": "<cursor>" }
+
+# B Reddit data 
+
+The Reddit dataset was obtained from the historical archive distributed through Academic Torrents. The archive provides separate monthly files for submissions and comments. The records originate from the Pushshift Reddit Dataset [12], which collected and archived historical Reddit activity. The original files are stored as Zstandard-compressed newline-delimited JSON (JSONL), such that each line represents a single submission or comment. For this study, we retrieved both types of records from December 2005 through December 2009. 
+
+B.1 Reddit submissions 
+
+Submission files contain one JSON object for each post published on Reddit. A shortened example of a submission record used in our dataset is shown below: 
+
+{"id": "6agu3", "author": "msaleem", 
+
+21 Table 2: Fields returned by the Moltbook comments endpoint. 
+
+Field Description 
+
+success Indicates whether the API request was successfully processed. 
+
+post_id Unique identifier of the post whose comments were requested. 
+
+sort Sorting criterion used for the returned comments. 
+
+count Number of comments reported by the endpoint. 
+
+comments List containing the comment objects returned by the request. 
+
+id Unique identifier of the comment. 
+
+post_id Identifier of the post to which the comment belongs. 
+
+content Textual content of the comment. 
+
+author_id Unique identifier of the comment author. 
+
+author Nested object containing information about the agent that cre-ated the comment (Table 3). 
+
+upvotes , downvotes Number of positive and negative votes reported for the com-ment. 
+
+score Comment score reported by the platform. 
+
+reply_count Number of replies reported for the comment. 
+
+depth Depth of the comment within the discussion tree. 
+
+is_deleted , is_spam Boolean status flags associated with the comment. 
+
+verification_status Verification status reported by the platform. 
+
+created_at , updated_at Timestamps corresponding to comment creation and last up-date. 
+
+replies Nested list containing replies associated with the comment. Reply objects contain analogous comment information and additionally include a parent_id identifying the comment to which they respond. 
+
+has_more Indicates whether additional pages of comments are available. 
+
+next_cursor Cursor used to retrieve the next page of comments. 
+
+"created_utc": 1204329644, "domain": "wetter-foto.de", "is_self": false, "num_comments": 0, "permalink": "/r/reddit.com/comments/6agu3/10_awesome_lightning_pictures/", "score": 14, "selftext": "", "subreddit": "reddit.com", "subreddit_id": "t5_6", "title": "10 Awesome Lightning Pictures", "url": "http://www.wetter-foto.de/lightning-special/", "archived": true, "edited": false, "locked": false, "over_18": false, "stickied": false, ... }
+
+22 Table 3: Information contained in the author object returned by the Moltbook API. 
+
+Field Description 
+
+id Unique identifier of the agent. 
+
+name Agent name. 
+
+description Profile description provided for the agent. 
+
+avatarUrl URL of the profile image, when available. 
+
+karma Agent karma value reported by the platform. 
+
+followerCount Number of followers reported for the agent. 
+
+followingCount Number of accounts followed by the agent. 
+
+isClaimed Boolean status flag indicating whether the account is marked as claimed by the platform. 
+
+isActive Boolean status flag indicating whether the account is marked as active. 
+
+createdAt Timestamp corresponding to account creation. 
+
+lastActive Timestamp of the last activity reported for the account. 
+
+deletedAt Deletion timestamp, when applicable. 
+
+B.2 Reddit comments 
+
+Comment files follow the same newline-delimited JSON structure, with each record representing a single Reddit comment. In addition to the comment text and author information, the records contain identifiers linking each comment to its corresponding submission and, when applicable, to its parent comment. A shortened example is 
+
+{"id": "c03leke", "name": "t1_c03leke", "author": "AngelaMotorman", "body": "I hear you. I purely hate the ...", "subreddit": "pics", "subreddit_id": "t5_2qh0u", "link_id": "t3_6e2ry", "parent_id": "t1_c03leij", "created_utc": "1207008108", "score": 6, "ups": 6, "downs": 0, "controversiality": 0, "archived": true, "edited": false, "score_hidden": false, "gilded": 0, "retrieved_on": 1425839647, ... }
+
+Unlike the nested reply structure returned by the Moltbook API, Reddit comments are stored as independent records. Conversation trees can be reconstructed using parent_id , which identifies the direct parent of each comment, and link_id , which identifies the submission to which the comment belongs. 23 Table 4: Main fields contained in Reddit submission records. 
+
+Field Description 
+
+id Unique identifier of the submission. 
+
+author Username of the account that created the submission. 
+
+title Title of the submission. 
+
+selftext Textual content of self-posts. It is empty for submissions consisting only of an external link. 
+
+url URL associated with the submission. 
+
+domain Domain associated with the submitted URL. 
+
+subreddit Name of the subreddit in which the submission was pub-lished. 
+
+subreddit_id Unique identifier of the corresponding subreddit. 
+
+subreddit_name_prefixed Subreddit name including the r/ prefix. 
+
+subreddit_type Type or status of the subreddit reported in the archive. 
+
+created_utc Submission creation time represented as a Unix timestamp. 
+
+score Submission score reported by Reddit. 
+
+num_comments Number of comments associated with the submission. 
+
+num_crossposts Number of crossposts reported for the submission. 
+
+permalink Reddit-relative URL identifying the submission page. 
+
+is_self Boolean flag indicating whether the submission is a Reddit self-post rather than an external link. 
+
+is_video ,
+
+is_reddit_media_domain 
+
+Flags describing whether the submission contains video or media hosted directly by Reddit. 
+
+archived , locked ,
+
+stickied , hidden 
+
+Status flags associated with the submission. 
+
+over_18 , spoiler Content-related flags reported by Reddit. 
+
+edited Indicates whether the submission had been edited. 
+
+gilded Gilding information reported for the submission. 
+
+author_flair_* Fields describing the author’s subreddit-specific flair. 
+
+link_flair_* Fields describing flair associated with the submission. 
+
+media , secure_media ,
+
+media_embed ,
+
+secure_media_embed 
+
+Metadata associated with embedded media, when present. 
+
+retrieved_on Timestamp indicating when the record was retrieved by the archival system. 
+
+# C Bootstrap assessment of semantic differences 
+
+To assess the robustness of the differences in semantic organization between Reddit and Molt-book, we performed non-parametric bootstrap analyses for the between-community centroid distance u and the community name–content distance w. In both cases, 10,000 bootstrap real-izations were generated independently for Reddit and Moltbook. For each realization, we calculated the corresponding mean distance for each platform and their difference, 
+
+∆(b) = ¯ x(b)Reddit − ¯x(b)Moltbook , (19) where b denotes the bootstrap realization and x corresponds to the semantic metric under consideration. The 95% bootstrap confidence interval was obtained from the 2.5th and 97.5th 24 Table 5: Fields contained in Reddit comment records. 
+
+Field Description 
+
+id Unique identifier of the comment. 
+
+name Full Reddit identifier of the comment. 
+
+body Textual content of the comment. 
+
+author Username of the account that created the comment. 
+
+subreddit Name of the subreddit in which the comment was published. 
+
+subreddit_id Unique identifier of the corresponding subreddit. 
+
+link_id Identifier of the submission to which the comment belongs. 
+
+parent_id Identifier of the direct parent of the comment. The parent can be either another comment or the submission itself. 
+
+created_utc Comment creation time represented as a Unix timestamp. 
+
+score Comment score reported by Reddit. 
+
+ups , downs Numbers of upvotes and downvotes reported in the archived record. 
+
+controversiality Controversiality indicator reported for the comment. 
+
+score_hidden Boolean flag indicating whether the comment score was hid-den. 
+
+archived Boolean flag indicating whether the corresponding discussion was archived. 
+
+edited Indicates whether the comment had been edited. 
+
+gilded Gilding information associated with the comment. 
+
+distinguished Moderator or administrator distinction associated with the comment, when applicable. 
+
+author_flair_css_class ,
+
+author_flair_text 
+
+Subreddit-specific author flair information. 
+
+retrieved_on Timestamp indicating when the record was retrieved by the archival system. percentiles of the resulting distribution of ∆(b).
+
+C.1 Between-community centroid distances 
+
+Pairwise distances between community centroids are not statistically independent, since ev-ery community centroid contributes to multiple pairs. Consequently, directly resampling the complete set of pairwise distances would treat dependent observations as independent and un-derestimate the uncertainty of their mean. We therefore used the communities themselves as the bootstrap sampling units. For each bootstrap realization, the Reddit and Moltbook centroid sets were resampled indepen-dently with replacement while preserving their original numbers of communities ( nR = 230 and 
+
+nM = 628 , respectively). All within-platform pairwise cosine distances were then recomputed from the resampled centroids, and their mean was calculated for each platform. The empirical mean pairwise centroid distances were 
+
+¯uR = 0 .6623 , ¯uM = 0 .6147 , (20) giving an observed difference 25 ∆u = ¯ uR − ¯uM = 0 .0476 . (21) Across 10,000 bootstrap realizations, the mean difference was 0.0457 and the 95% bootstrap interval was 
+
+∆u ∈ [0 .0186 , 0.0722] . (22) The interval lies entirely above zero, and Reddit exhibited the larger mean distance in 99.95% of bootstrap realizations (two-sided empirical p = 0 .001 ). These results support the conclusion that Reddit communities are more semantically differentiated from one another than Moltbook communities. Bootstrap realizations are shown in Figure 6. (a) (b) 
+
+Figure 6: Bootstrap assessment of the difference in between-community semantic differentia-tion. (a) Bootstrap distributions of the mean pairwise centroid cosine distance for Reddit and Moltbook, obtained by resampling community centroids with replacement and recomputing all within-platform pairwise distances. Dashed vertical lines indicate the means measured in the original data. (b) Bootstrap distribution of the difference ∆u = ¯ uR − ¯uM . The vertical reference at zero represents the null value of no difference between platforms, while the dashed line indi-cates the observed difference. The shaded interval corresponds to the 95% bootstrap confidence interval. The interval lies entirely above zero, supporting greater between-community semantic differentiation in Reddit. 
+
+C.2 Community name–content distances 
+
+For the centroid-to-name distance w, each community contributes a single observation. We therefore performed a standard non-parametric bootstrap by independently resampling the community-level distances with replacement within each platform, preserving the original sample sizes ( nR = 230 and nM = 628 ). The observed mean centroid-to-name distances were 
+
+¯wR = 0 .4605 , ¯wM = 0 .5525 , (23) corresponding to 26 ∆w = ¯ wR − ¯wM = −0.0920 . (24) Across 10,000 bootstrap realizations, the mean difference was −0.0919 , with a 95% bootstrap interval 
+
+∆w ∈ [−0.1171 , −0.0667] . (25) All bootstrap realizations preserved the observed ordering ¯wM > ¯wR (two-sided empirical p < 
+
+10 −4). Thus, the greater centroid-to-name distance observed in Moltbook is highly robust to resampling of the communities. Bootstrap realizations are shown in Figure 7. (a) (b) 
+
+Figure 7: Bootstrap assessment of the difference in community name–content correspondence. 
+
+(a) Bootstrap distributions of the mean centroid-to-name cosine distance for Reddit and Molt-book. Dashed vertical lines indicate the means measured in the original data. (b) Bootstrap distribution of ∆w = ¯ wR − ¯wM . The vertical reference at zero indicates no difference between the platforms, while the dashed line marks the observed difference. The shaded region repre-sents the 95% bootstrap confidence interval. The complete interval lies below zero, indicating systematically larger name–content distances in Moltbook. 
+
+C.3 Activity density 
+
+To better characterize participatory behavior, we analyzed the users’ activity density, defined as their total number of publications divided by their lifetime. The resulting distributions shown in Fig. 8 reveal fundamental differences in engagement between the two platforms. Moltbook exhibits a pronounced unimodal curvature with a heavily skewed right tail and a noticeable di-vergence between its mean and median. This strong concentration of values, alongside a larger presence of extreme outliers, suggests a rigid, predominant mode of interaction among its user base. In contrast, Reddit presents a flatter, more homogeneous spread across its domain. It fea-tures significantly fewer outliers, extends to smaller minimum values, and displays a high degree of central symmetry where its mean and median perfectly coincide. This broader, more equi-table distribution indicates that Reddit accommodates a wider and more heterogeneous variety of participatory approaches, fostering a balanced network engagement compared to Moltbook’s highly concentrated patterns. 27 (a) (b) Figure 8: Activity density distribution for (a) Moltbook and (b) Reddit 
+
+C.4 Activity distribution by submolts and subreddits 
+
+To further characterize the extent to which users participate within the network, we analyzed the activity distribution across individual submolts and subreddits. To visualize this behavior, we plotted in Fig. 9 horizontal bar charts displaying the total volume of posts and comments for the top ten most active communities in each respective platform. The analysis reveals a striking contrast in how activity is concentrated. Moltbook exhibits a highly skewed distribution, overwhelmingly dominated by a single major community. Specifi-cally, we observe an entire order of magnitude difference in total activity between the first and the second most active submolts. Conversely, Reddit displays a much more gradual decline in user engagement across its leading subreddits; an equivalent order-of-magnitude drop in activity only emerges when comparing the first community to the tenth. Ultimately, these findings indicate that Reddit presents a significantly more equitable partici-pation profile across its communities. While Moltbook’s user activity is disproportionately cen-tralized within one primary submolt, Reddit successfully sustains a distributed ecosystem where multiple communities can simultaneously attract and maintain robust levels of user engagement. 
+
+# References 
+
+[1] Alan Mislove, Massimiliano Marcon, Krishna P Gummadi, Peter Druschel, and Bobby Bhattacharjee. Measurement and analysis of online social networks. In Proceedings of the 7th ACM SIGCOMM conference on Internet measurement , pages 29–42, 2007. [2] Mark EJ Newman. The structure and function of complex networks. SIAM review , 45(2): 167–256, 2003. [3] David Lazer, Alex Pentland, Lada Adamic, Sinan Aral, Albert-László Barabási, Devon Brewer, Nicholas Christakis, Noshir Contractor, James Fowler, Myron Gutmann, et al. Computational social science. Science , 323(5915):721–723, 2009. [4] Michele Avalle, Niccolò Di Marco, Gabriele Etta, Emanuele Sangiorgio, Shayan Alipour, Anita Bonetti, Lorenzo Alvisi, Antonio Scala, Andrea Baronchelli, Matteo Cinelli, and Walter Quattrociocchi. Persistent interaction patterns across social media platforms and over time. Nature , 628(8008):582–589, 2024. doi: 10.1038/s41586-024-07229-y. 28 10 2 10 3 10 4 10 5 10 6 10 7
+
+> Frequency m/crypto m/ponderings m/agentfailures m/introductions m/philosophy m/mbc-20 m/mbc20 m/offmychest m/agents m/general Submolt Name
+> Top 10 Most Active Submolts
+> Activity Type Comments Posts
+
+(a) 10 5 
+
+> Frequency r/technology r/funny r/business r/entertainment r/worldnews r/science r/pics r/programming r/politics r/reddit.com Subreddit Name
+> Top 10 Most Active Subreddits
+> Activity Type Comments Posts
+
+(b) Figure 9: Activity distribution by community for (a) the top 10 submolts of Moltbook and (b) the top 10 subreddits of Reddit. We observe a greater concentration of activity in Moltbook, where the difference of total activity between the first and second submolt is one order of magnitude, while in Reddit this difference first appears between the first and the tenth subreddit. [5] Camille Roth and Jean-Philippe Cointet. Social and semantic coevolution in knowledge networks. Social Networks , 32(1):16–29, 2010. [6] Mark EJ Newman and Aaron Clauset. Structure and inference in annotated networks. 
+
+Nature communications , 7(1):11863, 2016. [7] Darko Hric, Tiago P Peixoto, and Santo Fortunato. Network structure, metadata, and the prediction of missing nodes and annotations. Physical Review X , 6(3):031038, 2016. [8] Katie Elson Anderson. Ask me anything: what is reddit? Library hi tech news , 32(5), 2015. [9] Randal S. Olson and Zachary P. Neal. Navigating the massive world of reddit: Using backbone networks to map user interests in social media. arXiv preprint arXiv:1312.3387 ,2013. doi: 10.48550/arXiv.1312.3387. [10] Carlo Michele Valensise, Matteo Cinelli, Alessandro Galeazzi, and Walter Quattrocioc-chi. Drifts and shifts: Characterizing the evolution of users interests on reddit. CoRR ,abs/1912.09210, 2019. URL http://arxiv.org/abs/1912.09210 .[11] Isaac Waller and Ashton Anderson. Quantifying social organization and political polariza-tion in online platforms. Nature , 600:264–268, 2021. doi: 10.1038/s41586-021-04167-x. [12] Jason Baumgartner, Savvas Zannettou, Brian Keegan, Megan Squire, and Jeremy Black-burn. The pushshift reddit dataset. Proceedings of the International AAAI Conference on Web and Social Media , 14(1):830–839, 2020. doi: 10.1609/icwsm.v14i1.7347. [13] Randal S Olson and Zachary P Neal. Navigating the massive world of reddit: Using back-bone networks to map user interests in social media. PeerJ Computer Science , 1:e4, 2015. doi: 10.7717/peerj-cs.4. [14] Jack Hessel, Chenhao Tan, and Lillian Lee. Science, askscience, and badscience: On the coexistence of highly related communities. In Proceedings of the international AAAI con-ference on web and social media , volume 10, pages 171–180, 2016. 29 [15] Ashwini Ashokkumar, Luke Hewitt, Isaias Ghezae, and Robb Willer. Large language models can predict the results of social science experiments. Nature , pages 1–8, 2026. doi: 10.1038/ s41586-026-10742-x. [16] Joon Sung Park, Joseph O’Brien, Carrie Jun Cai, Meredith Ringel Morris, Percy Liang, and Michael S Bernstein. Generative agents: Interactive simulacra of human behavior. In 
+
+Proceedings of the 36th annual acm symposium on user interface software and technology ,pages 1–22, 2023. [17] Azza Bouleimen, Giordano De Marzo, Taehee Kim, Nicolò Pagan, Hannah Metzler, Silvia Giordano, Anikó Hannák, and David Garcia. The collective turing test: large language models can generate realistic multi-user discussions. Scientific Reports , 2026. doi: 10.1038/ s41598-026-62286-9. [18] Xinyi Mou, Xuanwen Ding, Qi He, Liang Wang, Jingcong Liang, Xinnong Zhang, Jiayu Lin, Jiayu Zhou, Xuanjing Huang, and Zhongyu Wei. From individual to society: Asurvey on social simulation driven by large language model-based agents. arXiv preprint arXiv:2412.03563 , 2024. doi: 10.48550/arXiv.2412.03563. [19] Farnoosh Hashemi and Michael Macy. An empirical study of collective behaviors and social dynamics in large language model agents. In Proceedings of the 19th Conference of the European Chapter of the Association for Computational Linguistics , pages 7327–7351, Rabat, Morocco, 2026. Association for Computational Linguistics. doi: 10.18653/v1/2026. eacl-long.344. [20] Lin Chen, Yunke Zhang, Jie Feng, Haoye Chai, Honglin Zhang, Bingbing Fan, Yibo Ma, Shiyuan Zhang, Nian Li, Tianhui Liu, Nicholas Sukiennik, Keyu Zhao, Yu Li, Ziyi Liu, Fengli Xu, and Yong Li. Ai agent behavioral science. Humanities and Social Sciences Communications , 13:1011, 2026. doi: 10.1057/s41599-026-07316-7. [21] Moltbook web page. https://moltbook.com/ . Accessed: 2026-08-12. [22] Yukun Jiang, Yage Zhang, Xinyue Shen, Michael Backes, and Yang Zhang. Humans Wel-come to Observe: A first look at the agent social network moltbook. arXiv preprint arXiv:2602.10127 , 2026. doi: 10.48550/arXiv.2602.10127. [23] Agam Goyal, Olivia Pal, Hari Sundaram, Eshwar Chandrasekharan, and Koustuv Saha. Social simulacra in the wild: Ai agent communities on moltbook. arXiv preprint arXiv:2603.16128 , 2026. doi: 10.48550/arXiv.2603.16128. [24] Yunbei Zhang, Kai Mei, Ming Liu, Janet Wang, Dimitris N. Metaxas, Xiao Wang, Jihun Hamm, and Yingqiang Ge. Agents in the wild: Safety, society, and the illusion of sociality on moltbook. arXiv preprint arXiv:2602.13284 , 2026. doi: 10.48550/arXiv.2602.13284. [25] Saber Zerhoudi, Kanishka Ghosh Dastidar, Felix Klement, Artur Romazanov, Andreas Einwiller, Dang H Dang, Michael Dinzinger, Michael Granitzer, Annette Hautli-Janisz, Stefan Katzenbeisser, et al. Form without function: Agent social behavior in the moltbook network. arXiv preprint arXiv:2604.13052 , 2026. [26] Sebastian P. H. Speer, Laetitia Mwilambwe-Tshilobo, Lily Tsoi, Shannon M. Burns, Emily B. Falk, and Diana I. Tamir. Hyperscanning shows friends explore and strangers converge in conversation. Nature Communications , 15:7781, 2024. doi: 10.1038/ s41467-024-51990-7. [27] Atsushi Ueshima, Matthew I. Jones, and Nicholas A. Christakis. Simple autonomous agents can enhance creative semantic discovery by human groups. Nature Communications , 15: 5212, 2024. doi: 10.1038/s41467-024-49528-y. 30 [28] RaiderBDev. Reddit comments/submissions 2005-06 – 2023-12. Accessed: 2026-07-01. [29] Nils Reimers and Iryna Gurevych. Sentence-bert: Sentence embeddings using siamese bert-networks. In Proceedings of the 2019 Conference on Empirical Methods in Nat-ural Language Processing and the 9th International Joint Conference on Natural Lan-guage Processing , pages 3982–3992. Association for Computational Linguistics, 2019. doi: 10.18653/v1/D19-1410. [30] Mark O Hill. Diversity and evenness: a unifying notation and its consequences. Ecology ,54(2):427–432, 1973. [31] Fabio Saracco, Mika J Straka, Riccardo Di Clemente, Andrea Gabrielli, Guido Caldarelli, and Tiziano Squartini. Inferring monopartite projections of bipartite networks: an entropy-based approach. New Journal of Physics , 19(5):053022, may 2017. doi: 10.1088/1367-2630/ aa6b38. URL https://doi.org/10.1088/1367-2630/aa6b38 .[32] Vincent D Blondel, Jean-Loup Guillaume, Renaud Lambiotte, and Etienne Lefebvre. Fast unfolding of communities in large networks. Journal of statistical mechanics: theory and experiment , 2008(10):P10008, 2008. 31

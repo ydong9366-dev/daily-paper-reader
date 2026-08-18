@@ -41,17 +41,17 @@
 <section class="dpr-home-dashboard-card dpr-home-report-card">
   <div class="dpr-home-dashboard-header">
     <div>
-      <span class="dpr-home-dashboard-kicker">2026-08-17</span>
+      <span class="dpr-home-dashboard-kicker">2026-08-18</span>
       <h3 class="dpr-home-dashboard-title">今日汇总</h3>
     </div>
-    <strong class="dpr-home-dashboard-count">共 17 篇</strong>
+    <strong class="dpr-home-dashboard-count">共 25 篇</strong>
   </div>
   <dl class="dpr-home-dashboard-stats">
     <div class="dpr-home-dashboard-stat"><dt>累计更新</dt><dd>1 次</dd></div>
-    <div class="dpr-home-dashboard-stat"><dt>精读</dt><dd>6</dd></div>
+    <div class="dpr-home-dashboard-stat"><dt>精读</dt><dd>14</dd></div>
     <div class="dpr-home-dashboard-stat"><dt>速读</dt><dd>11</dd></div>
   </dl>
-  <p class="dpr-home-dashboard-body">最近更新：2026-08-17 20:48:06 UTC<br>状态：成功</p>
+  <p class="dpr-home-dashboard-body">最近更新：2026-08-18 20:48:07 UTC<br>状态：成功</p>
 </section>
 <section class="dpr-home-dashboard-card dpr-home-brief-card">
   <div class="dpr-home-dashboard-header">
@@ -62,9 +62,7 @@
     <strong class="dpr-home-dashboard-count">AI</strong>
   </div>
   <div class="dpr-home-dashboard-body">
-<p>今日共读17篇论文，精读6篇，重点关注多智能体强化学习前沿问题。</p>
-<p>两篇9.0分高星论文分别揭示“模拟器崩溃”风险，并给出卫星网络切换与功率分配的联合优化方案。</p>
-<p>建议优先了解多智能体模拟器的多样性设计，以及其在资源调度中的实际应用。</p>
+<p>今日共读25篇论文，精读14篇、速读11篇，重点聚焦AI智能体评估与多智能体框架。最值得关注的是《Beyond Final Scores》对长程AI研发智能体的系统评估，以及《MARC v1》提出的开源临床多智能体协调框架，均获9.0高分。建议优先精读这两篇，再结合8.0分的6G语义通信与边缘SLM虚拟代理文章拓展视野。</p>
   </div>
 </section>
 <section class="dpr-home-dashboard-card dpr-home-deep-card">
@@ -73,12 +71,12 @@
       <span class="dpr-home-dashboard-kicker">今日累计</span>
       <h3 class="dpr-home-dashboard-title">精读推荐</h3>
     </div>
-    <strong class="dpr-home-dashboard-count">6 篇</strong>
+    <strong class="dpr-home-dashboard-count">14 篇</strong>
   </div>
   <div class="dpr-home-dashboard-body">
-<ul class="dpr-home-dashboard-paper-list"><li><span class="dpr-home-dashboard-paper-title" title="One Frozen Simulator Is Not Enough: Simulator Collapse in Multi-Agent RL">One Frozen Simulator Is Not Enough: Simulator Collapse in Multi-Agent RL</span></li><li><span class="dpr-home-dashboard-paper-title" title="Multi-Agent Reinforcement Learning for Joint Handover Management and Power Allocation in Multi-Orbit Satellite Networks">Multi-Agent Reinforcement Learning for Joint Handover Management and Power Allocation in Multi-Orbit Satellite Networks</span></li><li><span class="dpr-home-dashboard-paper-title" title="Clearing the Fog: Towards Installing and Refining Proactive Exploration Capabilities in LLM Agents">Clearing the Fog: Towards Installing and Refining Proactive Exploration Capabilities in LLM Agents</span></li></ul>
+<ul class="dpr-home-dashboard-paper-list"><li><span class="dpr-home-dashboard-paper-title" title="Beyond Final Scores: A Systematic Evaluation of Agents for Long-Horizon AI Research and Development">Beyond Final Scores: A Systematic Evaluation of Agents for Long-Horizon AI Research and Development</span></li><li><span class="dpr-home-dashboard-paper-title" title="MARC v1: An Open-Source Multi-Agent Framework for Clinical AI Reasoning and Coordination">MARC v1: An Open-Source Multi-Agent Framework for Clinical AI Reasoning and Coordination</span></li><li><span class="dpr-home-dashboard-paper-title" title="A Temporal Barrier Framework for Collision Avoidance in Multi-Agent Autonomous Aerial Vehicles">A Temporal Barrier Framework for Collision Avoidance in Multi-Agent Autonomous Aerial Vehicles</span></li></ul>
   </div>
-  <div class="dpr-home-dashboard-tags"><span class="dpr-home-dashboard-tag">agents <strong>6</strong></span></div>
+  <div class="dpr-home-dashboard-tags"><span class="dpr-home-dashboard-tag">agents <strong>14</strong></span></div>
 </section>
 <section class="dpr-home-dashboard-card dpr-home-skim-card">
   <div class="dpr-home-dashboard-header">
@@ -89,7 +87,7 @@
     <strong class="dpr-home-dashboard-count">11 篇</strong>
   </div>
   <div class="dpr-home-dashboard-body">
-<ul class="dpr-home-dashboard-paper-list"><li><span class="dpr-home-dashboard-paper-title" title="Automating and Scaling Behavioral Scientific Research on AI Agents">Automating and Scaling Behavioral Scientific Research on AI Agents</span></li><li><span class="dpr-home-dashboard-paper-title" title="Robust Multi-Agent Bandits with Heavy-Tailed Rewards and Information Asymmetry">Robust Multi-Agent Bandits with Heavy-Tailed Rewards and Information Asymmetry</span></li><li><span class="dpr-home-dashboard-paper-title" title="Let it Cook: Learning to Wait in Sequential Decision Making">Let it Cook: Learning to Wait in Sequential Decision Making</span></li></ul>
+<ul class="dpr-home-dashboard-paper-list"><li><span class="dpr-home-dashboard-paper-title" title="Heterogeneity-Aware Belief Synchronization for Semantic Communication in AI-Native 6G Networks">Heterogeneity-Aware Belief Synchronization for Semantic Communication in AI-Native 6G Networks</span></li><li><span class="dpr-home-dashboard-paper-title" title="Enhancing Virtual Agents through SLMs and Edge-Computing: An Exploratory Evaluation of Think and Memory Processes">Enhancing Virtual Agents through SLMs and Edge-Computing: An Exploratory Evaluation of Think and Memory Processes</span></li><li><span class="dpr-home-dashboard-paper-title" title="XAI-Guided Conservative Decentralized Execution for Offline Multi-Agent Network Slicing">XAI-Guided Conservative Decentralized Execution for Offline Multi-Agent Network Slicing</span></li></ul>
   </div>
   <div class="dpr-home-dashboard-tags"><span class="dpr-home-dashboard-tag">agents <strong>11</strong></span></div>
 </section>

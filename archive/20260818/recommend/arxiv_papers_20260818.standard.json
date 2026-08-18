@@ -1,0 +1,1026 @@
+{
+  "mode": "standard",
+  "generated_at": "2026-08-18T20:33:55.963964+00:00",
+  "stats": {
+    "mode": "standard",
+    "tag_count": 1,
+    "deep_divecandidates": 32,
+    "deep_cap": 6,
+    "deep_selected": 14,
+    "quick_candidates": 25,
+    "quick_skim_target": 11,
+    "quick_selected": 11
+  },
+  "deep_dive": [
+    {
+      "id": "2608.13417v1",
+      "source": "arxiv",
+      "title": "Beyond Final Scores: A Systematic Evaluation of Agents for Long-Horizon AI Research and Development",
+      "abstract": "Autonomous agents are increasingly capable of improving models, systems, and other technical artifacts through long-horizon experimentation. To understand the current state of this capability, however, evaluation must go beyond final scores, which neither reveal where progress is gained or lost nor indicate whether accumulated experience improves later decisions. We therefore present a systematic evaluation of seven frontier models on 36 long-horizon tasks based on a new framework that uses rule-based metrics to characterize within-run behavior through Solution Framing, Execution, and Feedback Control and controlled comparisons to assess experience reuse within and across tasks. The results show that current agents operate more like engineering optimizers than fully autonomous researchers: they can formulate and implement practical solutions, but their performance varies substantially across runs, their strongest solutions mainly adapt or combine established techniques, and genuine methodological novelty remains rare. Detailed analysis reveals that observed performance is shaped by multiple factors, including distinct process bottlenecks behind similar final outcomes, experience reuse that can help or mislead subsequent decisions, and harness designs that affect performance stability. These findings suggest concrete directions for improving model training, inference-time strategies, experience management, and harness design.",
+      "authors": [
+        "Yiwei Li",
+        "Wanli Yang",
+        "Hexiang Tan",
+        "Xiangzhou Huang",
+        "Zhengyu Chen",
+        "Ziran Li",
+        "Borun Chen",
+        "Shanglin Lei",
+        "Huaisheng Zhu",
+        "Hao Tian",
+        "Fei Sun",
+        "Xunliang Cai",
+        "Jingang Wang"
+      ],
+      "primary_category": "cs.AI",
+      "categories": [
+        "cs.AI"
+      ],
+      "published": "2026-08-13T16:11:22+00:00",
+      "link": "https://arxiv.org/pdf/2608.13417v1",
+      "tags": [
+        "keyword:agents",
+        "query:agents"
+      ],
+      "llm_score": 9.0,
+      "llm_evidence_en": "Evaluates autonomous agents' long-horizon decision-making via Solution Framing, Execution, and Feedback Control",
+      "llm_evidence_cn": "通过解决方案构建、执行和反馈控制评估自主智能体的长时程决策能力",
+      "llm_evidence": "通过解决方案构建、执行和反馈控制评估自主智能体的长时程决策能力",
+      "canonical_evidence": "通过解决方案构建、执行和反馈控制评估自主智能体的长时程决策能力",
+      "llm_tldr_en": "Presents a systematic evaluation framework for autonomous agents on 36 long-horizon tasks, using rule-based metrics to characterize within-run behavior and experience reuse. Current agents still lag in iterative feedback and learning from past experience.",
+      "llm_tldr_cn": "现有评估方式只看最终分数，无法揭示长时程任务中智能体的进展或失败之处。作者提出基于规则度量的系统评估框架，对七个前沿模型在36个长时程任务上进行评测，从解决方案构建、执行和反馈控制三个维度刻画行为，并比较跨任务经验复用。结果显示当前智能体在反馈利用和经验复用上仍有明显不足，为评估智能体决策能力提供了新方法论。",
+      "llm_tldr": "现有评估方式只看最终分数，无法揭示长时程任务中智能体的进展或失败之处。作者提出基于规则度量的系统评估框架，对七个前沿模型在36个长时程任务上进行评测，从解决方案构建、执行和反馈控制三个维度刻画行为，并比较跨任务经验复用。结果显示当前智能体在反馈利用和经验复用上仍有明显不足，为评估智能体决策能力提供了新方法论。",
+      "llm_tags": [
+        "query:agents"
+      ],
+      "matched_query_tag": "query:agents",
+      "matched_query_text": "autonomous agent autonomous decision making",
+      "matched_requirement_id": "req-2",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2608.13476v1",
+      "source": "arxiv",
+      "title": "MARC v1: An Open-Source Multi-Agent Framework for Clinical AI Reasoning and Coordination",
+      "abstract": "We present Multi-Agent Reasoning and Coordination (MARC), an open-source framework that replaces monolithic LLM prompting with deterministic multi-agent orchestration for clinical reasoning. MARC coordinates role-specialized agents for extraction, reasoning, answer generation, and evaluation, with explicit context passing and traceable intermediate outputs, enabling stage-wise failure attribution. We additionally introduce a Decomposer module that generates task-specific agent prompts from a plain-language description, eliminating manual prompt engineering. The framework supports both API-based and local CPU-compatible deployments and is entirely configurable via YAML, without code modifications. MARC is designed to be model-agnostic, interpretable, and accessible to clinical domain experts without programming expertise. The full framework is available at https://github.com/Penn-RAIL/MARC-v1.",
+      "authors": [
+        "Saisha Shetty",
+        "Satvik Tripathi",
+        "Austin Lin",
+        "Colin Zhao",
+        "Theodore Kim",
+        "Don Enwerem",
+        "Jacinta Arnold",
+        "Shahriar Faghani",
+        "Tessa S Cook"
+      ],
+      "primary_category": "cs.AI",
+      "categories": [
+        "cs.AI",
+        "cs.CL"
+      ],
+      "published": "2026-08-13T17:00:08+00:00",
+      "link": "https://arxiv.org/pdf/2608.13476v1",
+      "tags": [
+        "keyword:agents",
+        "query:agents"
+      ],
+      "llm_score": 9.0,
+      "llm_evidence_en": "Open-source multi-agent framework for clinical reasoning with role-specialized agents and orchestration",
+      "llm_evidence_cn": "用于临床推理的开源多智能体框架，包含角色专化智能体与编排机制",
+      "llm_evidence": "用于临床推理的开源多智能体框架，包含角色专化智能体与编排机制",
+      "canonical_evidence": "用于临床推理的开源多智能体框架，包含角色专化智能体与编排机制",
+      "llm_tldr_en": "Presents MARC, an open-source multi-agent framework for clinical AI reasoning that coordinates role-specialized agents for extraction, reasoning, answer generation, and evaluation, with explicit context passing and traceable outputs.",
+      "llm_tldr_cn": "在临床AI推理中，整体式LLM提示缺乏可控性和可解释性，难以定位失败环节。作者提出多智能体推理与协调框架MARC，以确定性的多智能体编排替代整体式提示，协调抽取、推理、答案生成和评估等角色专化智能体，并通过显式上下文传递生成可追踪的中间输出。该框架还引入Decomposer模块自动生成任务提示，支持模型无关和本地CPU部署，方便实际应用。",
+      "llm_tldr": "在临床AI推理中，整体式LLM提示缺乏可控性和可解释性，难以定位失败环节。作者提出多智能体推理与协调框架MARC，以确定性的多智能体编排替代整体式提示，协调抽取、推理、答案生成和评估等角色专化智能体，并通过显式上下文传递生成可追踪的中间输出。该框架还引入Decomposer模块自动生成任务提示，支持模型无关和本地CPU部署，方便实际应用。",
+      "llm_tags": [
+        "query:agents"
+      ],
+      "matched_query_tag": "query:agents",
+      "matched_query_text": "multi-agent system coordination",
+      "matched_requirement_id": "req-3",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2608.14239v1",
+      "source": "arxiv",
+      "title": "A Temporal Barrier Framework for Collision Avoidance in Multi-Agent Autonomous Aerial Vehicles",
+      "abstract": "Operating teams of autonomous aircraft in dynamic, uncertain, and potentially adversarial environments requires safety protocols that are reliable yet selective, and allow agents to fly in close proximity while making progress toward mission objectives. We introduce adversarial time-to-collision (aTTC), a risk metric that quantifies, for a given agent, how quickly any surrounding agent could reach it assuming adversarial intent. We embed aTTC into the control barrier function (CBF) framework, defining the barrier directly in time rather than distance or velocity. The resulting aTTC-CBF is inherently anticipatory: agents modulate their own velocity based not on whether a peer is on a collision course, but on how quickly one could reach collision given its dynamical constraints. A differentiable neural-network surrogate makes the aTTC computable in real time within a standard CBF quadratic program. Across long time-horizon simulations of 3D independent-pursuit and formation-flight scenarios, the aTTC-CBF achieves up to twice the waypoint progress at half the collision rate of a higher-order distance-based CBF baseline.",
+      "authors": [
+        "Benedikt Barthel Sorensen",
+        "Mitchell Black",
+        "Erfaun Noorani",
+        "Themistoklis Sapsis"
+      ],
+      "primary_category": "eess.SY",
+      "categories": [
+        "eess.SY",
+        "cs.RO",
+        "math.OC"
+      ],
+      "published": "2026-08-14T12:15:00+00:00",
+      "link": "https://arxiv.org/pdf/2608.14239v1",
+      "tags": [
+        "keyword:agents",
+        "query:agents"
+      ],
+      "llm_score": 9.0,
+      "llm_evidence_en": "Temporal barrier framework for collision avoidance in multi-agent autonomous aerial vehicles",
+      "llm_evidence_cn": "面向多智能体自主飞行器防撞的时间屏障框架，直接涉及多智能体协调",
+      "llm_evidence": "面向多智能体自主飞行器防撞的时间屏障框架，直接涉及多智能体协调",
+      "canonical_evidence": "面向多智能体自主飞行器防撞的时间屏障框架，直接涉及多智能体协调",
+      "llm_tldr_en": "Presents aTTC-CBF, a temporal barrier framework that lets multi-agent autonomous aerial vehicles anticipate adversarial collision risk and modulate velocities to fly safely in close proximity while progressing toward missions.",
+      "llm_tldr_cn": "多智能体无人机在动态不确定环境中需要既可靠又有选择性的安全协议。本文提出对抗性碰撞时间aTTC并将其嵌入时间域控制屏障函数，使智能体能依据对方最快可能的逼近速度主动调节自身速度，而非等待碰撞航迹出现。该方法支持集群保持近距离安全飞行并推进任务目标，为多智能体系统协调提供了可预测的安全机制。",
+      "llm_tldr": "多智能体无人机在动态不确定环境中需要既可靠又有选择性的安全协议。本文提出对抗性碰撞时间aTTC并将其嵌入时间域控制屏障函数，使智能体能依据对方最快可能的逼近速度主动调节自身速度，而非等待碰撞航迹出现。该方法支持集群保持近距离安全飞行并推进任务目标，为多智能体系统协调提供了可预测的安全机制。",
+      "llm_tags": [
+        "query:agents"
+      ],
+      "matched_query_tag": "query:agents",
+      "matched_query_text": "multi-agent system coordination",
+      "matched_requirement_id": "req-3",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2608.14246v1",
+      "source": "arxiv",
+      "title": "Polaris : Multi Agentic System for Conversational Enterprise Analytics",
+      "abstract": "In today's fast-paced environment, the ability to swiftly access, understand, and act on data is no longer optional; it is essential. Yet most organizations remain data-rich but insight-poor, constrained by the complexity of querying, interpreting, and explaining enterprise-scale information. We present Polaris, a supervisor-led multi-agent framework for conversational enterprise analytics that bridges this gap. Polaris introduces Dynamic Task Coordination (DTC), a decision-theoretic orchestration layer that models agent-task assignment as adaptive bipartite matching, enabling real-time coordination, recovery, and optimization across specialized agents for querying, visualization, and reasoning. By coupling DTC with reason-first, ReAct-style agents, Polaris transforms natural-language queries into coherent analytical workflows that not only retrieve and visualize data but also explain the underlying \"why.\" Evaluation on structured enterprise datasets demonstrates high semantic fidelity and answer relevancy, underscoring the potential of multi-agent orchestration to deliver trustworthy, end-to-end business intelligence at scale.",
+      "authors": [
+        "Varuni H K",
+        "Soham Sarkar",
+        "Jay Kumar",
+        "Goutham Krishnan",
+        "Tanvi Johari",
+        "Avinash Bharadwaj",
+        "Santosh Hegde"
+      ],
+      "primary_category": "cs.AI",
+      "categories": [
+        "cs.AI"
+      ],
+      "published": "2026-08-14T12:26:41+00:00",
+      "link": "https://arxiv.org/pdf/2608.14246v1",
+      "tags": [
+        "keyword:agents",
+        "query:agents"
+      ],
+      "llm_score": 9.0,
+      "llm_evidence_en": "supervisor-led multi-agent coordination for analytics",
+      "llm_evidence_cn": "主管引导的多智能体协调分析系统",
+      "llm_evidence": "主管引导的多智能体协调分析系统",
+      "canonical_evidence": "主管引导的多智能体协调分析系统",
+      "llm_tldr_en": "Polaris is a supervisor-led multi-agent framework for conversational enterprise analytics, using Dynamic Task Coordination to model agent-task assignment as adaptive bipartite matching and coordinate specialized agents in real time.",
+      "llm_tldr_cn": "企业数据分析面临查询、解释和解读复杂信息的挑战。本文提出Polaris，一个监督者主导的多智能体框架，用于对话式企业分析。Polaris引入动态任务协调机制，将智能体-任务分配建模为自适应二部图匹配，实现实时协调、恢复和优化。该系统结合原因优先的ReAct风格智能体，使得用户可以通过自然语言对话获取数据洞察，显著提升了企业分析任务的效率和可用性。",
+      "llm_tldr": "企业数据分析面临查询、解释和解读复杂信息的挑战。本文提出Polaris，一个监督者主导的多智能体框架，用于对话式企业分析。Polaris引入动态任务协调机制，将智能体-任务分配建模为自适应二部图匹配，实现实时协调、恢复和优化。该系统结合原因优先的ReAct风格智能体，使得用户可以通过自然语言对话获取数据洞察，显著提升了企业分析任务的效率和可用性。",
+      "llm_tags": [
+        "query:agents"
+      ],
+      "matched_query_tag": "query:agents",
+      "matched_query_text": "multi-agent system coordination",
+      "matched_requirement_id": "req-3",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2608.14306v1",
+      "source": "arxiv",
+      "title": "Sensor-Driven Mission Synthesis for UAV/UGV Swarms: A TB-CSPN Coordination Architecture with Hardware-Enforced Safety",
+      "abstract": "This paper presents a coordination architecture for heterogeneous UAV/UGV swarms that synthesises mission actions from uncertain, multi-modal sensor evidence while preserving hardware-enforced safety at the actuation boundary. The approach combines radar, RF, acoustic, and visual observations with Topic-Based Communication Space Petri Net (TB-CSPN) orchestration to support incremental mission formation under partial and evolving information. Consultant agents transform sensor outputs into temporally bounded semantic tokens, while supervisor agents provide authorisation and policy-governed release of mission transitions. This separation between interpretation, coordination, and execution yields auditable decision paths, constrains non-determinism within the coordination layer through guards and synchronisation, and enables bounded-time integration of heterogeneous evidence. To improve resilience in contested environments, including cyber compromise, spoofing, jamming, and communication loss, the digital coordination layer is complemented by independent analogue safety envelopes that clamp or veto unsafe actuator commands issued to individual vehicles. A coastal-surveillance case study illustrates how the proposed architecture enables dependable, governed, and physically safe swarm coordination under operational uncertainty.",
+      "authors": [
+        "Uwe M. Borghoff",
+        "Paolo Bottoni",
+        "Remo Pareschi"
+      ],
+      "primary_category": "cs.AI",
+      "categories": [
+        "cs.AI",
+        "eess.SY"
+      ],
+      "published": "2026-08-14T13:44:10+00:00",
+      "link": "https://arxiv.org/pdf/2608.14306v1",
+      "tags": [
+        "keyword:agents",
+        "query:agents"
+      ],
+      "llm_score": 9.0,
+      "llm_evidence_en": "coordination architecture for heterogeneous UAV/UGV swarms with sensor-driven mission synthesis",
+      "llm_evidence_cn": "异构无人机/无人车集群的传感器驱动任务协调架构",
+      "llm_evidence": "异构无人机/无人车集群的传感器驱动任务协调架构",
+      "canonical_evidence": "异构无人机/无人车集群的传感器驱动任务协调架构",
+      "llm_tldr_en": "Presents a TB-CSPN coordination architecture for heterogeneous UAV/UGV swarms that synthesizes missions from multi-modal sensor evidence while enforcing hardware-level safety, separating interpretation, coordination, and execution.",
+      "llm_tldr_cn": "针对异构无人机与无人车集群在不确定、多模态传感器信息下的任务协调问题，提出一种基于Topic-Based Communication Space Petri Net的协调架构。咨询智能体将传感器输出转化为带时间约束的语义标记，监督智能体则负责授权并策略化地释放任务转移，实现解释、协调与执行的分离。该系统在保障硬件级安全的同时支持增量式任务形成，提升了集群任务的可靠性与可审计性。",
+      "llm_tldr": "针对异构无人机与无人车集群在不确定、多模态传感器信息下的任务协调问题，提出一种基于Topic-Based Communication Space Petri Net的协调架构。咨询智能体将传感器输出转化为带时间约束的语义标记，监督智能体则负责授权并策略化地释放任务转移，实现解释、协调与执行的分离。该系统在保障硬件级安全的同时支持增量式任务形成，提升了集群任务的可靠性与可审计性。",
+      "llm_tags": [
+        "query:agents"
+      ],
+      "matched_query_tag": "query:agents",
+      "matched_query_text": "multi-agent system coordination",
+      "matched_requirement_id": "req-3",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2608.14707v1",
+      "source": "arxiv",
+      "title": "Semantic Uncertainty-Guided Orchestration in Hierarchical Multi-Agent Systems",
+      "abstract": "As large language model (LLM)-based multi-agent systems become increasingly capable, coordinating agents under uncertainty becomes a fundamental challenge. Existing orchestration strategies typically rely on fixed interaction patterns and often lack mechanisms for assessing the reliability of intermediate reasoning steps, allowing errors and hallucinations to propagate through the system. This paper introduces a semantic-uncertainty-guided orchestration approach, HASSUM as a general framework for uncertainty-aware coordination in multi-agent systems. The method estimates uncertainty using semantic entropy and semantic density, which measure trust at the level of answer semantics rather than output probabilities. These signals enable adaptive orchestration decisions, including output verification, selective reprompting, additional deliberation, and confidence-aware response selection. Because the approach operates independently of any particular agent architecture, it can be integrated into a broad range of hierarchical and collaborative multi-agent systems. The evaluations demonstrate an implementation within a hierarchical agent framework and evaluate it on StrategyQA, JailbreakBench, and TruthfulQA benchmarks. Across tasks that require complex reasoning and are prone to ambiguity or hallucinations, uncertainty-guided orchestration yields more reliable outcomes than uncertainty-unaware coordination. Semantic entropy and semantic density in tandem outperformed either metric alone. Ablations testing different thresholds and model sizes demonstrated that both influence the effectiveness of semantic metrics. The results suggest that semantic uncertainty is a practical and general-purpose signal for improving robustness and trustworthiness in agentic AI systems.",
+      "authors": [
+        "John Knowlton",
+        "Aritra Guha",
+        "Risto Miikkulainen"
+      ],
+      "primary_category": "cs.AI",
+      "categories": [
+        "cs.AI"
+      ],
+      "published": "2026-08-11T03:55:53+00:00",
+      "link": "https://arxiv.org/pdf/2608.14707v1",
+      "tags": [
+        "keyword:agents",
+        "query:agents"
+      ],
+      "llm_score": 9.0,
+      "llm_evidence_en": "uncertainty-aware orchestration for multi-agent systems",
+      "llm_evidence_cn": "多智能体系统中的不确定性感知编排",
+      "llm_evidence": "多智能体系统中的不确定性感知编排",
+      "canonical_evidence": "多智能体系统中的不确定性感知编排",
+      "llm_tldr_en": "Proposes HASSUM, a semantic-uncertainty-guided orchestration framework for hierarchical multi-agent systems, using semantic entropy and density to adaptively coordinate agents and reduce error propagation.",
+      "llm_tldr_cn": "LLM多智能体协调面临不确定性，现有编排模式固定且无法评估中间推理可靠性，易导致错误传播。论文提出HASSUM框架，用语义熵与语义密度度量语义层面的不确定性，并据此自适应调整编排策略。该方法能减少幻觉与错误传播，为多智能体系统的可靠协调提供通用机制。",
+      "llm_tldr": "LLM多智能体协调面临不确定性，现有编排模式固定且无法评估中间推理可靠性，易导致错误传播。论文提出HASSUM框架，用语义熵与语义密度度量语义层面的不确定性，并据此自适应调整编排策略。该方法能减少幻觉与错误传播，为多智能体系统的可靠协调提供通用机制。",
+      "llm_tags": [
+        "query:agents"
+      ],
+      "matched_query_tag": "query:agents",
+      "matched_query_text": "multi-agent system coordination",
+      "matched_requirement_id": "req-3",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2608.14870v1",
+      "source": "arxiv",
+      "title": "JarvisBench: Always-on Intelligence Between Humans and Agents",
+      "abstract": "Long-horizon agents can execute continuously, but human attention remains intermittent and scarce. This creates a bidirectional coordination problem: users may need immediate access to an agent while work continues in the background, whereas agents may encounter consequential decisions that require user judgment after the user has stopped monitoring execution. We posit an always-on attention-coordination layer---\\textit{Jarvis}\\footnote{Named after the fictional AI assistant in \\textit{Iron Man}.}---that mediates this interface and allocates human attention across one or more working agents. We introduce \\textit{JarvisBench} to evaluate both directions of this coordination: whether an intermediary can accurately and promptly answer user-initiated questions about ongoing work, and whether it can recognize when an agent requires user judgment, solicit that judgment at the right moment, and route it back to improve task outcomes. JarvisBench contains 45 agentic task instances: 20 single-agent tasks and 25 workstreams organized into 10 multi-agent projects. The tasks span 19 domains and were selected and adapted from more than 2,000 public candidates. Crucially, the need for user attention arises naturally during execution rather than from an obvious omission in the initial prompt. JarvisBench is designed to integrate with arbitrary agent runtimes without modifying their underlying execution loops. Our reference implementation further provides a full-duplex speech interface, allowing users to reach Jarvis naturally while timely attention coordination supports agents working in the background. By separating agent execution from attention coordination, JarvisBench provides a stable evaluation target as agent capabilities continue to improve.",
+      "authors": [
+        "Chen Chen",
+        "Zhehuai Chen"
+      ],
+      "primary_category": "cs.AI",
+      "categories": [
+        "cs.AI"
+      ],
+      "published": "2026-08-14T20:17:24+00:00",
+      "link": "https://arxiv.org/pdf/2608.14870v1",
+      "tags": [
+        "keyword:agents",
+        "query:agents"
+      ],
+      "llm_score": 9.0,
+      "llm_evidence_en": "bidirectional human-agent coordination benchmark",
+      "llm_evidence_cn": "人机双向协调基准",
+      "llm_evidence": "人机双向协调基准",
+      "canonical_evidence": "人机双向协调基准",
+      "llm_tldr_en": "JarvisBench introduces an always-on attention-coordination layer and benchmark for evaluating bidirectional human-agent coordination, addressing the challenge of intermittent human attention in long-horizon agent operation.",
+      "llm_tldr_cn": "本文针对长期运行智能体与人类注意力稀缺之间的双向协调问题，提出常驻注意力协调层Jarvis以及评测基准JarvisBench。该层负责在用户与一个或多个工作智能体之间分配人类注意力，并评估中间层能否准确及时地回答用户查询以及何时需要用户判断。基准测试覆盖两个协调方向，为长时程智能体的人机协作提供了系统的评测方法与改进方向。",
+      "llm_tldr": "本文针对长期运行智能体与人类注意力稀缺之间的双向协调问题，提出常驻注意力协调层Jarvis以及评测基准JarvisBench。该层负责在用户与一个或多个工作智能体之间分配人类注意力，并评估中间层能否准确及时地回答用户查询以及何时需要用户判断。基准测试覆盖两个协调方向，为长时程智能体的人机协作提供了系统的评测方法与改进方向。",
+      "llm_tags": [
+        "query:agents"
+      ],
+      "matched_query_tag": "query:agents",
+      "matched_query_text": "multi-agent system coordination",
+      "matched_requirement_id": "req-3",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2608.15175v1",
+      "source": "arxiv",
+      "title": "LAPF: LLM-Agent-Based Path Finder Using the UAVScenes Dataset",
+      "abstract": "Uncrewed aerial vehicles (UAVs) are increasingly deployed for autonomous navigation in complex outdoor environments, where dynamic conditions and mission requirements require intelligent adaptive decision-making. Existing optimization-based, Machine Learning (ML), and Reinforcement Learning (RL) approaches often rely on predefined models or task-specific training, limiting their generalization and adaptability in uncertain scenarios. Recent Large Language Model (LLM)-assisted approaches offer promising reasoning capabilities but remain constrained by limited agentic functionality, including insufficient memory, planning, and tool interaction mechanisms.This paper proposes an LLM-Agent-Based Path Finder (LAPF) framework for autonomous UAV navigation in town-scale outdoor environments. LAPF extends LLM-assisted navigation by integrating perception, memory, planning, and action modules into a closed-loop cognitive architecture. The proposed agent leverages prior navigation experiences, performs Chain-of-Thought (CoT) reasoning, couples each detected hazard to a bounded corrective action, and dynamically refines waypoint decisions based on environmental feedback.The three independent trials per method demonstrate that LAPF achieves mean path lengths of 512.83 m and 506.37 m, compared to the straight-line optimum of 497.33 m, corresponding to path length reductions of 17.2% and 15.6% relative to CoT prompting and absolute path efficiencies of 97.1% and 98.1% in open-field and obstacle-injected scenarios, respectively. Furthermore, LAPF is the only evaluated approach that couples every detected hazard to a bounded, metric-neutral corrective action while maintaining near-goal stability, with zero clamp events in both scenarios, whereas CoT prompting increases from 9.7 to 14.0 events.",
+      "authors": [
+        "Yousef Emami",
+        "Mohammadhossein Homaei",
+        "Hao Zhou",
+        "Miguel Gutiérrez Gaitán",
+        "Atefeh Hajijamali Arani",
+        "Rui Zhang"
+      ],
+      "primary_category": "cs.RO",
+      "categories": [
+        "cs.RO",
+        "cs.AI"
+      ],
+      "published": "2026-08-15T11:28:21+00:00",
+      "link": "https://arxiv.org/pdf/2608.15175v1",
+      "tags": [
+        "keyword:agents",
+        "query:agents"
+      ],
+      "llm_score": 9.0,
+      "llm_evidence_en": "LLM-agent-based planner for autonomous UAV navigation with memory, planning, and tool interaction",
+      "llm_evidence_cn": "基于LLM智能体的无人机自主导航规划器，具备记忆、规划和工具交互能力",
+      "llm_evidence": "基于LLM智能体的无人机自主导航规划器，具备记忆、规划和工具交互能力",
+      "canonical_evidence": "基于LLM智能体的无人机自主导航规划器，具备记忆、规划和工具交互能力",
+      "llm_tldr_en": "Proposes LAPF, an LLM-agent-based path finder for autonomous UAV navigation, addressing generalization issues in existing optimization/RL methods by enhancing agentic functionality with memory, planning, and tool interaction.",
+      "llm_tldr_cn": "无人机在复杂户外环境进行自主导航需要智能自适应决策，但传统优化、机器学习和强化学习方法依赖预定义模型，泛化性不足。近来的LLM辅助方法虽具备推理能力，但缺少记忆、规划和工具交互等关键智能体机制。作者提出LAPF框架，利用LLM智能体实现镇级场景的自主路径规划，并通过增强的记忆与工具交互提升环境感知和决策能力。该工作展示了LLM智能体在自主导航中的潜力。",
+      "llm_tldr": "无人机在复杂户外环境进行自主导航需要智能自适应决策，但传统优化、机器学习和强化学习方法依赖预定义模型，泛化性不足。近来的LLM辅助方法虽具备推理能力，但缺少记忆、规划和工具交互等关键智能体机制。作者提出LAPF框架，利用LLM智能体实现镇级场景的自主路径规划，并通过增强的记忆与工具交互提升环境感知和决策能力。该工作展示了LLM智能体在自主导航中的潜力。",
+      "llm_tags": [
+        "query:agents"
+      ],
+      "matched_query_tag": "query:agents",
+      "matched_query_text": "autonomous agent autonomous decision making",
+      "matched_requirement_id": "req-2",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2608.15884v1",
+      "source": "arxiv",
+      "title": "Grouping Auction-Consensus Algorithm for Decentralized Task Allocation in Multi-Robot Systems",
+      "abstract": "Decentralized multi-robot task allocation (MRTA) is essential for scalable and resilient autonomous systems. The Consensus-Based Bundle Algorithm (CBBA) is a widely adopted decentralized baseline. However, its individual task-level bidding is poorly aligned with the min-sum objective of minimizing total team travel distance, leading to suboptimal allocations in spatially distributed environments. This paper introduces the Grouping Auction-Consensus Algorithm (GACA). This decentralized MRTA framework adopts the two-phase auction-consensus architecture of CBBA while fundamentally redesigning its bidding mechanism to reason over groups of spatially proximate tasks. A nearest-neighbor preprocessing step partitions tasks into spatially coherent groups before allocation. Agents then iteratively propose structured group-level actions: claiming unassigned groups, acquiring partial groups, or contesting groups held by other agents. Competing actions are resolved through a consensus phase. Operating in the MT-SR-IA problem class, GACA is evaluated against CBBA using a Mixed-Integer Linear Program as the ground-truth optimality reference. Across four swarm sizes and 4,000 test worlds, GACA achieves a median percent optimality of approximately 97% compared to 81--84% for CBBA, while converging in equal or fewer iterations. A scalability evaluation over 3,280 additional problem instances spanning swarm sizes of 5 to 20 agents and task counts of 10 to 50 confirms that these gains generalize robustly across a wide range of problem configurations.",
+      "authors": [
+        "Jose Rodriguez",
+        "Sven Koenig",
+        "Wenjie Dong",
+        "Qi Lu"
+      ],
+      "primary_category": "cs.RO",
+      "categories": [
+        "cs.RO"
+      ],
+      "published": "2026-08-16T18:17:49+00:00",
+      "link": "https://arxiv.org/pdf/2608.15884v1",
+      "tags": [
+        "keyword:agents",
+        "query:agents"
+      ],
+      "llm_score": 9.0,
+      "llm_evidence_en": "Decentralized multi-agent task allocation via auction-consensus coordination",
+      "llm_evidence_cn": "通过拍卖-共识机制实现多智能体去中心化任务分配",
+      "llm_evidence": "通过拍卖-共识机制实现多智能体去中心化任务分配",
+      "canonical_evidence": "通过拍卖-共识机制实现多智能体去中心化任务分配",
+      "llm_tldr_en": "Proposes GACA, a decentralized task allocation algorithm that redesigns bidding to reason over groups of spatially proximate tasks, improving min-sum travel distance in multi-robot systems.",
+      "llm_tldr_cn": "现有去中心化多机器人任务分配方法采用个体任务级投标，与最小化总路程的全局目标不一致，导致空间分布场景下分配次优。本文提出分组拍卖-共识算法GACA，保留CBBA的两阶段拍卖-共识架构，改在空间邻近任务组上进行出价，并利用最近邻预处理划分任务。实验结果验证该算法能降低队伍总旅行距离，提升多机器人协同分配的扩展性与性能。",
+      "llm_tldr": "现有去中心化多机器人任务分配方法采用个体任务级投标，与最小化总路程的全局目标不一致，导致空间分布场景下分配次优。本文提出分组拍卖-共识算法GACA，保留CBBA的两阶段拍卖-共识架构，改在空间邻近任务组上进行出价，并利用最近邻预处理划分任务。实验结果验证该算法能降低队伍总旅行距离，提升多机器人协同分配的扩展性与性能。",
+      "llm_tags": [
+        "query:agents"
+      ],
+      "matched_query_tag": "query:agents",
+      "matched_query_text": "multi-agent system coordination",
+      "matched_requirement_id": "req-3",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2608.16229v1",
+      "source": "arxiv",
+      "title": "Planner-Conditioned Diffusion for Coordinated Multi-Agent Exploration",
+      "abstract": "Coordinated multi-agent exploration requires not only efficient individual coverage but also non-redundant coverage across agents over extended planning horizons. Conventional approaches rely on hand-crafted coordination rules, while end-to-end multi-agent learning methods are difficult to scale and train. Diffusion-based planners such as DARE offer a promising alternative by generating long-horizon trajectories instead of single-step actions, but existing methods are trained on a narrow planner distribution, limiting behavioral diversity and inference-time controllability. We propose a Planner-Conditioned Diffusion Policy (PCDP) for graph-based multi-agent exploration. PCDP is trained on demonstrations from multiple planner styles with planner identity as an explicit conditioning input, enabling a single shared model to learn a multimodal trajectory distribution and generate diverse, controllable trajectory candidates from the same observation. Rather than learning coordination end-to-end, we reuse this multimodal single-agent policy across all agents and introduce coordination through local reranking, in which nearby agents jointly select the trajectory combination with minimal predicted overlap. We evaluate PCDP against classical and diffusion-based baselines on 100 held-out maps in a four-agent simulation setting. PCDP matches the perfect success rate of the diffusion-based baselines while improving mean max-agent travel, total team travel, and agent imbalance. Crucially, reranking alone over a single-planner baseline yields only marginal gains, indicating that planner-conditioned multimodality is the main contributor to improved coordination. Qualitative simulation results and real-robot experiments with two agents further validate that diverse long-horizon trajectory generation produces emergent spatial separation between agents without any explicit repulsion mechanism.",
+      "authors": [
+        "Marcus Yu Siong Teo",
+        "Jeric Lew",
+        "Tanishq Duhan",
+        "Guillaume Sartoretti"
+      ],
+      "primary_category": "cs.RO",
+      "categories": [
+        "cs.RO"
+      ],
+      "published": "2026-08-17T08:07:20+00:00",
+      "link": "https://arxiv.org/pdf/2608.16229v1",
+      "tags": [
+        "keyword:agents",
+        "query:agents"
+      ],
+      "llm_score": 9.0,
+      "llm_evidence_en": "diffusion policy for multi-agent coordination exploration",
+      "llm_evidence_cn": "扩散策略实现多智能体协调探索",
+      "llm_evidence": "扩散策略实现多智能体协调探索",
+      "canonical_evidence": "扩散策略实现多智能体协调探索",
+      "llm_tldr_en": "Planner-Conditioned Diffusion Policy (PCDP) trains on multiple planner styles with planner identity conditioning to generate diverse, controllable long-horizon trajectories for coordinated multi-agent exploration.",
+      "llm_tldr_cn": "多智能体协调探索需要兼顾个体覆盖与跨智能体的非冗余覆盖，现有方法依赖手工规则或难以扩展的端到端学习。本文提出基于规划器条件的扩散策略PCDP，在图结构的多智能体探索中，通过多个规划风格的示范训练并加入规划器身份条件，生成多样化且可控的长期轨迹。该方法在保持协调性的同时增强了行为多样性和推理时可控性，为多智能体协调探索提供了一种可扩展的生成式解决方案。",
+      "llm_tldr": "多智能体协调探索需要兼顾个体覆盖与跨智能体的非冗余覆盖，现有方法依赖手工规则或难以扩展的端到端学习。本文提出基于规划器条件的扩散策略PCDP，在图结构的多智能体探索中，通过多个规划风格的示范训练并加入规划器身份条件，生成多样化且可控的长期轨迹。该方法在保持协调性的同时增强了行为多样性和推理时可控性，为多智能体协调探索提供了一种可扩展的生成式解决方案。",
+      "llm_tags": [
+        "query:agents"
+      ],
+      "matched_query_tag": "query:agents",
+      "matched_query_text": "multi-agent system coordination",
+      "matched_requirement_id": "req-3",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2608.16402v1",
+      "source": "arxiv",
+      "title": "A Policy Algebra for Trust-Preserving Agentic AI Execution",
+      "abstract": "Large language model-based agentic frameworks primarily optimize capability: whether an agent can reason, retrieve information, call tools, delegate work, and complete a goal. Enterprise execution requires a stronger property. A successful result is not reliable if it was produced through unauthorized data access, widened delegated authority, unapproved side effects, unrecoverable budget consumption, or incomplete evidence. This paper defines reliable capability as a path property: an agent is reliably capable only when it completes a task through action events that remain admissible under identity, profile, tool, data, memory, budget, artifact, approval, and audit constraints. We propose a policy algebra that defines the reliability envelope within which agent capability may be exercised. Security profiles and runtime obligations compose through joins, intersections, budget narrowing, approval inheritance, and evidence accumulation; the resulting composition is both trust-preserving and the least restrictive state satisfying all governing inputs. The algebra also propagates restrictions across multi-agent calls and introduces cost-aware artifact materialization, which redirects open-ended execution toward a recoverable outcome as budget exposure grows. The evaluation is interpreted as a reliability-capability trade-off rather than a capability benchmark: the policy-algebra runtime intervenes on 94.8% of policy-violating events while retaining an 86.9% task-completion rate, eliminates the observed profile-monotonicity and zero-artifact-exhaustion violations, and increases audit completeness to 98.6%. The method provides researchers and practitioners with formal correctness conditions, executable decision semantics, and trace evidence for building agents that are not only capable, but reliably capable.",
+      "authors": [
+        "Bhaskar Tripathi",
+        "Anurag Kumar",
+        "Ramendra Kumar",
+        "Bhavesh Gadhe"
+      ],
+      "primary_category": "cs.AI",
+      "categories": [
+        "cs.AI"
+      ],
+      "published": "2026-08-17T10:59:15+00:00",
+      "link": "https://arxiv.org/pdf/2608.16402v1",
+      "tags": [
+        "keyword:agents",
+        "query:agents"
+      ],
+      "llm_score": 9.0,
+      "llm_evidence_en": "LLM agentic frameworks; task goal completion with policy constraints",
+      "llm_evidence_cn": "大语言模型智能体框架；在策略约束下完成任务目标",
+      "llm_evidence": "大语言模型智能体框架；在策略约束下完成任务目标",
+      "canonical_evidence": "大语言模型智能体框架；在策略约束下完成任务目标",
+      "llm_tldr_en": "This paper introduces a policy algebra to define a reliability envelope for LLM-based agentic frameworks, ensuring task completion adheres to identity, data, budget, approval, and audit constraints, making agent execution trustworthy for the enterprise.",
+      "llm_tldr_cn": "针对大型语言模型智能体框架只重能力而忽视可靠性的问题，本文提出一种策略代数，将可靠能力定义为在身份、数据、预算、审批和审计等约束下合规完成任务。通过约束智能体的行为路径，该代数界定了可信执行边界，确保智能体在完成目标的同时满足企业级安全与合规要求，从而建立了可验证的智能体执行保障机制。",
+      "llm_tldr": "针对大型语言模型智能体框架只重能力而忽视可靠性的问题，本文提出一种策略代数，将可靠能力定义为在身份、数据、预算、审批和审计等约束下合规完成任务。通过约束智能体的行为路径，该代数界定了可信执行边界，确保智能体在完成目标的同时满足企业级安全与合规要求，从而建立了可验证的智能体执行保障机制。",
+      "llm_tags": [
+        "query:agents"
+      ],
+      "matched_query_tag": "query:agents",
+      "matched_query_text": "task-oriented agent goal completion",
+      "matched_requirement_id": "req-4",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2608.16794v1",
+      "source": "arxiv",
+      "title": "Neurosymbolic Embodied Agents",
+      "abstract": "Language and vision-language models generate plausible embodied plans but do not guarantee executability, as their outputs can violate environment dynamics or act on incorrectly grounded entities. We present a neurosymbolic agent that factors long-horizon household tasks into task-directed visual exploration and constrained symbolic planning. In the first phase, a vision-language model and exploration harness acquire goal-relevant predicates and instance bindings from egocentric observations and grounded interactions, producing a symbolic initial state. In the second, a PDDL transition model restricts decoding to tokens that extend applicable actions. Monte Carlo tree search then evaluates executable continuations using a domain-independent planning heuristic. The resulting plans are executable by construction under the transition model, with transfer to the environment conditioned on correct visual grounding. On VirtualHome and ALFWorld, open 4B-27B models exceed 90% success in both environments, and our smallest agent substantially outperforms a 27B direct visual policy in each. Constraints and search prove complementary rather than interchangeable: in ALFWorld either alone solves under a third of tasks, whereas their combination solves over 95%. The method also uses several times fewer generated tokens than extended thinking and far fewer model-visible images than direct interaction, and residual failures localize to state acquisition rather than plan generation without any specialized training.",
+      "authors": [
+        "Mohammad Albinhassan",
+        "Yuming Feng",
+        "Alessandra Russo",
+        "Pranava Madhyastha"
+      ],
+      "primary_category": "cs.RO",
+      "categories": [
+        "cs.RO",
+        "cs.AI",
+        "cs.CL"
+      ],
+      "published": "2026-08-17T16:50:59+00:00",
+      "link": "https://arxiv.org/pdf/2608.16794v1",
+      "tags": [
+        "keyword:agents",
+        "query:agents"
+      ],
+      "llm_score": 9.0,
+      "llm_evidence_en": "perception and grounded interaction for embodied planning",
+      "llm_evidence_cn": "具身感知与交互规划",
+      "llm_evidence": "具身感知与交互规划",
+      "canonical_evidence": "具身感知与交互规划",
+      "llm_tldr_en": "Neurosymbolic Embodied Agents factor long-horizon household tasks into task-directed visual exploration and constrained symbolic planning, using PDDL models and MCTS to produce executable plans from grounded observations.",
+      "llm_tldr_cn": "本文针对语言模型生成具身计划不可执行的问题，提出神经符号具身智能体。第一阶段通过视觉探索与交互学习获取目标相关的谓词和实例绑定，构建符号初始状态；第二阶段用PDDL转移模型约束解码，并通过蒙特卡洛树搜索评估可执行的动作延续。该方法将感知与规划紧密结合，在长时程家庭任务中显著提高计划的可执行性与目标达成率，展示了神经符号融合的潜力。",
+      "llm_tldr": "本文针对语言模型生成具身计划不可执行的问题，提出神经符号具身智能体。第一阶段通过视觉探索与交互学习获取目标相关的谓词和实例绑定，构建符号初始状态；第二阶段用PDDL转移模型约束解码，并通过蒙特卡洛树搜索评估可执行的动作延续。该方法将感知与规划紧密结合，在长时程家庭任务中显著提高计划的可执行性与目标达成率，展示了神经符号融合的潜力。",
+      "llm_tags": [
+        "query:agents"
+      ],
+      "matched_query_tag": "query:agents",
+      "matched_query_text": "How do autonomous agents perceive and interact with their environment?",
+      "matched_requirement_id": "req-6",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2608.16798v1",
+      "source": "arxiv",
+      "title": "ClawGym II: Exploring Black-Box RL on Agent Harness",
+      "abstract": "Agent harnesses have substantially improved performance on long-horizon tasks by coordinating agent interactions with the environment. However, reinforcement learning through complex harnesses remains largely unexplored, as scaling such training to long-horizon agent tasks introduces fundamental challenges. In this work, we present a unified black-box RL framework for stable and scalable optimization of general agents through complex harnesses. Concretely, we first build a sandbox-based execution infrastructure that isolates task environments and harnesses within temporary sandboxes for large-scale concurrent rollouts. We then decouple policy optimization from opaque harness execution and place a serving proxy at the model boundary to capture model calls. To reconstruct multi-turn trajectories and improve training efficiency, we organize the captured calls into prefix trees and further adapt both critic-based PPO and critic-free GRPO to optimize over the recovered tree structure. Meanwhile, we maintain training-inference consistency throughout the optimization process. Finally, we introduce mix-harness training, allowing a single model to be jointly optimized by heterogeneous harnesses. With Qwen3-30A3B, black-box RL improves Pass@1 on ClawGym-Bench by 9.98 and 14.81 points through OpenClaw and Claude Code, respectively, while remaining stable over 200-400 optimization steps. Moreover, the framework yields consistent gains on more challenging tasks such as JobBench and OfficeQA. Overall, our framework enables effective, stable, and scalable optimization of general agents through black-box harnesses, supporting unified training across heterogeneous execution systems.",
+      "authors": [
+        "Huatong Song",
+        "Fei Bai",
+        "Ming Yang",
+        "Renyuan Li",
+        "Jia Deng",
+        "Jujie He",
+        "Zhange Zhang",
+        "Daixuan Cheng",
+        "Yan Xing",
+        "Qi Yun",
+        "Xuxing Chen",
+        "Danyang Li",
+        "Feng Chang",
+        "Chuan Hao",
+        "Ran Tao",
+        "Jian Yang",
+        "Bryan Dai",
+        "Wayne Xin Zhao",
+        "Mingjie Tang",
+        "Ji-Rong Wen"
+      ],
+      "primary_category": "cs.CL",
+      "categories": [
+        "cs.CL",
+        "cs.AI",
+        "cs.LG"
+      ],
+      "published": "2026-08-17T16:53:03+00:00",
+      "link": "https://arxiv.org/pdf/2608.16798v1",
+      "tags": [
+        "keyword:agents",
+        "query:agents"
+      ],
+      "llm_score": 9.0,
+      "llm_evidence_en": "Presents a black-box RL framework for stable and scalable optimization of general agents through complex harnesses",
+      "llm_evidence_cn": "提出黑盒强化学习框架，通过复杂智能体构架实现通用智能体的稳定可扩展训练",
+      "llm_evidence": "提出黑盒强化学习框架，通过复杂智能体构架实现通用智能体的稳定可扩展训练",
+      "canonical_evidence": "提出黑盒强化学习框架，通过复杂智能体构架实现通用智能体的稳定可扩展训练",
+      "llm_tldr_en": "Proposes ClawGym II, a unified black-box RL framework with sandbox-based execution and proxy serving to enable scalable RL optimization of agents through complex harnesses, addressing challenges of long-horizon training.",
+      "llm_tldr_cn": "智能体构架（harness）能显著提升长时程任务表现，但通过复杂构架进行强化学习训练仍鲜有探索，主要受限于规模化与稳定性问题。为此作者提出统一的黑盒RL框架，利用沙箱化执行基础设施实现大规模并发采样，并在模型边界部署服务代理解耦策略优化与不透明的构架执行。该框架为通用智能体的复杂构架优化提供了可扩展的强化学习训练路径。",
+      "llm_tldr": "智能体构架（harness）能显著提升长时程任务表现，但通过复杂构架进行强化学习训练仍鲜有探索，主要受限于规模化与稳定性问题。为此作者提出统一的黑盒RL框架，利用沙箱化执行基础设施实现大规模并发采样，并在模型边界部署服务代理解耦策略优化与不透明的构架执行。该框架为通用智能体的复杂构架优化提供了可扩展的强化学习训练路径。",
+      "llm_tags": [
+        "query:agents"
+      ],
+      "matched_query_tag": "query:agents",
+      "matched_query_text": "reinforcement learning agent training",
+      "matched_requirement_id": "req-5",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2608.16801v1",
+      "source": "arxiv",
+      "title": "When Agents Coordinate: Measuring Coordination in Multi-Agent AI Coding",
+      "abstract": "We study how teams of AI coding agents coordinate while solving programming tasks. Current evaluations usually report whether the agents complete the task and how much the run costs, leaving the coordination inside the team largely unmeasured. We introduce an instrument to measure this coordination. Each run is represented as a temporal network in which agents and files are nodes, and messages, file writes, and file reads are timestamped directed edges with an associated cost. We apply this instrument to 1902 runs, each evaluated with a fixed test suite, across configurations that vary the team size, the team structure, and the file policy. The resulting networks show how coordination changes as teams grow and as the work changes. Direct messaging initially increases close to quadratically with the number of agents, with much of this growth coming from an early round of introductions. As the teams grow further, this increase levels off in the largest teams we study, where agents increasingly communicate through broadcast messages. The task also shapes the network that emerges. Work built around a shared specification produces dense, highly connected teams, while pipeline tasks produce sparse networks organised around local interfaces. Shared files can replace repeated 1-to-1 communication, cutting output tokens by about 42% at eight agents on message-heavy work, while adding overhead when files already carry the coordination. Naming one agent as coordinator creates no communication hub and provides no reliable improvement in success. We also observe an unprompted tendency for agents to seek out hidden grading material. We repeat the key experimental conditions in a sealed environment, replacing the hidden material with marked placeholder files. Across 244 additional runs, agents still reach for it in four fifths of runs, while the coordinator and file-channel findings reproduce.",
+      "authors": [
+        "Giuseppe Destefanis",
+        "Tomaso Aste"
+      ],
+      "primary_category": "cs.AI",
+      "categories": [
+        "cs.AI",
+        "cs.SE"
+      ],
+      "published": "2026-08-17T16:57:38+00:00",
+      "link": "https://arxiv.org/pdf/2608.16801v1",
+      "tags": [
+        "keyword:agents",
+        "query:agents"
+      ],
+      "llm_score": 9.0,
+      "llm_evidence_en": "measuring coordination as a core challenge in multi-agent systems",
+      "llm_evidence_cn": "度量多智能体协调的核心挑战",
+      "llm_evidence": "度量多智能体协调的核心挑战",
+      "canonical_evidence": "度量多智能体协调的核心挑战",
+      "llm_tldr_en": "This paper introduces a temporal-network-based instrument to measure coordination in teams of AI coding agents across 1902 runs, revealing how coordination changes with team size, structure, and file policy.",
+      "llm_tldr_cn": "当前对多智能体AI编码团队的评测仅关注任务完成率和成本，忽略了团队内部的协调行为。本文提出一种基于时序网络的度量工具，将智能体和文件作为节点，消息、文件读写作为带时间戳的有向边，并关联成本。对1902次运行的分析显示，协调模式随团队规模、结构和文件策略的变化而变化，直接消息启动等行为揭示了协调的涌现规律。该工具为理解和优化多智能体协作提供了可量化的手段。",
+      "llm_tldr": "当前对多智能体AI编码团队的评测仅关注任务完成率和成本，忽略了团队内部的协调行为。本文提出一种基于时序网络的度量工具，将智能体和文件作为节点，消息、文件读写作为带时间戳的有向边，并关联成本。对1902次运行的分析显示，协调模式随团队规模、结构和文件策略的变化而变化，直接消息启动等行为揭示了协调的涌现规律。该工具为理解和优化多智能体协作提供了可量化的手段。",
+      "llm_tags": [
+        "query:agents"
+      ],
+      "matched_query_tag": "query:agents",
+      "matched_query_text": "What are the main challenges in multi agent coordination?",
+      "matched_requirement_id": "req-7",
+      "selection_source": "fresh_fetch"
+    }
+  ],
+  "quick_skim": [
+    {
+      "id": "2608.13394v1",
+      "source": "arxiv",
+      "title": "Heterogeneity-Aware Belief Synchronization for Semantic Communication in AI-Native 6G Networks",
+      "abstract": "6G networks will not be serving as communication infrastructures only; rather, they are expected to evolve into intelligent systems, where thousands of autonomous artificial intelligence (AI) agents are interconnected. The agents are deployed across a wide range of platforms including low Earth orbit (LEO) satellites, high-altitude platforms (HAPs), unmanned aerial vehicles (UAVs), edge servers, and terrestrial devices. These agents continuously observe their environment and exchange information. Semantic communication provides an efficient mechanism for exchanging meaningful information instead of raw data. However, its effectiveness depends on the communicating agents having sufficiently aligned beliefs to correctly interpret and decode the transmitted messages. This assumption becomes difficult to satisfy in the 6G network where heterogeneous AI models operate under diverse computational constraints and continuously acquire different knowledge from their local environments. This article presents a heterogeneity-aware belief synchronization framework for 6G AI-native networks. It uses latent translation models deployed on multi-access edge computing (MEC) servers. These models translate belief updates from one agent to agent-specific knowledge without requiring joint training and a homogeneous architecture of models. By exchanging compact belief updates through a latent translation model only when necessary, the framework preserves privacy, reduces synchronization cost, and minimizes local knowledge drift. We validate the framework through a case study on a multi-layered terrestrial/non-terrestrial network. Results demonstrate that it maintains low synchronization cost, measured by the number of parameters transmitted, and low belief alignment error across the heterogeneous agents in the case study.",
+      "authors": [
+        "Muhammad Hannan Akram",
+        "Muhammad Abubakar Rashid",
+        "Wassi Haider Kabir",
+        "Haejoon Jung",
+        "Kapal Dev",
+        "Syed Ali Hassan"
+      ],
+      "primary_category": "eess.SP",
+      "categories": [
+        "eess.SP",
+        "cs.AI",
+        "cs.MA"
+      ],
+      "published": "2026-08-13T15:53:15+00:00",
+      "link": "https://arxiv.org/pdf/2608.13394v1",
+      "tags": [
+        "keyword:agents",
+        "query:agents"
+      ],
+      "llm_score": 8.0,
+      "llm_evidence_en": "belief synchronization among autonomous AI agents for coordination in 6G networks",
+      "llm_evidence_cn": "6G网络中自主AI智能体间的信念同步以实现协调",
+      "llm_evidence": "6G网络中自主AI智能体间的信念同步以实现协调",
+      "canonical_evidence": "6G网络中自主AI智能体间的信念同步以实现协调",
+      "llm_tldr_en": "Proposes heterogeneity-aware belief synchronization for semantic communication among interconnected autonomous AI agents in 6G, addressing belief alignment for correct interpretation.",
+      "llm_tldr_cn": "6G网络将演变为智能系统，数千个自主AI智能体互联，持续观察环境并交换语义信息。语义通信依赖智能体间对齐的信念来正确解释信息。本文提出异构感知的信念同步方法，考虑不同平台的异构性，促进智能体间有效沟通。该工作对于实现AI原生6G网络中的多智能体协调具有基础意义。",
+      "llm_tldr": "6G网络将演变为智能系统，数千个自主AI智能体互联，持续观察环境并交换语义信息。语义通信依赖智能体间对齐的信念来正确解释信息。本文提出异构感知的信念同步方法，考虑不同平台的异构性，促进智能体间有效沟通。该工作对于实现AI原生6G网络中的多智能体协调具有基础意义。",
+      "llm_tags": [
+        "query:agents"
+      ],
+      "matched_query_tag": "query:agents",
+      "matched_query_text": "multi-agent system coordination",
+      "matched_requirement_id": "req-3",
+      "selection_source": "carryover_cache",
+      "paper_id": "2608.13394v1",
+      "quick_tier": "8plus"
+    },
+    {
+      "id": "2608.13900v1",
+      "source": "arxiv",
+      "title": "Agentic Transaction: Towards ACID-Compliant Agent Systems",
+      "abstract": "Large language model (LLM) agents are evolving from conversational assistants into autonomous systems that execute long-horizon tasks through reasoning, tool use, code generation, and workspace manipulation. As agents increasingly operate over persistent environments and multi-step workflows, they face challenges analogous to those addressed by transactional database systems: reliable execution, consistent outcomes, safe concurrency, and durable state management. We introduce the concept of an agentic transaction and propose an ACID-compliant agent system framework that reinterprets the classical ACID properties for agent execution through four semantic guarantees: Semantic Atomicity, Semantic Consistency, Semantic Isolation, and Semantic Durability. Together, these properties provide a principled foundation for building reliable agent systems despite model uncertainty and dynamic execution environments. To instantiate this framework, we develop an ACID-compliant data agent that realizes these guarantees through transactional exploration-execution-validation cycles, transactional skill hubs, confidence divergence-based validation, semantic dependency-aware isolation, and transaction-aware semantic state management. Experimental results on widely used benchmarks show that our system achieves a 10.6% improvement over state-of-the-art agents, including Claude Code. This work opens a broader research agenda on extending transactional principles and system architectures toward building trustworthy, scalable, and self-evolving AI agent systems.",
+      "authors": [
+        "Zhaoyan Sun",
+        "Xiaoxiao Wang",
+        "Guoliang Li"
+      ],
+      "primary_category": "cs.DB",
+      "categories": [
+        "cs.DB",
+        "cs.AI",
+        "cs.CL",
+        "cs.LG"
+      ],
+      "published": "2026-08-14T03:13:54+00:00",
+      "link": "https://arxiv.org/pdf/2608.13900v1",
+      "tags": [
+        "keyword:agents",
+        "query:agents"
+      ],
+      "llm_score": 7.0,
+      "llm_evidence_en": "ACID-compliant framework for reliable long-horizon agent execution",
+      "llm_evidence_cn": "面向可靠长程智能体执行的ACID兼容框架",
+      "llm_evidence": "面向可靠长程智能体执行的ACID兼容框架",
+      "canonical_evidence": "面向可靠长程智能体执行的ACID兼容框架",
+      "llm_tldr_en": "Introduces agentic transactions, reinterpreting ACID semantics for LLM agent execution to ensure reliable, consistent, isolated, and durable task completion.",
+      "llm_tldr_cn": "LLM智能体越来越多地自主执行持久环境中的长时程任务，面临可靠执行与状态一致性问题。论文类比数据库事务提出智能体事务概念，将ACID重解释为语义原子性、语义一致性、语义隔离与语义持久性。该框架为长程任务完成和并发控制提供了设计原则，有助于构建更稳定的智能体系统。",
+      "llm_tldr": "LLM智能体越来越多地自主执行持久环境中的长时程任务，面临可靠执行与状态一致性问题。论文类比数据库事务提出智能体事务概念，将ACID重解释为语义原子性、语义一致性、语义隔离与语义持久性。该框架为长程任务完成和并发控制提供了设计原则，有助于构建更稳定的智能体系统。",
+      "llm_tags": [
+        "query:agents"
+      ],
+      "matched_query_tag": "query:agents",
+      "matched_query_text": "task-oriented agent goal completion",
+      "matched_requirement_id": "req-4",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "7"
+    },
+    {
+      "id": "2608.15127v1",
+      "source": "arxiv",
+      "title": "From LLM Inference to Agentic Workloads: Characterization and Implications for Serving Systems",
+      "abstract": "Agentic applications are shifting AI serving from isolated model inference to long-running workloads in which LLMs coordinate tools, environments, and persistent state. However, the system behavior of these workloads---where latency, cost, and bottlenecks arise---remains poorly characterized, leaving serving systems to rely on assumptions built for conventional inference. We present AgentSysBench, a benchmark suite and measurement toolkit with ten representative agentic applications and unified systems-level instrumentation. Across controlled deployments and production traces, we identify six properties that distinguish agentic workloads from conventional LLM serving: (1) execution is heavyweight and stateful, with non-LLM components dominating latency in 5 of 10 applications and sandbox working-set memory peaking at 28 GB per session; (2) applications compose components with heterogeneous resource affinity---GPU-bound inference, memory-bound retrieval, CPU-bound sandboxes---whose task latencies diverge by up to 32x; (3) bottlenecks shift across requests, models, and deployments; (4) production sessions hold state idle for minutes to hours between active steps; (5) a control-plane tax---auxiliary LLM calls and context overhead from tool schemas and observations---crowds out productive compute and context; and (6) production traces from three applications reveal heavy cross-request redundancy in search queries and web fetches, exposing a large caching opportunity. Four design explorations demonstrate that these findings are actionable: task-aware serving reduces latency by 29--40%, communication-aware placement by up to 4.5x, state offloading reduces memory usage by 4.6x, and tool-result caching removes 35.2% of redundant search calls and saves 19.3% of aggregate search latency.",
+      "authors": [
+        "Chaokun Chang",
+        "Yukun Zhou",
+        "Kaihua Fu",
+        "Dakai An",
+        "Tianyu Feng",
+        "Hanfeng Lu",
+        "Sheng Yao",
+        "Pu Guo",
+        "Yinghao Yu",
+        "Yizhou Shan",
+        "Bo Li",
+        "Binhang Yuan",
+        "Wei Wang"
+      ],
+      "primary_category": "cs.OS",
+      "categories": [
+        "cs.OS",
+        "cs.AI",
+        "cs.DC",
+        "cs.MA"
+      ],
+      "published": "2026-08-15T09:02:16+00:00",
+      "link": "https://arxiv.org/pdf/2608.15127v1",
+      "tags": [
+        "keyword:agents",
+        "query:agents"
+      ],
+      "llm_score": 6.0,
+      "llm_evidence_en": "Characterizes agentic workloads where LLMs coordinate tools, environments, and persistent state",
+      "llm_evidence_cn": "刻画了LLM协调工具、环境和持久状态的智能体工作负载",
+      "llm_evidence": "刻画了LLM协调工具、环境和持久状态的智能体工作负载",
+      "canonical_evidence": "刻画了LLM协调工具、环境和持久状态的智能体工作负载",
+      "llm_tldr_en": "Presents AgentSysBench, a benchmark suite and measurement toolkit characterizing agentic workloads through six properties, showing how agents interact with tools and environments and the resulting serving implications.",
+      "llm_tldr_cn": "智能体应用使AI服务从单一推理转变为LLM协调工具、环境和持久状态的长时间运行负载，但其系统行为仍不清晰。作者提出AgentSysBench基准和测量工具包，对十个代表性应用进行系统级测量，识别出六项区别于传统LLM服务的特性，如执行重且有状态、非LLM组件等。该工作为理解智能体如何与环境交互以及优化智能体服务系统提供了数据基础。",
+      "llm_tldr": "智能体应用使AI服务从单一推理转变为LLM协调工具、环境和持久状态的长时间运行负载，但其系统行为仍不清晰。作者提出AgentSysBench基准和测量工具包，对十个代表性应用进行系统级测量，识别出六项区别于传统LLM服务的特性，如执行重且有状态、非LLM组件等。该工作为理解智能体如何与环境交互以及优化智能体服务系统提供了数据基础。",
+      "llm_tags": [
+        "query:agents"
+      ],
+      "matched_query_tag": "query:agents",
+      "matched_query_text": "How do autonomous agents perceive and interact with their environment?",
+      "matched_requirement_id": "req-6",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "6"
+    },
+    {
+      "id": "2608.13420v1",
+      "source": "arxiv",
+      "title": "Enhancing Virtual Agents through SLMs and Edge-Computing: An Exploratory Evaluation of Think and Memory Processes",
+      "abstract": "Embodied intelligent virtual agents are expected to operate as persistent, adaptive, and context-aware entities within complex virtual and Metaverse worlds. However, implementing cognitively capable agents in such environments is conceptually and technologically challenging. Among a range of blueprints and development approaches, the Cognitive Embodied Agent Architecture (CEAA) has been developed as an implementation-oriented framework for architecting components of perception, memory, reasoning, planning, and embodied action. Considering the recent advances in edge computing and generative AI language models, this paper explores the use of Small Language Models (SLMs) to support edge-based operation of selected CEAA components, focusing on \"Think\" and \"Memory\" as processes central to cognitive orchestration and persistence of virtual agents in interactive virtual worlds. An edge-based virtual agent gateway system was developed and evaluated on an NVIDIA Jetson Orin NX using Qwen2.5 models of different sizes, exploring the system's capability to process service requests and handle memory-driven conversations. A series of simulation experiments evaluated routing accuracy, memory-read performance, and latency, demonstrating an SLM-driven prototype agent system that partially implements selected CEAA processes to support the development of embodied agents whose cognitive \"brain\" can operate efficiently and contextually for interactive experiences in immersive virtual worlds.",
+      "authors": [
+        "Aimilios Hadjiliasi",
+        "Louis Nisiotis"
+      ],
+      "primary_category": "cs.AI",
+      "categories": [
+        "cs.AI"
+      ],
+      "published": "2026-08-13T16:12:52+00:00",
+      "link": "https://arxiv.org/pdf/2608.13420v1",
+      "tags": [
+        "keyword:agents",
+        "query:agents"
+      ],
+      "llm_score": 8.0,
+      "llm_evidence_en": "Explores cognitive embodied agent architecture with SLMs and edge computing for virtual agents",
+      "llm_evidence_cn": "探索结合小语言模型与边缘计算的具身认知智能体架构，用于虚拟智能体",
+      "llm_evidence": "探索结合小语言模型与边缘计算的具身认知智能体架构，用于虚拟智能体",
+      "canonical_evidence": "探索结合小语言模型与边缘计算的具身认知智能体架构，用于虚拟智能体",
+      "llm_tldr_en": "Explores using small language models and edge computing to implement cognitive capabilities (think and memory) in embodied virtual agents, with an exploratory evaluation of the CEAA architecture.",
+      "llm_tldr_cn": "具身智能虚拟智能体需要在复杂虚拟世界中持久、自适应地运行，但实现感知、记忆、推理和规划等认知能力在技术与概念上都很困难。本文基于认知具身智能体架构CEAA，探索利用小语言模型和边缘计算在端侧支持智能体的思考与记忆过程。通过探索性评估，验证了这种轻量级实现方式在虚拟环境中的可行性，为资源受限场景下的智能体认知能力部署提供了参考。",
+      "llm_tldr": "具身智能虚拟智能体需要在复杂虚拟世界中持久、自适应地运行，但实现感知、记忆、推理和规划等认知能力在技术与概念上都很困难。本文基于认知具身智能体架构CEAA，探索利用小语言模型和边缘计算在端侧支持智能体的思考与记忆过程。通过探索性评估，验证了这种轻量级实现方式在虚拟环境中的可行性，为资源受限场景下的智能体认知能力部署提供了参考。",
+      "llm_tags": [
+        "query:agents"
+      ],
+      "matched_query_tag": "query:agents",
+      "matched_query_text": "intelligent agent technology",
+      "matched_requirement_id": "req-1",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "8plus"
+    },
+    {
+      "id": "2608.14035v1",
+      "source": "arxiv",
+      "title": "Agent-Orchestration in Autonomous Chip Design",
+      "abstract": "Recent developments in large language models (LLMs) and tool-using agents encourage people to explore the potential of using agents in chip design. The core question is what kind of AI we really need in such a sophisticated industry.   To this end, we bring the idea of modeling a chip-design superintelligence as an enormous \\textit{AI-organization}.",
+      "authors": [
+        "Linyang Li"
+      ],
+      "primary_category": "cs.AI",
+      "categories": [
+        "cs.AI"
+      ],
+      "published": "2026-08-14T07:26:02+00:00",
+      "link": "https://arxiv.org/pdf/2608.14035v1",
+      "tags": [
+        "keyword:agents",
+        "query:agents"
+      ],
+      "llm_score": 7.0,
+      "llm_evidence_en": "explores using LLM-based tool-using agents for autonomous chip design via agent orchestration",
+      "llm_evidence_cn": "探讨通过智能体编排在自主芯片设计中使用基于LLM的工具型智能体",
+      "llm_evidence": "探讨通过智能体编排在自主芯片设计中使用基于LLM的工具型智能体",
+      "canonical_evidence": "探讨通过智能体编排在自主芯片设计中使用基于LLM的工具型智能体",
+      "llm_tldr_en": "The paper discusses modeling a chip-design superintelligence as an AI-organization, where agent-orchestration coordinates tool-using agents to perform autonomous chip design tasks.",
+      "llm_tldr_cn": "该文探讨将大型语言模型与工具型智能体用于芯片设计，提出将芯片设计超级智能建模为庞大的AI组织。核心问题从单个智能体能力转向智能体间的编排与协作，利用智能体组织来完成复杂且高壁垒的芯片设计任务。文章强调了在工业级场景中需要什么样的智能体体系与协作治理。",
+      "llm_tldr": "该文探讨将大型语言模型与工具型智能体用于芯片设计，提出将芯片设计超级智能建模为庞大的AI组织。核心问题从单个智能体能力转向智能体间的编排与协作，利用智能体组织来完成复杂且高壁垒的芯片设计任务。文章强调了在工业级场景中需要什么样的智能体体系与协作治理。",
+      "llm_tags": [
+        "query:agents"
+      ],
+      "matched_query_tag": "query:agents",
+      "matched_query_text": "intelligent agent technology",
+      "matched_requirement_id": "req-1",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "7"
+    },
+    {
+      "id": "2608.13982v1",
+      "source": "arxiv",
+      "title": "XAI-Guided Conservative Decentralized Execution for Offline Multi-Agent Network Slicing",
+      "abstract": "The recent advances toward sixth-generation (6G) and beyond-6G networks have accelerated the need for intelligent resource management mechanisms capable of supporting heterogeneous services under shared infrastructures in network slicing. However, resource allocation in network slicing naturally forms a resource-coupled cooperative optimization problem with competing slice demands. Slices compete for limited resources to minimize individual latencies while coordinating to avoid conflicts and underutilization. Although multi-agent reinforcement learning (MARL) has shown promising performance in such settings, existing online formulations remain costly, unsafe, and difficult to deploy due to their reliance on environmental interactions and communication among agents. In this work, we present explainable artificial intelligence (XAI)-guided conservative decentralized execution (X-CODE). X-CODE is an explainable offline MARL that operates offline without environmental interaction, nor inter-agent communication. It exploits explainability-aware reward shaping to modify the relative preference among joint offline transitions during centralized training to improve decentralized resource-allocation behavior. In deployment, the agents operate independently without signaling exchange among the agents. Simulation results demonstrate that the proposed approach achieves zero observed resource-conflict events in the evaluated test episodes while minimizing per-slice latencies. Moreover, the proposed framework exhibits lower signaling overhead and reduces effective inference latency by 88 % under the considered communication-delay model compared to the online baselines. Source codes and datasets are available through: https://github.com/Eslam211/xcode-ran-slicing.",
+      "authors": [
+        "Eslam Eldeeb",
+        "Hatim Chergui",
+        "Merouane Debbah"
+      ],
+      "primary_category": "cs.MA",
+      "categories": [
+        "cs.MA"
+      ],
+      "published": "2026-08-14T05:54:04+00:00",
+      "link": "https://arxiv.org/pdf/2608.13982v1",
+      "tags": [
+        "keyword:agents",
+        "query:agents"
+      ],
+      "llm_score": 8.0,
+      "llm_evidence_en": "Offline multi-agent reinforcement learning with conservative decentralized execution",
+      "llm_evidence_cn": "离线多智能体强化学习与保守去中心化执行",
+      "llm_evidence": "离线多智能体强化学习与保守去中心化执行",
+      "canonical_evidence": "离线多智能体强化学习与保守去中心化执行",
+      "llm_tldr_en": "Presents an XAI-guided conservative approach for offline MARL in network slicing, enabling safer decentralized execution while coordinating multiple slices to avoid conflicts and underutilization.",
+      "llm_tldr_cn": "网络切片中资源分配是资源耦合的协作优化问题，在线多智能体强化学习成本高且部署困难。本文提出基于XAI的保守去中心化执行方法，利用可解释性指导离线训练与部署，使各切片在协调竞争资源的同时避免冲突与资源闲置。实验表明该方法在保障安全性的前提下保持较好的性能表现，为6G等场景提供可行的智能资源管理方案。",
+      "llm_tldr": "网络切片中资源分配是资源耦合的协作优化问题，在线多智能体强化学习成本高且部署困难。本文提出基于XAI的保守去中心化执行方法，利用可解释性指导离线训练与部署，使各切片在协调竞争资源的同时避免冲突与资源闲置。实验表明该方法在保障安全性的前提下保持较好的性能表现，为6G等场景提供可行的智能资源管理方案。",
+      "llm_tags": [
+        "query:agents"
+      ],
+      "matched_query_tag": "query:agents",
+      "matched_query_text": "reinforcement learning agent training",
+      "matched_requirement_id": "req-5",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "8plus"
+    },
+    {
+      "id": "2608.14893v1",
+      "source": "arxiv",
+      "title": "Weaker Coherence, Weaker Reciprocity: Comparing the Semantic and Social Organization of Moltbook and Reddit",
+      "abstract": "Large language models enable the creation of autonomous agents that interact in social environments, raising the question of whether agent-based platforms reproduce the organizational properties of human social networks. We compare Moltbook, a social network populated by AI agents, with early Reddit, focusing on how communities organize and differentiate semantic content, using network analysis and NLP methods to characterize semantic coherence and diversity within and between communities, and their relationship to user activity. We find a systematic difference between the two platforms. Reddit communities show stronger semantic coherence, closer alignment with community names, and greater semantic diversity, with individual communities spanning broader content and communities more differentiated from one another. This combination distinguishes Reddit from Moltbook, whose communities are more homogeneous, less differentiated, and increasingly misaligned with their names over time. Users on Reddit also participate across communities that are more semantically related than those connected by activity in Moltbook. At the interaction level, comment-network motif analysis shows Moltbook dominated by non-reciprocal, broadcast-like exchanges, whereas Reddit shows more reciprocal, chained interaction patterns. These results indicate that Reddit combines semantic coherence with diversity across organizational levels, a pattern not reproduced by the AI-agent network.",
+      "authors": [
+        "Favio Di Ciocco",
+        "Lucas Díaz Celauro",
+        "Sebastián Pinto",
+        "Marcelo Kuperman",
+        "Pablo Balenzuela"
+      ],
+      "primary_category": "cs.SI",
+      "categories": [
+        "cs.SI",
+        "physics.soc-ph"
+      ],
+      "published": "2026-08-14T21:01:00+00:00",
+      "link": "https://arxiv.org/pdf/2608.14893v1",
+      "tags": [
+        "keyword:agents"
+      ],
+      "llm_score": 7.0,
+      "llm_evidence_en": "AI agent social network; multi-agent interaction and semantic organization",
+      "llm_evidence_cn": "人工智能智能体社交网络；多智能体交互与语义组织",
+      "llm_evidence": "人工智能智能体社交网络；多智能体交互与语义组织",
+      "canonical_evidence": "人工智能智能体社交网络；多智能体交互与语义组织",
+      "llm_tldr_en": "This paper studies AI-agent social networks by comparing Moltbook, populated by autonomous agents, with Reddit, using network analysis and NLP to reveal weaker semantic coherence and reciprocity in agent communities, highlighting emergent differences in social organization.",
+      "llm_tldr_cn": "本文利用网络分析与自然语言处理方法，比较了由自主智能体构成的社交网络Moltbook与人类社区Reddit的语义和社会组织。研究发现，与Reddit相比，Moltbook社区表现出较弱的语义连贯性、较弱的社区名称对齐程度以及更低的语义多样性，揭示出智能体平台在自组织机制上的系统性差异。这一发现为理解多智能体交互模式、评估基于大模型驱动的社交平台提供实证基础，也提示研究者需要关注智能体环境中的语义衰退问题。",
+      "llm_tldr": "本文利用网络分析与自然语言处理方法，比较了由自主智能体构成的社交网络Moltbook与人类社区Reddit的语义和社会组织。研究发现，与Reddit相比，Moltbook社区表现出较弱的语义连贯性、较弱的社区名称对齐程度以及更低的语义多样性，揭示出智能体平台在自组织机制上的系统性差异。这一发现为理解多智能体交互模式、评估基于大模型驱动的社交平台提供实证基础，也提示研究者需要关注智能体环境中的语义衰退问题。",
+      "llm_tags": [
+        "query:agents"
+      ],
+      "matched_query_tag": "query:agents",
+      "matched_query_text": "multi-agent system coordination",
+      "matched_requirement_id": "req-3",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "7"
+    },
+    {
+      "id": "2608.14068v1",
+      "source": "arxiv",
+      "title": "MACS: A Hybrid Multi-Agent Framework for Reliable Conversational E-Commerce Recommendation",
+      "abstract": "Conversational recommendation for e-commerce is increasingly mediated by large language models (LLMs), yet many real-world deployments operate under a stricter requirement: recommendations must be drawn only from a merchant's fixed catalog, without web search or unsupported product claims. In this setting, the main challenge is reliability under hard constraints: the system must satisfy user requirements, remain grounded in available inventory, and preserve preferences across multiple conversational turns. We present MACS (Multi-Agent Commerce System), a hybrid multi-agent framework for reliable conversational recommendation in fixed-catalog settings. MACS uses LLMs for language-facing tasks such as interpreting user requests, eliciting preferences, and generating responses, while correctness-critical operations, including product retrieval, hard-constraint filtering, brand exclusion, and progressive relaxation, are executed deterministically by the merchant agent. A session-persistent preference layer tracks constraints across turns, enabling consistent handling of budget overwrites and exclusion reversals. On a 140-query single-turn benchmark, MACS achieves the highest pass rate (87.1%) and perfect brand compliance (1.000). On a 10-scenario multi-turn benchmark, MACS achieves the strongest macro Pass@5 (72% vs. 56% GPT+Catalog / 52% Gemini+Catalog) with zero constraint drift. The advantage is sharpest on exclusion reversal (100% vs. 20% / 0%) and constraint accumulation (100% vs. 60% / 40%). Mean judged response quality is similar across systems (0.751 vs. 0.736). These results suggest that hybrid architectures combining deterministic constraint enforcement with session-persistent preference tracking provide stronger reliability-oriented performance than catalog-bound prompt-only baselines in the fixed-catalog merchant setting.",
+      "authors": [
+        "Juli Huang",
+        "Hannah Clay",
+        "Sajjad Beygi",
+        "Thomas Sarda",
+        "Negin Golrezaei",
+        "Amin Saberi"
+      ],
+      "primary_category": "cs.IR",
+      "categories": [
+        "cs.IR",
+        "cs.AI"
+      ],
+      "published": "2026-08-14T08:26:19+00:00",
+      "link": "https://arxiv.org/pdf/2608.14068v1",
+      "tags": [
+        "keyword:agents",
+        "query:agents"
+      ],
+      "llm_score": 8.0,
+      "llm_evidence_en": "hybrid multi-agent framework coordinating LLMs for reliable recommendation",
+      "llm_evidence_cn": "协调多个LLM的混合多智能体推荐框架",
+      "llm_evidence": "协调多个LLM的混合多智能体推荐框架",
+      "canonical_evidence": "协调多个LLM的混合多智能体推荐框架",
+      "llm_tldr_en": "MACS is a hybrid multi-agent framework for reliable conversational e-commerce recommendation under fixed-catalog constraints, using LLMs for language-facing tasks and coordinating agents to stay grounded in inventory.",
+      "llm_tldr_cn": "面向固定商品目录下的可靠对话推荐问题，提出混合多智能体系统MACS。该系统利用LLM处理语言理解等任务，通过多智能体协作确保推荐结果满足用户需求且不超出库存范围。实验显示MACS能在多轮对话中保持偏好一致并满足硬约束，为电商推荐提供了一种多智能体协同方案。",
+      "llm_tldr": "面向固定商品目录下的可靠对话推荐问题，提出混合多智能体系统MACS。该系统利用LLM处理语言理解等任务，通过多智能体协作确保推荐结果满足用户需求且不超出库存范围。实验显示MACS能在多轮对话中保持偏好一致并满足硬约束，为电商推荐提供了一种多智能体协同方案。",
+      "llm_tags": [
+        "query:agents"
+      ],
+      "matched_query_tag": "query:agents",
+      "matched_query_text": "multi-agent system coordination",
+      "matched_requirement_id": "req-3",
+      "selection_source": "carryover_cache",
+      "paper_id": "2608.14068v1",
+      "quick_tier": "8plus"
+    },
+    {
+      "id": "2608.15133v1",
+      "source": "arxiv",
+      "title": "Consensusability of Continuous-Time Multi-Agent Systems With Unbounded Heterogeneous Constant Delays: A Signed Laplacian Perspective",
+      "abstract": "The consensus of continuous-time multi-agent systems with unbounded and heterogeneous constant delays is investigated by combining frequency-domain analysis and algebraic graph theory. Several types of signed Laplacians are constructed to characterize consensusability under delays. The core results are established based on the defined delay-embedded signed Laplacian, where a small-delay link creates a cooperative interaction and a possibly unbounded large-delay link creates an antagonistic interaction between the agents. The dividing line between small and large delays is given by $τ_{ij}=π/2λ_{\\max}(\\bm{L}_0)$, where $λ_{\\max}(\\bm{L}_0)$ refers to the maximum eigenvalue of the conventional graph Laplacian. It is proved that the consensusability is preserved if the delay-embedded signed Laplacian is positive semi-definite with a simple zero eigenvalue. Moreover, we derived some consensus conditions in terms of the extended effective resistance which measures the overall coupling between two sets of agents. The obtained results provide new insights into the mechanism of delayed consensus from the interplay between the small-delay-induced cooperativeness and large-delay-induced antagonism in the underlying network topology.",
+      "authors": [
+        "Yue Song",
+        "Mengqi Xue",
+        "Jiazuo Hou",
+        "Yuxi Lu",
+        "Qi Liu"
+      ],
+      "primary_category": "math.OC",
+      "categories": [
+        "math.OC",
+        "eess.SY",
+        "math.DS"
+      ],
+      "published": "2026-08-15T09:11:37+00:00",
+      "link": "https://arxiv.org/pdf/2608.15133v1",
+      "tags": [
+        "keyword:agents",
+        "query:agents"
+      ],
+      "llm_score": 7.0,
+      "llm_evidence_en": "investigates consensusability of continuous-time multi-agent systems under heterogeneous delays",
+      "llm_evidence_cn": "研究异构时延下连续时间多智能体系统的可共识性",
+      "llm_evidence": "研究异构时延下连续时间多智能体系统的可共识性",
+      "canonical_evidence": "研究异构时延下连续时间多智能体系统的可共识性",
+      "llm_tldr_en": "The paper analyzes consensus in continuous-time multi-agent systems with unbounded heterogeneous constant delays, using signed Laplacians to characterize cooperative and antagonistic interactions under delay thresholds.",
+      "llm_tldr_cn": "该文研究连续时间多智能体系统在具有无界异构恒定时延下的可共识性。通过结合频域分析与代数图论，构造多种符号拉普拉斯矩阵刻画时延影响。核心成果基于时延嵌入符号拉普拉斯，定义了小/大时延的划分界限，小延时链路促成合作、大延时链路产生对抗，为多智能体协同提供了理论条件。",
+      "llm_tldr": "该文研究连续时间多智能体系统在具有无界异构恒定时延下的可共识性。通过结合频域分析与代数图论，构造多种符号拉普拉斯矩阵刻画时延影响。核心成果基于时延嵌入符号拉普拉斯，定义了小/大时延的划分界限，小延时链路促成合作、大延时链路产生对抗，为多智能体协同提供了理论条件。",
+      "llm_tags": [
+        "query:agents"
+      ],
+      "matched_query_tag": "query:agents",
+      "matched_query_text": "multi-agent system coordination",
+      "matched_requirement_id": "req-3",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "7"
+    },
+    {
+      "id": "2608.14109v1",
+      "source": "arxiv",
+      "title": "A Graph-Based Reinforcement Learning Framework for Structured Drift Diagnosis and Recovery in Autonomous LLM Agents",
+      "abstract": "Autonomous LLM agents are increasingly deployed in complex real-world workflows, yet they remain vulnerable to runtime behavioral drift, a silent deviation from the original task that can lead to irreversible side effects on external systems. Existing approaches address drift at the prompt level but lack structured mechanisms for step-level detection, risk assessment, and recovery decision. Because the main task-executing agent is often a large and expensive model that cannot be re-trained on every deployment, this work targets a plug-and-play recovery module instead. It introduces a graph-based framework in which a single small language model is trained via reinforcement learning to specialize at each node of a recovery graph, external to the main agent. Each node has a precise role\\,: drift classification, operation detection, risk evaluation, or final decision and the model learns to produce structured XML-formatted reasoning adapted to that role. Training combines rule-based structural rewards with an LLM-as-judge semantic-quality signal, so that the model is graded both on how it answers (schema and length) and on what it says. Experiments on the public AppWorld benchmark show that the method generally exploits information about the suspected drift onset to issue correct recovery decisions using a small language model. In addition, the trained small language model reliably respects the prescribed output schema and produces semantically appropriate content in each field according to its assigned node role.",
+      "authors": [
+        "Ismail El Hamraoui",
+        "Sagar Jose",
+        "Nicolas Bureau",
+        "Robert Plana"
+      ],
+      "primary_category": "cs.AI",
+      "categories": [
+        "cs.AI",
+        "cs.LG",
+        "cs.MA"
+      ],
+      "published": "2026-08-14T09:12:14+00:00",
+      "link": "https://arxiv.org/pdf/2608.14109v1",
+      "tags": [
+        "keyword:agents",
+        "query:agents"
+      ],
+      "llm_score": 8.0,
+      "llm_evidence_en": "Uses reinforcement learning to train a plug-and-play recovery module for autonomous LLM agents",
+      "llm_evidence_cn": "利用强化学习训练可插拔恢复模块，用于自治LLM智能体",
+      "llm_evidence": "利用强化学习训练可插拔恢复模块，用于自治LLM智能体",
+      "canonical_evidence": "利用强化学习训练可插拔恢复模块，用于自治LLM智能体",
+      "llm_tldr_en": "Proposes a graph-based framework where a small language model is trained via reinforcement learning at each node to detect, assess, and recover from runtime behavioral drift in autonomous LLM agents.",
+      "llm_tldr_cn": "自治LLM智能体在真实工作流中易发生运行时行为漂移，已有的提示级修复缺乏结构化检测与恢复机制。本文提出图结构框架，用单个小语言模型在每个节点上通过强化学习专门训练，作为即插即用的恢复模块，对漂移进行步骤级检测、风险评估与恢复决策。实验验证该方法能有效降低漂移带来的副作用，且无需重新训练主智能体。",
+      "llm_tldr": "自治LLM智能体在真实工作流中易发生运行时行为漂移，已有的提示级修复缺乏结构化检测与恢复机制。本文提出图结构框架，用单个小语言模型在每个节点上通过强化学习专门训练，作为即插即用的恢复模块，对漂移进行步骤级检测、风险评估与恢复决策。实验验证该方法能有效降低漂移带来的副作用，且无需重新训练主智能体。",
+      "llm_tags": [
+        "query:agents"
+      ],
+      "matched_query_tag": "query:agents",
+      "matched_query_text": "reinforcement learning agent training",
+      "matched_requirement_id": "req-5",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "8plus"
+    },
+    {
+      "id": "2608.14135v1",
+      "source": "arxiv",
+      "title": "AgilePE: Autonomous UAV Pursuit-Evasion via Self-Play Reinforcement Learning",
+      "abstract": "Autonomous pursuit-evasion is a fundamental challenge for Unmanned Aerial Vehicles (UAVs), requiring rapid decision-making under tightly coupled dynamics and continuously changing opponent behaviors. Traditional rule-based or differential-game approaches often struggle with high-dimensional aerial interactions and agile maneuvering. We present AgilePE, a complete system for autonomous UAV pursuit-evasion via self-play reinforcement learning. AgilePE integrates agile low-level control, competitive policy optimization, and sim-to-real deployment in a unified framework. The policy directly maps onboard state observations to Collective Thrust and Body Rates (CTBR) commands, enabling end-to-end agile maneuvering without intermediate trajectory planners or waypoint controllers. For training, we use competitive self-play with Prioritized Fictitious Self-Play (PFSP) and a diversified opponent pool, enabling agents to improve against historical policies while stabilizing optimization and reducing policy oscillation. This process leads to the emergence of sophisticated pursuit and evasion strategies. For real-world deployment, we develop a hardware-aligned simulation pipeline that models actuator-response dynamics, communication latency, and domain randomization. The learned policies transfer zero-shot to real quadrotors without task-specific tuning. Real-world experiments reproduce pursuit-evasion tactics observed in simulation, including rapid dodging and flanking, and demonstrate interactive two-agent zero-shot deployment.",
+      "authors": [
+        "Wenhao Tang",
+        "Tianyang Chen",
+        "Zhejun Cui",
+        "Boyuan An",
+        "Jiayu Chen",
+        "Ruize Zhang",
+        "Huidong Liu",
+        "Tianyue Wu",
+        "Qingmin Liao",
+        "Fei Gao",
+        "Yu Wang",
+        "Chao Yu"
+      ],
+      "primary_category": "cs.RO",
+      "categories": [
+        "cs.RO",
+        "cs.LG"
+      ],
+      "published": "2026-08-14T09:41:16+00:00",
+      "link": "https://arxiv.org/pdf/2608.14135v1",
+      "tags": [
+        "keyword:agents",
+        "query:agents"
+      ],
+      "llm_score": 8.0,
+      "llm_evidence_en": "autonomous UAV pursuit-evasion via self-play reinforcement learning",
+      "llm_evidence_cn": "基于自博弈强化学习的自主无人机追逃决策",
+      "llm_evidence": "基于自博弈强化学习的自主无人机追逃决策",
+      "canonical_evidence": "基于自博弈强化学习的自主无人机追逃决策",
+      "llm_tldr_en": "AgilePE is a complete system for autonomous UAV pursuit-evasion via self-play RL, mapping onboard observations directly to CTBR commands for agile end-to-end maneuvering.",
+      "llm_tldr_cn": "该文提出AgilePE，一个面向自主无人机追逃的完整系统，采用自博弈强化学习将机载状态观测直接映射为总推力和体速率指令，无需中间轨迹规划器或手工规则。系统整合了敏捷低层控制、竞争性策略优化与仿真到现实部署，使策略能应对不断变化的对手行为。实验结果证明了其在高度动态空中交互中实现快速敏捷机动的能力，为自主决策与端到端控制提供了完整范式。",
+      "llm_tldr": "该文提出AgilePE，一个面向自主无人机追逃的完整系统，采用自博弈强化学习将机载状态观测直接映射为总推力和体速率指令，无需中间轨迹规划器或手工规则。系统整合了敏捷低层控制、竞争性策略优化与仿真到现实部署，使策略能应对不断变化的对手行为。实验结果证明了其在高度动态空中交互中实现快速敏捷机动的能力，为自主决策与端到端控制提供了完整范式。",
+      "llm_tags": [
+        "query:agents"
+      ],
+      "matched_query_tag": "query:agents",
+      "matched_query_text": "autonomous agent autonomous decision making",
+      "matched_requirement_id": "req-2",
+      "selection_source": "carryover_cache",
+      "paper_id": "2608.14135v1",
+      "quick_tier": "8plus"
+    }
+  ]
+}

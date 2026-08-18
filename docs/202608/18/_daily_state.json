@@ -1,0 +1,409 @@
+{
+  "date": "20260818",
+  "date_label": "",
+  "generated_at": "2026-08-18 20:48:07 UTC",
+  "recommend_exists": true,
+  "run_count": 1,
+  "papers": [
+    {
+      "paper_id": "2608.13417v1",
+      "route": "202608/18/2608.13417v1-beyond-final-scores-a-systematic-evaluation-of-agents-for-long-horizon-ai-research-and-development",
+      "title": "Beyond Final Scores: A Systematic Evaluation of Agents for Long-Horizon AI Research and Development",
+      "section": "deep",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "agents"
+        }
+      ],
+      "score": 9.0,
+      "evidence": "通过解决方案构建、执行和反馈控制评估自主智能体的长时程决策能力",
+      "first_seen_at": "2026-08-18 20:48:07 UTC",
+      "updated_at": "2026-08-18 20:48:07 UTC"
+    },
+    {
+      "paper_id": "2608.13476v1",
+      "route": "202608/18/2608.13476v1-marc-v1-an-open-source-multi-agent-framework-for-clinical-ai-reasoning-and-coordination",
+      "title": "MARC v1: An Open-Source Multi-Agent Framework for Clinical AI Reasoning and Coordination",
+      "section": "deep",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "agents"
+        }
+      ],
+      "score": 9.0,
+      "evidence": "用于临床推理的开源多智能体框架，包含角色专化智能体与编排机制",
+      "first_seen_at": "2026-08-18 20:48:07 UTC",
+      "updated_at": "2026-08-18 20:48:07 UTC"
+    },
+    {
+      "paper_id": "2608.14239v1",
+      "route": "202608/18/2608.14239v1-a-temporal-barrier-framework-for-collision-avoidance-in-multi-agent-autonomous-aerial-vehicles",
+      "title": "A Temporal Barrier Framework for Collision Avoidance in Multi-Agent Autonomous Aerial Vehicles",
+      "section": "deep",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "agents"
+        }
+      ],
+      "score": 9.0,
+      "evidence": "面向多智能体自主飞行器防撞的时间屏障框架，直接涉及多智能体协调",
+      "first_seen_at": "2026-08-18 20:48:07 UTC",
+      "updated_at": "2026-08-18 20:48:07 UTC"
+    },
+    {
+      "paper_id": "2608.14246v1",
+      "route": "202608/18/2608.14246v1-polaris--multi-agentic-system-for-conversational-enterprise-analytics",
+      "title": "Polaris : Multi Agentic System for Conversational Enterprise Analytics",
+      "section": "deep",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "agents"
+        }
+      ],
+      "score": 9.0,
+      "evidence": "主管引导的多智能体协调分析系统",
+      "first_seen_at": "2026-08-18 20:48:07 UTC",
+      "updated_at": "2026-08-18 20:48:07 UTC"
+    },
+    {
+      "paper_id": "2608.14306v1",
+      "route": "202608/18/2608.14306v1-sensor-driven-mission-synthesis-for-uavugv-swarms-a-tb-cspn-coordination-architecture-with-hardware-enforced-safety",
+      "title": "Sensor-Driven Mission Synthesis for UAV/UGV Swarms: A TB-CSPN Coordination Architecture with Hardware-Enforced Safety",
+      "section": "deep",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "agents"
+        }
+      ],
+      "score": 9.0,
+      "evidence": "异构无人机/无人车集群的传感器驱动任务协调架构",
+      "first_seen_at": "2026-08-18 20:48:07 UTC",
+      "updated_at": "2026-08-18 20:48:07 UTC"
+    },
+    {
+      "paper_id": "2608.14707v1",
+      "route": "202608/18/2608.14707v1-semantic-uncertainty-guided-orchestration-in-hierarchical-multi-agent-systems",
+      "title": "Semantic Uncertainty-Guided Orchestration in Hierarchical Multi-Agent Systems",
+      "section": "deep",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "agents"
+        }
+      ],
+      "score": 9.0,
+      "evidence": "多智能体系统中的不确定性感知编排",
+      "first_seen_at": "2026-08-18 20:48:07 UTC",
+      "updated_at": "2026-08-18 20:48:07 UTC"
+    },
+    {
+      "paper_id": "2608.14870v1",
+      "route": "202608/18/2608.14870v1-jarvisbench-always-on-intelligence-between-humans-and-agents",
+      "title": "JarvisBench: Always-on Intelligence Between Humans and Agents",
+      "section": "deep",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "agents"
+        }
+      ],
+      "score": 9.0,
+      "evidence": "人机双向协调基准",
+      "first_seen_at": "2026-08-18 20:48:07 UTC",
+      "updated_at": "2026-08-18 20:48:07 UTC"
+    },
+    {
+      "paper_id": "2608.15175v1",
+      "route": "202608/18/2608.15175v1-lapf-llm-agent-based-path-finder-using-the-uavscenes-dataset",
+      "title": "LAPF: LLM-Agent-Based Path Finder Using the UAVScenes Dataset",
+      "section": "deep",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "agents"
+        }
+      ],
+      "score": 9.0,
+      "evidence": "基于LLM智能体的无人机自主导航规划器，具备记忆、规划和工具交互能力",
+      "first_seen_at": "2026-08-18 20:48:07 UTC",
+      "updated_at": "2026-08-18 20:48:07 UTC"
+    },
+    {
+      "paper_id": "2608.15884v1",
+      "route": "202608/18/2608.15884v1-grouping-auction-consensus-algorithm-for-decentralized-task-allocation-in-multi-robot-systems",
+      "title": "Grouping Auction-Consensus Algorithm for Decentralized Task Allocation in Multi-Robot Systems",
+      "section": "deep",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "agents"
+        }
+      ],
+      "score": 9.0,
+      "evidence": "通过拍卖-共识机制实现多智能体去中心化任务分配",
+      "first_seen_at": "2026-08-18 20:48:07 UTC",
+      "updated_at": "2026-08-18 20:48:07 UTC"
+    },
+    {
+      "paper_id": "2608.16229v1",
+      "route": "202608/18/2608.16229v1-planner-conditioned-diffusion-for-coordinated-multi-agent-exploration",
+      "title": "Planner-Conditioned Diffusion for Coordinated Multi-Agent Exploration",
+      "section": "deep",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "agents"
+        }
+      ],
+      "score": 9.0,
+      "evidence": "扩散策略实现多智能体协调探索",
+      "first_seen_at": "2026-08-18 20:48:07 UTC",
+      "updated_at": "2026-08-18 20:48:07 UTC"
+    },
+    {
+      "paper_id": "2608.16402v1",
+      "route": "202608/18/2608.16402v1-a-policy-algebra-for-trust-preserving-agentic-ai-execution",
+      "title": "A Policy Algebra for Trust-Preserving Agentic AI Execution",
+      "section": "deep",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "agents"
+        }
+      ],
+      "score": 9.0,
+      "evidence": "大语言模型智能体框架；在策略约束下完成任务目标",
+      "first_seen_at": "2026-08-18 20:48:07 UTC",
+      "updated_at": "2026-08-18 20:48:07 UTC"
+    },
+    {
+      "paper_id": "2608.16794v1",
+      "route": "202608/18/2608.16794v1-neurosymbolic-embodied-agents",
+      "title": "Neurosymbolic Embodied Agents",
+      "section": "deep",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "agents"
+        }
+      ],
+      "score": 9.0,
+      "evidence": "具身感知与交互规划",
+      "first_seen_at": "2026-08-18 20:48:07 UTC",
+      "updated_at": "2026-08-18 20:48:07 UTC"
+    },
+    {
+      "paper_id": "2608.16798v1",
+      "route": "202608/18/2608.16798v1-clawgym-ii-exploring-black-box-rl-on-agent-harness",
+      "title": "ClawGym II: Exploring Black-Box RL on Agent Harness",
+      "section": "deep",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "agents"
+        }
+      ],
+      "score": 9.0,
+      "evidence": "提出黑盒强化学习框架，通过复杂智能体构架实现通用智能体的稳定可扩展训练",
+      "first_seen_at": "2026-08-18 20:48:07 UTC",
+      "updated_at": "2026-08-18 20:48:07 UTC"
+    },
+    {
+      "paper_id": "2608.16801v1",
+      "route": "202608/18/2608.16801v1-when-agents-coordinate-measuring-coordination-in-multi-agent-ai-coding",
+      "title": "When Agents Coordinate: Measuring Coordination in Multi-Agent AI Coding",
+      "section": "deep",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "agents"
+        }
+      ],
+      "score": 9.0,
+      "evidence": "度量多智能体协调的核心挑战",
+      "first_seen_at": "2026-08-18 20:48:07 UTC",
+      "updated_at": "2026-08-18 20:48:07 UTC"
+    },
+    {
+      "paper_id": "2608.13394v1",
+      "route": "202608/18/2608.13394v1-heterogeneity-aware-belief-synchronization-for-semantic-communication-in-ai-native-6g-networks",
+      "title": "Heterogeneity-Aware Belief Synchronization for Semantic Communication in AI-Native 6G Networks",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "agents"
+        }
+      ],
+      "score": 8.0,
+      "evidence": "6G网络中自主AI智能体间的信念同步以实现协调",
+      "first_seen_at": "2026-08-18 20:48:07 UTC",
+      "updated_at": "2026-08-18 20:48:07 UTC"
+    },
+    {
+      "paper_id": "2608.13420v1",
+      "route": "202608/18/2608.13420v1-enhancing-virtual-agents-through-slms-and-edge-computing-an-exploratory-evaluation-of-think-and-memory-processes",
+      "title": "Enhancing Virtual Agents through SLMs and Edge-Computing: An Exploratory Evaluation of Think and Memory Processes",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "agents"
+        }
+      ],
+      "score": 8.0,
+      "evidence": "探索结合小语言模型与边缘计算的具身认知智能体架构，用于虚拟智能体",
+      "first_seen_at": "2026-08-18 20:48:07 UTC",
+      "updated_at": "2026-08-18 20:48:07 UTC"
+    },
+    {
+      "paper_id": "2608.13982v1",
+      "route": "202608/18/2608.13982v1-xai-guided-conservative-decentralized-execution-for-offline-multi-agent-network-slicing",
+      "title": "XAI-Guided Conservative Decentralized Execution for Offline Multi-Agent Network Slicing",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "agents"
+        }
+      ],
+      "score": 8.0,
+      "evidence": "离线多智能体强化学习与保守去中心化执行",
+      "first_seen_at": "2026-08-18 20:48:07 UTC",
+      "updated_at": "2026-08-18 20:48:07 UTC"
+    },
+    {
+      "paper_id": "2608.14068v1",
+      "route": "202608/18/2608.14068v1-macs-a-hybrid-multi-agent-framework-for-reliable-conversational-e-commerce-recommendation",
+      "title": "MACS: A Hybrid Multi-Agent Framework for Reliable Conversational E-Commerce Recommendation",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "agents"
+        }
+      ],
+      "score": 8.0,
+      "evidence": "协调多个LLM的混合多智能体推荐框架",
+      "first_seen_at": "2026-08-18 20:48:07 UTC",
+      "updated_at": "2026-08-18 20:48:07 UTC"
+    },
+    {
+      "paper_id": "2608.14109v1",
+      "route": "202608/18/2608.14109v1-a-graph-based-reinforcement-learning-framework-for-structured-drift-diagnosis-and-recovery-in-autonomous-llm-agents",
+      "title": "A Graph-Based Reinforcement Learning Framework for Structured Drift Diagnosis and Recovery in Autonomous LLM Agents",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "agents"
+        }
+      ],
+      "score": 8.0,
+      "evidence": "利用强化学习训练可插拔恢复模块，用于自治LLM智能体",
+      "first_seen_at": "2026-08-18 20:48:07 UTC",
+      "updated_at": "2026-08-18 20:48:07 UTC"
+    },
+    {
+      "paper_id": "2608.14135v1",
+      "route": "202608/18/2608.14135v1-agilepe-autonomous-uav-pursuit-evasion-via-self-play-reinforcement-learning",
+      "title": "AgilePE: Autonomous UAV Pursuit-Evasion via Self-Play Reinforcement Learning",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "agents"
+        }
+      ],
+      "score": 8.0,
+      "evidence": "基于自博弈强化学习的自主无人机追逃决策",
+      "first_seen_at": "2026-08-18 20:48:07 UTC",
+      "updated_at": "2026-08-18 20:48:07 UTC"
+    },
+    {
+      "paper_id": "2608.13900v1",
+      "route": "202608/18/2608.13900v1-agentic-transaction-towards-acid-compliant-agent-systems",
+      "title": "Agentic Transaction: Towards ACID-Compliant Agent Systems",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "agents"
+        }
+      ],
+      "score": 7.0,
+      "evidence": "面向可靠长程智能体执行的ACID兼容框架",
+      "first_seen_at": "2026-08-18 20:48:07 UTC",
+      "updated_at": "2026-08-18 20:48:07 UTC"
+    },
+    {
+      "paper_id": "2608.14035v1",
+      "route": "202608/18/2608.14035v1-agent-orchestration-in-autonomous-chip-design",
+      "title": "Agent-Orchestration in Autonomous Chip Design",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "agents"
+        }
+      ],
+      "score": 7.0,
+      "evidence": "探讨通过智能体编排在自主芯片设计中使用基于LLM的工具型智能体",
+      "first_seen_at": "2026-08-18 20:48:07 UTC",
+      "updated_at": "2026-08-18 20:48:07 UTC"
+    },
+    {
+      "paper_id": "2608.14893v1",
+      "route": "202608/18/2608.14893v1-weaker-coherence-weaker-reciprocity-comparing-the-semantic-and-social-organization-of-moltbook-and-reddit",
+      "title": "Weaker Coherence, Weaker Reciprocity: Comparing the Semantic and Social Organization of Moltbook and Reddit",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "agents"
+        }
+      ],
+      "score": 7.0,
+      "evidence": "人工智能智能体社交网络；多智能体交互与语义组织",
+      "first_seen_at": "2026-08-18 20:48:07 UTC",
+      "updated_at": "2026-08-18 20:48:07 UTC"
+    },
+    {
+      "paper_id": "2608.15133v1",
+      "route": "202608/18/2608.15133v1-consensusability-of-continuous-time-multi-agent-systems-with-unbounded-heterogeneous-constant-delays-a-signed-laplacian-perspective",
+      "title": "Consensusability of Continuous-Time Multi-Agent Systems With Unbounded Heterogeneous Constant Delays: A Signed Laplacian Perspective",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "agents"
+        }
+      ],
+      "score": 7.0,
+      "evidence": "研究异构时延下连续时间多智能体系统的可共识性",
+      "first_seen_at": "2026-08-18 20:48:07 UTC",
+      "updated_at": "2026-08-18 20:48:07 UTC"
+    },
+    {
+      "paper_id": "2608.15127v1",
+      "route": "202608/18/2608.15127v1-from-llm-inference-to-agentic-workloads-characterization-and-implications-for-serving-systems",
+      "title": "From LLM Inference to Agentic Workloads: Characterization and Implications for Serving Systems",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "agents"
+        }
+      ],
+      "score": 6.0,
+      "evidence": "刻画了LLM协调工具、环境和持久状态的智能体工作负载",
+      "first_seen_at": "2026-08-18 20:48:07 UTC",
+      "updated_at": "2026-08-18 20:48:07 UTC"
+    }
+  ]
+}

@@ -1,0 +1,302 @@
+Title: Grouping Auction-Consensus Algorithm for Decentralized Task Allocation in Multi-Robot Systems
+
+URL Source: https://arxiv.org/pdf/2608.15884v1
+
+Published Time: Tue, 18 Aug 2026 01:19:59 GMT
+
+Number of Pages: 14
+
+Markdown Content:
+# Grouping Auction-Consensus Algorithm for Decentralized Task Allocation in Multi-Robot Systems 
+
+Jose Rodriguez 1[0009 −0006 −6161 −0170] , Sven Koenig 2[0000 −0002 −5458 −094 X],Wenjie Dong 1[0000 −0003 −2842 −1782] , and Qi Lu 1[0000 −0002 −8425 −4686]  
+
+> 1
+
+The University of Texas at Rio Grande Valley, Edinburg, Texas 78539, USA 
+
+{jose.rodriguez53,wenjie.dong,qi.lu}@utrgv.edu  
+
+> 2
+
+University of California, Irvine, CA 92697, USA 
+
+{svenk}@uci.edu 
+
+Abstract. Decentralized multi-robot task allocation (MRTA) is essen-tial for scalable and resilient autonomous systems. The Consensus-Based Bundle Algorithm (CBBA) is a widely adopted decentralized baseline. However, its individual task-level bidding is poorly aligned with the min-sum objective of minimizing total team travel distance, leading to subop-timal allocations in spatially distributed environments. This paper intro-duces the Grouping Auction-Consensus Algorithm (GACA). This decen-tralized MRTA framework adopts the two-phase auction-consensus archi-tecture of CBBA while fundamentally redesigning its bidding mechanism to reason over groups of spatially proximate tasks. A nearest-neighbor preprocessing step partitions tasks into spatially coherent groups be-fore allocation. Agents then iteratively propose structured group-level actions: claiming unassigned groups, acquiring partial groups, or contest-ing groups held by other agents. Competing actions are resolved through a consensus phase. Operating in the MT-SR-IA problem class, GACA is evaluated against CBBA using a Mixed-Integer Linear Program as the ground-truth optimality reference. Across four swarm sizes and 4,000 test worlds, GACA achieves a median percent optimality of approxi-mately 97% compared to 81–84% for CBBA, while converging in equal or fewer iterations. A scalability evaluation over 3,280 additional prob-lem instances spanning swarm sizes of 5 to 20 agents and task counts of 10 to 50 confirms that these gains generalize robustly across a wide range of problem configurations. 
+
+Keywords: Multi-Robot Task Allocation · Decentralized Auction-Consensus 
+
+· Min-Sum Optimization 
+
+# 1 Introduction 
+
+The coordination of multiple autonomous agents to efficiently allocate and ex-ecute a set of tasks is a fundamental challenge in multi-robot systems. Multi-Robot Task Allocation (MRTA) problems arise in search and rescue, warehouse arXiv:2608.15884v1 [cs.RO] 16 Aug 2026 2 J. Rodriguez et al. 
+
+logistics, environmental monitoring, and UAV mission planning [1]. Centralized approaches can achieve globally optimal solutions, but they suffer from single points of failure, poor scalability, and sensitivity to communication delays [1][2]. Decentralized market-based auction algorithms have emerged as an effective al-ternative, enabling agents to self-organize through competitive bidding [3]. A landmark contribution is the Consensus-Based Bundle Algorithm (CBBA) [4], which alternates between a greedy bundle-building phase and a consensus phase that resolves conflicting task ownership through local communication. CBBA guarantees convergence to conflict-free solutions and is a widely adopted decentralized MRTA baseline. Despite its success, CBBA treats tasks as independent entities. In many de-ployments, however, tasks form spatial clusters, and allocating them individually leads to inefficient routing and redundant agent travel. This paper introduces the Grouping Auction-Consensus Algorithm (GACA), a decentralized MRTA framework that adopts the two-phase auction-consensus architecture of CBBA while fundamentally redesigning its bidding mechanism to reason jointly over groups of spatially proximate tasks. Rather than bidding on individual tasks, GACA agents propose structured actions over task groups, where actions con-sist of claiming unassigned groups, acquiring partial groups, or contesting groups held by other agents. Competing proposals are then resolved through a consen-sus phase. GACA targets the min-sum objective of minimizing total team travel distance, and is designed to substantially outperform CBBA on this criterion. The remainder of this paper is organized as follows. Section 2 reviews related work. Section 3 presents the problem formulation. Section 4 describes GACA in detail. Section 5 presents simulation results. Section 6 discusses the findings, and Section 7 concludes. 
+
+# 2 Related Works 
+
+2.1 Multi-Robot Task Allocation 
+
+The taxonomy of Gerkey and Matari [5] classifies MRTA problems along three axes: single- vs. multi-task robots (ST vs. MT), single- vs. multi-robot tasks (SR vs. MR), and instantaneous vs. time-extended assignment (IA vs. TA). This paper operates in the MT-SR-IA class. Robots execute multiple tasks, each task requires one robot, and assignments are made instantaneously. This problem definition has direct connections to the multiple Traveling Salesman Problem (mTSP) [6] and the min-sum criterion of minimizing total team travel distance. 
+
+2.2 Consensus-Based Bundle Algorithm and Variants 
+
+CBBA [4] coordinates agents through decentralized bundle-building and con-sensus phases, guaranteeing convergence to a conflict-free assignment proven at least 50% optimal for max-sum formulations. Performance guarantees for min-sum are considerably weaker, motivating the present work. Several extensions Grouping Auction-Consensus for Decentralized Task Allocation 3
+
+address specific limitations outside the MT-SR-IA scope considered in this pa-per. The Asynchronous CBBA (ACBBA) [7] extended the original synchronized framework of CBBA to support real-time dynamic tasking environments. The Coupled-Constraint CBBA (CCBBA) [8] introduced pessimistic and optimistic bidding strategies to handle complex temporal and assignment interdependencies between tasks. Event-Driven CBBA (ED-CBBA) [9] addressed the communica-tion overhead inherent to CBBA by introducing an event-based broadcasting strategy, achieving a 52% reduction in communication requirements while main-taining equivalent task allocation performance. CBPA [10] extended the bidding mechanism to incorporate payload consumption as a resource constraint, en-abling fault-tolerant and real-time scheduling in systems where robots carry heterogeneous payload capacities. ICBGA [11] further augmented the consen-sus framework with time window and resource load constraints, supporting col-laborative task allocation for UAV teams operating under tighter mission re-quirements. More recent work, such as AI-CBBA [12], incorporated graph con-volutional neural networks into the bundle-building phase to improve spatial reasoning and task coverage, demonstrating lower average distances traveled as the number of tasks scaled. While these contributions meaningfully extend CBBA’s capabilities, they largely preserve the core structure of individual task-level bidding and do not fundamentally alter how agents reason about spatial task structure during allocation. Regarding the min-sum objective specifically, Otte et al. [13] conducted an analysis of auction-based algorithms across multiple objectives. The work showed that standard CBBA-style scoring functions are not inherently aligned with the min-sum objective, underscoring the need for allocation strategies better suited to this criterion. 
+
+2.3 Clustering and Grouping Approaches 
+
+Explicit task grouping before allocation has shown promise for min-sum ob-jectives. Elango et al. [14] combined K-means clustering with an auction in a three-stage pipeline, reducing mTSP complexity through subproblem decompo-sition, though the cluster formation step is centralized. Yuan et al. [15] com-bined K-means++ with Particle Swarm Optimization for cluster-to-robot as-signment. In the decentralized setting, Dec-MATA [16] formulates task planning as maximum-weighted bipartite matching with soft clustering, achieving solu-tions within 728% of optimal MILP cost at orders-of-magnitude lower runtime. However, Dec-MATA’s clustering is computed in a one-shot step without inter-agent negotiation, limiting its ability to adaptively split or merge groups as the allocation evolves. Prior clustering-based MRTA methods share a common limitation: task groupings are determined either centrally or independently by each agent in a one-shot preprocessing step, without any mechanism for agents to iteratively contest, split, or merge groups as the allocation evolves. This re-stricts the flexibility of the allocation and can lead to suboptimal assignments when initial groupings are poorly matched to the spatial distribution of robots. GACA addresses this gap by embedding group-level negotiation directly into 4 J. Rodriguez et al. 
+
+the auction-consensus loop, allowing agents to propose and resolve competing claims over task groups, including splitting groups and stealing assigned groups, across multiple iterations until convergence. 
+
+# 3 Problem Formulation 
+
+3.1 Agents and Tasks 
+
+Consider a team of Na homogeneous robots operating in a bounded two-dimensional workspace W ⊂ R2. The set of agents is denoted I = {1, 2, . . . , N a}, and each agent i ∈ I has an initial position mi ∈ W . The set of tasks to be completed is denoted J = {1, 2, . . . , N t}, where each task j ∈ J is associated with a fixed location nj ∈ W that an agent must physically visit to execute the task. The Euclidean distance between an agent’s initial position and a task location is written as: 
+
+dmi,n j = ∥mi − nj ∥2 (1) and the Euclidean distance between two task locations is written as: 
+
+dnj ,n k = ∥nj − nk∥2, j̸ = k (2) 
+
+3.2 Communication Model 
+
+The communication topology is an undirected graph GC = ( I, EC ) where (i, k ) ∈EC if agents i and k are within direct communication range. The direct commu-nication indicator 
+
+gik =
+
+{
+
+1 if (i, k ) ∈ E C
+
+0 otherwise (3) denotes whether agents i and k can directly exchange information, with gik = gki 
+
+for all i, k ∈ I and gii = 0 by convention. During Phase 2, agent i collects proposals from all k with gik = 1 .
+
+3.3 Task Allocation as a Weighted Directed Graph 
+
+The allocation is a weighted directed graph GA = ( V, E, w ) with V = I ∪ J and 
+
+E ⊆ (I × J ) ∪ (J × J ) capturing agent-to-task and task-to-task transitions. Edge weights equal their respective Euclidean distances: w(i, j ) = dmi,n j and 
+
+w(j, k ) = dnj ,n k . A route ri for agent i is an ordered sequence of tasks drawn from J , beginning at mi and visiting each assigned task in sequence. The route induces a path in GA consisting of one agent-to-task edge followed by zero or more task-to-task edges. Grouping Auction-Consensus for Decentralized Task Allocation 5
+
+3.4 MT-SR-IA Conditions and Objective 
+
+Every task is visited by exactly one agent (SR condition): 
+
+∑  
+
+> v∈I∪J , v ̸=j
+
+1[( v, j ) ∈ E ] = 1 , ∀ j ∈ J (4) where 1[·] is an indicator function that equals a value of 1 if the enclosed condi-tion is true and 0 otherwise. Each vertex has at most one outgoing edge, naturally admitting the multi-task (MT) condition whereby an agent can leave from a task vertex to continue executing an ordered chain of tasks: 
+
+∑  
+
+> v∈J , v ̸=u
+
+1[( u, v ) ∈ E ] ≤ 1, ∀ u ∈ V (5) The min-sum objective is to minimize the total team travel distance: 
+
+G∗ 
+
+> A
+
+= arg min 
+
+> GA
+
+∑
+
+> (u,v )∈E
+
+w(u, v ) (6) This is equivalent to mTSP and is NP-hard in general [5]. GACA pursues a high-quality decentralized approximation. 
+
+# 4 Grouping Auction-Consensus Algorithm 
+
+4.1 Preprocessing: Spatial Task Grouping 
+
+Because all agents are assumed to have perfect and complete observability of the task set J , preprocessing requires no communication and is performed identically and independently by every agent before the first iteration. 
+
+Step 1: Nearest-Neighbor Graph. Task groups are initialized by construct-ing an undirected weighted graph GG = ( J , EG), where each task j ∈ J creates an edge to its nearest neighboring task: 
+
+ej = {j, k ∗}, k∗ = arg min    
+
+> k∈J , k ̸=j
+
+dnj ,n k (7) Duplicate edges, or cases where two tasks independently identify each other as nearest neighbors, are retained as a single edge. Some vertices may initially accumulate more than two incident edges, requiring conflict resolution. 
+
+Step 2: Conflict Resolution. A vertex with more than two incident edges conflicts with the route structure. Conflicts are resolved iteratively: the highest-weight edge incident to any conflict vertex is removed. If removal produces an isolated vertex, it is rerouted by adding a new edge to the nearest degree-one task. Rerouting produces at most one new edge per isolated task, so it cannot create a new conflict vertex or introduce a closed loop. This repeats until all vertices have degree of at most two, leaving a graph of simple path segments and closed loops. 6 J. Rodriguez et al. 
+
+Step 3: Loop Opening. Closed loops can arise independently of conflict reso-lution in rare cases where tasks are mutually proximate in a cyclic pattern, such that each task’s nearest neighbor forms a closed cycle. For each such loop, the highest-weight edge is removed, converting it to an open path with two distinct endpoints. After Steps 1–3, every connected component in GG is a simple path, and Step 4 proceeds on this conflict-free, loop-free graph. 
+
+Step 4: Group Route Assignment. Each connected component of GG consti-tutes a task group gl, an ordered bidirectional route. Unassigned groups carry a negative identifier −l while a group claimed by agent i ∈ I carries identifier i > 0.The initial group collection consists of unassigned groups G = {g−1, . . . , g −Ng }.
+
+Agent-Local State Variables. Each agent i maintains five lists throughout GACA. The route list pi stores the bidirectional route believed for each group, where entry pi,l stores the bidirectional route that agent i currently believes for group l. At initialization, pi = G for all i ∈ I . The group list zi ∈ ZNt records, for each task j, either its negative group identifier (unassigned) or the positive agent identifier that owns its group. At initialization, zi,j = l for all tasks j ∈ gl.The bid list yi ∈ RNt 
+
+> +
+
+stores the lowest observed bid per task. Lower bid values correspond to more competitive actions, so yi,j is initialized to +∞ for all tasks, indicating that no bids have been placed. The ordering list oi ∈ ZNt 
+
+> ≥0
+
+encodes each task’s zero-indexed position within its group route. Together, (zi, o i) fully encode the route structure pi and serve as the primary communication medium. The timestamp list si ∈ RNa 
+
+> +
+
+records the last received time from each agent, used during consensus to resolve stale information; initialized with si,i at the current time and si,k = 0 for k̸ = i. Lists zi, oi, yi, and si are shared with neighbors during Phase 2. 
+
+4.2 Phase 1: Action Selection 
+
+Each agent i independently proposes an action, or a desired change to the group allocation, encoded into its local zi, oi, yi. Route list pi is not modified until consensus confirms the action. Agent i tracks its current route pi,i with route tail τi, which defaults to mi if no tasks are yet assigned to agent i. Acquired groups are appended after τi.
+
+Bid Structure. Unlike CBBA’s per-task bids, GACA places one bid per action, and agents attempt at most one new action per action selection phase. Each action appends a group or sub-route to pi,i via a root task r ∈ J (the connection point). The bid b encodes the total acquisition cost. Upon action selection, yi,r ←
+
+b, and zi, oi are updated for all affected tasks. 
+
+Candidate Actions. Agent i evaluates four action types and selects the one with lowest b < y i,r :
+
+Full Group Claim. Claim an entire unassigned group gl. The root r is the end-point of gl closer to τi: b = dτi,n r . All tasks in gl have zi updated from −l to i,
+
+oi entries set to the appended ordering, and yi,r ← b.
+
+Split Claim. Claim a contiguous sub-route of an unassigned gl from an inte-rior root r to one endpoint. The residual fragment must be appended to an Grouping Auction-Consensus for Decentralized Task Allocation 7
+
+unassigned group. b = dτi,n r + csplit , where csplit is the edge cost of severing the group at r and rerouting the residual fragment with an unassigned group. Claimed tasks have zi updated to i, oi reindexed, and yi,r ← b. Residual tasks receive a new negative identifier with oi reindexed accordingly. 
+
+Full Steal. Claim an entire group currently owned by agent k̸ = i, connecting at its nearer endpoint r. All tasks move from k to i in zi, oi may be preserved or inverted, and yi,r ← b.
+
+Split Steal. Claim a sub-route of agent k’s group from interior root r to the last endpoint in agent k’s group. The tasks between r and the groups connection to agent k stay with k while the rest of the tasks are moved to i. Split Steal uses identical cost structure and update rules to Split Claim. If no action satisfies b < y i,r , agent i makes no proposal and leaves zi, oi, yi
+
+unchanged. The updated (zi, o i, y i, s i) are passed to Phase 2. 
+
+4.3 Phase 2: Consensus 
+
+Each agent i resolves conflicting proposals from all visible senders Si = {k ∈ I :
+
+gik = 1 } ∪ { i}, producing a revised (z∗ 
+
+> i
+
+, y ∗ 
+
+> i
+
+, o ∗ 
+
+> i
+
+) for the next iteration. 
+
+Proposal Collection and Action Set Extraction. For each sender k ∈Si, agent i reconstructs k’s proposed route list ˆpk by grouping tasks sharing a common zk,j value and sorting by ok,j . Three sets are then extracted relative to agent i’s current state zi. The claimed set Ck contains tasks j where zk,j = k
+
+but zi,j ̸ = k tasks k is actively acquiring. The prerequisite set Rk contains tasks where both zk,j = k and zi,j = k tasks already owned by k whose continued ownership is required for k’s proposed new actions to be valid. The donation map Dk contains tasks with zk,j < 0 and zk,j ̸ = zi,j tasks being released to unassigned status. This occurs either when sender k performs a split action (releasing the residual fragment) or when a prior competing claim outcompeted 
+
+k, invalidating downstream tasks that must be returned to the unassigned pool. 
+
+Conflict Graph Construction. Agent i builds an undirected conflict graph 
+
+F = ( Si, EF ) by connecting any pair of senders (a, b ) that exhibit at least one of four incompatibilities: a claim conflict (Ca ∩ Cb̸ = ∅), a prerequisite conflict 
+
+(Ca ∩ Rb̸ = ∅ or vice versa), a donation conflict (one sender donates a task while the other claims from the same group), or an ordering conflict (both reference the same group with disagreeing (z, o ) entries). Agent i then decomposes F into connected components {K 1, . . . , KM } via depth-first search; senders in different components are resolved independently. 
+
+Winner Selection and Application. For each component Km with task set 
+
+Tm = ∪ 
+
+> k∈K m
+
+Ck, agent i computes the total allocation cost 
+
+Φk = ∑
+
+> l∈L k
+
+[cost(ˆ pk,l ) + yk,r l
+
+] (8) for each sender k, where Lk is the index set of all groups in ˆpk, cost(ˆ pk,l ) is total inter-task distance for group l, and yk,r l is the bid for group l’s entry task. Scoring over the full route list ˆpk rather than only contested tasks ensures 8 J. Rodriguez et al. 
+
+equitable comparison regardless of prior task accumulation. If Tm = ∅ (pure ordering disagreement), the lowest-Φk sender wins and its full route list is ap-plied coherently. When Tm̸ = ∅, the winner k∗ = arg min k∈K m Φk among active claimants is selected. Agent i applies k∗’s allocation over all affected tasks, up-dating z∗ 
+
+> i
+
+[j] ← zk∗,j and o∗ 
+
+> i
+
+[j] ← ok∗,j for every task in the affected group set 
+
+Ak∗ . This extension to all tasks in affected groups, not only explicitly claimed ones, prevents stale z and o entries from producing incoherent routes in subse-quent iterations. Donation tasks from Dk∗ are applied to their target negative identifiers, with existing task positions reindexed accordingly. After all components are processed, agent i performs a final pass to propagate uncontested ownership. For tasks not covered by any Ck whose group has not been resolved, if all senders in Si that mention task j agree on the same z
+
+and o values, those values are written into z∗ 
+
+> i
+
+[j] and o∗ 
+
+> i
+
+[j]. Route list p∗ 
+
+> i
+
+is then reconstructed by grouping and sorting, and y∗ 
+
+> i
+
+is updated by inheriting bid values from the winning sender for any task that changed ownership. 
+
+Convergence. GACA iterates between Phase 1 and Phase 2 until no agent proposes a new action and all senders agree on a conflict-free allocation. 
+
+# 5 Simulative Results 
+
+5.1 Simulation Setup 
+
+Simulations were conducted on randomly generated worlds with agent and task positions uniformly sampled in square workspaces, with random side lengths between 2555 units. Task counts ranged from 2 to 4 per agent, yielding 1020 tasks for 5-agent teams and 4080 tasks for 20-agent teams. Four swarm sizes of 5, 10, 15, and 20 agents were evaluated over 1000 independently sampled vali-dation worlds for each tested swarm size. All simulations used a fully connected communication graph ( gik = 1 for all i̸ = k). Ground-truth optimal solutions were obtained via a mixed-integer linear programming (MILP) formulation with PuLP [17]. Because MILP solving is NP-hard, computation time grows rapidly with problem size, limiting the scalability of MILP-optimal ground-truth solu-tions. As a result, extensive testing was limited to worlds with up to 20 agents. Note that MILP solutions serve only as a reference and are not required by the proposed GACA approach. An example optimal solution obtained via the MILP formulation is shown in Fig. 1. Note that in Fig. 1, some agents remain idle. This is an expected outcome, as the focus of this work is to approach optimal solutions for the MRTA min-sum objective. Balancing this objective against a secondary goal of minimizing agent idleness is outside the scope of this work and is left for future work. Two metrics were recorded: percent optimality (ratio of MILP cost to algorithm cost, as a percentage) and convergence iterations .Demonstration videos are available on our YouTube playlist 3.  
+
+> 3https://tinyurl.com/DARSTaskAllocation Grouping Auction-Consensus for Decentralized Task Allocation 9
+
+Fig. 1: The optimal solution for 10 robots and 25 tasks in simulation 
+
+5.2 Solution Quality 
+
+Fig. 2 shows percent optimality distributions for CBBA and GACA across all four swarm sizes. GACA achieves a median of approximately 97% across all con-ditions, with an interquartile range of roughly 9599%. CBBA achieves a median of 8184% with a considerably wider spread, and the interquartile range spans 7790%, with the lower whisker falling below 65% in several configurations. No-tably, both algorithms produce tighter distributions as swarm size increases, but GACA’s distribution remains consistently tighter than CBBA’s at every swarm size, indicating that GACA’s solution quality is not only higher but also more predictable as the problem scales. 
+
+Fig. 2: Percent optimality comparison between CBBA and GACA at varying robot team sizes. 10 J. Rodriguez et al. 
+
+Fig. 3 shows convergence iteration distributions. GACA converges in equal or fewer iterations than CBBA across all swarm sizes, with a median approximately 1 iteration lower than CBBA. 
+
+Fig. 3: Convergence speed comparison between CBBA and GACA at varying robot team sizes (communication cycles until convergence). 
+
+5.3 Scalability Evaluation Across Diverse Problem Instances 
+
+To characterize robustness beyond four fixed swarm sizes, a variety dataset was constructed spanning all integer swarm sizes from 5 to 20 agents and all integer task counts from 10 to 50, with five independently sampled world configurations per combination for 3,280 total instances. Mean percent optimality and mean convergence iterations were aggregated per (swarm size, task count) cell and displayed as heatmaps in Figs. 4 and 5. 
+
+Fig. 4: Mean percent optimality across the variety dataset, averaged over five world configurations per cell. Greener cells indicate higher optimality relative to the MILP ground truth. Grouping Auction-Consensus for Decentralized Task Allocation 11 
+
+Fig. 4 reveals a diagonal gradient: cells in the lower-left region, where swarm size is large relative to task count, tend toward darker green, while the upper-right region, where fewer agents cover proportionally more tasks, shows more yellow and orange shading. This suggests solution quality is influenced by the task-to-agent ratio. Fig. 5 shows a complementary pattern: lighter yellow cells concentrate in the upper-left where swarm sizes and task counts are both small, while darker red cells appear more frequently in the lower-right as larger swarms contend over more tasks. Despite these trends, performance differences across the parameter space are moderate rather than severe. All cells remain above approximately 90% mean optimality, and all configurations converge within 14 iterations in the worst observed cases. 
+
+Fig. 5: Mean convergence iterations across the variety dataset, averaged over five world configurations per cell. Darker red indicates higher iteration counts. 
+
+# 6 Discussion 
+
+The 1316 percentage point median optimality advantage of GACA over CBBA stems directly from the alignment between GACA’s bid structure and the min-sum objective. CBBA’s task-level greedy bids optimize individual marginal re-wards without accounting for the spatial coherence of full routes. GACA bids on spatially contiguous groups whose intra-group travel is minimized by con-struction, with a bid cost anchored to the entry distance from the agent’s route tail a signal directly related to the incremental team travel cost. This structural alignment enables near-optimal solutions where CBBA consistently falls short. The observation that GACA converges in fewer iterations despite a richer action space reflects the atomic nature of group-level transfers: a single Full Group Claim or Full Steal simultaneously resolves the ownership of all tasks in a group, whereas CBBA may perform several contested cycles for individual tasks. Group-level actions also compress variance in convergence speed by re-solving spatially coherent blocks rather than isolated tasks, explaining GACA’s tighter iteration distribution. The variety dataset confirms that both properties 12 J. Rodriguez et al. 
+
+hold broadly across 656 parameter combinations. A higher task-to-agent ratio produces moderate reductions in solution quality and moderate increases in con-vergence iterations, consistent with greater inter-agent contention over groups, but all tested configurations remain above roughly 90% optimality and converge within 14 iterations. 
+
+# 7 Conclusion 
+
+This paper introduced GACA, a decentralized MRTA framework that adopts CBBA’s two-phase auction-consensus architecture while replacing its individual task-level bidding with a group-level action space comprising four proposal types: Full Group Claim, Split Claim, Full Steal, and Split Steal. Evaluated against CBBA and a MILP ground truth, GACA achieved a median percent optimality of approximately 97% versus 8184% for CBBA across four swarm sizes and 4000 total test worlds, while converging in equal or fewer iterations. A broad scalability evaluation over 3,280 instances confirmed that high solution quality and stable convergence generalize across a wide range of team sizes and task counts. These results demonstrate that embedding group-level negotiation into the auction-consensus loop is an effective and robust mechanism for near-optimal decentralized min-sum task allocation. 
+
+Limitations and Future Work . The nearest-neighbor preprocessing is agnos-tic to agent starting positions, potentially producing group boundaries poorly matched to the robot deployment. Incorporating agent geometry into the group-ing step is a natural improvement. GACA currently assumes homogeneous agents with no capacity constraints, time windows, or capability differences. Extending the bid structure and consensus rules to heterogeneous settings would broaden applicability. GACA is adaptable to function with more diverse communica-tion topologies or time-varying communication graphs by appropriately using the timestamp lists si to compensate for communication discrepancies, but for simplicity and to first provide proof of concept, the results shown in this work currently cover only evaluation with a fully connected communication graph. As such, while the core algorithm performs as expected under these idealized, time-invariant conditions, its robustness to adverse or imperfect communication has not been extensively tested. Since real-world deployments commonly experience imperfect communication, evaluating the robustness of GACA under a variety of communication conditions is an important next step. Finally, benchmarking against Dec-MATA and centralized clustering pipelines, and extending to 3D or dynamic task sets, are important directions.  
+
+> Acknowledgments. The authors acknowledge the financial support provided by the NSF CISE Expand AI program (No. 2434916), the NSF CREST Center for Multi-disciplinary Research Excellence in Cyber-Physical Infrastructure Systems (MECIS) (No. 2112650), and the NSF CISE MSI programs (No. 2318682 & No. 2431569). We acknowledge the valuable discussion with Dr. Pascal Van Hentenryck from the NSF AI Center, AI4OPT, about the decentralized task allocation framework.
+
+Grouping Auction-Consensus for Decentralized Task Allocation 13 
+
+# References 
+
+1. Nguyen, L.V.: Swarm intelligence-based multi-robotics: A comprehensive review. Applied Mathematics in Robotics: Theory, Methods and Applications 4(4), 1192– 1210 (2024). https://doi.org/10.3390/appliedmath4040064 2. Chakraa, H., Guérin, F., Leclercq, E., Lefebvre, D.: Optimization techniques for multi-robot task allocation problems: Review on the state-of-the-art. Robot. Au-ton. Syst. 168 , 104492 (2023) 3. Quinton, F., Grand, C., Lesire, C.: Market approaches to the multi-robot task allocation problem: a survey. J. Intell. Robot. Syst. 107 (2), 29 (2023) 4. Choi, H.L., Brunet, L., How, J.P.: Consensus-based decentralized auctions for robust task allocation. IEEE Transactions on Robotics 25 (4), 912–926 (2009). https://doi.org/10.1109/TRO.2009.2022423 5. Gerkey, B.P., Matari, M.J.: A formal analysis and taxonomy of task allocation in multi-robot systems. The International Journal of Robotics Research 23 (9), 939– 954 (2004). https://doi.org/10.1177/0278364904045564 6. Bektas, T.: The multiple traveling salesman problem: an overview of formulations and solution procedures. Omega 34 (3), 209–219 (2006). https://doi.org/10.1016/j.omega.2004.10.004 7. Nayak, S., Yeotikar, S., Carrillo, E., Rudnick-Cohen, E., Jaffar, M.K.M., Pa-tel, R., Azarm, S., Herrmann, J.W., Xu, H., Otte, M.: Experimental com-parison of decentralized task allocation algorithms under imperfect com-munication. IEEE Robotics and Automation Letters 5(2), 572–579 (2020). https://doi.org/10.1109/LRA.2019.2963646 8. Whitten, A.K., Choi, H.L., Johnson, L.B., How, J.P.: Decentralized task allocation with coupled constraints in complex missions. In: Proceed-ings of the 2011 American Control Conference. pp. 1642–1649 (2011). https://doi.org/10.1109/ACC.2011.5990917 9. Sao, V., Ho, T.D., Bhore, S., Sujit, P.: Event driven cbba with reduced communica-tion. In: 2025 International Conference on Unmanned Aircraft Systems (ICUAS). pp. 504–510 (2025). https://doi.org/10.1109/ICUAS65942.2025.11007849 10. Qiu, X., Zhu, P., Hu, Y., Zeng, Z., Lu, H.: Consensus-based dynamic task allocation for multi-robot system considering payloads consumption. In: 2024 China Automat. Congr. pp. 5294–5299 (2024). https://doi.org/10.1109/CAC63892.2024.10865375 11. Ma, Y., Li, X., Wang, H., Kang, Y., Cao, T., Zhang, Y., Yang, J.: Multi-uavs collaborative task allocation based on improved consensus-based grouping algo-rithm. In: 2024 IEEE 18th Int. Conf. Control Automat. pp. 850–855 (2024). https://doi.org/10.1109/ICCA62789.2024.10591950 12. Chekakta, Z., Aouf, N., Govindaraj, S., Polisano, F., De Cubber, G.: Towards learning-based distributed task allocation approach for multi-robot system. In: 2024 10th International Conference on Automation, Robotics and Applications (ICARA). pp. 34–39 (2024). https://doi.org/10.1109/ICARA60736.2024.10553196 13. Otte, M., Kuhlman, M.J., Sofge, D.: Auctions for multi-robot task allocation in communication limited environments. Autonomous Robots 44 (3), 547–584 (Mar 2020). https://doi.org/10.1007/s10514-019-09828-5 14. Elango, M., Nachiappan, S., Tiwari, M.K.: Balancing task allocation in multi-robot systems using k-means clustering and auction based mech-anisms. Expert Systems with Applications 38 (6), 6486–6491 (2011). https://doi.org/10.1016/j.eswa.2010.11.097 14 J. Rodriguez et al. 15. Yuan, Y., Yang, P., Jiang, H., Shi, T.: A multi-robot task allocation method based on the synergy of the k-means++ algorithm and the particle swarm algorithm. Biomimetics 9(11) (2024). https://doi.org/10.3390/biomimetics9110694 16. Ghassemi, P., Chowdhury, S.: Decentralized task allocation in multi-robot systems via bipartite graph matching augmented with fuzzy clustering. In: International Design Engineering Technical Conferences and Computers and Information in En-gineering Conference. vol. Volume 2A: 44th Design Automation Conference, p. V02AT03A014 (2018). https://doi.org/10.1115/DETC2018-86161 17. Mitchell, S.: PuLP: A linear programming toolkit for python (2011), https://coin-or.github.io/pulp/, accessed: July. 9, 2025
