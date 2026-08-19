@@ -1,0 +1,281 @@
+{
+  "date": "20260819",
+  "date_label": "",
+  "generated_at": "2026-08-19 20:58:58 UTC",
+  "recommend_exists": true,
+  "run_count": 1,
+  "papers": [
+    {
+      "paper_id": "2608.15509v1",
+      "route": "202608/19/2608.15509v1-temporal-logic-guided-universal-task-representations-for-reinforcement-learning",
+      "title": "Temporal Logic Guided Universal Task Representations for Reinforcement Learning",
+      "section": "deep",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "agents"
+        }
+      ],
+      "score": 9.0,
+      "evidence": "面向强化学习智能体的通用任务表示",
+      "first_seen_at": "2026-08-19 20:58:58 UTC",
+      "updated_at": "2026-08-19 20:58:58 UTC"
+    },
+    {
+      "paper_id": "2608.15755v1",
+      "route": "202608/19/2608.15755v1-intent-driven-situation-tracking-for-user-centric-multi-turn-agents",
+      "title": "Intent-Driven Situation Tracking for User-Centric Multi-Turn Agents",
+      "section": "deep",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "agents"
+        }
+      ],
+      "score": 9.0,
+      "evidence": "面向任务型多轮智能体的意图驱动情境跟踪",
+      "first_seen_at": "2026-08-19 20:58:58 UTC",
+      "updated_at": "2026-08-19 20:58:58 UTC"
+    },
+    {
+      "paper_id": "2608.17129v1",
+      "route": "202608/19/2608.17129v1-probe-manipulation-grounded-visual-question-answering-with-vlm-agents",
+      "title": "PROBE: Manipulation-Grounded Visual Question Answering with VLM Agents",
+      "section": "deep",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "agents"
+        }
+      ],
+      "score": 9.0,
+      "evidence": "VLM智能体通过操作环境来回答问题，直接涉及环境交互",
+      "first_seen_at": "2026-08-19 20:58:58 UTC",
+      "updated_at": "2026-08-19 20:58:58 UTC"
+    },
+    {
+      "paper_id": "2608.17282v1",
+      "route": "202608/19/2608.17282v1-dear-decentralized-agentic-reasoning-via-capability-grounding-and-collaborative-thought-navigation",
+      "title": "DeAR: Decentralized Agentic Reasoning via Capability Grounding and Collaborative Thought Navigation",
+      "section": "deep",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "agents"
+        }
+      ],
+      "score": 9.0,
+      "evidence": "去中心化多智能体协作推理",
+      "first_seen_at": "2026-08-19 20:58:58 UTC",
+      "updated_at": "2026-08-19 20:58:58 UTC"
+    },
+    {
+      "paper_id": "2608.17528v1",
+      "route": "202608/19/2608.17528v1-agent-lightning-v10-towards-harnessed-agentic-rl",
+      "title": "Agent Lightning v1.0: Towards Harnessed Agentic RL",
+      "section": "deep",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "agents"
+        }
+      ],
+      "score": 9.0,
+      "evidence": "智能体强化学习、Harness框架、智能体强化训练",
+      "first_seen_at": "2026-08-19 20:58:58 UTC",
+      "updated_at": "2026-08-19 20:58:58 UTC"
+    },
+    {
+      "paper_id": "2608.17584v1",
+      "route": "202608/19/2608.17584v1-hodagent-towards-on-demand-responsive-humanoids-for-physical-world-human-interaction",
+      "title": "HODAgent: Towards On-Demand, Responsive Humanoids for Physical World Human Interaction",
+      "section": "deep",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "agents"
+        }
+      ],
+      "score": 9.0,
+      "evidence": "结合规划与执行的System-2具身智能体实现响应式自主决策",
+      "first_seen_at": "2026-08-19 20:58:58 UTC",
+      "updated_at": "2026-08-19 20:58:58 UTC"
+    },
+    {
+      "paper_id": "2608.11967v1",
+      "route": "202608/19/2608.11967v1-loongreflect-boosting-long-horizon-reflection-in-search-agents-via-global-perspective-distillation",
+      "title": "LoongReflect: Boosting Long-Horizon Reflection in Search Agents via Global Perspective Distillation",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "agents"
+        }
+      ],
+      "score": 8.0,
+      "evidence": "利用基于结果的强化学习训练搜索智能体的反思能力",
+      "first_seen_at": "2026-08-19 20:58:58 UTC",
+      "updated_at": "2026-08-19 20:58:58 UTC"
+    },
+    {
+      "paper_id": "2608.14380v1",
+      "route": "202608/19/2608.14380v1-agentrewind-recoverable-execution-for-long-horizon-llm-agents",
+      "title": "AgentRewind: Recoverable Execution for Long-Horizon LLM Agents",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "agents"
+        }
+      ],
+      "score": 8.0,
+      "evidence": "面向长时程任务完成的可恢复执行机制",
+      "first_seen_at": "2026-08-19 20:58:58 UTC",
+      "updated_at": "2026-08-19 20:58:58 UTC"
+    },
+    {
+      "paper_id": "2608.15191v1",
+      "route": "202608/19/2608.15191v1-when-deep-research-agents-stagnate-enhancing-reasoning-with-retrieval-aware-agent-control",
+      "title": "When Deep Research Agents Stagnate: Enhancing Reasoning with Retrieval-Aware Agent Control",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "agents"
+        }
+      ],
+      "score": 8.0,
+      "evidence": "面向研究智能体自主动作选择的检索感知控制器",
+      "first_seen_at": "2026-08-19 20:58:58 UTC",
+      "updated_at": "2026-08-19 20:58:58 UTC"
+    },
+    {
+      "paper_id": "2608.15519v1",
+      "route": "202608/19/2608.15519v1-topological-collapse-of-higher-order-interactions-bottlenecks-collective-intelligence-in-ai-agent-societies",
+      "title": "Topological collapse of higher-order interactions bottlenecks collective intelligence in AI agent societies",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "agents"
+        }
+      ],
+      "score": 8.0,
+      "evidence": "揭示拓扑坍塌是AI智能体社会集体智能的关键瓶颈",
+      "first_seen_at": "2026-08-19 20:58:58 UTC",
+      "updated_at": "2026-08-19 20:58:58 UTC"
+    },
+    {
+      "paper_id": "2608.15549v1",
+      "route": "202608/19/2608.15549v1-mistypilot-enabling-social-robot-control-through-multi-agent-llm-skill-orchestration",
+      "title": "MistyPilot: Enabling Social-Robot Control through Multi-Agent LLM Skill Orchestration",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "agents"
+        }
+      ],
+      "score": 8.0,
+      "evidence": "多智能体大模型编排、任务路由、机器人控制",
+      "first_seen_at": "2026-08-19 20:58:58 UTC",
+      "updated_at": "2026-08-19 20:58:58 UTC"
+    },
+    {
+      "paper_id": "2608.15703v1",
+      "route": "202608/19/2608.15703v1-hymem-hierarchical-context-management-for-long-horizon-agents-via-information-isolation",
+      "title": "HyMem: Hierarchical Context Management for Long-Horizon Agents via Information Isolation",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "agents"
+        }
+      ],
+      "score": 8.0,
+      "evidence": "分层上下文管理提升LLM智能体在长周期任务上的目标完成能力",
+      "first_seen_at": "2026-08-19 20:58:58 UTC",
+      "updated_at": "2026-08-19 20:58:58 UTC"
+    },
+    {
+      "paper_id": "2608.16578v1",
+      "route": "202608/19/2608.16578v1-physics-of-agents-statistical-mechanics-predicts-collective-behavior-of-ai-agents",
+      "title": "Physics of Agents: Statistical Mechanics Predicts Collective Behavior of AI Agents",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "agents"
+        }
+      ],
+      "score": 8.0,
+      "evidence": "用统计力学预测多智能体系统的集体行为",
+      "first_seen_at": "2026-08-19 20:58:58 UTC",
+      "updated_at": "2026-08-19 20:58:58 UTC"
+    },
+    {
+      "paper_id": "2608.10330v1",
+      "route": "202608/19/2608.10330v1-hierarchical-compositionality-for-an-assistive-ai-agent",
+      "title": "Hierarchical Compositionality for An Assistive AI Agent",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "agents"
+        }
+      ],
+      "score": 7.0,
+      "evidence": "智能体架构用于感知并消解人类引用对象的歧义，属于交互关键问题",
+      "first_seen_at": "2026-08-19 20:58:58 UTC",
+      "updated_at": "2026-08-19 20:58:58 UTC"
+    },
+    {
+      "paper_id": "2608.14352v1",
+      "route": "202608/19/2608.14352v1-atlas-discovering-agent-strategies-through-llm-guided-abstraction-and-automata-learning",
+      "title": "ATLAS: Discovering Agent Strategies through LLM-Guided Abstraction and Automata Learning",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "agents"
+        }
+      ],
+      "score": 7.0,
+      "evidence": "从轨迹中推断智能体-环境交互策略的可解释模型",
+      "first_seen_at": "2026-08-19 20:58:58 UTC",
+      "updated_at": "2026-08-19 20:58:58 UTC"
+    },
+    {
+      "paper_id": "2608.14815v1",
+      "route": "202608/19/2608.14815v1-ai-agents-and-the-future-of-vis",
+      "title": "AI Agents and the Future of VIS",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "agents"
+        }
+      ],
+      "score": 7.0,
+      "evidence": "面向可视化与数据挖掘的自主目标驱动智能体",
+      "first_seen_at": "2026-08-19 20:58:58 UTC",
+      "updated_at": "2026-08-19 20:58:58 UTC"
+    },
+    {
+      "paper_id": "2608.15888v1",
+      "route": "202608/19/2608.15888v1-bounded-agents-delegation-security-for-multi-agent-ai-systems",
+      "title": "Bounded Agents: Delegation Security for Multi-Agent AI Systems",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "agents"
+        }
+      ],
+      "score": 7.0,
+      "evidence": "讨论多智能体AI系统中的委派和权限追踪，涉及协调安全挑战",
+      "first_seen_at": "2026-08-19 20:58:58 UTC",
+      "updated_at": "2026-08-19 20:58:58 UTC"
+    }
+  ]
+}

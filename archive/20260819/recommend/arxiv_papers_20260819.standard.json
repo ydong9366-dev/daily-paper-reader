@@ -1,0 +1,700 @@
+{
+  "mode": "standard",
+  "generated_at": "2026-08-19T20:46:43.105793+00:00",
+  "stats": {
+    "mode": "standard",
+    "tag_count": 1,
+    "deep_divecandidates": 15,
+    "deep_cap": 6,
+    "deep_selected": 6,
+    "quick_candidates": 15,
+    "quick_skim_target": 11,
+    "quick_selected": 11
+  },
+  "deep_dive": [
+    {
+      "id": "2608.15509v1",
+      "source": "arxiv",
+      "title": "Temporal Logic Guided Universal Task Representations for Reinforcement Learning",
+      "abstract": "Task guided agents demonstrate strong performance in a wide range of complex tasks. However, most existing task representation algorithms are tailored to specific contexts and struggle to generalize across diverse scenarios. Moreover, they typically depend on gradient signals from reinforcement learning controllers to update their weights, which can degrade both representation quality and learning efficiency. To overcome these limitations, we propose LOTUS, a temporal logic inspired universal task representation framework that can be seamlessly integrated into any RL algorithm to enhance agent performance across diverse task settings. Specifically, we design a novel task representation architecture capable of modeling relationships and extracting task semantics from LTL formulas. We further introduce a more effective update mechanism that treats the LTL encoder as a policy, thereby improving representation capacity. To enhance stability and robustness, LOTUS leverages the bisimulation metric, which provides theoretical guarantees for LTL representation, including behavioral equivalence, optimality fidelity, and trajectory robustness. Experimental results show that LOTUS outperforms most existing methods in learning efficiency, generalization capability, and representation quality. Specifically, LOTUS accelerates convergence over 20% in single-task scenarios, achieves a 15%-45% higher success rate in unseen manipulation tasks, and improves generalization performance over 25% in complex multi-task environments with increased sub-goal depth or conjunctions. The corresponding code, videos, and appendix are available at: https://lotus-website.github.io/.",
+      "authors": [
+        "Hao Zhang",
+        "Zhangli Zhou",
+        "Zhen Kan"
+      ],
+      "primary_category": "cs.RO",
+      "categories": [
+        "cs.RO",
+        "cs.FL",
+        "cs.LG"
+      ],
+      "published": "2026-08-16T03:28:43+00:00",
+      "link": "https://arxiv.org/pdf/2608.15509v1",
+      "tags": [
+        "keyword:agents",
+        "query:agents"
+      ],
+      "llm_score": 9.0,
+      "llm_evidence_en": "Universal task representation for RL agents",
+      "llm_evidence_cn": "面向强化学习智能体的通用任务表示",
+      "llm_evidence": "面向强化学习智能体的通用任务表示",
+      "canonical_evidence": "面向强化学习智能体的通用任务表示",
+      "llm_tldr_en": "Proposes LOTUS, a temporal logic inspired universal task representation framework that integrates into any RL algorithm to improve agent performance across diverse task settings.",
+      "llm_tldr_cn": "针对现有任务表示方法难以泛化且依赖RL控制器梯度信号的问题，提出LOTUS时序逻辑通用任务表示框架。该框架能建模任务间关系，可无缝集成到任意强化学习算法中，增强智能体在多种任务下的表现。实验证明其能提升表征质量与学习效率，具有广泛的适用性。",
+      "llm_tldr": "针对现有任务表示方法难以泛化且依赖RL控制器梯度信号的问题，提出LOTUS时序逻辑通用任务表示框架。该框架能建模任务间关系，可无缝集成到任意强化学习算法中，增强智能体在多种任务下的表现。实验证明其能提升表征质量与学习效率，具有广泛的适用性。",
+      "llm_tags": [
+        "query:agents"
+      ],
+      "matched_query_tag": "query:agents",
+      "matched_query_text": "reinforcement learning agent training",
+      "matched_requirement_id": "req-5",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2608.15755v1",
+      "source": "arxiv",
+      "title": "Intent-Driven Situation Tracking for User-Centric Multi-Turn Agents",
+      "abstract": "User-centric multi-turn agents must act on an evolving task situation shaped by changing user intents, accumulated tool-grounded facts, missing information, and execution constraints. Existing context-management methods improve the use of past interaction history, but rarely maintain an explicit situation state that separates grounded facts from task-state judgments. As a result, agents often need to infer fine-grained attributes, task dependencies, and constraint satisfaction implicitly from dialogue traces. We propose Intent-Driven Situation States (IDSS), a training-free framework that maintains an explicit situation state alongside the dialogue. IDSS parses tool returns into provenance-aware entities and attributes, tracks user intents, required variables, constraints, and execution status, and propagates new facts to task constraints to update action executability. This allows agents to avoid infeasible actions, advance dependent goals, and reuse relevant information without repeatedly searching raw history. Experiments on three interactive benchmarks across eight LLMs show that IDSS improves task completion, preference elicitation, and interaction efficiency, with clear gains on tasks involving multi-entity coordination, evolving user constraints, and constraint-aware replanning. Ablations and error analyses show that these improvements come from the interaction between fact persistence, intent-centered state tracking, and constraint modeling. These results suggest that explicit situation tracking offers an effective alternative to history-centric context management for reliable user-centric multi-turn agents.",
+      "authors": [
+        "Meiling Tao",
+        "Yiling Tao",
+        "Peng Wang"
+      ],
+      "primary_category": "cs.AI",
+      "categories": [
+        "cs.AI"
+      ],
+      "published": "2026-08-16T14:14:07+00:00",
+      "link": "https://arxiv.org/pdf/2608.15755v1",
+      "tags": [
+        "keyword:agents",
+        "query:agents"
+      ],
+      "llm_score": 9.0,
+      "llm_evidence_en": "intent-driven situation tracking for task-oriented multi-turn agents",
+      "llm_evidence_cn": "面向任务型多轮智能体的意图驱动情境跟踪",
+      "llm_evidence": "面向任务型多轮智能体的意图驱动情境跟踪",
+      "canonical_evidence": "面向任务型多轮智能体的意图驱动情境跟踪",
+      "llm_tldr_en": "IDSS is a training-free framework maintaining explicit intent-driven situation states alongside dialogue, parsing tool returns into provenance-aware entities to improve task success.",
+      "llm_tldr_cn": "用户中心多轮智能体需要在动态任务情境中行动，但现有上下文管理很少显式维护情境状态，难以区分已确认事实与任务判断。本文提出无训练的IDSS框架，在对话之外维护显式的意图驱动情境状态，将工具返回解析为可溯源实体与属性，持续跟踪用户意图和约束缺口。实验表明该方法在多轮任务中显著改善属性、依赖与约束满足的判别能力。这为多轮智能体任务完成提供了轻量高效的解决方案。",
+      "llm_tldr": "用户中心多轮智能体需要在动态任务情境中行动，但现有上下文管理很少显式维护情境状态，难以区分已确认事实与任务判断。本文提出无训练的IDSS框架，在对话之外维护显式的意图驱动情境状态，将工具返回解析为可溯源实体与属性，持续跟踪用户意图和约束缺口。实验表明该方法在多轮任务中显著改善属性、依赖与约束满足的判别能力。这为多轮智能体任务完成提供了轻量高效的解决方案。",
+      "llm_tags": [
+        "query:agents"
+      ],
+      "matched_query_tag": "query:agents",
+      "matched_query_text": "task-oriented agent goal completion",
+      "matched_requirement_id": "req-4",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2608.17129v1",
+      "source": "arxiv",
+      "title": "PROBE: Manipulation-Grounded Visual Question Answering with VLM Agents",
+      "abstract": "Vision-language Models (VLMs) excel at 2D grounding, spatial reasoning and agentic tool-based planning in static scenes. However, consider asking a home robot \"Is my medication still in the cabinet?\" The answer may be physically hidden behind a row of containers that must first be moved aside. Answering such questions in real-world cluttered environments requires reasoning in dynamic scenes: distractors must be manipulated to reveal occluded objects, and each action changes the scene the model must reason over. We formalize this setting as Manipulation-Grounded Visual Question Answering (MG-VQA) and introduce PROBE, a framework for benchmarking and finetuning VLM agents on such tasks. We first develop PROBE-Sim, a high-fidelity tabletop simulator with everyday objects and a robot manipulator equipped with grasping and pushing tools. PROBE-Sim is used to create PROBE-Bench: an evaluation suite of 150 tasks across 6 question types on cluttered tabletop scenes, where a VLM perceives, picks up or pushes objects before answering. We observe consistent trend across all frontier VLMs: agentic tool-based methods outperform their perception-only baselines (8.0% on average) across all task types. We further design PROBE-Agent, a finetuning recipe to distill successful trajectories from a powerful teacher foundation model to a smaller open-weight model using a mixed data recipe that encourages manipulation-efficient question answering. PROBE Agent finetuned models outperform their off-the-shelf agent baseline (11.5% on average) and demonstrate positive transfer to unseen objects and a held-out task. We validate sim-to-real transfer by deploying PROBE-Agent finetuned policies in real-world tabletop environments.",
+      "authors": [
+        "Vineet Bhat",
+        "Siyi Chen",
+        "Alex Zook",
+        "Xuning Yang",
+        "Stan Birchfield",
+        "Valts Blukis",
+        "Jonathan Tremblay"
+      ],
+      "primary_category": "cs.CV",
+      "categories": [
+        "cs.CV",
+        "cs.RO"
+      ],
+      "published": "2026-08-17T21:03:31+00:00",
+      "link": "https://arxiv.org/pdf/2608.17129v1",
+      "tags": [
+        "keyword:agents",
+        "query:agents"
+      ],
+      "llm_score": 9.0,
+      "llm_evidence_en": "VLM agents perceive and manipulate the environment to answer questions, directly addressing environment interaction",
+      "llm_evidence_cn": "VLM智能体通过操作环境来回答问题，直接涉及环境交互",
+      "llm_evidence": "VLM智能体通过操作环境来回答问题，直接涉及环境交互",
+      "canonical_evidence": "VLM智能体通过操作环境来回答问题，直接涉及环境交互",
+      "llm_tldr_en": "Introduces Manipulation-Grounded VQA, formalizing tasks where VLM agents must move distractors to reveal occluded objects and answer questions, providing a simulator and benchmark for developing such agents.",
+      "llm_tldr_cn": "论文指出现有VLM主要处理静态场景，难以回答需要移动遮挡物的物理世界问题。为此形式化操作落地VQA（MG-VQA）任务，并构建PROBE-Sim高保真桌面模拟器和PROBE框架，用于基准测试和微调VLM智能体。该工作使智能体必须通过操作环境来感知和推理，显著推进了动态场景中具身智能体的研究。",
+      "llm_tldr": "论文指出现有VLM主要处理静态场景，难以回答需要移动遮挡物的物理世界问题。为此形式化操作落地VQA（MG-VQA）任务，并构建PROBE-Sim高保真桌面模拟器和PROBE框架，用于基准测试和微调VLM智能体。该工作使智能体必须通过操作环境来感知和推理，显著推进了动态场景中具身智能体的研究。",
+      "llm_tags": [
+        "query:agents"
+      ],
+      "matched_query_tag": "query:agents",
+      "matched_query_text": "How do autonomous agents perceive and interact with their environment?",
+      "matched_requirement_id": "req-6",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2608.17282v1",
+      "source": "arxiv",
+      "title": "DeAR: Decentralized Agentic Reasoning via Capability Grounding and Collaborative Thought Navigation",
+      "abstract": "Existing agentic reasoning systems typically rely on centralized protocols. This design introduces routing bottlenecks and static role allocations that often fail when handling complex multimodal queries. We propose DeAR (Decentralized Agentic Reasoning), a framework that shifts from central control to autonomous peer-to-peer collaboration. DeAR is built on three mechanisms: (1) decentralized capability grounding for query-dependent agent specialization, (2) thought map navigation for targeted peer interactions, and (3) topology update for adaptive error correction. Evaluations across 9 diverse multimodal reasoning and text-based QA benchmarks indicate that DeAR consistently outperforms recent baseline methods, validating that decentralized and adaptive collaboration among agents enhances accuracy in knowledge-intensive reasoning tasks. The source code will be available at https://open_upon_acceptance.",
+      "authors": [
+        "Xing Wei",
+        "Changmeng Zheng",
+        "XiaoYong Wei",
+        "Xiufen Ye",
+        "Qing Li"
+      ],
+      "primary_category": "cs.AI",
+      "categories": [
+        "cs.AI"
+      ],
+      "published": "2026-08-18T02:26:13+00:00",
+      "link": "https://arxiv.org/pdf/2608.17282v1",
+      "tags": [
+        "keyword:agents",
+        "query:agents"
+      ],
+      "llm_score": 9.0,
+      "llm_evidence_en": "decentralized peer-to-peer reasoning for multi-agent collaboration",
+      "llm_evidence_cn": "去中心化多智能体协作推理",
+      "llm_evidence": "去中心化多智能体协作推理",
+      "canonical_evidence": "去中心化多智能体协作推理",
+      "llm_tldr_en": "DeAR decentralizes agentic reasoning via capability grounding, thought map navigation, and topology update, enabling autonomous peer-to-peer collaboration that outperforms centralized baselines.",
+      "llm_tldr_cn": "现有智能体推理系统多依赖集中式协议，存在路由瓶颈和静态角色分配问题，难以应对复杂多模态查询。本文提出DeAR去中心化智能体推理框架，将中央控制转为自主点对点协作，通过能力锚定实现按查询特化、思维图导航实现定向交互、拓扑更新实现自适应纠错。在9个多模态推理和文本QA基准上，DeAR一致优于近期基线。这为去中心化多智能体协作推理提供了有力方案。",
+      "llm_tldr": "现有智能体推理系统多依赖集中式协议，存在路由瓶颈和静态角色分配问题，难以应对复杂多模态查询。本文提出DeAR去中心化智能体推理框架，将中央控制转为自主点对点协作，通过能力锚定实现按查询特化、思维图导航实现定向交互、拓扑更新实现自适应纠错。在9个多模态推理和文本QA基准上，DeAR一致优于近期基线。这为去中心化多智能体协作推理提供了有力方案。",
+      "llm_tags": [
+        "query:agents"
+      ],
+      "matched_query_tag": "query:agents",
+      "matched_query_text": "multi-agent system coordination",
+      "matched_requirement_id": "req-3",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2608.17528v1",
+      "source": "arxiv",
+      "title": "Agent Lightning v1.0: Towards Harnessed Agentic RL",
+      "abstract": "Modern agents operate inside agent harnesses that manage tools, context, and control flow, making the harness a critical part of the agent system. Our original Agent Lightning introduced a disaggregated architecture that connects arbitrary agents to RL training through an LLM endpoint proxy, an approach later adopted by frameworks such as verl Uni-Agent, AReaL 2.0, slime, and Polar. We refer to this paradigm as harnessed agentic RL, where the deploy-time harness directly participates in model post-training. Harnessed agentic RL differs fundamentally from traditional agentic RL: the harness, rather than the training engine, owns the environment interaction loop, while the trainer observes only sequences of LLM request-response pairs. This introduces challenges in retokenization, sample merging, advantage calculation, loss normalization, and backend scheduling, which can substantially affect training stability and effectiveness. We present Agent Lightning v1.0, a lightweight framework for harnessed agentic RL implemented in approximately 3,500 lines of code. It supports arbitrary agent harnesses and serves as a practical testbed for studying these challenges. We evaluate it on instruction-following, search, and coding agents, and provide a complete reproducible pipeline for coding-agent RL. Using only 6K training examples and modest compute, RL improves Qwen3.5-9B on SWE-bench Verified from 41.8% to 56.4%, a 14.6-point absolute gain. We release the complete workflow and training scripts to facilitate reproducible research on harnessed agentic RL.",
+      "authors": [
+        "Zhiyuan He",
+        "Siwei Zhang",
+        "Zhiwen Zhou",
+        "Yuqing Yang",
+        "Yu Kang",
+        "Yuge Zhang",
+        "Luna K. Qiu",
+        "Tin Yan Tsui",
+        "Jiahang Xu",
+        "Chong Luo"
+      ],
+      "primary_category": "cs.AI",
+      "categories": [
+        "cs.AI",
+        "cs.SE"
+      ],
+      "published": "2026-08-18T08:50:13+00:00",
+      "link": "https://arxiv.org/pdf/2608.17528v1",
+      "tags": [
+        "keyword:agents",
+        "query:agents"
+      ],
+      "llm_score": 9.0,
+      "llm_evidence_en": "agentic reinforcement learning, harness, agent RL training",
+      "llm_evidence_cn": "智能体强化学习、Harness框架、智能体强化训练",
+      "llm_evidence": "智能体强化学习、Harness框架、智能体强化训练",
+      "canonical_evidence": "智能体强化学习、Harness框架、智能体强化训练",
+      "llm_tldr_en": "Agent Lightning introduces harnessed agentic RL, connecting arbitrary agents to RL training via an LLM endpoint proxy, where the harness owns the environment interaction loop during model post-training.",
+      "llm_tldr_cn": "针对智能体强化学习中训练引擎与环境交互耦合的问题，提出harnessed agentic RL范式：部署时的智能体harness直接参与模型后训练，通过LLM端点代理连接任意智能体与环境，使训练器只观察请求-响应对。该架构提升了RL训练对不同智能体的通用性，已被多个框架采用，为智能体强化学习训练提供了新基础设施。",
+      "llm_tldr": "针对智能体强化学习中训练引擎与环境交互耦合的问题，提出harnessed agentic RL范式：部署时的智能体harness直接参与模型后训练，通过LLM端点代理连接任意智能体与环境，使训练器只观察请求-响应对。该架构提升了RL训练对不同智能体的通用性，已被多个框架采用，为智能体强化学习训练提供了新基础设施。",
+      "llm_tags": [
+        "query:agents"
+      ],
+      "matched_query_tag": "query:agents",
+      "matched_query_text": "reinforcement learning agent training",
+      "matched_requirement_id": "req-5",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2608.17584v1",
+      "source": "arxiv",
+      "title": "HODAgent: Towards On-Demand, Responsive Humanoids for Physical World Human Interaction",
+      "abstract": "We propose HODAgent, a System-2 embodied agent for humanoid robots in service settings, addressing situated intent, responsive execution, task revision, and outcome verification. Its semi-duplex architecture integrates an Env-Interactor, Planner, Executor, and hierarchical Memory to maintain coherent interaction, planning, and task state during service episodes. This allows handling new requests during motion, retaining progress, revising actions, and grounding closure in execution outcomes. A shared interface connects simulation and physical robots (Unitree G1), isolating platform-specific control. In an interactive simulation with 164 cases, HODAgent achieves 84.8% and 91.5% Joint Success under two VLM backbones, outperforming baselines by 9.8 and 18.9 points. On physical robots, pass rates are 92% (atomic), 72% (composite), and 63.3% (complete tasks). On multiple embodied benchmarks, it improves over baselines by 0.7-9.0 points. Results show a unified System-2 agent enables adaptive humanoid service across simulation and reality.",
+      "authors": [
+        "Wang Warren Chen",
+        "Jiahao Zhang",
+        "Zhenjiang Li",
+        "Mingxu Wang",
+        "Lei Yi",
+        "Yuchen Kang",
+        "Shuo Sun",
+        "Ziping Chen",
+        "Jie Chen"
+      ],
+      "primary_category": "cs.RO",
+      "categories": [
+        "cs.RO"
+      ],
+      "published": "2026-08-18T09:49:16+00:00",
+      "link": "https://arxiv.org/pdf/2608.17584v1",
+      "tags": [
+        "keyword:agents",
+        "query:agents"
+      ],
+      "llm_score": 9.0,
+      "llm_evidence_en": "System-2 embodied agent with planner and executor for responsive autonomous decision making",
+      "llm_evidence_cn": "结合规划与执行的System-2具身智能体实现响应式自主决策",
+      "llm_evidence": "结合规划与执行的System-2具身智能体实现响应式自主决策",
+      "canonical_evidence": "结合规划与执行的System-2具身智能体实现响应式自主决策",
+      "llm_tldr_en": "HODAgent is a System-2 embodied agent for humanoid robots with semi-duplex architecture integrating environment interaction, planning, execution, and memory for responsive task execution.",
+      "llm_tldr_cn": "服务场景中的人形机器人需要应对情境意图、响应执行、任务修订与结果验证。本文提出HODAgent，一种System-2具身智能体，其半双工架构整合环境交互器、规划器、执行器和分层记忆，以在服务过程中维持连贯交互、规划与任务状态。它能在运动过程中处理新请求、保留进度并修订动作，通过共享接口连接仿真与真实机器人。交互仿真实验显示，在两种VLM骨干下联合成功率分别达84.8%和91.5%，优于基线。",
+      "llm_tldr": "服务场景中的人形机器人需要应对情境意图、响应执行、任务修订与结果验证。本文提出HODAgent，一种System-2具身智能体，其半双工架构整合环境交互器、规划器、执行器和分层记忆，以在服务过程中维持连贯交互、规划与任务状态。它能在运动过程中处理新请求、保留进度并修订动作，通过共享接口连接仿真与真实机器人。交互仿真实验显示，在两种VLM骨干下联合成功率分别达84.8%和91.5%，优于基线。",
+      "llm_tags": [
+        "query:agents"
+      ],
+      "matched_query_tag": "query:agents",
+      "matched_query_text": "autonomous agent autonomous decision making",
+      "matched_requirement_id": "req-2",
+      "selection_source": "fresh_fetch"
+    }
+  ],
+  "quick_skim": [
+    {
+      "id": "2608.11967v1",
+      "source": "arxiv",
+      "title": "LoongReflect: Boosting Long-Horizon Reflection in Search Agents via Global Perspective Distillation",
+      "abstract": "Large language model agents increasingly rely on long-horizon reasoning to solve complex tasks involving planning, tool use, and memory. A critical capability in such settings is reflection: assessing trajectory progress, identifying missing evidence and unreliable intermediate states, and deciding whether to continue, revise, or abandon the current branch. Learning effective reflection, however, is challenging because reflection is performed locally within the current branch, whereas its utility can only be determined by its contribution to the final trajectory outcome. This local-global mismatch makes outcome-based reinforcement learning provide only local, sparse and delayed supervision for reflective decisions. To solve these, we propose LoongReflect, a training framework that formulates reflection as a memory-control policy. The agent operates over a reversible trajectory tree using explicit reflect and backtrack actions. Reflection consolidates verified facts, missing evidence, and branch-specific risks into working memory, while backtracking removes an unreliable branch from the active context and preserves a concise corrective lesson. To learn this policy, LoongReflect combines two complementary signals through a look-ahead, extragradient-style coordination mechanism. A fast channel distills globally informed reflective behavior from a privileged teacher, with supervision restricted to reflection and backtracking tokens. A slow channel optimizes complete trajectories using outcome-based GRPO, aligning local control decisions with final task success. Experiments on multi-hop retrieval-augmented generation and mathematical reasoning benchmarks demonstrate consistent improvements over outcome-only reinforcement learning and self-distillation baselines.",
+      "authors": [
+        "Zhixin Zhang",
+        "Xinke Jiang",
+        "Zhibang Yang",
+        "Weixuan Xu",
+        "Guohong Qiu",
+        "Xu Chu",
+        "Junfeng Zhao",
+        "Yasha Wang"
+      ],
+      "primary_category": "cs.LG",
+      "categories": [
+        "cs.LG",
+        "cs.AI"
+      ],
+      "published": "2026-08-12T11:56:03+00:00",
+      "link": "https://arxiv.org/pdf/2608.11967v1",
+      "tags": [
+        "keyword:agents",
+        "query:agents"
+      ],
+      "llm_score": 8.0,
+      "llm_evidence_en": "Uses outcome-based reinforcement learning for reflection in search agents",
+      "llm_evidence_cn": "利用基于结果的强化学习训练搜索智能体的反思能力",
+      "llm_evidence": "利用基于结果的强化学习训练搜索智能体的反思能力",
+      "canonical_evidence": "利用基于结果的强化学习训练搜索智能体的反思能力",
+      "llm_tldr_en": "Proposes LoongReflect to boost long-horizon reflection in LLM search agents via global perspective distillation, addressing the local-global mismatch in outcome-based RL supervision.",
+      "llm_tldr_cn": "长时程推理智能体需要具备反思能力来评估轨迹进展并决定是否继续、修订或放弃当前分支，但反思只在当前分支内执行，其效用需由最终结果决定，造成局部与全局的失配。针对这一问题，基于结果的强化学习只能提供局部、稀疏且延迟的反馈。为此提出LoongReflect，通过全局视角蒸馏增强搜索智能体的长时程反思能力，有效缓解局部全局失配导致训练信号不足的问题，提升复杂任务的完成质量。",
+      "llm_tldr": "长时程推理智能体需要具备反思能力来评估轨迹进展并决定是否继续、修订或放弃当前分支，但反思只在当前分支内执行，其效用需由最终结果决定，造成局部与全局的失配。针对这一问题，基于结果的强化学习只能提供局部、稀疏且延迟的反馈。为此提出LoongReflect，通过全局视角蒸馏增强搜索智能体的长时程反思能力，有效缓解局部全局失配导致训练信号不足的问题，提升复杂任务的完成质量。",
+      "llm_tags": [
+        "query:agents"
+      ],
+      "matched_query_tag": "query:agents",
+      "matched_query_text": "reinforcement learning agent training",
+      "matched_requirement_id": "req-5",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "8plus"
+    },
+    {
+      "id": "2608.10330v1",
+      "source": "arxiv",
+      "title": "Hierarchical Compositionality for An Assistive AI Agent",
+      "abstract": "AI agents are increasingly being developed to assist humans in various applications, and Large Language Models and other deep network architectures are considered to be state of the art for such agents. These methods are impressive stochastic predictors, but they are resource-hungry, opaque, and known to make arbitrary decisions in novel situations due to the narrow set of underlying representation and processing choices. Our work seeks to explore the design of architectures for such AI agents based on core principles that can be traced back to the early pioneers of AI but are not fully utilized in modern AI methods. We do so in this paper in the context of the core problem of AI agents addressing ambiguity in the objects being referred to by the human participants. Humans address such ambiguity by heuristically leveraging compositional knowledge of domain context and the preferences of the other human participants. Drawing inspiration from this observation, we describe an architecture that embeds the principle of hierarchical compositionality and uses simple heuristics to achieve the desired disambiguation. Specifically, domain objects are represented in terms of primitive attributes drawn from human-validated semantic feature norms, and a hierarchical combination of attributes and concepts automatically identified from a limited observed history of interactions of an assistive agent with specific users. The assistive agent then achieves the desired disambiguation by reasoning with knowledge of this compositional hierarchy; axioms governing domain dynamics; and models of semantic compatibility, session salience, and user-specific thematic preference, requesting human clarification when necessary. Experiments show that our approach consistently outperforms state of the art data-driven baselines, supporting adaptation to specific user profiles.",
+      "authors": [
+        "Tianyi Fu",
+        "Mohan Sridharan"
+      ],
+      "primary_category": "cs.AI",
+      "categories": [
+        "cs.AI"
+      ],
+      "published": "2026-08-11T00:17:56+00:00",
+      "link": "https://arxiv.org/pdf/2608.10330v1",
+      "tags": [
+        "keyword:agents",
+        "query:agents"
+      ],
+      "llm_score": 7.0,
+      "llm_evidence_en": "Agent architecture for perceiving and resolving ambiguity in human-referenced objects, key to interaction",
+      "llm_evidence_cn": "智能体架构用于感知并消解人类引用对象的歧义，属于交互关键问题",
+      "llm_evidence": "智能体架构用于感知并消解人类引用对象的歧义，属于交互关键问题",
+      "canonical_evidence": "智能体架构用于感知并消解人类引用对象的歧义，属于交互关键问题",
+      "llm_tldr_en": "Explores hierarchical compositionality for assistive AI agents to address ambiguity in referenced objects, offering a principled alternative to opaque deep models.",
+      "llm_tldr_cn": "论文指出现代AI智能体虽是强大的随机预测器，但资源密集且不透明，在歧义情境中容易做出任意决策。作者从早期AI先驱的原则出发，在辅助型智能体的人类指代消解问题中探索层次化组合性架构。该方法旨在通过结构化的组合处理减少歧义并提高可解释性，为设计鲁棒且可靠的辅助智能体提供了替代性路径。",
+      "llm_tldr": "论文指出现代AI智能体虽是强大的随机预测器，但资源密集且不透明，在歧义情境中容易做出任意决策。作者从早期AI先驱的原则出发，在辅助型智能体的人类指代消解问题中探索层次化组合性架构。该方法旨在通过结构化的组合处理减少歧义并提高可解释性，为设计鲁棒且可靠的辅助智能体提供了替代性路径。",
+      "llm_tags": [
+        "query:agents"
+      ],
+      "matched_query_tag": "query:agents",
+      "matched_query_text": "How do autonomous agents perceive and interact with their environment?",
+      "matched_requirement_id": "req-6",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "7"
+    },
+    {
+      "id": "2608.14380v1",
+      "source": "arxiv",
+      "title": "AgentRewind: Recoverable Execution for Long-Horizon LLM Agents",
+      "abstract": "Many real-world tasks require LLM agents to interact with their environments over long execution horizons. Errors that occur early in execution may propagate through both the agent context and environment state, and their effects may be difficult to reverse through subsequent actions. Existing methods mainly seek to reduce such errors through plan refinement and safety checks but provide little support after errors occur. To enable recovery during long-horizon execution, we present AgentRewind, a runtime recovery framework that records aligned checkpoints of the agent context and controlled environment, allowing agents to return to an earlier state and resume execution with information from previous attempts. We also construct MettleBench, a benchmark for evaluating task completion and partial progress on long-horizon engineering assignments containing a series of related requirements. Experiments across tasks, multiple models, execution strategies, and agent harnesses show that AgentRewind improves task success rate and average checklist progress over the compared baselines.",
+      "authors": [
+        "Yu Zhuang",
+        "Kefei Chen",
+        "Yitong Duan",
+        "Shuxin Zheng",
+        "Jian Li",
+        "Xu-Yao Zhang"
+      ],
+      "primary_category": "cs.AI",
+      "categories": [
+        "cs.AI"
+      ],
+      "published": "2026-08-14T15:20:35+00:00",
+      "link": "https://arxiv.org/pdf/2608.14380v1",
+      "tags": [
+        "keyword:agents",
+        "query:agents"
+      ],
+      "llm_score": 8.0,
+      "llm_evidence_en": "recoverable execution for long-horizon task completion",
+      "llm_evidence_cn": "面向长时程任务完成的可恢复执行机制",
+      "llm_evidence": "面向长时程任务完成的可恢复执行机制",
+      "canonical_evidence": "面向长时程任务完成的可恢复执行机制",
+      "llm_tldr_en": "AgentRewind records aligned checkpoints of agent context and environment to let long-horizon LLM agents roll back and resume with previous attempt info, improving task completion.",
+      "llm_tldr_cn": "针对长时程智能体任务中早期错误难以逆转的问题，本文提出AgentRewind运行时恢复框架。该框架持续记录智能体上下文与环境状态的校准检查点，允许智能体回退到先前状态并结合此前尝试信息重新执行。作者还构建MettleBench评测基准，实验表明该方法能有效缓解错误传播，显著提高长时程任务的目标完成率，为任务导向智能体提供了鲁棒执行保障。",
+      "llm_tldr": "针对长时程智能体任务中早期错误难以逆转的问题，本文提出AgentRewind运行时恢复框架。该框架持续记录智能体上下文与环境状态的校准检查点，允许智能体回退到先前状态并结合此前尝试信息重新执行。作者还构建MettleBench评测基准，实验表明该方法能有效缓解错误传播，显著提高长时程任务的目标完成率，为任务导向智能体提供了鲁棒执行保障。",
+      "llm_tags": [
+        "query:agents"
+      ],
+      "matched_query_tag": "query:agents",
+      "matched_query_text": "task-oriented agent goal completion",
+      "matched_requirement_id": "req-4",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "8plus"
+    },
+    {
+      "id": "2608.14352v1",
+      "source": "arxiv",
+      "title": "ATLAS: Discovering Agent Strategies through LLM-Guided Abstraction and Automata Learning",
+      "abstract": "Large Language Model (LLM)-based agents are increasingly used for complex tasks such as software testing and cybersecurity assessment. While these agents demonstrate impressive capabilities, their behavior is difficult to understand, explain, and analyze. Existing evaluations focus mainly on task success and execution traces, offering limited insight into the strategies employed by the agent. We present ATLAS (Automata Learning for Agent Trajectory Analysis and Strategy Discovery), an approach for recovering interpretable behavioral models from agent trajectories. ATLAS combines trace abstraction with automata learning to infer finite-state models that capture observed agent-environment interaction strategies. These models provide human-interpretable insights and support automated analyses of recurring behaviors, decision points, successful task-completion paths, and failure loops. As a proof of concept, we apply ATLAS to trajectories generated by an LLM-based penetration-testing agent. The resulting models expose high-level behavioral strategies for exploiting vulnerable machines that are difficult to identify from raw execution traces alone. We discuss how learned behavioral models can support explainability, model-guided exploration, auditing, and analysis of agentic systems. We further demonstrate symbolic model-based knowledge transfer from powerful frontier models to compact language models. In addition, we show how model transformations can derive concise explanations of agent behavior in a penetration-testing case study comprising 12 vulnerable machines. ATLAS highlights a new opportunity for model-driven engineering: transforming agent trajectories into explicit behavioral models that enable systematic understanding and analysis of otherwise opaque AI agents.",
+      "authors": [
+        "Ignacio D. Lopez-Miguel",
+        "Andreas Happe",
+        "Jürgen Cito",
+        "Ezio Bartocci",
+        "Bettina Könighofer",
+        "Martin Tappler"
+      ],
+      "primary_category": "cs.SE",
+      "categories": [
+        "cs.SE",
+        "cs.LG"
+      ],
+      "published": "2026-08-14T14:51:48+00:00",
+      "link": "https://arxiv.org/pdf/2608.14352v1",
+      "tags": [
+        "keyword:agents",
+        "query:agents"
+      ],
+      "llm_score": 7.0,
+      "llm_evidence_en": "Infers interpretable models of agent-environment interaction strategies from trajectories",
+      "llm_evidence_cn": "从轨迹中推断智能体-环境交互策略的可解释模型",
+      "llm_evidence": "从轨迹中推断智能体-环境交互策略的可解释模型",
+      "canonical_evidence": "从轨迹中推断智能体-环境交互策略的可解释模型",
+      "llm_tldr_en": "Presents ATLAS, an approach combining trace abstraction with automata learning to recover interpretable finite-state models that capture observed agent-environment interaction strategies.",
+      "llm_tldr_cn": "LLM智能体在复杂任务中行为难懂，现有评估仅关注任务成功率和轨迹。该论文提出ATLAS，结合轨迹抽象与自动机学习，从智能体与环境交互的轨迹中推断出有限状态模型，从而揭示可解释的策略结构。该方法为分析智能体决策、发现行为模式和验证安全性质提供了新的视角，增强了对自主智能体的理解与控制。",
+      "llm_tldr": "LLM智能体在复杂任务中行为难懂，现有评估仅关注任务成功率和轨迹。该论文提出ATLAS，结合轨迹抽象与自动机学习，从智能体与环境交互的轨迹中推断出有限状态模型，从而揭示可解释的策略结构。该方法为分析智能体决策、发现行为模式和验证安全性质提供了新的视角，增强了对自主智能体的理解与控制。",
+      "llm_tags": [
+        "query:agents"
+      ],
+      "matched_query_tag": "query:agents",
+      "matched_query_text": "How do autonomous agents perceive and interact with their environment?",
+      "matched_requirement_id": "req-6",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "7"
+    },
+    {
+      "id": "2608.15191v1",
+      "source": "arxiv",
+      "title": "When Deep Research Agents Stagnate: Enhancing Reasoning with Retrieval-Aware Agent Control",
+      "abstract": "In this paper, we analyze the reasoning trajectories of a variety of DRAs and show that existing agents often suffer from reasoning stagnation: the majority of iterations contribute little or no improvement to final performance, while agents lack awareness of their trajectories and are therefore ineffective at adapting their search strategies or determining when to terminate. To address this issue, we introduce a set of unsupervised signals and a Retrieval-Aware Agent Controller (RAAC), which assists the agent in selecting optimal actions at each stage of the research process. RAAC incorporates key information retrieval principles, namely search novelty and information coverage, resulting in more effective reasoning trajectories that improve overall performance while reducing unnecessary iterations, and consequently cost and latency. Specifically on BrowseComp-Plus and across a large set of DRAs, adding RAAC reduces the number of search calls by an average of 14, significantly improves the best-performing DRA on recall and accuracy, and achieves an accuracy gain of up to 10% (3% on average).",
+      "authors": [
+        "Heydar Soudani",
+        "Elizabeth Lingg",
+        "Faegheh Hasibi",
+        "Navid Rekabsaz"
+      ],
+      "primary_category": "cs.IR",
+      "categories": [
+        "cs.IR"
+      ],
+      "published": "2026-08-15T12:14:38+00:00",
+      "link": "https://arxiv.org/pdf/2608.15191v1",
+      "tags": [
+        "keyword:agents",
+        "query:agents"
+      ],
+      "llm_score": 8.0,
+      "llm_evidence_en": "retrieval-aware agent controller for autonomous action selection in research agents",
+      "llm_evidence_cn": "面向研究智能体自主动作选择的检索感知控制器",
+      "llm_evidence": "面向研究智能体自主动作选择的检索感知控制器",
+      "canonical_evidence": "面向研究智能体自主动作选择的检索感知控制器",
+      "llm_tldr_en": "Identifies reasoning stagnation in deep research agents and introduces RAAC, a retrieval-aware controller that uses unsupervised signals to improve action selection and termination decisions.",
+      "llm_tldr_cn": "深度研究智能体常陷入推理停滞，大多数迭代对最终表现贡献甚微，而智能体缺乏轨迹意识。本文提出检索感知智能体控制器RAAC，利用无监督信号结合信息检索原则（搜索新颖性与覆盖度），在每个研究阶段辅助智能体选择最优动作并决定终止时机。实验表明RAAC能显著提升推理轨迹的有效性，减少无效迭代。",
+      "llm_tldr": "深度研究智能体常陷入推理停滞，大多数迭代对最终表现贡献甚微，而智能体缺乏轨迹意识。本文提出检索感知智能体控制器RAAC，利用无监督信号结合信息检索原则（搜索新颖性与覆盖度），在每个研究阶段辅助智能体选择最优动作并决定终止时机。实验表明RAAC能显著提升推理轨迹的有效性，减少无效迭代。",
+      "llm_tags": [
+        "query:agents"
+      ],
+      "matched_query_tag": "query:agents",
+      "matched_query_text": "autonomous agent autonomous decision making",
+      "matched_requirement_id": "req-2",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "8plus"
+    },
+    {
+      "id": "2608.14815v1",
+      "source": "arxiv",
+      "title": "AI Agents and the Future of VIS",
+      "abstract": "Recent advances in agents (i.e., autonomous, goal-driven AI systems that iteratively observe, act, and learn from their environments) offer a fundamentally different approach from traditional AI models that passively respond to input. These AI agents are rapidly reshaping how we approach data-intensive tasks and providing new opportunities for the VIS community. Imagine an agent autonomously generating visualizations to analyze complex data, discovering patterns collaboratively, testing hypotheses, and communicating visual insights at a speed and scale beyond human capability. Yet, the emergence of these powerful systems raises critical questions that the VIS community must address: Could autonomous agents eventually replace human data scientists, and if not, how might they best collaborate? Are current visualization techniques and interfaces, originally designed for human analysts, suitable for agent interactions? How can VIS designers effectively integrate agents into their workflows without compromising human agency? And to what extent should agents help shape and educate the next generation of visualization researchers? Through a mix of keynote talks, paper presentations, and an agentic VIS challenge, this workshop invites researchers and practitioners to share innovative ideas, explore these questions, and discuss strategies to transform the impact of VIS for a future where human and AI agents co-exist.",
+      "authors": [
+        "Chen Zhu-Tian",
+        "Nam Wook Kim",
+        "Saeed Boorboor",
+        "Shivam Raval",
+        "Pan Hao",
+        "Qianwen Wang",
+        "Vidya Setlur"
+      ],
+      "primary_category": "cs.HC",
+      "categories": [
+        "cs.HC"
+      ],
+      "published": "2026-08-14T18:41:08+00:00",
+      "link": "https://arxiv.org/pdf/2608.14815v1",
+      "tags": [
+        "keyword:agents",
+        "query:agents"
+      ],
+      "llm_score": 7.0,
+      "llm_evidence_en": "autonomous goal-driven AI agents for visualization and data analysis",
+      "llm_evidence_cn": "面向可视化与数据挖掘的自主目标驱动智能体",
+      "llm_evidence": "面向可视化与数据挖掘的自主目标驱动智能体",
+      "canonical_evidence": "面向可视化与数据挖掘的自主目标驱动智能体",
+      "llm_tldr_en": "Discusses the transformative potential of autonomous goal-driven AI agents in visualization and data analysis, raising critical questions about whether they will replace human data scientists and how best to collaborate.",
+      "llm_tldr_cn": "自主目标驱动的AI智能体正改变数据密集任务的处理方式，为可视化社区带来新机遇。本文展望智能体自主生成可视化、协作发现模式并交流洞察的图景，同时提出其是否会取代人类数据科学家、如何人机协作等关键问题。该文为可视化研究与智能体技术交叉提供了方向性思考。",
+      "llm_tldr": "自主目标驱动的AI智能体正改变数据密集任务的处理方式，为可视化社区带来新机遇。本文展望智能体自主生成可视化、协作发现模式并交流洞察的图景，同时提出其是否会取代人类数据科学家、如何人机协作等关键问题。该文为可视化研究与智能体技术交叉提供了方向性思考。",
+      "llm_tags": [
+        "query:agents"
+      ],
+      "matched_query_tag": "query:agents",
+      "matched_query_text": "intelligent agent technology",
+      "matched_requirement_id": "req-1",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "7"
+    },
+    {
+      "id": "2608.15519v1",
+      "source": "arxiv",
+      "title": "Topological collapse of higher-order interactions bottlenecks collective intelligence in AI agent societies",
+      "abstract": "Current paradigms in artificial intelligence concentrate on scaling the capabilities of individual models, yet the collective behaviour of interacting agents is shaped by the topology of their interactions rather than by individual cognition alone. Here we show that the binding constraint on collective behaviour in agent societies is topological. Analysing a macroscopic AI social platform of 1.6 million registered agents (174,458 active in the interaction record), we identify a phenomenon we term topological collapse: extreme hub dominance degrades higher-order group interactions into star-shaped broadcast patterns, suppressing the cohesive structure that discontinuous social contagion requires. We formalise this constraint through a Hyperedge Irreducibility Score (HIS) and an analytical topology amplification factor ($Φ$). Across 22 frontier language models from ten vendors, 1,040 controlled simulations and empirical human networks, the bottleneck proves model-agnostic: under a fixed interaction protocol the topological indicators are invariant across models (cross-model HIS s.d. = 0.000 in the pairwise condition) even as behavioural outcomes diverge widely. These findings reframe the design of artificial societies around the geometry of interaction rather than the optimisation of individual cognition, with implications for AI sociology, algorithmic group dynamics, hybrid human-AI ecosystems and collective alignment. The code is publicly available at https://github.com/Darwin-Agent/topological-collapse-agent-societies.",
+      "authors": [
+        "Shuo Lu",
+        "Weicheng Meng",
+        "Aijing Yu",
+        "Kun Shao",
+        "Jian Luan",
+        "Ran He",
+        "Jian Liang"
+      ],
+      "primary_category": "cs.SI",
+      "categories": [
+        "cs.SI"
+      ],
+      "published": "2026-08-16T04:15:22+00:00",
+      "link": "https://arxiv.org/pdf/2608.15519v1",
+      "tags": [
+        "keyword:agents",
+        "query:agents"
+      ],
+      "llm_score": 8.0,
+      "llm_evidence_en": "identifies topological collapse as a key bottleneck in AI agent societies",
+      "llm_evidence_cn": "揭示拓扑坍塌是AI智能体社会集体智能的关键瓶颈",
+      "llm_evidence": "揭示拓扑坍塌是AI智能体社会集体智能的关键瓶颈",
+      "canonical_evidence": "揭示拓扑坍塌是AI智能体社会集体智能的关键瓶颈",
+      "llm_tldr_en": "Analyzing 1.6 million agents on an AI social platform, this paper shows topological collapse, extreme hub dominance, degrades higher-order interactions and bottlenecks collective intelligence.",
+      "llm_tldr_cn": "个体模型能力之外，AI智能体社会的集体行为受交互拓扑约束。通过分析含160万注册智能体的大规模AI社交平台，本文发现一种拓扑坍塌现象：极度枢纽主导将高阶群体交互退化为星形广播模式，抑制了不连续社会传染所需的凝聚结构。该发现表明拓扑结构是智能体集体智能的约束因素，为设计多智能体协作网络提供了新的理论视角。",
+      "llm_tldr": "个体模型能力之外，AI智能体社会的集体行为受交互拓扑约束。通过分析含160万注册智能体的大规模AI社交平台，本文发现一种拓扑坍塌现象：极度枢纽主导将高阶群体交互退化为星形广播模式，抑制了不连续社会传染所需的凝聚结构。该发现表明拓扑结构是智能体集体智能的约束因素，为设计多智能体协作网络提供了新的理论视角。",
+      "llm_tags": [
+        "query:agents"
+      ],
+      "matched_query_tag": "query:agents",
+      "matched_query_text": "What are the main challenges in multi agent coordination?",
+      "matched_requirement_id": "req-7",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "8plus"
+    },
+    {
+      "id": "2608.15888v1",
+      "source": "arxiv",
+      "title": "Bounded Agents: Delegation Security for Multi-Agent AI Systems",
+      "abstract": "LLM-based agents can act on behalf of a user to access cloud services, call tools, or invoke agents. At session start, the agent's permissions are set but remain static, and each request is evaluated independently, without considering prior actions. Within its permissions, an agent may act contrary to the delegated task, combine individually permitted actions into a prohibited outcome, or delegate authority to a sub-agent without limiting it. A prompt injection poses a risk only if the agent has authority to perform such actions; this is therefore a problem of authorization architecture, not just the model. The Agentic Principal Chain (APC) tracks delegated authority from one principal to the next. APC evaluates each request against the accumulated session state using six authorization checks. APC carries forward and restricts delegated scope and budgets. Using composition closure, APC checks requests against prior actions to prevent prohibited combinations and enforces the decision outside the model. We prove Blast Radius Monotonicity and Composition Soundness for APC implementations; Composition Soundness is limited to prohibited combinations under a complete restriction set and serialized admission. We evaluated 3,154 instances including InjecAgent, AgentDojo, and ASB. Our compromised-model evaluation tests APC independently of model behavior by inserting the ground-truth attack call after the first legitimate tool call. AgentDojo exfiltration fell from 75-100% to 0% across all four domains; APC blocked all 544 InjecAgent data-stealing cases. Intent binding reduced destruction from 38.6% to 4.0% and manipulation from 90.5% to 12.1%. Authorization latency was 0.24 ms at the 99th percentile on an idle host; across 949 AgentDojo task-injection pairs, utility was 8.6 and 13.9 percentage points lower in the two settings. Implementation, evaluation tools, and data are publicly available.",
+      "authors": [
+        "Xabier Muruaga"
+      ],
+      "primary_category": "cs.AI",
+      "categories": [
+        "cs.AI",
+        "cs.CR"
+      ],
+      "published": "2026-08-16T18:38:00+00:00",
+      "link": "https://arxiv.org/pdf/2608.15888v1",
+      "tags": [
+        "keyword:agents",
+        "query:agents"
+      ],
+      "llm_score": 7.0,
+      "llm_evidence_en": "Discusses delegation and authority tracking in multi-agent AI systems, a coordination security challenge",
+      "llm_evidence_cn": "讨论多智能体AI系统中的委派和权限追踪，涉及协调安全挑战",
+      "llm_evidence": "讨论多智能体AI系统中的委派和权限追踪，涉及协调安全挑战",
+      "canonical_evidence": "讨论多智能体AI系统中的委派和权限追踪，涉及协调安全挑战",
+      "llm_tldr_en": "Proposes the Agentic Principal Chain for tracking delegated authority across sub-agents, addressing security and permission-scope challenges in multi-agent systems.",
+      "llm_tldr_cn": "多智能体系统中，权限设置静态且请求独立评估，智能体可能利用权限执行超出委派目标的行为。论文提出Agentic Principal Chain（APC），通过追踪主体间的委派链并结合会话累积状态评估请求，缓解提示注入和越权组合问题。该工作强调授权架构对多智能体系统安全至关重要，为构建可问责的智能体协作提供了安全机制。",
+      "llm_tldr": "多智能体系统中，权限设置静态且请求独立评估，智能体可能利用权限执行超出委派目标的行为。论文提出Agentic Principal Chain（APC），通过追踪主体间的委派链并结合会话累积状态评估请求，缓解提示注入和越权组合问题。该工作强调授权架构对多智能体系统安全至关重要，为构建可问责的智能体协作提供了安全机制。",
+      "llm_tags": [
+        "query:agents"
+      ],
+      "matched_query_tag": "query:agents",
+      "matched_query_text": "multi-agent system coordination",
+      "matched_requirement_id": "req-3",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "7"
+    },
+    {
+      "id": "2608.15549v1",
+      "source": "arxiv",
+      "title": "MistyPilot: Enabling Social-Robot Control through Multi-Agent LLM Skill Orchestration",
+      "abstract": "Programming small social robots from natural-language instructions requires more than invoking isolated APIs. Interactive tasks combine reactive physical behaviors with stateful social behaviors, while existing interfaces often require developers to manually compose APIs into skills, configure their parameters, bind sensor events to skills, and manage task states at runtime. We present MistyPilot, a multi-agent LLM framework that interprets high-level natural-language instructions and orchestrates the corresponding skills on the Misty social robot. A Task Router dispatches each instruction to one of two specialized agents: a Physically Interactive Agent for sensor-triggered robot control and direct skill invocation, and a Social Interaction Agent for dialogue-oriented task-state management and context-dependent multimodal response generation. To improve efficiency, the Social Interaction Agent reuses previously generated results when applicable and invokes full generation otherwise. We evaluate MistyPilot on five component-level suites, with sensor bindings and skill invocations executed on the physical Misty robot, and a preliminary user study with 12 participants. MistyPilot attains high accuracy on routing, sensor-skill binding, task-state parsing, result reuse, and skill extension up to 100 skills, and lower variance than an otherwise identical single-agent baseline, while participants report positive perceptions of usability and interaction quality. The code will be made publicly available via the project page.",
+      "authors": [
+        "Xiao Wang",
+        "Lu Dong",
+        "Ifeoma Nwogu",
+        "Srirangaraj Setlur",
+        "Venu Govindaraju"
+      ],
+      "primary_category": "cs.RO",
+      "categories": [
+        "cs.RO",
+        "cs.AI"
+      ],
+      "published": "2026-08-16T05:45:16+00:00",
+      "link": "https://arxiv.org/pdf/2608.15549v1",
+      "tags": [
+        "keyword:agents",
+        "query:agents"
+      ],
+      "llm_score": 8.0,
+      "llm_evidence_en": "multi-agent LLM orchestration, task router, robot control",
+      "llm_evidence_cn": "多智能体大模型编排、任务路由、机器人控制",
+      "llm_evidence": "多智能体大模型编排、任务路由、机器人控制",
+      "canonical_evidence": "多智能体大模型编排、任务路由、机器人控制",
+      "llm_tldr_en": "MistyPilot is a multi-agent LLM framework that interprets natural-language instructions and orchestrates physical and social skills on the Misty robot, with a task router dispatching to specialized agents.",
+      "llm_tldr_cn": "针对小型社交机器人从自然语言指令生成交互行为的需求，MistyPilot采用多智能体LLM框架，通过任务路由器将指令分派给物理交互智能体与社交交互智能体，自动组合技能并绑定传感器事件，免去手工API编排。该系统在Misty机器人上实现高层指令到机器人技能执行的高效映射，展示了多智能体编排在社交机器人控制中的价值。",
+      "llm_tldr": "针对小型社交机器人从自然语言指令生成交互行为的需求，MistyPilot采用多智能体LLM框架，通过任务路由器将指令分派给物理交互智能体与社交交互智能体，自动组合技能并绑定传感器事件，免去手工API编排。该系统在Misty机器人上实现高层指令到机器人技能执行的高效映射，展示了多智能体编排在社交机器人控制中的价值。",
+      "llm_tags": [
+        "query:agents"
+      ],
+      "matched_query_tag": "query:agents",
+      "matched_query_text": "multi-agent system coordination",
+      "matched_requirement_id": "req-3",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "8plus"
+    },
+    {
+      "id": "2608.15703v1",
+      "source": "arxiv",
+      "title": "HyMem: Hierarchical Context Management for Long-Horizon Agents via Information Isolation",
+      "abstract": "Large language model (LLM) agents often perform poorly on complex, long-horizon tasks because their context becomes increasingly cluttered over time. As interactions accumulate, detailed execution traces and intermediate outputs dominate the context, making it difficult for the model to retain and use high-level planning information. Most existing methods address this issue through compression or retrieval applied to a single, flat context, which does not clearly separate different types of context information and often leads to degraded reasoning. To address this challenge, we propose HyMem, a hierarchical framework that explicitly separates the agent's context into distinct functional layers. HyMem organizes context by function to separate high-level planning from execution and complex analysis. Its isolated reasoning module handles complex subtasks without adding intermediate reasoning traces to the persistent planning context, while its memory management module preserves task progress across context refreshes through structured summaries. These components reduce redundant context accumulation, retain task-critical information, and support coherent long-horizon reasoning within a limited context window. Experiments on GAIA and Browsecomp-plus show that, with DeepSeek-V4, HyMem achieves average Pass@1 scores of 66.7% and 61.3%, outperforming the strongest baseline by 6.1 and 4.7 percentage points, respectively. Further analysis indicates that HyMem effectively controls the growth of the reasoning context, allowing the model to maintain focus and accuracy across complex, long-horizon tasks.",
+      "authors": [
+        "XinQi Wang",
+        "Jinwei Xiao",
+        "Sijia Cui",
+        "Hongming Zhang",
+        "Yanna Wang",
+        "Qingyang Zhang",
+        "Bo Xu"
+      ],
+      "primary_category": "cs.AI",
+      "categories": [
+        "cs.AI"
+      ],
+      "published": "2026-08-16T12:15:01+00:00",
+      "link": "https://arxiv.org/pdf/2608.15703v1",
+      "tags": [
+        "keyword:agents",
+        "query:agents"
+      ],
+      "llm_score": 8.0,
+      "llm_evidence_en": "hierarchical context management improves LLM agents on long-horizon tasks",
+      "llm_evidence_cn": "分层上下文管理提升LLM智能体在长周期任务上的目标完成能力",
+      "llm_evidence": "分层上下文管理提升LLM智能体在长周期任务上的目标完成能力",
+      "canonical_evidence": "分层上下文管理提升LLM智能体在长周期任务上的目标完成能力",
+      "llm_tldr_en": "HyMem is a hierarchical context management framework that separates agent context into distinct functional layers, improving reasoning and performance on complex long-horizon tasks.",
+      "llm_tldr_cn": "LLM智能体在长周期任务中常因上下文随时间杂乱堆积而表现不佳，现有压缩或检索方法在单一扁平上下文中难以区分不同信息类型。本文提出HyMem，一个分层上下文管理框架，将智能体上下文按功能显式分离为不同层次，避免执行痕迹和中间输出干扰高层规划信息。通过信息隔离，HyMem增强了模型对高层面规划信息的保持与利用，提升了复杂长周期任务上的推理表现。",
+      "llm_tldr": "LLM智能体在长周期任务中常因上下文随时间杂乱堆积而表现不佳，现有压缩或检索方法在单一扁平上下文中难以区分不同信息类型。本文提出HyMem，一个分层上下文管理框架，将智能体上下文按功能显式分离为不同层次，避免执行痕迹和中间输出干扰高层规划信息。通过信息隔离，HyMem增强了模型对高层面规划信息的保持与利用，提升了复杂长周期任务上的推理表现。",
+      "llm_tags": [
+        "query:agents"
+      ],
+      "matched_query_tag": "query:agents",
+      "matched_query_text": "task-oriented agent goal completion",
+      "matched_requirement_id": "req-4",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "8plus"
+    },
+    {
+      "id": "2608.16578v1",
+      "source": "arxiv",
+      "title": "Physics of Agents: Statistical Mechanics Predicts Collective Behavior of AI Agents",
+      "abstract": "AI agents increasingly operate as part of interacting systems rather than in isolation. As agents exchange information and jointly make decisions, their interactions can improve collective reasoning but may also produce herding, polarization, or amplify shared biases. Understanding and predicting these collective dynamics is therefore important for designing effective and aligned multi-agent systems. Here, we study over 10,000 communities of language-model agents that repeatedly exchange messages and revise their opinions across objective mathematics questions and subjective political statements. Despite substantial diversity in possible behavior, the individual and group dynamics can be represented by three characteristic regimes: indifference, polarization, and consensus. AI agents start indifferent and build conviction as they interact. On objective questions, communication improves collective accuracy, while on subjective questions it often drifts group opinions toward the right in the political spectrum. We explain these observations with a statistical-mechanics formalism in which agents stochastically favor lower social pressure. Given only initial opinions, our model predicts individual trajectories, outperforms all standard baselines, generalizes to unseen community graphs, and reproduces the observed group archetype distributions. Our fitted model parameters reveal the mechanics underlying our key observations: i) communities operate below the critical social temperature, which explains conviction buildup; ii) attractive ties outweigh repulsive ones, which favors consensus; and iii) agents holding the correct answer exert the strongest pull, which drives truth-seeking. Overall, our results demonstrate that collective behavior of AI agents, like that of other complex systems, follows compact and predictive dynamical laws.",
+      "authors": [
+        "Batu El",
+        "Jinhee Paeng",
+        "Fatih Dinc",
+        "Shiye Su",
+        "Mete Erdogan",
+        "Aneesh Pappu",
+        "Haotian Ye",
+        "Wanjia Zhao",
+        "Surya Ganguli",
+        "James Zou"
+      ],
+      "primary_category": "cs.AI",
+      "categories": [
+        "cs.AI",
+        "cs.MA",
+        "cs.SI"
+      ],
+      "published": "2026-08-17T13:41:24+00:00",
+      "link": "https://arxiv.org/pdf/2608.16578v1",
+      "tags": [
+        "keyword:agents",
+        "query:agents"
+      ],
+      "llm_score": 8.0,
+      "llm_evidence_en": "statistical mechanics to predict collective behavior in multi-agent systems",
+      "llm_evidence_cn": "用统计力学预测多智能体系统的集体行为",
+      "llm_evidence": "用统计力学预测多智能体系统的集体行为",
+      "canonical_evidence": "用统计力学预测多智能体系统的集体行为",
+      "llm_tldr_en": "Physics of Agents applies statistical mechanics over 10,000 language-model agent communities, identifying universal regimes that predict collective behaviors like herding and polarization in multi-agent systems.",
+      "llm_tldr_cn": "针对多智能体系统中集体推理可能出现的羊群效应与极化问题，本文利用统计力学研究了超一万个语言模型智能体社区的反复消息交换与观点更新。无论初始行为多多样，个体与群体动态都可用三种特征状态刻画。该发现为设计和调优多智能体系统提供了一种可预测集体行为的定量方法，对智能体对齐与安全部署具有重要参考价值。",
+      "llm_tldr": "针对多智能体系统中集体推理可能出现的羊群效应与极化问题，本文利用统计力学研究了超一万个语言模型智能体社区的反复消息交换与观点更新。无论初始行为多多样，个体与群体动态都可用三种特征状态刻画。该发现为设计和调优多智能体系统提供了一种可预测集体行为的定量方法，对智能体对齐与安全部署具有重要参考价值。",
+      "llm_tags": [
+        "query:agents"
+      ],
+      "matched_query_tag": "query:agents",
+      "matched_query_text": "What are the main challenges in multi agent coordination?",
+      "matched_requirement_id": "req-7",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "8plus"
+    }
+  ]
+}
