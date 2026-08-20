@@ -1,89 +1,128 @@
 {
-  "generated_at": "2026-08-19T20:46:43.107539+00:00",
-  "updated_date": "20260819",
+  "generated_at": "2026-08-20T20:30:36.960816+00:00",
+  "updated_date": "20260820",
   "carryover_days": 9,
   "tag_states": {
     "agents": {
-      "updated_date": "20260819",
+      "updated_date": "20260820",
       "carryover_days": 9,
       "items": [
         {
-          "id": "2608.16590v1",
+          "id": "2608.18524v1",
           "source": "arxiv",
-          "title": "Zetta $ζ$: An Efficient Closed-Loop Embodied Harness for Self-Evolving Physical Intelligence",
-          "abstract": "Embodied agents are increasingly used to close the gap left by end-to-end policy models. Yet the agentic path has not realized closed-loop learning in physical execution: existing harnesses remain largely open-loop, following fixed skills during rollout and reflecting only after an episode completes. Such post-hoc reflection cannot govern execution as it unfolds, because physical interaction requires decisions to track rapidly changing robot-environment states at a frequency beyond today's large agentic models. We present Zetta, a closed-loop embodied harness that evolves code-based runtime critics and recovery skills online while keeping the base policy frozen. Through three timescale-separated loops, Zetta provides action-frequency governance, rollout-level critic-recovery proposal, and validation-gated skill updates. Together with Z-Infra, a rollout infrastructure decoupling agent logic from heterogeneous execution resources, Zetta achieves state-of-the-art success on LIBERO-Pro and RoboCasa under our current rollout budget, reaching 90.8% and 93.6%, with an 11.1x inference speedup; success continues to scale with self-exploration experience; learned skills transfer zero-shot, and clear robotic \"Aha Moments\" emerge. These results show that closed-loop harness self-evolution opens a scaling path for reliable physical intelligence.",
+          "title": "DART-SD: Diamond-topology Aware Retrieval and Tuning for Self-Distillation of Multi-Turn Tool-Calling Agents",
+          "abstract": "Equipping Large Language Models (LLMs) with multi-turn tool-calling capabilities is essential for building autonomous agents. However, progress is fundamentally limited by the reliance on full-length trajectory imitation. For tasks involving multiple order-independent sub-goals, the optimal solution space forms a vast combinatorial diamond lattice. Forcing this rich topology into monolithic trajectories causes a severe topological collapse, indiscriminately penalizing valid alternative explorations and severely degrading policy diversity. To address this, we propose DART-SD (Diamond-topology Aware Retrieval and Tuning for Self-Distillation), a novel framework that shifts the paradigm from global forcing to topology-guided localized correction. DART-SD first models the execution process as a converging Interaction-State Transition Graph (ISTG), faithfully capturing the inherent diamond topology of successful and failed exploratory paths. During autonomous rollouts, the framework identifies the Critical Topological Breakpoint (CTB) and retrieves success-supported recovery references. Finally, we introduce a progressive self-distillation paradigm through CTB-guided localized supervision, ensuring that the training loss is calculated exclusively on the generated recovery steps while strictly protecting the valid reasoning prefix from destructive gradient updates. Experiments on complex multi-turn tool-calling benchmarks demonstrate that DART-SD significantly outperforms traditional full-trajectory baselines.",
           "authors": [
-            "Xin Ding",
-            "Liang Mi",
-            "Mingzhe Huang",
-            "Zixuan Wang",
-            "Chao Zhang",
-            "Zixu Hao",
-            "Fu Chen",
-            "Xiangyu Li",
-            "Yikai Zheng",
-            "Yaoyu Guo",
-            "Weijun Wang",
-            "Kun Li",
-            "Hao Wu",
-            "Yunxin Liu",
-            "Ting Cao"
+            "Hangrui Xu",
+            "Jiarui Wang",
+            "Yang Yang",
+            "Chuanbo Zhu",
+            "Fangda Chen",
+            "Ziqi Wu",
+            "Jingming Cai",
+            "Yan Song"
           ],
-          "primary_category": "cs.RO",
+          "primary_category": "cs.CL",
           "categories": [
-            "cs.RO"
+            "cs.CL",
+            "cs.AI",
+            "cs.LG",
+            "cs.MA"
           ],
-          "published": "2026-08-17T13:49:43+00:00",
-          "link": "https://arxiv.org/pdf/2608.16590v1",
+          "published": "2026-08-19T04:19:21+00:00",
+          "link": "https://arxiv.org/pdf/2608.18524v1",
           "tags": [
             "keyword:agents",
             "query:agents"
           ],
           "llm_score": 8.0,
-          "llm_evidence_en": "closed-loop embodied harness for physical environment interaction",
-          "llm_evidence_cn": "用于物理环境交互的闭环具身框架",
-          "llm_evidence": "用于物理环境交互的闭环具身框架",
-          "canonical_evidence": "用于物理环境交互的闭环具身框架",
-          "llm_tldr_en": "Zetta introduces an efficient closed-loop embodied harness that evolves runtime critics and recovery skills online, enabling embodied agents to adjust physical interactions at action frequency without unfreezing the base policy.",
-          "llm_tldr_cn": "针对现有具身框架无法在物理执行中实时闭环学习的问题，本文提出Zetta高效闭环具身框架。该框架在保持基础策略冻结的同时，在线演化基于代码的运行时批评者和恢复技能，并通过三个时间尺度分离的循环提供行动频率级决策。实验显示它能让智能体在动态物理环境中持续适应，显著改善长时程交互控制。",
-          "llm_tldr": "针对现有具身框架无法在物理执行中实时闭环学习的问题，本文提出Zetta高效闭环具身框架。该框架在保持基础策略冻结的同时，在线演化基于代码的运行时批评者和恢复技能，并通过三个时间尺度分离的循环提供行动频率级决策。实验显示它能让智能体在动态物理环境中持续适应，显著改善长时程交互控制。",
+          "llm_evidence_en": "multi-turn tool-calling agents; sub-goal topology aware self-distillation",
+          "llm_evidence_cn": "多轮工具调用智能体；面向子目标拓扑的自蒸馏，服务于任务目标完成",
+          "llm_evidence": "多轮工具调用智能体；面向子目标拓扑的自蒸馏，服务于任务目标完成",
+          "canonical_evidence": "多轮工具调用智能体；面向子目标拓扑的自蒸馏，服务于任务目标完成",
+          "llm_tldr_en": "Proposes DART-SD, a topology-aware retrieval and tuning framework that trains multi-turn tool-calling agents via self-distillation, avoiding topological collapse by preserving valid alternative sub-goal exploration paths.",
+          "llm_tldr_cn": "现有方法依赖整条轨迹模仿来训练多轮工具调用智能体，会惩罚有效的替代子目标路径并导致策略多样性下降。为此，本文提出 DART-SD，利用钻石拓扑感知的检索与自蒸馏来学习多样化的子目标求解路径。在包含多个顺序无关子目标的任务上，该方法避免了拓扑坍缩，提升了策略多样性。该框架为构建自主任务型智能体提供了新的训练范式。",
+          "llm_tldr": "现有方法依赖整条轨迹模仿来训练多轮工具调用智能体，会惩罚有效的替代子目标路径并导致策略多样性下降。为此，本文提出 DART-SD，利用钻石拓扑感知的检索与自蒸馏来学习多样化的子目标求解路径。在包含多个顺序无关子目标的任务上，该方法避免了拓扑坍缩，提升了策略多样性。该框架为构建自主任务型智能体提供了新的训练范式。",
           "llm_tags": [
             "query:agents"
           ],
           "matched_query_tag": "query:agents",
-          "matched_query_text": "How do autonomous agents perceive and interact with their environment?",
-          "matched_requirement_id": "req-6",
+          "matched_query_text": "task-oriented agent goal completion",
+          "matched_requirement_id": "req-4",
           "selection_source": "carryover_cache",
-          "paper_id": "2608.16590v1",
+          "paper_id": "2608.18524v1",
           "carry_days": 1
         },
         {
-          "id": "2608.17749v1",
+          "id": "2608.18312v1",
           "source": "arxiv",
-          "title": "The Curious Case of Exploding DecPOMDPs: Containing the Fire through Policy Counting",
-          "abstract": "Decentralised partially observable Markov decision processes (DecPOMDPs) provide a general framework for modelling multi-agent decision making under uncertainty. However, DecPOMDPs are known to suffer from exponential complexity in the number of agents. One way to combat this intractability in agent numbers is to look at partitions of agents that exhibit a form of symmetry among agents, allowing for a compact encoding by counting. However, a challenge arises as the policy space explodes, even though the model complexity and evaluation cost reduce to a polynomial dependence. In this paper, we redirect our focus from counting agents to counting policies, which actually enables tractability in agent numbers for so called policy-counted DecPOMDPs. Further, we present policy-counted dynamic programming using the compact representation to solve policy-counted DecPOMDPs efficiently.",
+          "title": "Artifact-centered Claim-aware Observability for Autonomous Scientific Agents",
+          "abstract": "Autonomous scientific agents now increasingly propose ideas, write code, run experiments, analyze results, and even draft papers. Observe and audit those agents are necessary but logging every model call is not enough, scientists also need to inspect the artifacts and claims that the systems produced and their relations. This is driven by the fact that failures in scientific agent systems are often distributed across several objects. A manuscript claim may cite the wrong evidence, a search process may select a degenerate candidate, a laboratory novelty claim may depend on an unstated rule, or a multi-agent plan may change without a visible trigger. Existing tracing, experiment tracking, and archival provenance tools are valuable, but their native objects do not make these scientific audit relations first-class. We argue that autonomous scientific systems should emit portable, claim-aware artifact lineage as a minimum audit layer. We propose a compact observability profile organized around individuals, operators, fitness records, lineage, archives, runs, streams, and steering commands. In this profile, scientific claims are ordinary individuals with explicit evidence bindings and verification records. The profile is intended as a semantic layer that complements current telemetry and provenance standards. Execution details can remain in OpenTelemetry. Final packages can export to PROV-O or RO-Crate standards.",
           "authors": [
-            "Nazlı Nur Karabulut",
-            "tanya Braun"
+            "Xiangyu Yin",
+            "Ming Du",
+            "Michael H. Prince",
+            "Mathew J. Cherukara"
           ],
-          "primary_category": "cs.AI",
+          "primary_category": "cs.CL",
           "categories": [
-            "cs.AI"
+            "cs.CL",
+            "cs.CY",
+            "cs.HC"
           ],
-          "published": "2026-08-18T13:12:31+00:00",
-          "link": "https://arxiv.org/pdf/2608.17749v1",
+          "published": "2026-08-18T20:47:24+00:00",
+          "link": "https://arxiv.org/pdf/2608.18312v1",
           "tags": [
             "keyword:agents",
             "query:agents"
           ],
           "llm_score": 8.0,
-          "llm_evidence_en": "complexity explosion in DecPOMDPs tackled by policy counting",
-          "llm_evidence_cn": "通过策略计数应对DecPOMDP指数复杂度",
-          "llm_evidence": "通过策略计数应对DecPOMDP指数复杂度",
-          "canonical_evidence": "通过策略计数应对DecPOMDP指数复杂度",
-          "llm_tldr_en": "Proposes policy-counted DecPOMDPs to tame exponential complexity in agent numbers, shifting from agent symmetry counting to policy counting for tractable evaluation.",
-          "llm_tldr_cn": "DecPOMDP是建模多智能体不确定决策的通用框架，但智能体数量导致指数复杂度。本文指出按智能体对称性计数虽可降低模型复杂度，却引发策略空间爆炸；为此将计数对象从智能体转向策略，提出策略计数的DecPOMDP表示，使求值与评估复杂度在智能体数量上呈多项式依赖。该理论为大规模多智能体协作决策提供了新的可解性路径。",
-          "llm_tldr": "DecPOMDP是建模多智能体不确定决策的通用框架，但智能体数量导致指数复杂度。本文指出按智能体对称性计数虽可降低模型复杂度，却引发策略空间爆炸；为此将计数对象从智能体转向策略，提出策略计数的DecPOMDP表示，使求值与评估复杂度在智能体数量上呈多项式依赖。该理论为大规模多智能体协作决策提供了新的可解性路径。",
+          "llm_evidence_en": "observability for autonomous scientific agents",
+          "llm_evidence_cn": "自主科学智能体的可观测性",
+          "llm_evidence": "自主科学智能体的可观测性",
+          "canonical_evidence": "自主科学智能体的可观测性",
+          "llm_tldr_en": "Proposes artifact-centered claim-aware observability for auditing autonomous scientific agents, emphasizing inspection of artifacts and claims beyond raw model call logs.",
+          "llm_tldr_cn": "针对自主科学智能体的审计需求，现有追踪和日志手段难以揭露跨对象的失败根因，例如声明引用错误证据或计划无触发变更。本文提出以工件中心、声明感知的可观测性框架，系统记录智能体产生的工件、声明及其关系，从而支持对多智能体科学系统的有效审计和调试。该工作弥补了实验追踪与归档溯源工具的不足，为可信科学智能体提供了关键基础设施。",
+          "llm_tldr": "针对自主科学智能体的审计需求，现有追踪和日志手段难以揭露跨对象的失败根因，例如声明引用错误证据或计划无触发变更。本文提出以工件中心、声明感知的可观测性框架，系统记录智能体产生的工件、声明及其关系，从而支持对多智能体科学系统的有效审计和调试。该工作弥补了实验追踪与归档溯源工具的不足，为可信科学智能体提供了关键基础设施。",
+          "llm_tags": [
+            "query:agents"
+          ],
+          "matched_query_tag": "query:agents",
+          "matched_query_text": "intelligent agent technology",
+          "matched_requirement_id": "req-1",
+          "selection_source": "carryover_cache",
+          "paper_id": "2608.18312v1",
+          "carry_days": 1
+        },
+        {
+          "id": "2608.18575v1",
+          "source": "arxiv",
+          "title": "Beyond LLM-Based Reasoning: Lightweight GNNs for Agent Failure Attribution",
+          "abstract": "Large language model (LLM)-based multi-agent systems (MAS) often exhibit complex failure modes, which frequently cause agents to produce incorrect outcomes. This motivates the task of Agent Failure Attribution: given a failed multi-agent trajectory, identify the faulty agents and their corresponding error types. Existing approaches predominantly rely on LLMs to perform failure attribution, either through direct prompting, fine-tuning on synthetic data or complex agentic pipelines. While effective, these methods incur substantial computational overhead due to long-context processing, expensive post-training and handcrafted workflows. Moreover, empirical evidence shows that even state-of-the-art models achieve limited accuracy on existing benchmarks, suggesting that scaling model size alone is insufficient. In this work, we revisit this task and question the necessity of such expensive generative solutions. We introduce AFANet, a lightweight graph-based framework that models interaction trajectories through step-level semantic signals and agent-level relationships. We show that with significantly fewer parameters and near-zero inference cost, AFANet (i) matches or outperforms LLM-based baselines, including fine-tuned models on in-domain benchmarks, (ii) maintains robust performance across different GNN architectures and (iii) can be further improved with inexpensive test-time adaptation on the OOD benchmark. Our results suggest that effective agent failure attribution does not require heavy LLM reasoning and a lightweight, structured approach can achieve strong performance.",
+          "authors": [
+            "Ting-Wei Li",
+            "Yuanchen Bei",
+            "Xiao Lin",
+            "Hanghang Tong"
+          ],
+          "primary_category": "cs.CL",
+          "categories": [
+            "cs.CL"
+          ],
+          "published": "2026-08-19T06:16:09+00:00",
+          "link": "https://arxiv.org/pdf/2608.18575v1",
+          "tags": [
+            "keyword:agents",
+            "query:agents"
+          ],
+          "llm_score": 8.0,
+          "llm_evidence_en": "multi-agent failure attribution, identifies faulty agents and error types in coordination",
+          "llm_evidence_cn": "多智能体故障归因，识别协调中的错误智能体与错误类型",
+          "llm_evidence": "多智能体故障归因，识别协调中的错误智能体与错误类型",
+          "canonical_evidence": "多智能体故障归因，识别协调中的错误智能体与错误类型",
+          "llm_tldr_en": "Proposes lightweight GNNs for agent failure attribution in LLM-based multi-agent systems, identifying faulty agents and error types from failed trajectories with lower cost than LLM prompting.",
+          "llm_tldr_cn": "基于LLM的多智能体系统常出现复杂故障，现有归因方法依赖LLM提示或微调，计算开销大且准确率有限。论文提出轻量级图神经网络方法，从失败轨迹中识别故障智能体及其错误类型。实验表明该方法在显著降低计算成本的同时提升了基准上的归因准确率。这为多智能体系统的故障调试与协调优化提供了高效的自动化工具。",
+          "llm_tldr": "基于LLM的多智能体系统常出现复杂故障，现有归因方法依赖LLM提示或微调，计算开销大且准确率有限。论文提出轻量级图神经网络方法，从失败轨迹中识别故障智能体及其错误类型。实验表明该方法在显著降低计算成本的同时提升了基准上的归因准确率。这为多智能体系统的故障调试与协调优化提供了高效的自动化工具。",
           "llm_tags": [
             "query:agents"
           ],
@@ -91,7 +130,46 @@
           "matched_query_text": "What are the main challenges in multi agent coordination?",
           "matched_requirement_id": "req-7",
           "selection_source": "carryover_cache",
-          "paper_id": "2608.17749v1",
+          "paper_id": "2608.18575v1",
+          "carry_days": 1
+        },
+        {
+          "id": "2608.18353v1",
+          "source": "arxiv",
+          "title": "Model Predictive Supervisory Control for Hierarchical and Distributed UAS Traffic Management",
+          "abstract": "This work proposes a hierarchical Model Predictive Supervisory Control (MPSC) framework for multi-agent systems with shared resources. MPSC integrates receding-horizon cost-optimal control with Supervisory control theory (SCT) based supervision that enforces safety, nonblockingness, and resource exclusivity. Scalability arises from hierarchical and scalable supervisor and automaton templates, enabling distributed execution without monolithic synthesis. Using this framework, this work develops an urban Unmanned aircraft system Traffic Management (UTM) model. The model supports pickup-and-delivery missions under time-varying demand efficiently.",
+          "authors": [
+            "Matheus P. Loures",
+            "Guilherme V. Raffo",
+            "Patrícia N. Pena"
+          ],
+          "primary_category": "eess.SY",
+          "categories": [
+            "eess.SY",
+            "cs.MA"
+          ],
+          "published": "2026-08-18T22:08:41+00:00",
+          "link": "https://arxiv.org/pdf/2608.18353v1",
+          "tags": [
+            "keyword:agents",
+            "query:agents"
+          ],
+          "llm_score": 8.0,
+          "llm_evidence_en": "hierarchical model predictive supervisory control for multi-agent shared resources",
+          "llm_evidence_cn": "面向多智能体共享资源的分层模型预测监督控制",
+          "llm_evidence": "面向多智能体共享资源的分层模型预测监督控制",
+          "canonical_evidence": "面向多智能体共享资源的分层模型预测监督控制",
+          "llm_tldr_en": "Proposes a hierarchical Model Predictive Supervisory Control framework for multi-agent UAS traffic management, integrating receding-horizon control with supervisory control to enforce safety and resource exclusivity.",
+          "llm_tldr_cn": "多智能体系统共享资源时，需要同时保证安全性、不死锁和资源独占性。论文提出分层模型预测监督控制(MPSC)框架，将滚动时域最优控制与监督控制理论结合，通过分层模板实现分布式执行。基于该框架构建的城市无人机交通管理模型支持时变需求下的取送任务，并保持了可扩展性。这为大规模多智能体协调提供了兼顾安全与效率的控制方案。",
+          "llm_tldr": "多智能体系统共享资源时，需要同时保证安全性、不死锁和资源独占性。论文提出分层模型预测监督控制(MPSC)框架，将滚动时域最优控制与监督控制理论结合，通过分层模板实现分布式执行。基于该框架构建的城市无人机交通管理模型支持时变需求下的取送任务，并保持了可扩展性。这为大规模多智能体协调提供了兼顾安全与效率的控制方案。",
+          "llm_tags": [
+            "query:agents"
+          ],
+          "matched_query_tag": "query:agents",
+          "matched_query_text": "multi-agent system coordination",
+          "matched_requirement_id": "req-3",
+          "selection_source": "carryover_cache",
+          "paper_id": "2608.18353v1",
           "carry_days": 1
         }
       ]

@@ -41,7 +41,7 @@
 <section class="dpr-home-dashboard-card dpr-home-report-card">
   <div class="dpr-home-dashboard-header">
     <div>
-      <span class="dpr-home-dashboard-kicker">2026-08-19</span>
+      <span class="dpr-home-dashboard-kicker">2026-08-20</span>
       <h3 class="dpr-home-dashboard-title">今日汇总</h3>
     </div>
     <strong class="dpr-home-dashboard-count">共 17 篇</strong>
@@ -51,7 +51,7 @@
     <div class="dpr-home-dashboard-stat"><dt>精读</dt><dd>6</dd></div>
     <div class="dpr-home-dashboard-stat"><dt>速读</dt><dd>11</dd></div>
   </dl>
-  <p class="dpr-home-dashboard-body">最近更新：2026-08-19 20:58:58 UTC<br>状态：成功</p>
+  <p class="dpr-home-dashboard-body">最近更新：2026-08-20 20:42:25 UTC<br>状态：成功</p>
 </section>
 <section class="dpr-home-dashboard-card dpr-home-brief-card">
   <div class="dpr-home-dashboard-header">
@@ -62,7 +62,7 @@
     <strong class="dpr-home-dashboard-count">AI</strong>
   </div>
   <div class="dpr-home-dashboard-body">
-<p>今日17篇论文中，2篇精读聚焦时序逻辑引导的强化学习与意图驱动的多轮智能体，均获9.0高分。最值得关注的是以时序逻辑统一任务表示，以及用意图追踪提升多轮对话的用户中心体验。建议普通读者优先浏览长程智能体的全局反思与可恢复执行方向，相关速读论文得分8.0。</p>
+<p>今日精选17篇AI论文，精读6篇、速读11篇，聚焦LLM多智能体协作与智能测试前沿；最值得关注StateBridge提出的无训练隐状态对齐机制，以及HxAgent在端到端Web应用测试中的迭代规划能力；建议普通读者优先了解多智能体通信效率优化与自动化测试工具的实际应用价值。</p>
   </div>
 </section>
 <section class="dpr-home-dashboard-card dpr-home-deep-card">
@@ -74,7 +74,7 @@
     <strong class="dpr-home-dashboard-count">6 篇</strong>
   </div>
   <div class="dpr-home-dashboard-body">
-<ul class="dpr-home-dashboard-paper-list"><li><span class="dpr-home-dashboard-paper-title" title="Temporal Logic Guided Universal Task Representations for Reinforcement Learning">Temporal Logic Guided Universal Task Representations for Reinforcement Learning</span></li><li><span class="dpr-home-dashboard-paper-title" title="Intent-Driven Situation Tracking for User-Centric Multi-Turn Agents">Intent-Driven Situation Tracking for User-Centric Multi-Turn Agents</span></li><li><span class="dpr-home-dashboard-paper-title" title="PROBE: Manipulation-Grounded Visual Question Answering with VLM Agents">PROBE: Manipulation-Grounded Visual Question Answering with VLM Agents</span></li></ul>
+<ul class="dpr-home-dashboard-paper-list"><li><span class="dpr-home-dashboard-paper-title" title="StateBridge: Training-free Hidden-state Alignment for Latent Communication in LLM Multi-Agent Systems">StateBridge: Training-free Hidden-state Alignment for Latent Communication in LLM Multi-Agent Systems</span></li><li><span class="dpr-home-dashboard-paper-title" title="HxAgent: Iterative Agent Planning for End-to-End Web Application Testing">HxAgent: Iterative Agent Planning for End-to-End Web Application Testing</span></li><li><span class="dpr-home-dashboard-paper-title" title="Bayesian Partner Modelling enables Adaptive Replanning for LLM Coordination">Bayesian Partner Modelling enables Adaptive Replanning for LLM Coordination</span></li></ul>
   </div>
   <div class="dpr-home-dashboard-tags"><span class="dpr-home-dashboard-tag">agents <strong>6</strong></span></div>
 </section>
@@ -87,7 +87,7 @@
     <strong class="dpr-home-dashboard-count">11 篇</strong>
   </div>
   <div class="dpr-home-dashboard-body">
-<ul class="dpr-home-dashboard-paper-list"><li><span class="dpr-home-dashboard-paper-title" title="LoongReflect: Boosting Long-Horizon Reflection in Search Agents via Global Perspective Distillation">LoongReflect: Boosting Long-Horizon Reflection in Search Agents via Global Perspective Distillation</span></li><li><span class="dpr-home-dashboard-paper-title" title="AgentRewind: Recoverable Execution for Long-Horizon LLM Agents">AgentRewind: Recoverable Execution for Long-Horizon LLM Agents</span></li><li><span class="dpr-home-dashboard-paper-title" title="When Deep Research Agents Stagnate: Enhancing Reasoning with Retrieval-Aware Agent Control">When Deep Research Agents Stagnate: Enhancing Reasoning with Retrieval-Aware Agent Control</span></li></ul>
+<ul class="dpr-home-dashboard-paper-list"><li><span class="dpr-home-dashboard-paper-title" title="Act2Intention: A Benchmark For Developing Active Mobile Agents Through Inferring User Intention from GUI Actions">Act2Intention: A Benchmark For Developing Active Mobile Agents Through Inferring User Intention from GUI Actions</span></li><li><span class="dpr-home-dashboard-paper-title" title="From Sequence to Structure: Relational Uncertainty Propagation for LLM Agents">From Sequence to Structure: Relational Uncertainty Propagation for LLM Agents</span></li><li><span class="dpr-home-dashboard-paper-title" title="$\texttt{Flip-Team}$: Cooperative Takeover Games with Stochastic Human Override">$\texttt{Flip-Team}$: Cooperative Takeover Games with Stochastic Human Override</span></li></ul>
   </div>
   <div class="dpr-home-dashboard-tags"><span class="dpr-home-dashboard-tag">agents <strong>11</strong></span></div>
 </section>
