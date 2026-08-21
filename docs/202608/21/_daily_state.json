@@ -1,0 +1,281 @@
+{
+  "date": "20260821",
+  "date_label": "",
+  "generated_at": "2026-08-21 19:58:01 UTC",
+  "recommend_exists": true,
+  "run_count": 1,
+  "papers": [
+    {
+      "paper_id": "2608.17289v1",
+      "route": "202608/21/2608.17289v1-planpo-group-planning-aware-policy-optimization-for-multi-turn-agentic-llms",
+      "title": "PlanPO: Group Planning-Aware Policy Optimization for Multi-Turn Agentic LLMs",
+      "section": "deep",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "agents"
+        }
+      ],
+      "score": 9.0,
+      "evidence": "用于训练多轮智能体大语言模型的强化学习方法",
+      "first_seen_at": "2026-08-21 19:58:01 UTC",
+      "updated_at": "2026-08-21 19:58:01 UTC"
+    },
+    {
+      "paper_id": "2608.19842v1",
+      "route": "202608/21/2608.19842v1-sapo-single-rollout-autoregressive-policy-optimization-for-agentic-reinforcement-learning",
+      "title": "SAPO: Single-Rollout Autoregressive Policy Optimization for Agentic Reinforcement Learning",
+      "section": "deep",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "agents"
+        }
+      ],
+      "score": 9.0,
+      "evidence": "面向智能体强化学习的单次轨迹自回归策略优化",
+      "first_seen_at": "2026-08-21 19:58:01 UTC",
+      "updated_at": "2026-08-21 19:58:01 UTC"
+    },
+    {
+      "paper_id": "2608.19964v1",
+      "route": "202608/21/2608.19964v1-g-mark-grounded-multi-agent-reasoning-for-cooperative-driving-via-knowledge-graphs",
+      "title": "G-MARK: Grounded Multi-Agent Reasoning for Cooperative Driving via Knowledge Graphs",
+      "section": "deep",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "agents"
+        }
+      ],
+      "score": 9.0,
+      "evidence": "部分可观测条件下基于知识图谱的协作驾驶多智能体推理",
+      "first_seen_at": "2026-08-21 19:58:01 UTC",
+      "updated_at": "2026-08-21 19:58:01 UTC"
+    },
+    {
+      "paper_id": "2608.16293v1",
+      "route": "202608/21/2608.16293v1-principled-authority-switching-for-shared-autonomy-in-human-robot-teams",
+      "title": "Principled Authority Switching for Shared Autonomy in Human-Robot Teams",
+      "section": "deep",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "agents"
+        }
+      ],
+      "score": 8.0,
+      "evidence": "共享自治中自主智能体的博弈论权威切换",
+      "first_seen_at": "2026-08-21 19:58:01 UTC",
+      "updated_at": "2026-08-21 19:58:01 UTC"
+    },
+    {
+      "paper_id": "2608.18312v1",
+      "route": "202608/21/2608.18312v1-artifact-centered-claim-aware-observability-for-autonomous-scientific-agents",
+      "title": "Artifact-centered Claim-aware Observability for Autonomous Scientific Agents",
+      "section": "deep",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "agents"
+        }
+      ],
+      "score": 8.0,
+      "evidence": "自主科学智能体的可观测性",
+      "first_seen_at": "2026-08-21 19:58:01 UTC",
+      "updated_at": "2026-08-21 19:58:01 UTC"
+    },
+    {
+      "paper_id": "2608.18353v1",
+      "route": "202608/21/2608.18353v1-model-predictive-supervisory-control-for-hierarchical-and-distributed-uas-traffic-management",
+      "title": "Model Predictive Supervisory Control for Hierarchical and Distributed UAS Traffic Management",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "agents"
+        }
+      ],
+      "score": 8.0,
+      "evidence": "面向多智能体共享资源的分层模型预测监督控制",
+      "first_seen_at": "2026-08-21 19:58:01 UTC",
+      "updated_at": "2026-08-21 19:58:01 UTC"
+    },
+    {
+      "paper_id": "2608.18524v1",
+      "route": "202608/21/2608.18524v1-dart-sd-diamond-topology-aware-retrieval-and-tuning-for-self-distillation-of-multi-turn-tool-calling-agents",
+      "title": "DART-SD: Diamond-topology Aware Retrieval and Tuning for Self-Distillation of Multi-Turn Tool-Calling Agents",
+      "section": "deep",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "agents"
+        }
+      ],
+      "score": 8.0,
+      "evidence": "面向多轮工具调用的自主智能体，通过自蒸馏训练提升多子目标策略多样性",
+      "first_seen_at": "2026-08-21 19:58:01 UTC",
+      "updated_at": "2026-08-21 19:58:01 UTC"
+    },
+    {
+      "paper_id": "2608.18575v1",
+      "route": "202608/21/2608.18575v1-beyond-llm-based-reasoning-lightweight-gnns-for-agent-failure-attribution",
+      "title": "Beyond LLM-Based Reasoning: Lightweight GNNs for Agent Failure Attribution",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "agents"
+        }
+      ],
+      "score": 8.0,
+      "evidence": "多智能体故障归因，识别协调中的错误智能体与错误类型",
+      "first_seen_at": "2026-08-21 19:58:01 UTC",
+      "updated_at": "2026-08-21 19:58:01 UTC"
+    },
+    {
+      "paper_id": "2608.19794v1",
+      "route": "202608/21/2608.19794v1-towards-general-embodied-intelligence-integrating-large-language-models-knowledge-bases-and-reasoning-capabilities-to-build-the-next-generation-of-ai-agents",
+      "title": "Towards general embodied intelligence: integrating large language models, knowledge bases, and reasoning capabilities to build the next generation of AI agents",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "agents"
+        }
+      ],
+      "score": 8.0,
+      "evidence": "综述以大语言模型为中心的智能体如何融合知识库、推理与具身能力",
+      "first_seen_at": "2026-08-21 19:58:01 UTC",
+      "updated_at": "2026-08-21 19:58:01 UTC"
+    },
+    {
+      "paper_id": "2608.19880v1",
+      "route": "202608/21/2608.19880v1-envharness-awakening-static-worlds-for-agent-learning",
+      "title": "EnvHarness: Awakening Static Worlds for Agent Learning",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "agents"
+        }
+      ],
+      "score": 8.0,
+      "evidence": "通过可编程组件重塑静态环境，促进智能体的交互学习与训练",
+      "first_seen_at": "2026-08-21 19:58:01 UTC",
+      "updated_at": "2026-08-21 19:58:01 UTC"
+    },
+    {
+      "paper_id": "2608.20099v1",
+      "route": "202608/21/2608.20099v1-reward-guided-autoregressive-graph-generation-for-efficient-multi-agent-communication-topology-design",
+      "title": "Reward-Guided Autoregressive Graph Generation for Efficient Multi-Agent Communication Topology Design",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "agents"
+        }
+      ],
+      "score": 8.0,
+      "evidence": "利用奖励引导的自回归图生成优化多智能体通信拓扑，兼顾正确性与紧凑性",
+      "first_seen_at": "2026-08-21 19:58:01 UTC",
+      "updated_at": "2026-08-21 19:58:01 UTC"
+    },
+    {
+      "paper_id": "2608.20129v1",
+      "route": "202608/21/2608.20129v1-multi-agent-orchestration-with-the-common-sense-reasoning-capabilities-of-llms-for-autonomous-driving",
+      "title": "Multi-Agent Orchestration with the Common-Sense Reasoning Capabilities of LLMs for Autonomous Driving",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "agents"
+        }
+      ],
+      "score": 8.0,
+      "evidence": "结合强化学习与LLM常识推理的多智能体编排用于自动驾驶",
+      "first_seen_at": "2026-08-21 19:58:01 UTC",
+      "updated_at": "2026-08-21 19:58:01 UTC"
+    },
+    {
+      "paper_id": "2608.15832v1",
+      "route": "202608/21/2608.15832v1-the-authority-resolution-framework-a-five-domain-ontology-for-governing-who-and-what-decides-at-scale",
+      "title": "The Authority Resolution Framework: A Five-Domain Ontology for Governing Who and What Decides, at Scale",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "agents"
+        }
+      ],
+      "score": 7.0,
+      "evidence": "五域本体用于解析自主行动者在上下文中是否获得授权",
+      "first_seen_at": "2026-08-21 19:58:01 UTC",
+      "updated_at": "2026-08-21 19:58:01 UTC"
+    },
+    {
+      "paper_id": "2608.19263v1",
+      "route": "202608/21/2608.19263v1-the-evaluation-context-protocol-ecp-a-portable-contract-for-ai-agent-evaluation",
+      "title": "The Evaluation Context Protocol (ECP): A Portable Contract for AI Agent Evaluation",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "agents"
+        }
+      ],
+      "score": 7.0,
+      "evidence": "面向AI智能体架构的可移植评估协议",
+      "first_seen_at": "2026-08-21 19:58:01 UTC",
+      "updated_at": "2026-08-21 19:58:01 UTC"
+    },
+    {
+      "paper_id": "2608.19557v1",
+      "route": "202608/21/2608.19557v1-when-do-llm-agents-help-deadline-aware-mixed-criticality-task-scheduling-at-the-autonomous-vehicle-edge",
+      "title": "When Do LLM Agents Help? Deadline-Aware Mixed-Criticality Task Scheduling at the Autonomous-Vehicle Edge",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "agents"
+        }
+      ],
+      "score": 7.0,
+      "evidence": "多智能体LLM控制层用于自动驾驶边缘的截止期感知调度决策",
+      "first_seen_at": "2026-08-21 19:58:01 UTC",
+      "updated_at": "2026-08-21 19:58:01 UTC"
+    },
+    {
+      "paper_id": "2608.19653v1",
+      "route": "202608/21/2608.19653v1-deltaml-bench-evaluating-machine-learning-agents-on-real-world-research-repositories",
+      "title": "DeltaML-Bench: Evaluating Machine Learning Agents on Real-World Research Repositories",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "agents"
+        }
+      ],
+      "score": 7.0,
+      "evidence": "在真实研究仓库上评估机器学习智能体的基准",
+      "first_seen_at": "2026-08-21 19:58:01 UTC",
+      "updated_at": "2026-08-21 19:58:01 UTC"
+    },
+    {
+      "paper_id": "2608.20169v1",
+      "route": "202608/21/2608.20169v1-task-coevolve-efficient-harness-optimization-via-adaptive-validation-task-selection",
+      "title": "Task-CoEvolve: Efficient Harness Optimization via Adaptive Validation Task Selection",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "agents"
+        }
+      ],
+      "score": 6.0,
+      "evidence": "通过自适应验证任务选择实现高效的LLM智能体框架优化",
+      "first_seen_at": "2026-08-21 19:58:01 UTC",
+      "updated_at": "2026-08-21 19:58:01 UTC"
+    }
+  ]
+}
