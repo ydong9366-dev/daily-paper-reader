@@ -41,17 +41,17 @@
 <section class="dpr-home-dashboard-card dpr-home-report-card">
   <div class="dpr-home-dashboard-header">
     <div>
-      <span class="dpr-home-dashboard-kicker">2026-08-21</span>
+      <span class="dpr-home-dashboard-kicker">2026-07-24 ~ 2026-08-22</span>
       <h3 class="dpr-home-dashboard-title">今日汇总</h3>
     </div>
-    <strong class="dpr-home-dashboard-count">共 17 篇</strong>
+    <strong class="dpr-home-dashboard-count">共 16 篇</strong>
   </div>
   <dl class="dpr-home-dashboard-stats">
     <div class="dpr-home-dashboard-stat"><dt>累计更新</dt><dd>1 次</dd></div>
-    <div class="dpr-home-dashboard-stat"><dt>精读</dt><dd>6</dd></div>
-    <div class="dpr-home-dashboard-stat"><dt>速读</dt><dd>11</dd></div>
+    <div class="dpr-home-dashboard-stat"><dt>精读</dt><dd>0</dd></div>
+    <div class="dpr-home-dashboard-stat"><dt>速读</dt><dd>16</dd></div>
   </dl>
-  <p class="dpr-home-dashboard-body">最近更新：2026-08-21 19:58:01 UTC<br>状态：成功</p>
+  <p class="dpr-home-dashboard-body">最近更新：2026-08-22 02:43:34 UTC<br>状态：成功</p>
 </section>
 <section class="dpr-home-dashboard-card dpr-home-brief-card">
   <div class="dpr-home-dashboard-header">
@@ -62,9 +62,9 @@
     <strong class="dpr-home-dashboard-count">AI</strong>
   </div>
   <div class="dpr-home-dashboard-body">
-<p>今日速览17篇论文，核心聚焦多轮智能体强化学习优化，其中《PlanPO》与《SAPO》以9.0分并列精读榜首。</p>
-<p>最值得关注两大方向：一是面向多轮智能体的规划感知策略优化（PlanPO），二是单次采样的自回归策略优化（SAPO），两者均旨在提升智能体决策效率与稳定性。</p>
-<p>建议优先精读上述两篇RL方法论文，并顺带浏览UAS交通管理及轻量GNN失败归因研究，以扩展智能体落地视角。</p>
+<p>今日速读16篇论文，零精读，全部聚焦多智能体系统拓扑优化。</p>
+<p>最值得关注三篇满分工作：MANTA自适应拓扑演化、HELENA分层稀疏协作、基于因果推断的可解释通信拓扑设计。</p>
+<p>建议普通读者优先从因果推断那篇入手，可直观理解智能体间通信结构为何有效。</p>
   </div>
 </section>
 <section class="dpr-home-dashboard-card dpr-home-deep-card">
@@ -73,12 +73,12 @@
       <span class="dpr-home-dashboard-kicker">今日累计</span>
       <h3 class="dpr-home-dashboard-title">精读推荐</h3>
     </div>
-    <strong class="dpr-home-dashboard-count">6 篇</strong>
+    <strong class="dpr-home-dashboard-count">0 篇</strong>
   </div>
   <div class="dpr-home-dashboard-body">
-<ul class="dpr-home-dashboard-paper-list"><li><span class="dpr-home-dashboard-paper-title" title="PlanPO: Group Planning-Aware Policy Optimization for Multi-Turn Agentic LLMs">PlanPO: Group Planning-Aware Policy Optimization for Multi-Turn Agentic LLMs</span></li><li><span class="dpr-home-dashboard-paper-title" title="SAPO: Single-Rollout Autoregressive Policy Optimization for Agentic Reinforcement Learning">SAPO: Single-Rollout Autoregressive Policy Optimization for Agentic Reinforcement Learning</span></li><li><span class="dpr-home-dashboard-paper-title" title="G-MARK: Grounded Multi-Agent Reasoning for Cooperative Driving via Knowledge Graphs">G-MARK: Grounded Multi-Agent Reasoning for Cooperative Driving via Knowledge Graphs</span></li></ul>
+<p class="dpr-home-dashboard-empty">今日暂无推荐。</p>
   </div>
-  <div class="dpr-home-dashboard-tags"><span class="dpr-home-dashboard-tag">agents <strong>6</strong></span></div>
+
 </section>
 <section class="dpr-home-dashboard-card dpr-home-skim-card">
   <div class="dpr-home-dashboard-header">
@@ -86,12 +86,12 @@
       <span class="dpr-home-dashboard-kicker">今日累计</span>
       <h3 class="dpr-home-dashboard-title">速读推荐</h3>
     </div>
-    <strong class="dpr-home-dashboard-count">11 篇</strong>
+    <strong class="dpr-home-dashboard-count">16 篇</strong>
   </div>
   <div class="dpr-home-dashboard-body">
-<ul class="dpr-home-dashboard-paper-list"><li><span class="dpr-home-dashboard-paper-title" title="Model Predictive Supervisory Control for Hierarchical and Distributed UAS Traffic Management">Model Predictive Supervisory Control for Hierarchical and Distributed UAS Traffic Management</span></li><li><span class="dpr-home-dashboard-paper-title" title="Beyond LLM-Based Reasoning: Lightweight GNNs for Agent Failure Attribution">Beyond LLM-Based Reasoning: Lightweight GNNs for Agent Failure Attribution</span></li><li><span class="dpr-home-dashboard-paper-title" title="Towards general embodied intelligence: integrating large language models, knowledge bases, and reasoning capabilities to build the next generation of AI agents">Towards general embodied intelligence: integrating large language models, knowledge bases, and reasoning capabilities to build the next generation of AI agents</span></li></ul>
+<ul class="dpr-home-dashboard-paper-list"><li><span class="dpr-home-dashboard-paper-title" title="MANTA: Multi-Agent Network Topology Adaptation for Self-Evolving Multi-Agent Systems">MANTA: Multi-Agent Network Topology Adaptation for Self-Evolving Multi-Agent Systems</span></li><li><span class="dpr-home-dashboard-paper-title" title="HELENA:Hierarchical Sparse Coordination over a Union of Complementary Topologies for MAS">HELENA:Hierarchical Sparse Coordination over a Union of Complementary Topologies for MAS</span></li><li><span class="dpr-home-dashboard-paper-title" title="Discovering Efficient and Explainable Communication Topologies for LLM-based Multi-Agent Systems via Causal Inference">Discovering Efficient and Explainable Communication Topologies for LLM-based Multi-Agent Systems via Causal Inference</span></li></ul>
   </div>
-  <div class="dpr-home-dashboard-tags"><span class="dpr-home-dashboard-tag">agents <strong>11</strong></span></div>
+  <div class="dpr-home-dashboard-tags"><span class="dpr-home-dashboard-tag">multi-agent <strong>16</strong></span></div>
 </section>
 </div>
 

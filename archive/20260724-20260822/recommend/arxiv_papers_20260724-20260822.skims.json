@@ -1,0 +1,636 @@
+{
+  "mode": "skims",
+  "generated_at": "2026-08-22T02:37:22.009151+00:00",
+  "stats": {
+    "mode": "skims",
+    "forced_all_quick": true,
+    "min_score": 8.0,
+    "deep_divecandidates": 16,
+    "deep_cap": null,
+    "deep_selected": 0,
+    "quick_candidates": 16,
+    "quick_skim_target": null,
+    "quick_selected": 16
+  },
+  "deep_dive": [],
+  "quick_skim": [
+    {
+      "id": "2607.28527v1",
+      "source": "arxiv",
+      "title": "MANTA: Multi-Agent Network Topology Adaptation for Self-Evolving Multi-Agent Systems",
+      "abstract": "Large language model-based multi-agent systems improve complex problem solving through task decomposition, agent specialization, information exchange, and intermediate validation. However, existing systems typically treat communication topology as a fixed design choice or an offline optimization target. We introduce MANTA, a framework for Multi-Agent Network Topology Adaptation that enables communication structures to self-evolve at inference time. Before execution, MANTA initializes a task-conditioned topology from prior structural experience. During deployment, it monitors collaboration traces and applies bounded structural updates when the current organization becomes insufficient. These updates can modify agent roles, communication links, execution order, information visibility, and validation pathways while preserving the task interface and agent budget. We evaluate MANTA against representative single-agent and multi-agent baselines on five benchmarks spanning information seeking, tool use, planning, workflow execution, and mathematical reasoning. MANTA achieves the highest average score of 74.0, outperforming the strongest baseline by 5.8 percentage points and obtaining the best result on PlanCraft. These results show that inference-time self-improvement can extend to the architecture of collaboration itself.",
+      "authors": [
+        "Mao-xun Huang",
+        "Jerry Wang",
+        "Yi-Cheng Lai",
+        "Zhengxin Zhang",
+        "Claire Cardie",
+        "Hen-Hsen Huang"
+      ],
+      "primary_category": "cs.AI",
+      "categories": [
+        "cs.AI"
+      ],
+      "published": "2026-07-30T17:01:27+00:00",
+      "link": "https://arxiv.org/pdf/2607.28527v1",
+      "tags": [
+        "keyword:multi-agent",
+        "query:multi-agent"
+      ],
+      "llm_score": 10.0,
+      "llm_evidence_en": "proposes MANTA framework for multi-agent network topology adaptation with self-evolving communication structures",
+      "llm_evidence_cn": "提出MANTA框架，使多智能体通信拓扑在推理时自适应演化",
+      "llm_evidence": "提出MANTA框架，使多智能体通信拓扑在推理时自适应演化",
+      "canonical_evidence": "提出MANTA框架，使多智能体通信拓扑在推理时自适应演化",
+      "llm_tldr_en": "MANTA enables self-evolving communication topology in LLM-based multi-agent systems by initializing task-conditioned topologies and applying bounded structural updates from collaboration traces.",
+      "llm_tldr_cn": "大模型多智能体系统通常将通信拓扑视为固定设计或离线优化目标，限制了复杂任务的适应性。MANTA框架在推理前根据先验经验初始化任务条件拓扑，并在执行中监控协作轨迹，对通信链路和角色进行有界的结构更新，使系统组织能够自我演化。该方法提升了多智能体系统对动态任务的适应性和整体性能，为拓扑设计提供了新的在线自适应范式。",
+      "llm_tldr": "大模型多智能体系统通常将通信拓扑视为固定设计或离线优化目标，限制了复杂任务的适应性。MANTA框架在推理前根据先验经验初始化任务条件拓扑，并在执行中监控协作轨迹，对通信链路和角色进行有界的结构更新，使系统组织能够自我演化。该方法提升了多智能体系统对动态任务的适应性和整体性能，为拓扑设计提供了新的在线自适应范式。",
+      "llm_tags": [
+        "query:multi-agent"
+      ],
+      "matched_query_tag": "query:multi-agent",
+      "matched_query_text": "How to design the topology of a multi agent system",
+      "matched_requirement_id": "req-7",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2608.04634v1",
+      "source": "arxiv",
+      "title": "HELENA:Hierarchical Sparse Coordination over a Union of Complementary Topologies for MAS",
+      "abstract": "LLM-based multi-agent systems (MAS) typically optimize a single topology, restricting reasoning to a narrow trajectory and limiting comprehensive analytical capacity. Naively merging multiple topologies into a composite graph introduces redundant noise propagation across irrelevant connections, degrading solution quality. To address this dilemma, we propose \\textbf{Hierarchical Sparse Coordination over a Union of Complementary Topologies for MAS (HELENA)}, a multi-agent framework that balances diverse reasoning paths with sparse task-dependent execution. \\helena{} constructs a union MAS graph from complementary candidate topologies selected via Monte Carlo Tree Search and Determinantal Point Process, broadening the reasoning trajectory for comprehensive analysis of complex problems. A Hierarchical Sparse Coordination module then activates only a sparse subgraph at each step while agents exchange compressed latent briefs to suppress redundant noise propagation. Finally, a Local Self-Refinement stage identifies decision units with discrepancy evidence and rewrites them only when contrastive evidence simultaneously confirms a reliable solution-side failure and a challenger-side improvement. Experiments across eight benchmarks show that \\helena{} achieves state-of-the-art results on all benchmarks, with an average gain of \\pctup{3.47} over the strongest baseline and up to \\pctup{10.34} on MMLU-Pro, achieving larger improvements on harder benchmarks at a reasonable additional cost.",
+      "authors": [
+        "Zhifang Mao",
+        "Linyao Zheng",
+        "Xuhang Shi",
+        "Xiuquan Hou"
+      ],
+      "primary_category": "cs.MA",
+      "categories": [
+        "cs.MA"
+      ],
+      "published": "2026-08-05T09:49:30+00:00",
+      "link": "https://arxiv.org/pdf/2608.04634v1",
+      "tags": [
+        "keyword:multi-agent",
+        "query:multi-agent"
+      ],
+      "llm_score": 10.0,
+      "llm_evidence_en": "designing multi-agent system topology by merging complementary topologies via MCTS and DPP",
+      "llm_evidence_cn": "通过MCTS和DPP合并互补拓扑来设计多智能体系统拓扑",
+      "llm_evidence": "通过MCTS和DPP合并互补拓扑来设计多智能体系统拓扑",
+      "canonical_evidence": "通过MCTS和DPP合并互补拓扑来设计多智能体系统拓扑",
+      "llm_tldr_en": "HELENA constructs a union MAS graph from complementary topologies selected via MCTS and DPP, enabling hierarchical sparse coordination that broadens reasoning while avoiding noise propagation and improving solution quality.",
+      "llm_tldr_cn": "基于LLM的多智能体系统往往只优化单一拓扑，限制了推理路径的多样性；而简单合并多个拓扑又会带来冗余噪声传播。HELENA提出分层稀疏协调框架，利用蒙特卡洛树搜索和行列式点过程从互补候选拓扑中构建并集图，并根据任务进行稀疏执行。实验表明该方法能兼顾推理多样性和解质量，为多智能体拓扑设计提供了新范式。",
+      "llm_tldr": "基于LLM的多智能体系统往往只优化单一拓扑，限制了推理路径的多样性；而简单合并多个拓扑又会带来冗余噪声传播。HELENA提出分层稀疏协调框架，利用蒙特卡洛树搜索和行列式点过程从互补候选拓扑中构建并集图，并根据任务进行稀疏执行。实验表明该方法能兼顾推理多样性和解质量，为多智能体拓扑设计提供了新范式。",
+      "llm_tags": [
+        "query:multi-agent"
+      ],
+      "matched_query_tag": "query:multi-agent",
+      "matched_query_text": "How to design the topology of a multi agent system",
+      "matched_requirement_id": "req-7",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2608.12921v2",
+      "source": "arxiv",
+      "title": "Discovering Efficient and Explainable Communication Topologies for LLM-based Multi-Agent Systems via Causal Inference",
+      "abstract": "The performance of large language model (LLM)-based multi-agent systems (MAS) largely depends on effective communication topologies. Existing topology generation methods, however, typically learn communication topologies through black-box optimization driven solely by task-level rewards. While effective, such optimization provides little insight into why particular communication edges are selected, making it difficult to identify the critical communication subgraphs responsible for successful collaboration. To address this limitation, we propose E2-Explainer, a model-agnostic framework for providing interpretable explanations of communication topologies produced by arbitrary topology generators. Specifically, we formulate topology explanation as a causal attribution problem that identifies compact communication subgraphs supported by edge-level evidence of task preservation. We obtain this evidence with a Granger-style objective that measures how masking each communication channel changes the task outcome and the stability of the final response. The resulting budgeted subgraphs are then distilled into an amortized explainer, enabling efficient post-hoc explanation without repeated edge-level evaluations at deployment. Extensive experiments on multiple reasoning and coding benchmarks demonstrate that E2-Explainer identifies critical communication subgraphs that preserve successful collaboration. These subgraphs can also be executed directly to prune redundant communication edges, substantially reducing communication costs while maintaining competitive task performance.",
+      "authors": [
+        "Junzhi Li",
+        "Peng He",
+        "Qirui Ji",
+        "Wei Wang",
+        "Lixiang Liu",
+        "Chuxiong Sun"
+      ],
+      "primary_category": "cs.MA",
+      "categories": [
+        "cs.MA",
+        "cs.AI"
+      ],
+      "published": "2026-08-13T08:03:02+00:00",
+      "link": "https://arxiv.org/pdf/2608.12921v2",
+      "tags": [
+        "keyword:multi-agent",
+        "query:multi-agent"
+      ],
+      "llm_score": 10.0,
+      "llm_evidence_en": "communication topology generation; interpretable topologies; causal inference",
+      "llm_evidence_cn": "通信拓扑生成与可解释分析，直接面向智能体通信图设计",
+      "llm_evidence": "通信拓扑生成与可解释分析，直接面向智能体通信图设计",
+      "canonical_evidence": "通信拓扑生成与可解释分析，直接面向智能体通信图设计",
+      "llm_tldr_en": "Proposes E2-Explainer, a model-agnostic framework to interpret communication topologies of LLM-based multi-agent systems. It uses causal inference to explain why communication edges are selected and identify critical subgraphs for successful collaboration, addressing the black-box limitation of existing topology generators.",
+      "llm_tldr_cn": "LLM多智能体系统性能高度依赖通信拓扑，但现有拓扑生成方法多为黑盒优化，难以解释边选择原因。本文提出E2-Explainer，一个模型无关框架，可为任意拓扑生成器生成通信拓扑的可解释说明，识别关键通信子图。结合因果推断，帮助理解高效协作的底层结构，为多智能体系统设计提供可解释的拓扑分析工具。",
+      "llm_tldr": "LLM多智能体系统性能高度依赖通信拓扑，但现有拓扑生成方法多为黑盒优化，难以解释边选择原因。本文提出E2-Explainer，一个模型无关框架，可为任意拓扑生成器生成通信拓扑的可解释说明，识别关键通信子图。结合因果推断，帮助理解高效协作的底层结构，为多智能体系统设计提供可解释的拓扑分析工具。",
+      "llm_tags": [
+        "query:multi-agent"
+      ],
+      "matched_query_tag": "query:multi-agent",
+      "matched_query_text": "how to design the communication graph for agents",
+      "matched_requirement_id": "req-4",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2608.20099v1",
+      "source": "arxiv",
+      "title": "Reward-Guided Autoregressive Graph Generation for Efficient Multi-Agent Communication Topology Design",
+      "abstract": "LLM-based Multi-Agent Systems (MAS) achieve strong performance on complex reasoning tasks by coordinating multiple agents, but at the cost of substantial token consumption. Recent work on automatic topology design, ARG-Designer, has reframed this problem as autoregressive graph generation. However, its training objective provides no explicit incentive for the model to generate sparse and efficient topologies. We address this limitation by introducing a Reward-Guided Autoregressive Graph Generation (RGA-Designer) inspired by Reinforcement Learning from Human Feedback (RLHF). We train a reward model that jointly captures task correctness and structural compactness, and then fine-tune the pretrained graph generator using the reward model as feedback. Our method preserves task accuracy at the level of ARG-Designer while reducing token consumption by an average of 20.5%.",
+      "authors": [
+        "Poomphob Suwannapichat",
+        "Boonyarit Changaival",
+        "Caesar Wu",
+        "Pascal Bouvry"
+      ],
+      "primary_category": "cs.MA",
+      "categories": [
+        "cs.MA",
+        "cs.CL",
+        "cs.LG"
+      ],
+      "published": "2026-08-20T14:32:01+00:00",
+      "link": "https://arxiv.org/pdf/2608.20099v1",
+      "tags": [
+        "keyword:multi-agent",
+        "query:multi-agent"
+      ],
+      "llm_score": 10.0,
+      "llm_evidence_en": "directly proposes reward-guided autoregressive graph generation for efficient multi-agent communication topology design",
+      "llm_evidence_cn": "直接提出奖励引导的自回归图生成方法用于高效多智能体通信拓扑设计",
+      "llm_evidence": "直接提出奖励引导的自回归图生成方法用于高效多智能体通信拓扑设计",
+      "canonical_evidence": "直接提出奖励引导的自回归图生成方法用于高效多智能体通信拓扑设计",
+      "llm_tldr_en": "RGA-Designer introduces reward-guided autoregressive graph generation for multi-agent communication topology design, training a reward model that captures task correctness and structural compactness to fine-tune the generator, producing sparser and more efficient topologies that reduce token consumption without compromising performance.",
+      "llm_tldr_cn": "针对LLM多智能体系统通信拓扑自动设计缺乏效率激励的问题，本文提出奖励引导的自回归图生成方法RGA-Designer。它结合任务正确性与结构紧凑性训练奖励模型，并对预训练图生成器进行微调，从而生成稀疏高效的通信拓扑。实验表明该方法在保持任务性能的同时显著降低token消耗，为多智能体系统的高效拓扑设计提供了新范式。",
+      "llm_tldr": "针对LLM多智能体系统通信拓扑自动设计缺乏效率激励的问题，本文提出奖励引导的自回归图生成方法RGA-Designer。它结合任务正确性与结构紧凑性训练奖励模型，并对预训练图生成器进行微调，从而生成稀疏高效的通信拓扑。实验表明该方法在保持任务性能的同时显著降低token消耗，为多智能体系统的高效拓扑设计提供了新范式。",
+      "llm_tags": [
+        "query:multi-agent"
+      ],
+      "matched_query_tag": "query:multi-agent",
+      "matched_query_text": "how to design the communication graph for agents",
+      "matched_requirement_id": "req-4",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2607.28679v1",
+      "source": "arxiv",
+      "title": "Multi-Agent Planning with Spatio-Temporal and Topological Constraints using STL-GO",
+      "abstract": "Multi-agent planning problems arise in a variety of engineering applications, such as multi-robot wildfire fighting and unmanned aerial inspection in factories. A particular challenge is the existence of spatio-temporal (i.e., when and/or where an agent should do what) and topological constraints (i.e., how agents should interact), as typically formalized via the notion of graphs. Over the last years, various frameworks have been proposed that can capture such constraints via spatio-temporal logics. We focus here on spatio-temporal logic with graph operators (STL-GO), a recent formalism that supports reasoning about multiple agents and their topologies, such as sensing, communication, and task topologies. In this paper, we consider the problem of planning multi-agent paths that satisfy constraints written in STL-GO. This problem is particularly challenging due to the need of encoding multiple, potentially time-varying graphs via the graph operators inherent to STL-GO. We present two encodings of this problem, one based on mixed-integer programming (MIP) and another based on satisfiability modulo theory (SMT), with soundness guarantees. We provide a unified interface for specifying agent constraints, their graph topologies, and the STL-GO specification, enabling seamless use of both methods and facilitating direct comparison between them. We evaluate both encodings on a multi-UAV search-and-rescue benchmark, ablating over team size and graph complexity, highlighting the expressiveness of the proposed encodings under dynamic multi- graph interactions.",
+      "authors": [
+        "Sheryl Paul",
+        "Vidisha Kudalkar",
+        "Anand Balakrishnan",
+        "Lars Lindemann",
+        "Alberto Speranzon",
+        "Jyotirmoy V. Deshmukh"
+      ],
+      "primary_category": "cs.AI",
+      "categories": [
+        "cs.AI",
+        "cs.MA"
+      ],
+      "published": "2026-07-29T16:12:58+00:00",
+      "link": "https://arxiv.org/pdf/2607.28679v1",
+      "tags": [
+        "keyword:multi-agent",
+        "query:multi-agent"
+      ],
+      "llm_score": 9.0,
+      "llm_evidence_en": "topological constraints over sensing, communication, task topologies; graph-based organization",
+      "llm_evidence_cn": "感知、通信、任务等拓扑约束的图形式化与多智能体交互组织",
+      "llm_evidence": "感知、通信、任务等拓扑约束的图形式化与多智能体交互组织",
+      "canonical_evidence": "感知、通信、任务等拓扑约束的图形式化与多智能体交互组织",
+      "llm_tldr_en": "Proposes a multi-agent planning approach using STL-GO, a spatio-temporal logic with graph operators that supports reasoning about sensing, communication, and task topologies. It addresses spatio-temporal and topological constraints in multi-robot applications and provides a formal framework for planning and verification.",
+      "llm_tldr_cn": "多智能体规划问题在工程应用中普遍存在，例如多机器人灭火与无人机巡检，时空与拓扑约束是其中的核心难点。本文聚焦于支持图运算符的时空逻辑STL-GO，该形式化能够对传感、通信、任务等多种智能体拓扑进行统一推理。论文探讨如何在满足这些约束的条件下生成可行的多智能体规划，为复杂多智能体系统的规划验证提供了新的形式化框架。",
+      "llm_tldr": "多智能体规划问题在工程应用中普遍存在，例如多机器人灭火与无人机巡检，时空与拓扑约束是其中的核心难点。本文聚焦于支持图运算符的时空逻辑STL-GO，该形式化能够对传感、通信、任务等多种智能体拓扑进行统一推理。论文探讨如何在满足这些约束的条件下生成可行的多智能体规划，为复杂多智能体系统的规划验证提供了新的形式化框架。",
+      "llm_tags": [
+        "query:multi-agent"
+      ],
+      "matched_query_tag": "query:multi-agent",
+      "matched_query_text": "graph-based organization of multi-agent interactions",
+      "matched_requirement_id": "req-5",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2608.05967v1",
+      "source": "arxiv",
+      "title": "M$^3$Prune: Hierarchical Collaborative Pruning for Efficient Multi-Modal Multi-Agent Retrieval-Augmented Generation",
+      "abstract": "Recent advances in multi-modal retrieval-augmented generation (mRAG), which augments multi-modal large language models (MLLMs) with external knowledge, have shown that collective intelligence from multiple agents can outperform a single model through effective communication. Despite their strong performance, existing multi-agent systems incur substantial token overhead and computational cost, posing challenges for large-scale deployment. To address these issues, we propose a Multi-Modal Multi-agent hierarchical communication graph PRUNING framework, termed M3Prune. M3Prune eliminates redundant communication edges both across and within modalities, improving the trade-off between task performance and token overhead. Specifically, M3Prune first performs intra-modal graph sparsification in the textual and visual modalities to identify task-critical communication links. It then constructs an inter-modal communication graph and sparsifies cross-modal connections while encouraging consistent cross-modal reasoning through a modality alignment score. Finally, it progressively prunes redundant edges to obtain an efficient hierarchical topology. Extensive experiments on both general-domain and domain-specific mRAG benchmarks show that M3Prune consistently outperforms single-agent and strong multi-agent mRAG systems while signifi- cantly improving token efficiency.",
+      "authors": [
+        "Taolin Zhang",
+        "Weizi shao",
+        "Zijie Zhou",
+        "Chen Chen",
+        "Daiyang Yu",
+        "Tingyuan Hu",
+        "Chengyu Wang",
+        "Xiaofeng He"
+      ],
+      "primary_category": "cs.MM",
+      "categories": [
+        "cs.MM"
+      ],
+      "published": "2026-08-06T12:44:35+00:00",
+      "link": "https://arxiv.org/pdf/2608.05967v1",
+      "tags": [
+        "keyword:multi-agent",
+        "query:multi-agent"
+      ],
+      "llm_score": 9.0,
+      "llm_evidence_en": "Proposes hierarchical communication graph pruning to eliminate redundant edges across and within modalities, directly designing the agent communication graph.",
+      "llm_evidence_cn": "提出层次化通信图剪枝，跨模态和模态内删除冗余通信边，直接设计智能体通信图。",
+      "llm_evidence": "提出层次化通信图剪枝，跨模态和模态内删除冗余通信边，直接设计智能体通信图。",
+      "canonical_evidence": "提出层次化通信图剪枝，跨模态和模态内删除冗余通信边，直接设计智能体通信图。",
+      "llm_tldr_en": "Presents M3Prune, a hierarchical pruning framework that removes redundant communication edges in multi-modal multi-agent systems, improving token efficiency while retaining task performance.",
+      "llm_tldr_cn": "针对多模态多智能体检索增强生成系统 token 开销大的问题，本文提出 M3Prune 层次化协同剪枝框架。通过跨模态与模态内两层剪枝，消除冗余通信边，在保持任务性能的同时显著降低通信 token 成本。实验证明剪枝后的通信图能维持集体智能，并可支撑更大规模部署。其层次化设计兼顾跨模态与模态内冗余结构，为多智能体通信图优化提供了新思路。",
+      "llm_tldr": "针对多模态多智能体检索增强生成系统 token 开销大的问题，本文提出 M3Prune 层次化协同剪枝框架。通过跨模态与模态内两层剪枝，消除冗余通信边，在保持任务性能的同时显著降低通信 token 成本。实验证明剪枝后的通信图能维持集体智能，并可支撑更大规模部署。其层次化设计兼顾跨模态与模态内冗余结构，为多智能体通信图优化提供了新思路。",
+      "llm_tags": [
+        "query:multi-agent"
+      ],
+      "matched_query_tag": "query:multi-agent",
+      "matched_query_text": "how to design the communication graph for agents",
+      "matched_requirement_id": "req-4",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2608.07196v1",
+      "source": "arxiv",
+      "title": "EMAS: Stabilizing Multi-Agent System Evolution through Evidence-Guided Revision",
+      "abstract": "Many methods for automated multi-agent system design optimize prompts and topologies during an initial design stage and then deploy the resulting system unchanged on subsequent samples. Experience from these samples is rarely consolidated into reusable system updates, while accuracy-oriented designs may incur high token costs. We introduce EMAS (Evolving Multi-Agent System), which uses this experience to revise MAS topology and prompts without updating LLM parameters, either to improve accuracy or to reduce cost. EMAS converts traces into structured diagnoses that specify a revision operation and target. It generates a candidate revision only when the same diagnosis recurs across samples and applies it only if paired validation against the current MAS meets the corresponding acceptance criterion. Across four benchmarks and two LLMs, EMAS attains the highest task-weighted overall accuracy for both backbones and is best or tied in six of eight model--benchmark settings. Within two evolution epochs, EMAS achieves relative gains of 6.30% and 20.10% in task-weighted accuracy on Kimi-K2-6 and Qwen3.6-27B, respectively. On MBPP with Qwen3.6-27B, EMAS raises accuracy from 55.09% to 89.12% while reducing token use per task by 62.2%. These results show that EMAS can turn experience from new samples into reusable updates to MAS topology and prompts.",
+      "authors": [
+        "Chao Fei",
+        "Qingyi Si",
+        "Kaihua Liang",
+        "Yanghua Xiao",
+        "Panos Kalnis",
+        "Hongcheng Guo"
+      ],
+      "primary_category": "cs.AI",
+      "categories": [
+        "cs.AI"
+      ],
+      "published": "2026-08-07T13:11:42+00:00",
+      "link": "https://arxiv.org/pdf/2608.07196v1",
+      "tags": [
+        "keyword:multi-agent",
+        "query:multi-agent"
+      ],
+      "llm_score": 9.0,
+      "llm_evidence_en": "Revises multi-agent system topology and prompts during evolution, explicitly a method for designing the topology of MAS.",
+      "llm_evidence_cn": "在演化过程中根据证据修订多智能体系统的拓扑与提示词，明确是设计MAS拓扑的方法。",
+      "llm_evidence": "在演化过程中根据证据修订多智能体系统的拓扑与提示词，明确是设计MAS拓扑的方法。",
+      "canonical_evidence": "在演化过程中根据证据修订多智能体系统的拓扑与提示词，明确是设计MAS拓扑的方法。",
+      "llm_tldr_en": "Introduces EMAS, an evolving multi-agent system that converts traces into structured diagnoses and revises MAS topology and prompts to improve accuracy or reduce cost, stabilizing evolution through validation.",
+      "llm_tldr_cn": "针对自动化多智能体系统设计只优化初始阶段而未利用运行经验的问题，EMAS提出证据引导的修订机制。它将运行轨迹转化为结构化诊断，仅当相同诊断反复出现时生成候选修订，并通过配对验证决定是否应用。该方法可在不更新LLM参数的情况下改进MAS拓扑与提示词，从而在提高准确率或降低成本的同时稳定系统演化。",
+      "llm_tldr": "针对自动化多智能体系统设计只优化初始阶段而未利用运行经验的问题，EMAS提出证据引导的修订机制。它将运行轨迹转化为结构化诊断，仅当相同诊断反复出现时生成候选修订，并通过配对验证决定是否应用。该方法可在不更新LLM参数的情况下改进MAS拓扑与提示词，从而在提高准确率或降低成本的同时稳定系统演化。",
+      "llm_tags": [
+        "query:multi-agent"
+      ],
+      "matched_query_tag": "query:multi-agent",
+      "matched_query_text": "How to design the topology of a multi agent system",
+      "matched_requirement_id": "req-7",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2607.23678v1",
+      "source": "arxiv",
+      "title": "Focus Is All You Need: Adaptive Goal-aware Attention Orchestration for Multi-Agent Graph Systems",
+      "abstract": "Large language models (LLMs) enable autonomous agents for reasoning, planning, and tool use. Recent systems increasingly organize these agents as graphs of specialized, interconnected nodes. Although graph-based orchestration supports flexible decomposition and coordination, it creates a key challenge: \\textbf{attention allocation}. As workflows grow, existing approaches often execute graph components uniformly, wasting resources on irrelevant or low-impact tasks. We introduce \\textbf{Attention Orchestration}, a paradigm that extends Transformer-style attention from token representations to workflow-level agent coordination. Our framework, \\textbf{Adaptive Goal-aware Attention Orchestration (AGAO)}, dynamically estimates agent importance based on user objectives, graph dependencies, and computational constraints. AGAO combines three components: (1) goal-aware attention, measuring semantic relevance between user goals and agent capabilities; (2) topology-aware attention, modeling structural dependencies in agent graphs; and (3) resource-aware attention, allocating budgets and execution priorities across heterogeneous agents. Together, these mechanisms transform static agent graphs into adaptive systems that focus computation on goal-critical reasoning paths. Experiments across diverse multi-agent workloads show that AGAO improves task effectiveness while reducing unnecessary computation, latency, and token consumption compared with existing graph-based execution strategies. Our work establishes \\textbf{Attention Engineering} as a direction for scalable, intelligent multi-agent systems. Code: https://github.com/MingzhouFan97/AGAO.",
+      "authors": [
+        "Mingzhou Fan",
+        "Siyuan Xu",
+        "Mingxuan Yuan"
+      ],
+      "primary_category": "cs.AI",
+      "categories": [
+        "cs.AI"
+      ],
+      "published": "2026-07-26T14:23:33+00:00",
+      "link": "https://arxiv.org/pdf/2607.23678v1",
+      "tags": [
+        "keyword:multi-agent",
+        "query:multi-agent"
+      ],
+      "llm_score": 8.0,
+      "llm_evidence_en": "graph-based orchestration; adaptive attention; multi-agent graph systems",
+      "llm_evidence_cn": "多智能体图系统的图结构编排与自适应注意力分配",
+      "llm_evidence": "多智能体图系统的图结构编排与自适应注意力分配",
+      "canonical_evidence": "多智能体图系统的图结构编排与自适应注意力分配",
+      "llm_tldr_en": "Proposes AGAO, an adaptive goal-aware attention orchestration framework for multi-agent graph systems. It extends Transformer-style attention from token representations to workflow-level agent coordination, dynamically estimating agent relevance and focusing computation on high-impact tasks, improving efficiency of graph-based orchestration.",
+      "llm_tldr_cn": "基于图的多智能体系统在灵活分解与协调的同时带来注意力分配挑战，现有方法往往均匀执行图组件，浪费资源。本文提出注意力编排范式AGAO，将Transformer式注意力从词元扩展到工作流级智能体协调。通过动态估计智能体相关性，AGAO将计算聚焦于关键任务，提升图系统效率。",
+      "llm_tldr": "基于图的多智能体系统在灵活分解与协调的同时带来注意力分配挑战，现有方法往往均匀执行图组件，浪费资源。本文提出注意力编排范式AGAO，将Transformer式注意力从词元扩展到工作流级智能体协调。通过动态估计智能体相关性，AGAO将计算聚焦于关键任务，提升图系统效率。",
+      "llm_tags": [
+        "query:multi-agent"
+      ],
+      "matched_query_tag": "query:multi-agent",
+      "matched_query_text": "graph-based organization of multi-agent interactions",
+      "matched_requirement_id": "req-5",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2607.26212v1",
+      "source": "arxiv",
+      "title": "Multi-Agent Debate Strategies: Survey, Taxonomy, and Challenges",
+      "abstract": "Multi-Agent Debate (MAD) is a promising paradigm for improving the accuracy and robustness of Large Language Model (LLM)-based agentic systems. It enables multiple agents to exchange arguments, critique each other's outputs, and iteratively converge towards a solution. However, research remains fragmented, with inconsistent terminology and no rigorous synthesis of MAD design dimensions. We present a systematic literature review characterizing 141 primary studies on MAD. We derive a three-dimensional taxonomy covering debate participants, the interaction mechanisms structuring the exchange, and the agreement protocols governing debate resolution, supported by formal notations to render MAD configurations. Our analysis reveals that the field has implicitly converged on a narrow design pattern - static, fully connected topologies, verbatim exchange, short-term memory and voting resolution strategies - adopted by convention rather than systematic comparison, while promising alternatives remain marginal. Because any MAD setting reflects roughly a dozen interacting design decisions, cross-study comparison is unreliable when these are left implicit. We position the taxonomy as a descriptive map of the research landscape, a framework for controlled benchmarking, and potentially as a schema for machine-readable MAD specifications. As future work, we propose formalizing it into an executable specification, enabling cost-aware benchmarking and automated tuning of debate configurations.",
+      "authors": [
+        "Quim Motger",
+        "Marc Oriol",
+        "Jordi Marco",
+        "Xavier Franch"
+      ],
+      "primary_category": "cs.SE",
+      "categories": [
+        "cs.SE",
+        "cs.AI"
+      ],
+      "published": "2026-07-28T19:26:50+00:00",
+      "link": "https://arxiv.org/pdf/2607.26212v1",
+      "tags": [
+        "keyword:multi-agent",
+        "query:multi-agent"
+      ],
+      "llm_score": 8.0,
+      "llm_evidence_en": "systematic taxonomy of interaction mechanisms in multi-agent debate, covering participants, exchange structure, and agreement protocols",
+      "llm_evidence_cn": "对多智能体辩论中交互机制的系统分类，涵盖参与者、交流结构和协议",
+      "llm_evidence": "对多智能体辩论中交互机制的系统分类，涵盖参与者、交流结构和协议",
+      "canonical_evidence": "对多智能体辩论中交互机制的系统分类，涵盖参与者、交流结构和协议",
+      "llm_tldr_en": "A systematic literature review of 141 studies on multi-agent debate, deriving a three-dimensional taxonomy of debate participants, interaction mechanisms, and agreement protocols to synthesize MAD design dimensions.",
+      "llm_tldr_cn": "多智能体辩论是提升大模型智能体系统准确性和鲁棒性的重要范式，它让多个智能体交换论证、互相批判并迭代收敛到解决方案。然而当前研究术语混乱，缺乏对辩论设计维度的严格综合。本综述分析了141项研究，提出包含辩论参与者、交互机制和协议的三维分类体系，并辅以形式化符号以描述各种配置。该工作揭示了领域内隐式收敛的设计共识，为多智能体交互结构的设计与研究提供了统一参考框架。",
+      "llm_tldr": "多智能体辩论是提升大模型智能体系统准确性和鲁棒性的重要范式，它让多个智能体交换论证、互相批判并迭代收敛到解决方案。然而当前研究术语混乱，缺乏对辩论设计维度的严格综合。本综述分析了141项研究，提出包含辩论参与者、交互机制和协议的三维分类体系，并辅以形式化符号以描述各种配置。该工作揭示了领域内隐式收敛的设计共识，为多智能体交互结构的设计与研究提供了统一参考框架。",
+      "llm_tags": [
+        "query:multi-agent"
+      ],
+      "matched_query_tag": "query:multi-agent",
+      "matched_query_text": "approaches for designing the interaction structure of multi-agent systems",
+      "matched_requirement_id": "req-3",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2607.27942v1",
+      "source": "arxiv",
+      "title": "Scaling LLM-Driven Multi-Agent Systems: Design Principles and Architectural Scalability Analysis",
+      "abstract": "LLM-based multi-agent systems have the potential to enable collective intelligence and scale toward solving highly complex tasks through coordinated ensembles of specialized agents. However, despite their theoretical potential, the architectural design space remains largely non-systematized and lacks broadly established design principles. Furthermore, the scalability characteristics of such systems are only partially understood so far. This paper makes two contributions. We first distill four design principles for scalable MAS architectures from a structured analysis of prior work: simplicity, elastic feedback, sequential workflows with optional loops, and summary-based communication. We operationalize these principles in a reference architecture whose topology is formalized as a constrained directed workflow graph, and we evaluate four configurations of increasing complexity on a standardized benchmark of terminal-based system engineering tasks using two LLMs of differing capability. Our findings show that scaling yields measurable accuracy improvements with approximately linear cost growth, but only when the underlying LLM exceeds a minimum capability threshold. Performance peaks at intermediate complexity, then degrades due to timeouts and evaluation limitations. In addition, persistent consistency issues emerge as a central challenge across all scaling levels. These results provide concrete design guidance for practitioners and highlight consistency and evaluation standardization as key targets for future research.",
+      "authors": [
+        "Linus Sander",
+        "Fengjunjie Pan",
+        "Vahid Zolfaghari",
+        "Andre Schamschurko",
+        "Nenad Petrovic",
+        "Alois Knoll"
+      ],
+      "primary_category": "cs.MA",
+      "categories": [
+        "cs.MA"
+      ],
+      "published": "2026-07-30T09:50:04+00:00",
+      "link": "https://arxiv.org/pdf/2607.27942v1",
+      "tags": [
+        "keyword:multi-agent",
+        "query:multi-agent"
+      ],
+      "llm_score": 8.0,
+      "llm_evidence_en": "Distills four design principles for scalable LLM-based multi-agent architectures, directly addressing how to design the interaction structure.",
+      "llm_evidence_cn": "从现有工作中提炼出可扩展多智能体架构的四条设计原则，直接面向交互结构设计。",
+      "llm_evidence": "从现有工作中提炼出可扩展多智能体架构的四条设计原则，直接面向交互结构设计。",
+      "canonical_evidence": "从现有工作中提炼出可扩展多智能体架构的四条设计原则，直接面向交互结构设计。",
+      "llm_tldr_en": "Distills four design principles for scalable LLM-driven MAS architectures—simplicity, elastic feedback, sequential workflows with optional loops, and summary-based communication—and analyzes their scalability.",
+      "llm_tldr_cn": "针对LLM驱动的多智能体系统架构设计缺乏系统化原则的问题，本文从结构化分析中提炼出四条可扩展设计原则：简洁性、弹性反馈、带可选循环的串行工作流、基于摘要的通信。通过实现和可扩展性分析，说明这些原则能指导构建大规模MAS。该工作为交互结构与通信方式的设计提供了实操性指导。",
+      "llm_tldr": "针对LLM驱动的多智能体系统架构设计缺乏系统化原则的问题，本文从结构化分析中提炼出四条可扩展设计原则：简洁性、弹性反馈、带可选循环的串行工作流、基于摘要的通信。通过实现和可扩展性分析，说明这些原则能指导构建大规模MAS。该工作为交互结构与通信方式的设计提供了实操性指导。",
+      "llm_tags": [
+        "query:multi-agent"
+      ],
+      "matched_query_tag": "query:multi-agent",
+      "matched_query_text": "approaches for designing the interaction structure of multi-agent systems",
+      "matched_requirement_id": "req-3",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2608.03833v1",
+      "source": "arxiv",
+      "title": "History Matters: Meta-policy Delegation with Heterogeneous Multi-agent Reinforcement Learning",
+      "abstract": "AI agents are expected to play an increasingly important role in future decision-making systems. In this paper, we consider collaborative systems composed of heterogeneous multi-agent systems (MAS), where their members have different capabilities and operating costs. We study how agents can delegate tasks to one another so that certain research tasks can be completed effectively under resource-constrained scenarios. We first develop a multi-agent reinforcement learning-based (MARL) delegation training that enables agents to make sequential delegation decisions while minimizing the total execution cost. We then extend this approach to MARL with prescribed delegation topologies. Furthermore, we introduce two new frameworks for collaboration and delegation in multi-agent systems. The first framework proposes that an agent's policy depends not only on the current state of the underlying Markov decision process but also on the interaction history, including previous joint actions. This history-dependent formulation can improve coordination even in fully observable environments, where conventional MARL methods typically restrict policies to depend only on the current state. The second framework proposes a novel, potentially multi-dimensional monetary mechanism to facilitate the collaboration and delegation for MAS.",
+      "authors": [
+        "Ziqing Lu",
+        "Avinash Reddy Mudireddy",
+        "Sarra Alqahtani",
+        "Weiyu Xu"
+      ],
+      "primary_category": "cs.MA",
+      "categories": [
+        "cs.MA"
+      ],
+      "published": "2026-08-04T15:39:40+00:00",
+      "link": "https://arxiv.org/pdf/2608.03833v1",
+      "tags": [
+        "keyword:multi-agent",
+        "query:multi-agent"
+      ],
+      "llm_score": 8.0,
+      "llm_evidence_en": "prescribed delegation topologies and interaction structure in heterogeneous MARL",
+      "llm_evidence_cn": "异构多智能体强化学习中的预设委托拓扑与交互结构",
+      "llm_evidence": "异构多智能体强化学习中的预设委托拓扑与交互结构",
+      "canonical_evidence": "异构多智能体强化学习中的预设委托拓扑与交互结构",
+      "llm_tldr_en": "This paper develops MARL-based delegation training for heterogeneous agents to minimize costs, extended to prescribed delegation topologies. Topology-aware delegation improves collaborative efficiency under resource constraints.",
+      "llm_tldr_cn": "异构多智能体系统中各成员能力和成本不同，如何在资源受限下进行任务委托是一个关键问题。本文提出基于多智能体强化学习的委托训练方法，让智能体顺序决策并以最小总成本完成任务，同时支持预设委托拓扑。实验验证了该方法在资源受限场景中的有效性，为多智能体拓扑相关研究提供了新视角。",
+      "llm_tldr": "异构多智能体系统中各成员能力和成本不同，如何在资源受限下进行任务委托是一个关键问题。本文提出基于多智能体强化学习的委托训练方法，让智能体顺序决策并以最小总成本完成任务，同时支持预设委托拓扑。实验验证了该方法在资源受限场景中的有效性，为多智能体拓扑相关研究提供了新视角。",
+      "llm_tags": [
+        "query:multi-agent"
+      ],
+      "matched_query_tag": "query:multi-agent",
+      "matched_query_text": "What are the common methods for constructing agent communication topologies",
+      "matched_requirement_id": "req-8",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2608.07810v1",
+      "source": "arxiv",
+      "title": "Mobility, Memory, and Network Structure in Agent-Based Models of Convention Tipping and Convergence",
+      "abstract": "Tipping-point dynamics describe the critical conditions under which a committed minority drives a population to abandon an established convention in favor of a new one. We present a transparent agent-based model of this process, in which agents hold one of two behavioral states and a mobile committed minority attempts to overturn the incumbent convention. Our goal was to examine how localized mobility, bounded agent memory, and network topology jointly influence the tipping threshold. Using a custom agent-based simulation framework, we found that in many configurations, tipping becomes effectively inevitable: given sufficient time, the population always converges to the minority state. This observation motivated a complementary analysis focused on the pace of convergence rather than its feasibility. We introduce a unified predictive model that accurately estimates how structural and behavioral parameters determine the time required for complete adoption, showing that mobility is the dominant accelerator while memory and connectivity modulate convergence in systematic ways. Together, these results extend classical tipping-point research by linking structural and behavioral factors not only to the likelihood of convention change but also to the timescale on which it unfolds. While we frame the model in terms of convention-like binary behavioral adoption, the same mechanisms bear on norm change and other contagion-like social processes.",
+      "authors": [
+        "Joe Shymanski",
+        "Garrick Springer",
+        "Sandip Sen"
+      ],
+      "primary_category": "cs.MA",
+      "categories": [
+        "cs.MA",
+        "cs.SI"
+      ],
+      "published": "2026-08-07T23:17:59+00:00",
+      "link": "https://arxiv.org/pdf/2608.07810v1",
+      "tags": [
+        "keyword:multi-agent",
+        "query:multi-agent"
+      ],
+      "llm_score": 8.0,
+      "llm_evidence_en": "examines how network topology and connectivity patterns influence tipping thresholds in agent-based models",
+      "llm_evidence_cn": "研究网络拓扑与连接模式如何影响基于智能体模型的临界转变阈值",
+      "llm_evidence": "研究网络拓扑与连接模式如何影响基于智能体模型的临界转变阈值",
+      "canonical_evidence": "研究网络拓扑与连接模式如何影响基于智能体模型的临界转变阈值",
+      "llm_tldr_en": "This paper studies how localized mobility, bounded memory, and network topology jointly affect convention tipping thresholds in agent-based models, finding that in many configurations tipping becomes inevitable and the population converges to the minority state, highlighting network structure's role in collective dynamics.",
+      "llm_tldr_cn": "本文针对惯例转变的临界动力问题，提出一个透明可复现的智能体仿真模型，考察局部移动性、有限记忆和网络拓扑对转变阈值的影响。通过系统实验发现，在多种配置下转变趋近不可避免，群体总会收敛至少数派状态。该结果说明网络结构与个体约束共同决定了多智能体群体的集体收敛行为，为理解拓扑层面的群体动力学提供了基础。",
+      "llm_tldr": "本文针对惯例转变的临界动力问题，提出一个透明可复现的智能体仿真模型，考察局部移动性、有限记忆和网络拓扑对转变阈值的影响。通过系统实验发现，在多种配置下转变趋近不可避免，群体总会收敛至少数派状态。该结果说明网络结构与个体约束共同决定了多智能体群体的集体收敛行为，为理解拓扑层面的群体动力学提供了基础。",
+      "llm_tags": [
+        "query:multi-agent"
+      ],
+      "matched_query_tag": "query:multi-agent",
+      "matched_query_text": "the network layout and connectivity patterns in multi-agent systems",
+      "matched_requirement_id": "req-2",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2608.13616v1",
+      "source": "arxiv",
+      "title": "Adjacency-Based Spectral Proxy Control of Mobile Communication Agents",
+      "abstract": "We consider a heterogeneous mobile-agent network composed of uncontrolled task agents and controllable communication agents. The objective is to reposition communication agents online as task agents move. Since throughput-based objectives are generally unsuitable for real-time control, spectral graph metrics such as algebraic connectivity are commonly adopted as surrogate objectives. However, controlling algebraic connectivity relies on the eigenvector corresponding to the second-smallest eigenvalue of a graph's Laplacian matrix (i.e., the Fiedler vector), whose distributed estimation requires an unbounded number of communication rounds to converge.   In this work, we identify a structural decomposition of this Fiedler-gradient controller into a local interaction rule and a graph embedding component, suggesting the use of alternative embeddings that are easier to estimate distributively than the Fiedler vector. As a particular instance, we propose A-Fiedler, which replaces the Fiedler embedding with the dominant eigenvector of the adjacency matrix, commonly used as a graph embedding of nodes into a latent geometry. This representation is more naturally suited for distributed implementation under local communication constraints.   We evaluate A-Fiedler against the classical Fiedler-gradient controller. Results show comparable network performance in the absence of communication constraints and improved robustness under distributed estimation. For instance, under the same number of communication rounds, the Fielder-gradient may even converge to disconnected configurations whereas our proposition maintains performance. We believe our contribution provides a simpler path toward distributed network control.",
+      "authors": [
+        "Mariana del Castillo",
+        "Federico Larroca"
+      ],
+      "primary_category": "cs.RO",
+      "categories": [
+        "cs.RO",
+        "cs.LG",
+        "cs.MA",
+        "eess.SY"
+      ],
+      "published": "2026-08-12T20:35:02+00:00",
+      "link": "https://arxiv.org/pdf/2608.13616v1",
+      "tags": [
+        "keyword:multi-agent",
+        "query:multi-agent"
+      ],
+      "llm_score": 8.0,
+      "llm_evidence_en": "spectral graph metrics for connectivity control in mobile multi-agent network layout",
+      "llm_evidence_cn": "谱图指标用于移动多智能体网络布局的连通性控制",
+      "llm_evidence": "谱图指标用于移动多智能体网络布局的连通性控制",
+      "canonical_evidence": "谱图指标用于移动多智能体网络布局的连通性控制",
+      "llm_tldr_en": "To maintain connectivity in mobile-agent networks, this work uses spectral metrics such as algebraic connectivity as proxy and decomposes the Fiedler-gradient controller into an adjacency-based form for real-time repositioning.",
+      "llm_tldr_cn": "异构移动智能体网络需要在线调整通信节点的位置以维持连通性，而代数连通度等谱图指标被用作实时控制的代理目标。本文识别出Fiedler梯度控制器的结构分解，提出基于邻接的谱代理控制方法，避免了传统分布式估计所需的无限通信轮次。该方法可有效支撑移动通信智能体的连通性布局控制。",
+      "llm_tldr": "异构移动智能体网络需要在线调整通信节点的位置以维持连通性，而代数连通度等谱图指标被用作实时控制的代理目标。本文识别出Fiedler梯度控制器的结构分解，提出基于邻接的谱代理控制方法，避免了传统分布式估计所需的无限通信轮次。该方法可有效支撑移动通信智能体的连通性布局控制。",
+      "llm_tags": [
+        "query:multi-agent"
+      ],
+      "matched_query_tag": "query:multi-agent",
+      "matched_query_text": "the network layout and connectivity patterns in multi-agent systems",
+      "matched_requirement_id": "req-2",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2608.15133v1",
+      "source": "arxiv",
+      "title": "Consensusability of Continuous-Time Multi-Agent Systems With Unbounded Heterogeneous Constant Delays: A Signed Laplacian Perspective",
+      "abstract": "The consensus of continuous-time multi-agent systems with unbounded and heterogeneous constant delays is investigated by combining frequency-domain analysis and algebraic graph theory. Several types of signed Laplacians are constructed to characterize consensusability under delays. The core results are established based on the defined delay-embedded signed Laplacian, where a small-delay link creates a cooperative interaction and a possibly unbounded large-delay link creates an antagonistic interaction between the agents. The dividing line between small and large delays is given by $τ_{ij}=π/2λ_{\\max}(\\bm{L}_0)$, where $λ_{\\max}(\\bm{L}_0)$ refers to the maximum eigenvalue of the conventional graph Laplacian. It is proved that the consensusability is preserved if the delay-embedded signed Laplacian is positive semi-definite with a simple zero eigenvalue. Moreover, we derived some consensus conditions in terms of the extended effective resistance which measures the overall coupling between two sets of agents. The obtained results provide new insights into the mechanism of delayed consensus from the interplay between the small-delay-induced cooperativeness and large-delay-induced antagonism in the underlying network topology.",
+      "authors": [
+        "Yue Song",
+        "Mengqi Xue",
+        "Jiazuo Hou",
+        "Yuxi Lu",
+        "Qi Liu"
+      ],
+      "primary_category": "math.OC",
+      "categories": [
+        "math.OC",
+        "eess.SY",
+        "math.DS"
+      ],
+      "published": "2026-08-15T09:11:37+00:00",
+      "link": "https://arxiv.org/pdf/2608.15133v1",
+      "tags": [
+        "keyword:multi-agent",
+        "query:multi-agent"
+      ],
+      "llm_score": 8.0,
+      "llm_evidence_en": "analyzes consensusability under delays using signed Laplacians to characterize connectivity patterns",
+      "llm_evidence_cn": "利用符号拉普拉斯矩阵刻画时延下多智能体系统的连接模式与一致性",
+      "llm_evidence": "利用符号拉普拉斯矩阵刻画时延下多智能体系统的连接模式与一致性",
+      "canonical_evidence": "利用符号拉普拉斯矩阵刻画时延下多智能体系统的连接模式与一致性",
+      "llm_tldr_en": "Investigates consensus of continuous-time multi-agent systems with unbounded heterogeneous delays via a signed Laplacian perspective, characterizing small-delay cooperative and large-delay antagonistic interactions.",
+      "llm_tldr_cn": "多智能体系统的一致性与通信拓扑密切相关，但无界异构时延会破坏一致性条件。本文从符号拉普拉斯矩阵角度出发，结合频域分析与代数图论，构造时延嵌入的符号拉普拉斯矩阵，刻画小延迟合作与大延迟对抗的交互机制，并给出大小延迟的临界判据。这一结果揭示了时延对拓扑连接模式的影响，为设计鲁棒的通信拓扑提供了理论基础。",
+      "llm_tldr": "多智能体系统的一致性与通信拓扑密切相关，但无界异构时延会破坏一致性条件。本文从符号拉普拉斯矩阵角度出发，结合频域分析与代数图论，构造时延嵌入的符号拉普拉斯矩阵，刻画小延迟合作与大延迟对抗的交互机制，并给出大小延迟的临界判据。这一结果揭示了时延对拓扑连接模式的影响，为设计鲁棒的通信拓扑提供了理论基础。",
+      "llm_tags": [
+        "query:multi-agent"
+      ],
+      "matched_query_tag": "query:multi-agent",
+      "matched_query_text": "the network layout and connectivity patterns in multi-agent systems",
+      "matched_requirement_id": "req-2",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2608.15519v1",
+      "source": "arxiv",
+      "title": "Topological collapse of higher-order interactions bottlenecks collective intelligence in AI agent societies",
+      "abstract": "Current paradigms in artificial intelligence concentrate on scaling the capabilities of individual models, yet the collective behaviour of interacting agents is shaped by the topology of their interactions rather than by individual cognition alone. Here we show that the binding constraint on collective behaviour in agent societies is topological. Analysing a macroscopic AI social platform of 1.6 million registered agents (174,458 active in the interaction record), we identify a phenomenon we term topological collapse: extreme hub dominance degrades higher-order group interactions into star-shaped broadcast patterns, suppressing the cohesive structure that discontinuous social contagion requires. We formalise this constraint through a Hyperedge Irreducibility Score (HIS) and an analytical topology amplification factor ($Φ$). Across 22 frontier language models from ten vendors, 1,040 controlled simulations and empirical human networks, the bottleneck proves model-agnostic: under a fixed interaction protocol the topological indicators are invariant across models (cross-model HIS s.d. = 0.000 in the pairwise condition) even as behavioural outcomes diverge widely. These findings reframe the design of artificial societies around the geometry of interaction rather than the optimisation of individual cognition, with implications for AI sociology, algorithmic group dynamics, hybrid human-AI ecosystems and collective alignment. The code is publicly available at https://github.com/Darwin-Agent/topological-collapse-agent-societies.",
+      "authors": [
+        "Shuo Lu",
+        "Weicheng Meng",
+        "Aijing Yu",
+        "Kun Shao",
+        "Jian Luan",
+        "Ran He",
+        "Jian Liang"
+      ],
+      "primary_category": "cs.SI",
+      "categories": [
+        "cs.SI"
+      ],
+      "published": "2026-08-16T04:15:22+00:00",
+      "link": "https://arxiv.org/pdf/2608.15519v1",
+      "tags": [
+        "keyword:multi-agent",
+        "query:multi-agent"
+      ],
+      "llm_score": 8.0,
+      "llm_evidence_en": "Identifies topological collapse in AI agent societies where hub dominance turns higher-order interactions into star-shaped broadcast patterns, directly linking topology to collective intelligence.",
+      "llm_evidence_cn": "发现AI智能体社会中的拓扑坍塌现象：中心节点主导使高阶交互退化为星型广播模式，直接影响集体智能。",
+      "llm_evidence": "发现AI智能体社会中的拓扑坍塌现象：中心节点主导使高阶交互退化为星型广播模式，直接影响集体智能。",
+      "canonical_evidence": "发现AI智能体社会中的拓扑坍塌现象：中心节点主导使高阶交互退化为星型广播模式，直接影响集体智能。",
+      "llm_tldr_en": "Analyzes 1.6 million registered AI agents and shows that extreme hub dominance degrades higher-order interactions into star-shaped patterns, bottlenecking collective intelligence. Introduces formal model of topological collapse.",
+      "llm_tldr_cn": "面向大规模AI智能体社会（160万注册智能体）的实证分析发现，极端中心主导会使高阶群组交互退化为星型广播，破坏不连续社会传染所需的凝聚结构，形成“拓扑坍塌”。作者形式化了该现象并验证其压制集体智能的机制，提示在部署多智能体系统时必须关注交互拓扑的结构约束。",
+      "llm_tldr": "面向大规模AI智能体社会（160万注册智能体）的实证分析发现，极端中心主导会使高阶群组交互退化为星型广播，破坏不连续社会传染所需的凝聚结构，形成“拓扑坍塌”。作者形式化了该现象并验证其压制集体智能的机制，提示在部署多智能体系统时必须关注交互拓扑的结构约束。",
+      "llm_tags": [
+        "query:multi-agent"
+      ],
+      "matched_query_tag": "query:multi-agent",
+      "matched_query_text": "topological arrangement enabling agent collaboration",
+      "matched_requirement_id": "req-6",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2608.17282v1",
+      "source": "arxiv",
+      "title": "DeAR: Decentralized Agentic Reasoning via Capability Grounding and Collaborative Thought Navigation",
+      "abstract": "Existing agentic reasoning systems typically rely on centralized protocols. This design introduces routing bottlenecks and static role allocations that often fail when handling complex multimodal queries. We propose DeAR (Decentralized Agentic Reasoning), a framework that shifts from central control to autonomous peer-to-peer collaboration. DeAR is built on three mechanisms: (1) decentralized capability grounding for query-dependent agent specialization, (2) thought map navigation for targeted peer interactions, and (3) topology update for adaptive error correction. Evaluations across 9 diverse multimodal reasoning and text-based QA benchmarks indicate that DeAR consistently outperforms recent baseline methods, validating that decentralized and adaptive collaboration among agents enhances accuracy in knowledge-intensive reasoning tasks. The source code will be available at https://open_upon_acceptance.",
+      "authors": [
+        "Xing Wei",
+        "Changmeng Zheng",
+        "XiaoYong Wei",
+        "Xiufen Ye",
+        "Qing Li"
+      ],
+      "primary_category": "cs.AI",
+      "categories": [
+        "cs.AI"
+      ],
+      "published": "2026-08-18T02:26:13+00:00",
+      "link": "https://arxiv.org/pdf/2608.17282v1",
+      "tags": [
+        "keyword:multi-agent",
+        "query:multi-agent"
+      ],
+      "llm_score": 8.0,
+      "llm_evidence_en": "decentralized peer-to-peer collaboration; topology update; interaction structure design",
+      "llm_evidence_cn": "去中心化点对点协作与拓扑更新机制，属于交互结构设计方法",
+      "llm_evidence": "去中心化点对点协作与拓扑更新机制，属于交互结构设计方法",
+      "canonical_evidence": "去中心化点对点协作与拓扑更新机制，属于交互结构设计方法",
+      "llm_tldr_en": "Introduces DeAR, a decentralized agentic reasoning framework using capability grounding, thought map navigation, and topology update. It shifts from central control to autonomous peer-to-peer collaboration, improving routing bottlenecks and static role allocation; consistently outperforms baselines across 9 multimodal and text QA benchmarks.",
+      "llm_tldr_cn": "现有智能体推理系统依赖集中协议，存在路由瓶颈与静态角色分配问题。本文提出DeAR框架，转向自主点对点协作，包含能力锚定、思维图导航和拓扑更新三种机制。在9个多模态推理与文本QA基准上，DeAR持续优于现有方法，验证了分散式协作推理的有效性。",
+      "llm_tldr": "现有智能体推理系统依赖集中协议，存在路由瓶颈与静态角色分配问题。本文提出DeAR框架，转向自主点对点协作，包含能力锚定、思维图导航和拓扑更新三种机制。在9个多模态推理与文本QA基准上，DeAR持续优于现有方法，验证了分散式协作推理的有效性。",
+      "llm_tags": [
+        "query:multi-agent"
+      ],
+      "matched_query_tag": "query:multi-agent",
+      "matched_query_text": "approaches for designing the interaction structure of multi-agent systems",
+      "matched_requirement_id": "req-3",
+      "selection_source": "fresh_fetch"
+    }
+  ]
+}

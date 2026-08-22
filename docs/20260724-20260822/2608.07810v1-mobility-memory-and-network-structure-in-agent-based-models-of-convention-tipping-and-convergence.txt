@@ -1,0 +1,704 @@
+Title: Mobility, Memory, and Network Structure in Agent-Based Models of Convention Tipping and Convergence
+
+URL Source: https://arxiv.org/pdf/2608.07810v1
+
+Published Time: Tue, 11 Aug 2026 00:19:19 GMT
+
+Number of Pages: 24
+
+Markdown Content:
+# Mobility, Memory, and Network Structure in Agent-Based Models of Convention Tipping and Convergence 
+
+# Joe Shymanski 1, Garrick Springer 1, Sandip Sen 1    
+
+> 1University of Tulsa
+> Correspondence should be addressed to sandip-sen@utulsa.edu Journal of Artificial Societies and Social Simulation xx(x) x, 20xx Doi: 10.18564/jasss.xxxx Url: http://jasss.soc.surrey.ac.uk/xx/x/x.html Received: dd-mmm-yyyy Accepted: dd-mmm-yyyy Published: dd-mmm-yyyy
+
+Abstract: Tipping-point dynamics describe the critical conditions under which a committed minority drives a population to abandon an established convention in favor of a new one. We present a transparent agent-based model of this process, in which agents hold one of two behavioral states and a mobile committed minority at-tempts to overturn the incumbent convention. Our goal was to examine how localized mobility, bounded agent memory, and network topology jointly influence the tipping threshold. Using a custom agent-based simulation framework, we found that in many configurations, tipping becomes effectively inevitable: given sufficient time, the population always converges to the minority state. This observation motivated a complementary analysis focused on the pace of convergence rather than its feasibility. We introduce a unified predictive model that ac-curately estimates how structural and behavioral parameters determine the time required for complete adop-tion, showing that mobility is the dominant accelerator while memory and connectivity modulate convergence in systematic ways. Together, these results extend classical tipping-point research by linking structural and be-havioral factors not only to the likelihood of convention change but also to the timescale on which it unfolds. While we frame the model in terms of convention-like binary behavioral adoption, the same mechanisms bear on norm change and other contagion-like social processes. 
+
+Keywords: Tipping Points, Convention Change, Committed Minorities, Network Topology, Mobility, Agent-Based Modeling 
+
+# Introduction 
+
+1.1 Social conventions and norms play a central role in shaping collective human behavior. Understanding how these shared behavioral regularities emerge, spread, and change is essential across sociology, economics, and artificial intelligence (Andrighetto & Vriens 2022; Gelfand et al. 2024; Morris-Martin et al. 2019; Young 1996). Of particular interest are sudden shifts, or tipping points , where a committed minority induces a majority to abandon an established convention in favor of a new one (Andreoni et al. 2021; Centola et al. 2018; De et al. 2018; Everall et al. 2023; Milkoreit 2023). The size of this minority group, often called the critical mass , has been studied in evolutionary game theory and through controlled experiments, with estimates of the threshold typically falling near 20–30% of the population (Centola 2010; Centola & Baronchelli 2015; Centola et al. 2018; Kandori et al. 1993; Young 1996). 
+
+1.2 We use the term convention deliberately. Following the norm-emergence tradition, we model a convention as a binary behavioral state that propagates through local reinforcement, rather than as a prescriptive rule backed by sanctions, values, or institutional authority. The mechanisms we study therefore apply most directly to convention-like norms and, more broadly, to any state that spreads through local interaction—opinions, in-novations, or behaviors—with norm change being one important application rather than the full scope of the model. We make this modeling stance explicit because it scopes which social phenomena our results speak to and which they deliberately abstract away (see Related Work). 
+
+JASSS , xx(x) x, 20xx http://jasss.soc.surrey.ac.uk/xx/x/x.html Doi: 10.18564/jasss.xxxx arXiv:2608.07810v1 [cs.MA] 7 Aug 2026 1.3 In practice, populations do not interact at random: individuals are connected through social networks that shape who influences whom and how quickly behaviors spread. Network topology therefore plays a central role in determining the conditions under which a new convention can take hold. In the context of multi-agent systems (MAS), such networked interactions offer insight into how collective conventions can be influenced or accelerated under different structural and behavioral conditions (Baccino & Villata 2023; Helfmann et al. 2021; Lopez 2015; Morris-Martin et al. 2019). 
+
+1.4 We focus on three factors—localized mobility, bounded memory, and network topology—because each is a consistently identified determinant of convention and norm spread in the emergence literature, yet they are rarely studied jointly. Mobility governs how committed actors are exposed to, and mix across, local neighbor-hoods (De et al. 2015; Masuda et al. 2017); memory acts as behavioral inertia that reinforces the incumbent convention (Villatoro et al. 2009; Centola et al. 2018); and topology fixes the reinforcement structure through which complex contagions either spread or stall (Centola 2010; Watts & Strogatz 1998). These three dimensions are also largely orthogonal—one behavioral (memory), one dynamic (mobility), and one structural (topology)— which lets us isolate and characterize their individual and joint effects through systematic ablation rather than conflating them. 
+
+1.5 Our initial goal was to study how these three factors jointly affect tipping thresholds. Using a custom agent-based simulation framework, we examined how lattice and small-world (Watts & Strogatz 1998) networks, dif-ferent neighborhood definitions (Zaitsev 2017), and mobile versus stationary agents influence the fraction of committed influencers required for large-scale adoption. 
+
+1.6 However, our experiments revealed that, within this dynamic setting, tipping appeared inevitable: given enough time, the minority state always spread to the full population. This observation motivated a complementary focus on the time required for convergence . We therefore extended our analysis to quantify and model how structural and behavioral factors determine the pace at which convention change unfolds. 
+
+1.7 Prior work on tipping points typically focused on static networks or stateless agents (Granovetter 1978; Centola et al. 2018), limiting analysis to the minimal conditions required for change. By incorporating memory, localized movement, and structured interactions, our framework provides a richer setting that links traditional tipping-point theory with the temporal dynamics of convergence. 
+
+1.8 We emphasize that this is a theoretical , mechanism-oriented agent-based model rather than an empirical pre-dictor of any specific social system. Its purpose is to isolate and analytically characterize how four primitives— committed-minority seed fraction, mobility, memory, and connectivity—shape both whether and how quickly a convention tips, not to replicate the full cognitive or institutional richness of real norm dynamics. This stance follows the established practice in social simulation of using deliberately stylized models to expose mechanisms in a controlled setting, and it guides how we interpret our parameters and scope our claims throughout. 
+
+1.9 Our contributions are threefold: • We introduce a transparent simulation framework for studying convention tipping under variations in topology, mobility, and memory. • We show that in this dynamic system, tipping is assured in most contexts, allowing the analysis of con-vergence time as a complementary outcome of interest. • We derive a unified predictive model that explains how structural and behavioral parameters jointly de-termine the timescale of adoption. 
+
+1.10 This work builds on existing research on norm emergence, tipping points, and network science, but it extends prior approaches by showing how the same mechanisms that enable convention change also determine how quickly it unfolds. 
+
+1.11 The rest of this paper is organized as follows: we first review related work, then present our simulation process and modeling framework, and then report the results. The remaining sections discuss findings and conclusions and outline future directions. 
+
+# Related Work 
+
+2.1 The distinction between conventions and social norms is often blurred in the literature on collective behavior. In general, norms are viewed as conventions reinforced by social regulation or the threat of sanction, whereas   
+
+> JASSS , xx(x) x, 20xx http://jasss.soc.surrey.ac.uk/xx/x/x.html
+
+Doi: 10.18564/jasss.xxxx conventions may persist through coordination alone (Mellema et al. 2020). For the purposes of this study, we treat the two terms interchangeably, since our focus lies in the emergence and persistence of a minority be-havior within a majority population. More broadly, the same mechanisms can describe any phenomenon that propagates through local interactions in a network, including opinions, ideologies, innovations, cultural pref-erences, diseases, or information cascades. 
+
+# Norm Emergence versus Normative MAS 
+
+2.2 It is useful to locate our work within one of two strands of research on norms in multi-agent systems (Morris-Martin et al. 2019). The normative MAS strand treats norms as explicit, prescriptive rules—often expressed with deontic concepts and enforced through sanctions, institutions, or designated authorities—and studies how agents reason about, adopt, or synthesize such rules. The norm-emergence strand, by contrast, treats norms and conventions as implicit behavioral regularities that arise bottom-up from repeated local interaction and reinforcement, with a norm deemed to have “emerged” once a sufficient fraction of agents follow it. Our model belongs squarely to the second strand: agents hold a binary behavioral state and update it from local observa-tion, with no explicit rules, sanctions, values, or hierarchy. This places our contribution alongside the tipping-point and convention-emergence literature rather than the deontic or institutional-norm literature, and it ex-plains why norm-specific constructs such as sanction severity, goal feasibility, or influencer authority lie outside our present scope (we return to this in the Discussion). 
+
+# Positioning Relative to Critical-Mass and Convention-Change Models 
+
+2.3 Interest in critical-mass and convention-change dynamics remains highly active. Centola et al. (2018) provided experimental evidence for tipping points in human social conventions, and Andreoni et al. (2021) showed in controlled experiments that the location of a tipping point can be predicted from measurable features of the population. On the modeling side, Iacopini et al. (2022) extended the committed-minority naming-game frame-work to higher-order group interactions, showing that the critical mass required to overturn a convention de-pends on the structure of group encounters—a structural sensitivity that parallels the topology and mobility effects we report. Most recently, Ashery et al. (2025) demonstrated that populations of large language model (LLM) agents spontaneously form shared conventions and exhibit committed-minority tipping, indicating that these dynamics extend even to AI-agent populations. Such LLM-based social simulations are an emerging but still unreliable methodology: recent assessments caution that current LLM agents exhibit inconsistent and bi-ased behavior in social-simulation settings and advocate hybrid designs over wholesale replacement of mech-anistic models (Taillandier et al. 2025; Huang et al. 2024). This motivates our choice of a transparent, stylized agent-based model, in which every mechanism is interpretable and every parameter can be ablated, as a com-plementary and reproducible vantage point on the same critical-mass phenomena. 
+
+# Foundational Theories of Tipping Points 
+
+2.4 Granovetter’s threshold model (Granovetter 1978) formalized how individuals adopt behaviors once a critical portion of their peers have already done so, explaining how small perturbations can trigger large-scale cas-cades. Young (1996) extended this reasoning to coordination games, showing that repeated local interactions can entrench or overturn conventions depending on early adopters. 
+
+2.5 Building on these theoretical foundations, Centola and colleagues (Centola 2010; Centola & Baronchelli 2015; Centola et al. 2018) combined empirical and simulation studies to demonstrate that tipping points for social conventions typically arise when 20–30% of a population is committed to the new behavior. Their work em-phasized that network clustering, memory of past interactions, and reinforcement from multiple neighbors are critical to successful convention change. Gelfand et al. (2024) provide a comprehensive survey of this litera-ture, showing that while tipping thresholds are a robust feature of collective dynamics, they are sensitive to structural and cognitive factors. 
+
+# Topology, Memory, and Minority Influence 
+
+2.6 Network structure has been shown to strongly shape contagion and coordination processes. Centola (2010) found that clustered-lattice networks accelerate complex contagions compared to random graphs, as repeated   
+
+> JASSS , xx(x) x, 20xx http://jasss.soc.surrey.ac.uk/xx/x/x.html
+
+Doi: 10.18564/jasss.xxxx reinforcement among neighbors facilitates behavioral adoption. Villatoro et al. (2009) explored related topol-ogy and memory effects, although their analysis centered on unbiased agents with multiple conventions rather than on committed minorities. 
+
+2.7 Subsequent work examined how the position and commitment of minority groups influence outcomes. Bac-cino & Villata (2023) showed that small but resolute groups can drive majority adoption when embedded in favorable network locations, with influence amplified by the strength or visibility of commitment. These re-sults reinforce Centola’s insight that topology interacts with agent behavior to determine whether a minority can overturn a dominant convention. 
+
+# Influencer Characteristics and Mobility 
+
+2.8 Most studies of convention diffusion assume fixed agent positions (Helfmann et al. 2021; Choi et al. 2010), but mobility can fundamentally alter outcomes. Models of random walks (Masuda et al. 2017) and evolutionary dynamics with limited migration (De et al. 2015) suggest that movement enhances mixing, though typically in simplified or global forms. Our work extends this line of research by allowing influencers to move locally at each step, demonstrating that even modest mobility sharply lowers tipping thresholds and accelerates convergence. 
+
+2.9 In summary, prior research establishes the importance of thresholds, reinforcement, and network structure in convention change. Our contribution unifies these insights by linking traditional tipping-point analyses with the temporal dynamics of convergence, showing how topology, memory, and mobility jointly determine both the emergence and the pace of adoption within a single simulation framework. 
+
+# Methodology 
+
+# Topological Generation 
+
+3.1 We consider two network structures: square lattices and small-world networks, chosen for their relevance to social systems. Lattices capture localized, densely clustered interactions, while small-world networks introduce occasional long-range links (Watts & Strogatz 1998). This structural diversity allows us to isolate the effects of connectivity and influencer mobility. 
+
+Lattices. 3.2 We place N = n2 agents on an n × n grid. Connectivity is determined by two Boolean parameters: torus , which wraps edges to form a toroidal lattice, and Moore , which distinguishes between von Neumann (4 neighbors) and Moore (8 neighbors) neighborhoods. 
+
+Small-Worlds. 3.3 Small-world networks are generated using the Watts–Strogatz model (Watts & Strogatz 1998). Each node is initially connected to k nearest neighbors in a one-dimensional ring topology, and each edge is rewired with probability p. We fix p = 0 .1 to balance clustering with randomness, avoiding the fully regular ( p = 0 ) and fully random ( p = 1 ) extremes. Agents are assigned one node each in this ring, ensuring consistent spatial embedding across runs. 
+
+# Agent Types 
+
+3.4 Agents are divided into two fixed types: ordinary and influencer . While type does not change during a sim-ulation, each agent maintains a binary state representing its current convention, which can evolve through interaction.   
+
+> JASSS , xx(x) x, 20xx http://jasss.soc.surrey.ac.uk/xx/x/x.html
+
+Doi: 10.18564/jasss.xxxx Ordinary. 3.5 Ordinary agents form the initial majority and all begin with state 0. They are stationary within the network topology and update their state at each timestep by observing the states present in their neighborhood, both currently and over the previous M timesteps stored in memory. Memory represents the number of past neigh-borhood observations retained by the agent. 
+
+3.6 We make this update rule explicit. Let Ni denote the network positions adjacent to agent i, and let sj (τ ) ∈{0, 1} be the state occupying position j at time τ (occupancy can change as influencers move). At each step, agent i tallies the states observed in its neighborhood over the current step and the previous M steps, 
+
+n(c) 
+
+> i
+
+(t) = 
+
+> t
+
+X 
+
+> τ=t−M
+
+X
+
+> j∈N i
+
+1[sj (τ ) = c] , c ∈ { 0, 1}, (1) and then adopts the locally dominant state, retaining its current state in the case of a tie: 
+
+si(t + 1) = 
+
+
+
+1 if n(1)  
+
+> i
+
+(t) > n (0)  
+
+> i
+
+(t),
+
+0 if n(1)  
+
+> i
+
+(t) < n (0)  
+
+> i
+
+(t),si(t) otherwise. (2) When M = 0 the rule reduces to a memoryless majority over current neighbors. In this way, memory serves as temporal inertia, smoothing short-term fluctuations and reinforcing consistent local patterns. 
+
+3.7 The update in Equation 2 is deterministic : an agent always moves to its locally dominant state. A natural alterna-tive is probabilistic updating, in which an agent switches to state 1 with probability proportional to n(1)  
+
+> i
+
+(t)/ n(0)  
+
+> i
+
+(t)+ 
+
+n(1)  
+
+> i
+
+(t), as in stochastic threshold and noisy-voter models. We adopt the deterministic rule because it makes the mechanisms maximally transparent and because, as shown in the Results section, it already drives the population to inevitable tipping given sufficient time. Probabilistic switching would introduce additional fluc-tuations that may shift the numerical values of thresholds and convergence times, but it would not change our qualitative findings: the same monotone dependence of tipping on seed fraction, mobility, and memory would persist, since stochastic updating preserves the direction of the local majority signal in expectation. 
+
+Influencers. 3.8 A fraction f of the population is designated as influencers, seeded with the alternative convention (state 1). Influencers are committed: they never change state, and they move with probability m at each timestep. When moving, an influencer swaps positions with a randomly chosen ordinary neighbor. 
+
+3.9 We model mobility as a local swap, and restrict it to influencers, for three deliberate reasons. First, swapping conserves the degree sequence and overall structure of the network exactly, so that any change in outcomes can be attributed to movement rather than to a concurrent change in topology—a confound that would arise under edge-rewiring forms of mobility. Second, restricting motion to the committed minority isolates the effect we care about, namely the exposure of a fixed set of seeds to new local neighborhoods, while keeping the majority substrate fixed as a controlled reference. Third, single-step local swaps match the small-step, local-diffusion assumption common to spatial mobility models, in which agents mix gradually with nearby regions rather than teleporting globally. This design ensures each node remains occupied and lets the minority convention diffuse gradually through the network. Allowing ordinary agents to move as well, or using non-local mobility models, is a natural extension that we leave to future work (see Future Work). 
+
+# Simulation Process 
+
+3.10 Influencers were distributed evenly across the network using a Halton sequence with Owen scrambling to en-sure well-dispersed yet distinct placements across runs (Chi et al. 2005). For lattice networks, two-dimensional samples were rounded to the nearest grid coordinates; for small-world networks, one-dimensional samples were mapped directly to node IDs. 
+
+3.11 At each timestep, influencers moved with probability m, while ordinary agents updated their conventions based on their current neighborhoods and memory histories. The global adoption rate of the minority convention   
+
+> JASSS , xx(x) x, 20xx http://jasss.soc.surrey.ac.uk/xx/x/x.html
+
+Doi: 10.18564/jasss.xxxx (a) Step 0 (b) Step 500 (c) Step 1,000   
+
+> (d) Step 0 (e) Step 500 (f) Step 1,000
+
+Figure 1: Simulations using lattice (a–c) and small-world (d–f) networks. Blue nodes are ordinary agents in state 0, orange nodes are converted ordinary agents (state 1), and red nodes are influencers. was recorded at every step. Simulations terminated upon reaching full adoption (ubiquity) or the maximum timestep limit. 
+
+3.12 Figure 1 illustrates representative lattice and small-world runs, with influencers shown in red, ordinary agents in state 0 in blue, and converted ordinary agents in orange. Figure 2 shows the corresponding adoption curves. Notably, adoption does not increase monotonically: as influencers move, local reversals occur, yet mobility ultimately drives convergence. 
+
+# Tipping Point Estimation 
+
+3.13 To estimate the tipping threshold f ∗ for each configuration, we ran 50 simulations at evenly spaced influencer fractions f , recording the final adoption rate A. We then fit these ( f , A) samples to a logistic curve: 
+
+Aord (f ) = 11 + e−a(f −b) , (3) where b is the midpoint and a controls steepness. Because influencers never change state ( Ainf (f ) = 1 ), the full adoption rate is given by: 
+
+A(f ) = f A inf (f ) + (1 − f )Aord (f ) = f + 1 − f
+
+1 + e−a(f −b) (4) which incorporates both the linear contribution of influencers and the nonlinear response of ordinary agents. Parameters a and b were optimized using nonlinear least squares, and f ∗ was obtained via root-finding at 
+
+A(f ) = 0 .5. Figure 3 illustrates a representative fit.   
+
+> JASSS , xx(x) x, 20xx http://jasss.soc.surrey.ac.uk/xx/x/x.html
+
+Doi: 10.18564/jasss.xxxx (a) Lattice. (b) Small world. 
+
+Figure 2: Adoption rates over time for the simulations shown in Figure 1. 
+
+Figure 3: Example A(f ) curve fitted to simulation data for a single configuration (100-node lattice with von Neumann neighborhoods, no agent memory, and mobility rate of .01).   
+
+> JASSS , xx(x) x, 20xx http://jasss.soc.surrey.ac.uk/xx/x/x.html
+
+Doi: 10.18564/jasss.xxxx Figure 4: Pairwise tipping-point heatmaps over the five configuration parameters m, N , steps , M , and topology .The figure is a lower-triangular matrix of subplots: each subplot pairs two parameters, with one varying along the horizontal axis and the other along the vertical axis, and each cell shows the mean tipping threshold f ∗
+
+averaged over all configurations sharing that pair of values (marginalizing over the other three parameters). Axis tick labels give the discrete levels of each parameter. The diagonal is empty because a parameter is not plotted against itself, and the upper-right triangle is omitted because it would duplicate the lower-left subplots with axes transposed; the blank diagonal cell in the topology row/column is this empty self-pairing, not missing data. Shading within each subplot is normalized independently to highlight relative trends, so colors are comparable within but not across subplots. 
+
+# Time to Ubiquity Measure 
+
+3.14 While tipping thresholds capture the conditions under which convention change becomes self-sustaining, they do not quantify how quickly convergence occurs once that process begins. To complement f ∗, we define the 
+
+time to ubiquity (TTU), denoted T , as the first timestep at which the minority convention achieves full adoption. Let A(t) ∈ [0 , 1] denote the global adoption rate—the fraction of agents in state 1—at time t, and let steps be the time horizon. Then 
+
+T = min { t ∈ { 0, 1, . . . , steps } : A(t) = 1 }, (5) and T is left undefined (right-censored) when A(t) < 1 for all t ≤ steps , i.e. when ubiquity is not reached within the horizon. This measure captures the temporal dynamics of convention change, extending analysis beyond the onset of adoption to the speed of full convergence. 
+
+# Results 
+
+# Sensitivity Analysis 
+
+4.1 We first conducted a systematic sensitivity analysis across five parameters: influencer mobility ( m), agent mem-ory ( M ), population size ( N ), maximum timesteps ( steps ), and network structure ( topology ). The 432 configu-rations are the full-factorial (Cartesian) product of the discrete levels of these five parameters: 
+
+6|{z} 
+
+> m
+
+× 3|{z} 
+
+> M
+
+× 3|{z} 
+
+> steps
+
+× 4|{z} 
+
+> N
+
+× 2|{z} 
+
+> topology
+
+= 432 ,
+
+with m ∈ { 0, 0.01 , 0.05 , 0.1, 0.25 , 0.5}, M ∈ { 0, 5, 10 }, steps ∈ { 200 , 1000 , 5000 }, N ∈ { 100 , 225 , 400 , 1600 },and topology ∈ { lattice , small-world } (using the von Neumann lattice and k=4 small-world as the canonical   
+
+> JASSS , xx(x) x, 20xx http://jasss.soc.surrey.ac.uk/xx/x/x.html
+
+Doi: 10.18564/jasss.xxxx Figure 5: Trends in f ∗ vs. mobility rate, memory, and time horizon ( steps ). structure for each). For each configuration, 50 simulations were run at evenly spaced influencer fractions f ,yielding 432 × 50 = 21 ,600 ( f, A ) samples. Each configuration was fitted to Equation 4 to extract the tipping threshold f ∗. The full set of parameter levels and defaults is listed in Table 4 of the appendix. 
+
+4.2 Figure 4 summarizes the pairwise effects among these parameters; each subplot shows mean f ∗ for one pair of parameters, marginalizing over the other three (see caption for how to read the triangular layout). The clear-est pattern is that f ∗ declines steeply with increasing mobility, then plateaus at higher m. Longer interaction horizons ( steps ) also reduce the threshold, while greater memory capacity ( M ) inflates it. Lattice networks gen-erally exhibit slightly higher tipping points than small-world networks, but both topology and population size show negligible influence compared to the other variables. 
+
+4.3 Spearman correlations confirm these trends: mobility ( ρ = −.69 ), time horizon ( ρ = −.53 ), and memory (ρ = .15 ) exhibit the strongest associations with f ∗, whereas topology ( ρ = −.08 ) and size ( |ρ| < . 01 ) are weak. These relationships indicate that the ease of convention change is governed primarily by the dynamic characteristics of movement, memory, and interaction frequency rather than by static network features. 
+
+4.4 Figure 5 illustrates the three most influential factors individually. f ∗ decays rapidly with mobility but stabilizes at high m. Longer horizons decrease f ∗, though this reduction can be offset by memory: as M grows, agents resist change for longer, effectively flattening the mobility advantage. For example, with m = 0 .5, a 200-step memoryless simulation produces a similar threshold to one with 5,000 steps and M = 10 .
+
+# Extended Analysis of Key Effects 
+
+4.5 Beyond the overall sensitivity analysis, we conducted targeted experiments to more precisely characterize how memory, interaction horizon, and topology affect the tipping threshold f ∗. Each experiment varied a single factor while holding others fixed at default values that can be found in Table 4 of Appendix C. 
+
+4.6 These extended analyses confirmed the earlier trends while clarifying their functional forms. Increasing mem-ory raised thresholds in a logarithmic fashion, consistent with the notion that recalling past interactions rein-forces the incumbent convention but with diminishing returns. Conversely, extending the simulation horizon reduced f ∗ according to a reciprocal decay, indicating that longer exposure provides more opportunities for influencers to trigger cascades. Both effects are stable across topologies. 
+
+4.7 Topology and mobility, however, exhibit a notable interaction. When influencers can move, denser lattices and small-world networks (via Moore neighborhoods or higher k) require larger influencer fractions to succeed, as each agent must counter more neighbors before switching. In contrast, when mobility is absent, thresholds are uniformly high across all topologies—reflecting that static influencers rarely achieve sufficient local clustering to propagate a new convention.   
+
+> JASSS , xx(x) x, 20xx http://jasss.soc.surrey.ac.uk/xx/x/x.html
+
+Doi: 10.18564/jasss.xxxx Figure 6: Mean time to ubiquity (TTU) across all configurations. Color encodes memory ( M ; low = purple, high = yellow), and point size encodes average node degree ( d). 
+
+4.8 Overall, these extended tests reveal three dominant mechanisms: (1) memory acts as inertia, slowing conven-tion change; (2) larger time horizons stimulate more opportunity for spread; and (3) topology amplifies or sup-presses these forces depending on whether mobility is present. Fitted functional forms and detailed parameter tables are provided in Appendix D. These relationships motivate the construction of a unified model in the next subsection that captures the speed of convergence. 
+
+# Time to Ubiquity Analysis 
+
+4.9 We next analyzed the time to ubiquity (TTU)—the number of simulation steps required for the influencer conven-tion to achieve full adoption across the population. Each configuration was averaged over 50 trials on 225-node networks, systematically varying the influencer fraction ( f ), mobility rate ( m), memory capacity ( M ), and mean node degree ( d). These quantities were selected based on earlier sensitivity analyses that identified them as the dominant drivers of convention change. 
+
+Modeling Objective. 4.10 Rather than fitting a black-box predictor, we sought a compact, factorized equation with correct limits and clear mechanism–term alignment. Each factor should correspond to a single driver (seed size, memory, mobility, connectivity) and reproduce the empirical shapes observed in the aggregated data. 
+
+Empirical Patterns. 4.11 Figure 6 visualizes the aggregated TTU data across all configurations. Each point represents an averaged run, with color encoding memory ( M ) and point size encoding connectivity ( d). Convergence times decrease sharply with higher f and m, increase with M , and vary nonlinearly with d: greater connectivity generally accelerates diffusion but can slow it when influencers are scarce and memory is large. These interactions highlight the need for a unified model that can reproduce all observed regimes without overfitting or losing interpretability. 
+
+Model Structure and Rationale. 4.12 To capture these patterns, we derived a compact, factorized expression linking T to the four primary variables while preserving their empirical shapes and mechanistic meanings. • The term f −pf encodes how larger seed fractions ( f ) accelerate convergence following a power-law trend. • The logarithmic factor ln( M + hM ) captures diminishing returns from memory, consistent with the ex-tended analyses.   
+
+> JASSS , xx(x) x, 20xx http://jasss.soc.surrey.ac.uk/xx/x/x.html
+
+Doi: 10.18564/jasss.xxxx Table 1: Optimized parameters for Equation 6. The model achieves R2 = 0 .91 , RMSE = 57 .1, and AIC = 52 ,144 .
+
+c pf hM gm pm hm qm elo ehi fc wf Mc wM
+
+7.39 1.52 5.33 0.074 19.11 0.069 18.95 -2.44 9.31 0.32 0.022 148.14 108.64 
+
+Table 2: Model evaluation metrics for TTU prediction. Lower RMSE & AIC and higher R2 are better. 
+
+Model R2 RM SE AIC 
+
+1. cf −pf 0.78 90.92 58,119.84 2. cf −pf ln ( M + hM ) 0.83 80.18 56,501.97 3. cf −pf ln ( M + hM ) (m+gm)pm  
+
+> (m+hm)qm
+
+0.85 76.14 55,842.96 
+
+4. Equation 6 0.91 57.08 52,143.53 
+
+• The ratio (m+gm)pm  
+
+> (m+hm)qm
+
+models the steep early drop and plateau observed with increasing mobility ( m). • The connectivity term 
+
+ ddmin 
+
+e(f,M )
+
+introduces a gated exponent e(f, M ) that flips sign only in the small-
+
+f , large-M regime, reflecting when additional edges hinder rather than help adoption. 
+
+4.13 Each component thus mirrors a distinct mechanism in the simulator—seeding, memory inertia, mobility diffu-sion, and network connectivity—making the model interpretable as well as predictive. Equation 6 expresses these combined effects: 
+
+T (f, M, m, d ) = 1 + cf −pf ln( M + hM ) (m + gm)pm
+
+(m + hm)qm
+
+ ddmin 
+
+e(f,M )
+
+, (6) where dmin = 2 − 2/N . The gated exponent is defined as: 
+
+e(f, M ) = elo + ( ehi − elo ) σ
+
+ fc − fwf
+
+
+
+σ
+
+ M − Mc
+
+wM
+
+
+
+, σ(x) = 11 + e−x . (7) 
+
+4.14 This factorization allows the equation to generalize across topologies while maintaining clear causal meaning. A detailed interpretation of each term and its empirical justification is provided below (see the subsection “In-terpreting the TTU Model”). 
+
+# Model Fitting and Evaluation 
+
+4.15 The unified TTU equation was fitted with nonlinear least squares over more than 350,000 simulated runs span-ning all tested values of f , m, M , and d. The fitted parameters (Table 1) yield strong fit quality, with R2 = 0 .91 
+
+and RMSE ≈ 57 , indicating that the model accounts for most of the variance and keeps typical errors modest relative to the scale of T .
+
+4.16 Beyond raw fit, we also assess parsimony using Akaike’s Information Criterion (AIC), which penalizes unnec-essary parameters. The unified model attains AIC = 52 ,144 , outperforming simpler baselines (Table 2). This shows that the additional terms improve predictive power sufficiently to justify their inclusion, rather than over-fitting. 
+
+Comparative Model Performance. 4.17 We compare against three nested baselines that drop one mechanism at a time to test necessity and redun-dancy. Table 2 reports R2 and RMSE (goodness-of-fit) and AIC (parsimony with parameter penalty). 
+
+4.18 The incremental improvements from Models 1 → 4 reveal that each term is necessary to reproduce the observed dynamics. The largest R2/RMSE gain appears when adding the mobility ratio, capturing the sharp reduction in 
+
+T as m moves away from zero. The gated degree term delivers the final AIC improvement, removing residual bias in the small-f , large-M corner without inflating complexity. 
+
+JASSS , xx(x) x, 20xx http://jasss.soc.surrey.ac.uk/xx/x/x.html Doi: 10.18564/jasss.xxxx Figure 7: Histogram of residuals for T (f, M, m, d ). The near-symmetric shape indicates unbiased error distri-bution. 
+
+Residual Analysis. 4.19 Figures 7 and 8 illustrate the model’s fit quality. Residuals are symmetric (Figure 7) and unbiased with respect to each feature (Figure 8), confirming that Equation 6 generalizes across the tested domain. 
+
+4.20 The stepwise gains from Model 1 → Model 2 → Model 3 show that each mechanism contributes predictive power with minimal redundancy. The improvements are most pronounced in regimes with low f or high M , where simpler models systematically underpredict convergence times. This demonstrates that the added complexity of Equation 6 is necessary to capture the nonlinear interactions between influencer fraction, memory, mobility, and connectivity, while still yielding an interpretable functional form. 
+
+# Interpreting the TTU Model 
+
+4.21 Equation 6 is intentionally factorized so that each term corresponds directly to a mechanism in the simulator and satisfies the correct limiting behavior. This structure makes the model both explanatory and predictive, allowing each component to be read as a functional analogue of an underlying process governing convention convergence. 
+
+Influencer Presence. 4.22 The multiplicative core f −pf captures the universal “more influencers ⇒ faster convergence” law and enforces the boundary f → 0+ ⇒ T → ∞ . The fitted exponent pf quantifies seed sensitivity: doubling f reduces the expected TTU by approximately 2pf . This term formalizes the observed power-law decay in convergence time with increasing influencer fraction. 
+
+Memory. 4.23 The logarithmic factor ln( M + hM ) models the diminishing effect of memory on adoption speed. Larger M
+
+increases inertia by reinforcing prior behaviors, but the influence of additional memory weakens at higher val-ues, consistent with the extended analysis. The offset hM > 0 ensures continuity at M = 0 and corresponds to the small baseline inertia observed even among memoryless agents. 
+
+Mobility. 4.24 The rational mobility term (m+gm)pm  
+
+> (m+hm)qm
+
+produces the empirically observed “elbow” effect: as mobility increases from zero, T drops sharply and then plateaus at higher m. This reproduces the finding that even small amounts of movement dramatically accelerate convention spread, after which additional movement yields diminishing returns. The small constants gm and hm position the knee near the range where mobility effects transition from marginal to saturated.   
+
+> JASSS , xx(x) x, 20xx http://jasss.soc.surrey.ac.uk/xx/x/x.html
+
+Doi: 10.18564/jasss.xxxx (a) f (b) M   
+
+> (c) m(d) d
+
+Figure 8: Residuals of T (f, M, m, d ) plotted against each feature. The absence of systematic bias confirms model adequacy across the tested range. 
+
+Average Connectivity. 4.25 The gated connectivity term 
+
+ ddmin 
+
+e(f,M )
+
+explains why degree can both help and hinder diffusion. The ex-ponent e(f, M ) (Equation 7) flips sign only when influencers are scarce and memory is large, matching the empirical corner case where increased connectivity disperses influence rather than amplifying it. Outside this regime, higher degree consistently speeds convergence, capturing the typical “more edges, faster diffusion” relationship. 
+
+Correct Limits and Parsimony. 4.26 The additive baseline 1 + · · · anchors the model at one step for easy regimes (large f , moderate or high m)and ensures finite predictions as parameters vary. Together, these terms reproduce the correct asymptotic lim-its across all variables without cross-variable polynomials, preserving interpretability while maintaining high predictive accuracy. 
+
+Synthesis. 4.27 Overall, each factor in Equation 6 corresponds to an interpretable mechanism: seed size, memory inertia, mo-bility coupling, and degree-gated diffusion. Their combined behavior captures nuanced dynamics of conven-tion convergence within a single predictive expression. This correspondence between mechanism and func-tional form grounds the model empirically and provides a transparent bridge to the theoretical discussion that follows.   
+
+> JASSS , xx(x) x, 20xx http://jasss.soc.surrey.ac.uk/xx/x/x.html
+
+Doi: 10.18564/jasss.xxxx Table 3: Mapping between model parameters and their social interpretations.             
+
+> Symbol Model quantity Social interpretation
+> fInfluencer seed fraction Committed minority / critical mass
+> mInfluencer mobility rate Cross-community exposure and mixing
+> MAgent memory length Reinforcement history / behavioral inertia
+> dMean node degree Breadth of local social exposure
+> TTime to ubiquity Convergence / intervention timescale
+
+# Discussion 
+
+5.1 Our results suggest that convention change in structured populations is shaped by two interdependent pro-cesses: first, reaching a tipping threshold f ∗ that allows large-scale adoption to begin, and second, the ensuing convergence to full adoption over a time T . While analyzed separately, both reflect the same underlying mech-anisms of mobility, memory, and network connectivity. 
+
+5.2 Although our model is deliberately abstract, each of its parameters maps onto an interpretable social quantity, which guards against the impression that the model’s components are arbitrary. Table 3 summarizes these correspondences: the seed fraction f is the committed minority, mobility m is the rate of cross-neighborhood exposure or mixing, memory M is the reinforcement history or behavioral inertia of ordinary agents, connec-tivity d is the breadth of local exposure, and the time to ubiquity T is the timescale over which an intervention would play out. We use these interpretations to frame the discussion that follows. 
+
+5.3 The tipping thresholds we observed are consistently lower than those reported in prior empirical and theoret-ical studies (Centola et al. 2018; Young 1996). This discrepancy arises from our local-interaction model: influ-encers interact repeatedly with neighbors rather than with randomly chosen partners, enabling minorities to reinforce one another even with uncoordinated movement. The effect of mobility is especially pronounced— without mobility, minorities require roughly 25% of the population to succeed, but even minimal movement collapses this requirement by an order of magnitude. 
+
+5.4 Memory and time horizon also interact in predictable ways. Larger memory increases f ∗, as agents become more resistant to change, but with diminishing returns consistent with earlier findings (Centola et al. 2018). Longer horizons, by contrast, drive thresholds downward: given sufficient time, any network can eventually flip once the first conversion occurs. Degree effects are more nuanced—greater connectivity typically accelerates adoption, but under very small f and high M , it can hinder spread by overwhelming agents with majority-state memories. Finally, we found no systematic effect of network size: thresholds and convergence times scale consistently, with dmin → 2 as N → ∞ , suggesting robustness to larger populations. 
+
+5.5 The unified TTU model integrates these insights, showing how the same structural and behavioral parameters that influence thresholds also determine convergence speed. Mobility again dominates: increasing m not only lowers the required f ∗ but also shortens T , whereas memory consistently slows adoption. The gated degree term explains why connectivity sometimes helps (when influencers are sufficient) and sometimes hurts (when they are scarce). Importantly, the model remains robust to network size, since dmin → 2 as N → ∞ .
+
+# Connection to Diffusion of Innovations 
+
+5.6 The logistic form we fit to the adoption response (Equation 3) is not merely a convenient curve: it situates our results within the long-established theory of diffusion of innovations. Rogers (2003) described the cumulative adoption of an innovation across a population as an S-shaped (sigmoidal) curve, partitioning adopters into innovators, early adopters, an early and late majority, and laggards as the process passes through an initial slow phase, a rapid take-off once a critical mass is reached, and a final saturation. Our A(f ) curves reproduce exactly this shape: adoption is negligible below the tipping threshold f ∗, rises steeply once the committed minority is large enough to trigger self-sustaining cascades, and saturates as the convention becomes ubiquitous. In this reading, the steepness parameter a of the logistic captures how sharply the population transitions through Rogers’ take-off phase, while the midpoint b aligns with the critical mass at which the early majority begins to adopt. The same correspondence has long been used to model the diffusion of innovations on networks (Choi et al. 2010), and it reinforces that our committed-minority mechanism is a structural account of the well-known S-curve rather than a new and unrelated phenomenon. The time to ubiquity T then complements this static picture by quantifying how fast the population traverses the S-curve once tipping is assured.   
+
+> JASSS , xx(x) x, 20xx http://jasss.soc.surrey.ac.uk/xx/x/x.html
+
+Doi: 10.18564/jasss.xxxx Convention Switching and Churn 
+
+5.7 Because ordinary agents update from a moving committed minority, adoption is not monotone: as influencers swap into and out of a neighborhood, locally converted agents can briefly revert before the convention takes hold permanently (visible as the dips in Figure 2). The number of times agents switch state before convergence is therefore a meaningful secondary indicator of the “churn” or transient confusion a population experiences en route to consensus. Our present data record the global adoption trajectory A(t) but not per-agent switch counts, so we report this only qualitatively: configurations that converge slowly—low f , low m, or high M —exhibit visibly more reversals along the way, consistent with the same inertia mechanisms that raise T . A direct measurement of switch counts as a function of mobility and memory is a concrete and inexpensive extension we have scoped for future work, and we expect it to track T closely while sharpening the interpretation of memory as a stabilizer that suppresses churn. 
+
+# Value of Extensive Analysis 
+
+5.8 The detailed parameter analyses were essential for constructing a grounded functional model rather than arbi-trary curve fits. Each extended experiment directly informed one component of the unified TTU equation: the logarithmic dependence of f ∗ on memory motivated the ln( M + hM ) term; the power-law decay of conver-gence time with increasing seed fraction inspired the f −pf factor; the sharp early drop and plateau in mobility yielded the rational mobility term; and the mixed role of connectivity required the gated exponent e(f, M ).Together, these empirical trends shaped the model’s structure and ensured that each term corresponds to a dis-tinct, interpretable mechanism. The breadth of experimentation thus served a methodological purpose—distilling the efficient, generalizable form of Equation 6 across topologies—rather than simply expanding the dataset. 
+
+# Broader Implications 
+
+5.9 The linked dynamics of tipping and convergence observed here mirror phenomena across social and biological systems. In online mobilization and influencer campaigns (Bakshy et al. 2011; Centola 2010; González-Bailón et al. 2011), modest increases in mobility (exposure to new micro-communities) can collapse both the required committed minority and the time to consensus, whereas long social “memory” (stable prior interactions or feeds) raises thresholds and slows convergence (Flaxman et al. 2016; Bicchieri 2016). In public health, the gated degree effect parallels contexts where high contact rates speed adoption of protective behaviors once seeding is adequate (Centola 2011; Bavel et al. 2020), but hinder change when initial uptake is scarce and prior behaviors are strongly reinforced (Bicchieri & Dimant 2022). In civic settings, the framework clarifies when to invest in seeding (raising f ), in mobility-enabling interventions (raising m), or in reducing memory-like reinforcement to accelerate convention change (Centola et al. 2018; Young 1996). 
+
+# Limitations 
+
+5.10 Our study has several limitations, the most fundamental of which is one of scope. By design, we model a conven-tion as a binary behavioral state that spreads through local reinforcement; we therefore deliberately abstract away the features that distinguish full social norms from bare conventions. In particular, our agents have no val-ues or preferences that would make some conventions more desirable than others, no sanctions or punishment for non-conformity, no notion of norm legitimacy or institutional backing, no expectations about what others believe one ought to do, and no hierarchy or differential authority among influencers. These are precisely the norm-specific constructs studied in the normative-MAS and institutional-norm literatures, and their omission means our results speak to convention-like adoption rather than to the full richness of normative change. We see this not as a flaw but as a controlled boundary: the present framework isolates the structural and behav-ioral mechanisms (mobility, memory, connectivity, seeding) cleanly, and sanction-, value-, or hierarchy-based dynamics could be layered atop it as explicit extensions. 
+
+5.11 Beyond scope, several modeling choices bound generality. First, simulations were restricted to relatively small, homogeneous populations; although f ∗ showed little sensitivity to network size, larger or more heterogeneous networks may exhibit new effects. Second, only the committed minority moves, and it does so by local swaps; allowing ordinary agents to move, or using non-local mobility, may change the quantitative picture. Third, in-fluencers were modeled as stubborn but unstrategic; real actors often adapt or coordinate, potentially lowering thresholds further. Fourth, we focused on binary adoption, leaving open how multiple competing conventions   
+
+> JASSS , xx(x) x, 20xx http://jasss.soc.surrey.ac.uk/xx/x/x.html
+
+Doi: 10.18564/jasss.xxxx or weighted preferences interact with tipping and ubiquity. Finally, the update rule is deterministic; stochastic switching would add realism at the cost of transparency. These extensions present natural directions for future work. 
+
+# Conclusion 
+
+6.1 This work presents a unified perspective on convention change by linking the conditions that enable large-scale adoption with the dynamics that govern its completion. Using a custom agent-based simulation framework, we show that: • Even modest mobility drastically lowers tipping thresholds and accelerates convergence. • Memory increases resistance to change but with diminishing returns, elevating the tipping threshold f ∗
+
+and lengthening convergence time T .• Connectivity generally facilitates diffusion, though under sparse seeding and high memory it can impede adoption. 
+
+6.2 These findings reveal the surprising efficiency of uncoordinated minorities: without communication or strategy, a small mobile faction can overturn entrenched conventions in networks of hundreds or thousands. Beyond social conventions and norms, this framework extends naturally to opinion dynamics, ideological diffusion, po-litical mobilization, and epidemic modeling, complementing classical contagion approaches such as SIR (Weiss 2013). 
+
+6.3 Crucially, the extensive analyses throughout this study were not exploratory for their own sake—they identified the functional dependencies of mobility, memory, and connectivity that underpin both tipping and conver-gence. These empirical insights directly shaped the unified TTU equation, ensuring that each term reflects a measurable relationship rather than a curve-fitting artifact. By grounding the model in systematic simulations and theoretical limits, we provide an interpretable and general framework for predicting not only when con-vention change occurs, but also how quickly it completes. 
+
+6.4 To ensure reproducibility, the full simulation framework and analysis scripts are archived in the CoMSES Com-putational Model Library, with documentation following the ODD protocol summarized in Appendix A. The model can be found at 
+
+https://www.comses.net/codebase-release/4d4ad689-1d32-48a0-93a4-594bc78a0eea/ .
+
+# Future Work 
+
+7.1 Several promising extensions remain for future exploration: • Entrenched agents. Real populations include individuals with strong inertia or vested interests. Model-ing agents who resist switching back after adoption could reveal hysteresis effects, where reversal thresh-olds differ from initial tipping points. • Punishment and enforcement. Incorporating sanctions against norm violators may clarify how deter-rence mechanisms interact with committed minorities and influence stability. • Influencer persistence. Minority influencers may lose motivation or energy over time, reducing mobility or reverting to the majority convention; modeling this decay could yield richer temporal dynamics. • Strategic and generalized mobility. Future work could examine coordinated or adaptive movement policies, where influencers adjust their rate or direction of travel based on local feedback or learned tra-jectories. A complementary direction is to relax our modeling choice that only the committed minority moves, allowing ordinary agents to relocate as well, and to compare local swaps against non-local mo-bility models. • Quantifying switching and churn. Recording the number of times each agent changes state before con-vergence would measure the transient churn a population undergoes, sharpening the interpretation of memory as a stabilizer and providing a second outcome to validate against the time to ubiquity.   
+
+> JASSS , xx(x) x, 20xx http://jasss.soc.surrey.ac.uk/xx/x/x.html
+
+Doi: 10.18564/jasss.xxxx • Seeding strategies. Investigating targeted placements or adaptive seeding methods may identify more efficient pathways to convention change than uniform initialization. • Network diversity. Extending the analysis to scale-free, hub-and-spoke, or multilayer networks could generalize the findings to heterogeneous real-world systems. • Prediction and intervention. Developing early-warning indicators from adoption curves could enable active control of tipping dynamics, such as adding influencers or boosting mobility to accelerate desired outcomes. • Multiple conventions and competition. Allowing concurrent conventions to spread may reveal coexis-tence equilibria, oscillations, or cyclic dominance akin to ecological models. • Heterogeneous agents. Introducing variability in susceptibility, memory, or mobility could uncover mixed strategies where some agents act as early adopters while others remain long-term holdouts. • Empirical validation. Applying the framework to real-world datasets—such as social media cascades, organizational change, or epidemic diffusion—would test external validity and illuminate which mecha-nisms dominate in practice. 
+
+# Appendix A: ODD Model Description 
+
+For transparency and reproducibility, we summarize the model using the Overview, Design concepts, and De-tails (ODD) protocol. Notation follows the main text, and the parameter levels and defaults referenced below are listed in Table 4. 
+
+# Overview 
+
+Purpose. 
+
+The model is a theoretical, mechanism-oriented agent-based model whose purpose is to isolate how four primitives— the committed-minority seed fraction ( f ), influencer mobility ( m), agent memory ( M ), and network connectiv-ity ( d)—jointly determine whether and how quickly a population abandons an incumbent binary convention in favor of one promoted by a committed minority. It is not intended as an empirically calibrated predictor of any specific social system. 
+
+Entities, state variables, and scales. 
+
+The model contains a single agent type partitioned into two roles. Ordinary agents (the initial majority) carry a mutable binary state si ∈ { 0, 1} and are fixed to a network position. Influencer agents (the committed minority, a fraction f of the population) are permanently in state 1 and may relocate. Agents occupy the nodes of a static network—either a square lattice (with optional torus wrapping and von Neumann or Moore neighborhoods) or a Watts–Strogatz small-world graph (degree k, rewiring probability p). Each ordinary agent additionally stores the states observed in its neighborhood over the previous M timesteps. One timestep corresponds to one synchronous update of all agents; a run lasts at most steps timesteps. 
+
+Process overview and scheduling. 
+
+At each timestep: (1) every influencer relocates with probability m by swapping positions with a randomly cho-sen ordinary neighbor; (2) every ordinary agent updates its state synchronously via the local majority-over-memory rule (Equations 1–2); (3) the global adoption rate A(t) is recorded. The run terminates when A(t) = 1 
+
+(ubiquity) or when steps is reached.   
+
+> JASSS , xx(x) x, 20xx http://jasss.soc.surrey.ac.uk/xx/x/x.html
+
+Doi: 10.18564/jasss.xxxx Design Concepts 
+
+• Basic principle. Convention change is modeled as a complex contagion driven by local reinforcement from a committed minority, in the norm-emergence tradition. • Emergence. The tipping threshold f ∗ and time to ubiquity T are emergent outcomes of local interac-tions, not imposed. • Sensing and interaction. Ordinary agents sense only the states present in their network neighborhood, aggregated over their memory window; there is no global information or direct communication. • Stochasticity. Randomness enters through influencer placement (a scrambled Halton sequence) and through probabilistic movement at rate m. State updates themselves are deterministic. • Observation. The adoption trajectory A(t) is observed every step; from it we derive f ∗ (via the logistic fit of Equation 4) and T (Equation 5). 
+
+# Details 
+
+Initialization. 8.1 The population is placed on the chosen network. A fraction f of nodes is designated as influencers using a scrambled Halton sequence (Appendix B) and set to state 1; all remaining (ordinary) agents start in state 0 with empty memory. 
+
+Input data. 8.2 The model uses no external input data; all dynamics are generated endogenously. 
+
+Submodels. 8.3 The movement submodel is the local swap described in the Methodology section. The update submodel is the majority-over-memory rule of Equations 1–2. The measurement submodels are the logistic tipping-point estimator (Equations 3–4) and the time-to-ubiquity measure (Equation 5). 
+
+# Appendix B: Influencer Placement 
+
+9.1 Influencers were placed using a Halton sequence with Owen scrambling to ensure even yet varied distributions across runs. For lattice networks, two-dimensional Halton samples were generated, rounded to the nearest integer, and mapped to grid coordinates. For small-world networks, one-dimensional samples were directly mapped to node IDs. This approach yields balanced but stochastic seeding, reducing sampling bias while avoid-ing artificial clustering. The same randomized seed configuration was applied consistently across both lattice and small-world topologies to ensure comparability. 
+
+# Appendix C: Simulation Parameters 
+
+10.1 Table 4 lists the variables used in the simulations, their admissible values, and defaults when not explicitly varied. Dynamic parameters such as m, M , and f drive social processes, while structural parameters (e.g., k,
+
+p) define the interaction graph. Holding most constants at defaults enables clean ablation of key mechanisms in sensitivity studies.   
+
+> JASSS , xx(x) x, 20xx http://jasss.soc.surrey.ac.uk/xx/x/x.html
+
+Doi: 10.18564/jasss.xxxx Table 4: Variable descriptions, possible values, and default values. 
+
+Variable Description Possible Values Default 
+
+A Final adoption rate [0 , 1] –
+
+dist Initial influencer distribution {even} even 
+
+f Fraction of influencers [0 , 1] –
+
+f ∗ Tipping threshold [0 , 1] –
+
+k Small-world: avg. node degree N 4
+
+M Agent memory (steps) N 5
+
+m Influencer mobility rate [0 , 1] 0.05 
+
+M oore Lattice: Moore neighborhoods? {true, false} false 
+
+N Number of agents/nodes N 100 
+
+p Small-world: rewiring prob. [0 , 1] 0.1 
+
+steps Time horizon (max steps) N 200 
+
+topology Lattice or small-world {lattice, small-world} –
+
+torus Lattice: torus wrapping? {true, false} false 
+
+# Appendix D: Extended Analysis of Key Effects 
+
+11.1 These focused tests isolate single drivers while holding others at default settings, clarifying functional forms that later inform the unified TTU equation (Equation 6) in the main text. 
+
+# Memory 
+
+11.2 Isolating memory revealed a logarithmic dependence of the tipping threshold: 
+
+f ∗(M ) = a ln( M + b). (8) The fit (Figure 9) achieved R2 ≈ 0.97 . Although the function lacks a horizontal asymptote, f ∗ cannot exceed 
+
+0.5; unrealistically large M would be required to approach that bound. 
+
+# Steps 
+
+11.3 Varying the maximum number of timesteps while fixing other parameters yielded a reciprocal decay: 
+
+f ∗(steps ) = asteps b , (9) with R2 ≈ 0.98 (Figure 9). This implies thresholds can be driven arbitrarily close to zero given sufficient time. 
+
+# Topology 
+
+11.4 Table 5 reports the effects of lattice parameters (torus and Moore neighborhoods) and small-world degree k
+
+across mobility rates m. With mobile influencers, denser networks require larger f to succeed; with immobile influencers, thresholds remain high across all structures. 
+
+11.5 In static environments, dense connections offer little advantage because influence cannot migrate beyond fixed neighborhoods. Under mobility, the same connectivity becomes an accelerant: influencers traverse boundaries and bridge clusters, explaining the nonlinear thresholds seen in the broader analyses. 
+
+# Appendix E: Extended Time-to-Ubiquity Analysis 
+
+12.1 Here we expand on time-to-ubiquity (TTU) patterns across topologies. While the unified model (Equation 6) pro-vides a compact predictor, visualizing raw data clarifies structural differences between grids and small-worlds. Each point aggregates 50 trials per configuration, smoothing temporal noise and highlighting stable macro-level trends. 
+
+JASSS , xx(x) x, 20xx http://jasss.soc.surrey.ac.uk/xx/x/x.html Doi: 10.18564/jasss.xxxx (a) M (b) steps 
+
+Figure 9: Extended analysis of M and steps , showing supplementary f ∗ samples with other parameters fixed to defaults. Table 5: Topology and mobility effects on f ∗ in lattices (left) and small-worlds (right); other parameters fixed. 
+
+m torus M oore f ∗ 95% CI 0 .354 [.322, .381] 0 ✓ .399 [.363, .428] 0 ✓ .317 [.293, .335] 0 ✓ ✓ .338 [.307, .358] .10 .121 [.113, .127] .10 ✓ .134 [.129, .139] .10 ✓ .152 [.145, .158] .10 ✓ ✓ .178 [.162, .189] .25 .110 [.105, .116] .25 ✓ .127 [.124, .129] .25 ✓ .151 [.138, .162] .25 ✓ ✓ .194 [.180, .203] 
+
+m k f ∗ 95% CI 0 2 .379 [.364, .394] 0 4 .280 [.268, .291] 0 6 .347 [.333, .350] 0 8 .319 [.307, .331] .10 2 .121 [.114, .129] .10 4 .122 [.117, .127] .10 6 .144 [.141, .147] .10 8 .164 [.161, .166] .25 2 .084 [.079, .089] .25 4 .098 [.093, .102] .25 6 .127 [.125, .130] .25 8 .168 [.167, .168] 
+
+JASSS , xx(x) x, 20xx http://jasss.soc.surrey.ac.uk/xx/x/x.html Doi: 10.18564/jasss.xxxx (a) Lattice, von Neumann (b) Torus, von Neumann  
+
+> (c) Lattice, Moore (d) Torus, Moore
+
+Figure 10: Mean TTU data for grid-based topologies. 
+
+# Scatterplots by Topology 
+
+12.2 Figures 10 and 11 display TTU means for each topological configuration, ordered by increasing average degree 
+
+d.
+
+# Interpretability Notes 
+
+12.3 For completeness, we restate the mechanism–term mapping in Equation 6: • Baseline 1 + · · · anchors easy regimes near one step. • f −pf enforces divergence as f → 0 and quantifies seed sensitivity. • ln( M + hM ) captures diminishing inertia from memory. • Mobility fraction (m+gm)pm  
+
+> (m+hm)qm
+
+reproduces rapid early gains and saturation at high m.• Degree factor 
+
+ ddmin 
+
+e(f,M )
+
+explains why higher degree typically accelerates adoption but can impede it under scarce seeds and large memory; here dmin = 2 − 2 
+
+> N
+
+.
+
+12.4 These notes bridge the empirical observations of the Results section with the analytical form of Equation 6, clar-ifying how curvature, saturation, and gated interactions correspond to estimated parameters. This alignment supports both quantitative accuracy and mechanistic transparency.   
+
+> JASSS , xx(x) x, 20xx http://jasss.soc.surrey.ac.uk/xx/x/x.html
+
+Doi: 10.18564/jasss.xxxx (a) k = 2 (b) k = 4 
+
+(c) k = 6 (d) k = 8 
+
+Figure 11: Mean TTU data for small-world networks. 
+
+JASSS , xx(x) x, 20xx http://jasss.soc.surrey.ac.uk/xx/x/x.html Doi: 10.18564/jasss.xxxx References 
+
+Andreoni, J., Nikiforakis, N. & Siegenthaler, S. (2021). Predicting social tipping and norm change in controlled experiments. Proceedings of the National Academy of Sciences , 118 (16), e2014893118. doi: 10.1073/pnas. 2014893118 
+
+Andrighetto, G. & Vriens, E. (2022). A research agenda for the study of social norm change. Philosophical Trans-actions of the Royal Society A , 380 (2227), 20200411. doi: 10.1098/rsta.2020.0411 
+
+Ashery, A. F., Aiello, L. M. & Baronchelli, A. (2025). Emergent social conventions and collective bias in LLM pop-ulations. Science Advances , 11 (20), eadu9368. doi: 10.1126/sciadv.adu9368 
+
+Baccino, L. & Villata, S. (2023). How does a minority opinion spread?: An agent-based model on the opposition between a silent majority and a loud minority. In The International FLAIRS Conference Proceedings , vol. 36 Bakshy, E., Hofman, J. M., Mason, W. A. & Watts, D. J. (2011). Everyone’s an influencer: quantifying influence on twitter. In Proceedings of the fourth ACM international conference on Web search and data mining , (pp. 65–74). doi: 10.1145/1935826.1935845 
+
+Bavel, J. J. V., Baicker, K., Boggio, P. S., Capraro, V., Cichocka, A., Cikara, M., Crockett, M. J., Crum, A. J., Douglas, K. M., Druckman, J. N. et al. (2020). Using social and behavioural science to support covid-19 pandemic response. Nature Human Behaviour , 4(5), 460–471. doi: 10.1038/s41562-020-0884-z 
+
+Bicchieri, C. (2016). Norms in the wild: How to diagnose, measure, and change social norms . New York: Oxford University Press Bicchieri, C. & Dimant, E. (2022). Nudging with care: The risks and benefits of social information. Public Choice ,
+
+191 (3), 443–464. doi: 10.1007/s11127-021-00879-w 
+
+Centola, D. (2010). The spread of behavior in an online social network experiment. Science , 329 (5996), 1194– 1197. doi: 10.1126/science.1185231 
+
+Centola, D. (2011). An experimental study of homophily in the adoption of health behavior. Science , 334 (6060), 1269–1272. doi: 10.1126/science.1207055 
+
+Centola, D. & Baronchelli, A. (2015). The spontaneous emergence of conventions: An experimental study of cultural evolution. Proceedings of the National Academy of Sciences of the United States of America , 112 ,1989–1994. doi: 10.1073/pnas.1418838112 
+
+Centola, D., Becker, J., Brackbill, D. & Baronchelli, A. (2018). Experimental evidence for tipping points in social convention. Science , 360 (6393), 1116–1119. doi: 10.1126/science.aas8827 
+
+Chi, H., Mascagni, M. & Warnock, T. (2005). On the optimal halton sequence. Mathematics and computers in simulation , 70 (1), 9–21. doi: 10.1016/j.matcom.2005.03.004 
+
+Choi, H., Kim, S. H. & Lee, J. (2010). Role of network structure and network effects in diffusion of innovations. 
+
+Industrial Marketing Management , 39 , 170–177. doi: 10.1016/j.indmarman.2008.08.006 
+
+De, S., Gelfand, M., Nau, D. & Roos, P. (2015). The inevitability of ethnocentrism revisited: Ethnocentrism dimin-ishes as mobility increases. Scientific Reports , 5. doi: 10.1038/srep17963 
+
+De, S., Nau, D. S., Pan, X. & Gelfand, M. J. (2018). Tipping points for norm change in human cultures. In Social, Cultural, and Behavioral Modeling: 11th International Conference, SBP-BRiMS 2018, Washington, DC, USA, July 10-13, 2018, Proceedings 11 , (pp. 61–69). Springer. doi: 10.1007/978-3-319-93372-6_7 
+
+Everall, J. P., Donges, J. F. & Otto, I. M. (2023). The pareto effect in tipping social networks: from minority to majority. EGUsphere , 2023 , 1–38. doi: 10.5194/egusphere-2023-2241 
+
+Flaxman, S., Goel, S. & Rao, J. M. (2016). Filter bubbles, echo chambers, and online news consumption. Public Opinion Quarterly , 80 (S1), 298–320. doi: 10.1093/poq/nfw006 
+
+Gelfand, M. J., Gavrilets, S. & Nunn, N. (2024). Norm dynamics: Interdisciplinary perspectives on social norm emergence, persistence, and change. Annual Review of Psychology , 75 (1), 341–378. doi: 10.1146/ annurev-psych-033020-013319   
+
+> JASSS , xx(x) x, 20xx http://jasss.soc.surrey.ac.uk/xx/x/x.html
+
+Doi: 10.18564/jasss.xxxx González-Bailón, S., Borge-Holthoefer, J., Rivero, A. & Moreno, Y. (2011). The dynamics of protest recruitment through an online network. Scientific Reports , 1(1), 1–7. doi: 10.1038/srep00197 
+
+Granovetter, M. (1978). Threshold models of collective behavior. American Journal of Sociology , 83 (6), 1420– 1443. doi: 10.1086/226707 
+
+Helfmann, L., Heitzig, J., Koltai, P., Kurths, J. & Schütte, C. (2021). Statistical analysis of tipping pathways in agent-based models. The European Physical Journal Special Topics , 230 (16), 3249–3271. doi: 10.1140/epjs/ s11734-021-00191-0 
+
+Huang, Y., Yuan, Z., Zhou, Y., Guo, K., Wang, X., Zhuang, H., Sun, W., Sun, L., Wang, J., Ye, Y. & Zhang, X. (2024). Social science meets LLMs: How reliable are large language models in social simulations? arXiv preprint arXiv:2410.23426 Iacopini, I., Petri, G., Baronchelli, A. & Barrat, A. (2022). Group interactions modulate critical mass dynamics in social convention. Communications Physics , 5(1), 64. doi: 10.1038/s42005-022-00845-y 
+
+Kandori, M., Mailath, G. J. & Rob, R. (1993). Learning, mutation, and long run equilibria in games. Econometrica ,
+
+61 (1), 29–56. doi: 10.2307/2951777 
+
+Lopez, F. (2015). Modeling emergence of norms in multi-agent systems by applying tipping points ideas. arXiv preprint arXiv:1508.04531 
+
+Masuda, N., Porter, M. A. & Lambiotte, R. (2017). Random walks and diffusion on networks. Physics Reports ,
+
+716-717 , 1–58. doi: 10.1016/j.physrep.2017.07.007 
+
+Mellema, R., Jensen, M. & Dignum, F. (2020). Social rules for agent systems. arXiv preprint arXiv:2004.12797 Milkoreit, M. (2023). Social tipping points everywhere?—patterns and risks of overuse. Wiley Interdisciplinary Reviews: Climate Change , 14 (2), e813. doi: 10.1002/wcc.813 
+
+Morris-Martin, A., De Vos, M. & Padget, J. (2019). Norm emergence in multiagent systems: a viewpoint paper. 
+
+Autonomous Agents and Multi-Agent Systems , 33 , 706–749. doi: 10.1007/s10458-019-09422-0 
+
+Rogers, E. M. (2003). Diffusion of Innovations . New York: Free Press, 5th edn. Taillandier, P., Zucker, J. D., Grignard, A., Gaudou, B., Huynh, N. Q. & Drogoul, A. (2025). Integrating LLM in agent-based social simulation: Opportunities and challenges. arXiv preprint arXiv:2507.19364 Villatoro, D., Sen, S. & Sabater-Mir, J. (2009). Topology and memory effect on convention emergence. In Pro-ceedings - 2009 IEEE/WIC/ACM International Conference on Intelligent Agent Technology, IAT 2009 , vol. 2, (pp. 233–240). doi: 10.1109/WI-IAT.2009.155 
+
+Watts, D. J. & Strogatz, S. H. (1998). Collective dynamics of ‘small-world’ networks. Nature , 393 (6684), 440–442. doi: 10.1038/30918 
+
+Weiss, H. H. (2013). The SIR model and the foundations of public health. Materials Matemàtics , 2013 (3), 1–17 Young, H. P. (1996). The economics of convention. Journal of Economic Perspectives , 10 (2), 105–122. doi: 
+
+10.1257/jep.10.2.105 
+
+Zaitsev, D. A. (2017). A generalized neighborhood for cellular automata. Theoretical Computer Science , 666 ,21–35. doi: 10.1016/j.tcs.2016.11.002   
+
+> JASSS , xx(x) x, 20xx http://jasss.soc.surrey.ac.uk/xx/x/x.html
+
+Doi: 10.18564/jasss.xxxx

@@ -1,0 +1,265 @@
+{
+  "date": "20260724-20260822",
+  "date_label": "2026-07-24 ~ 2026-08-22",
+  "generated_at": "2026-08-22 02:43:34 UTC",
+  "recommend_exists": true,
+  "run_count": 1,
+  "papers": [
+    {
+      "paper_id": "2607.28527v1",
+      "route": "20260724-20260822/2607.28527v1-manta-multi-agent-network-topology-adaptation-for-self-evolving-multi-agent-systems",
+      "title": "MANTA: Multi-Agent Network Topology Adaptation for Self-Evolving Multi-Agent Systems",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "multi-agent"
+        }
+      ],
+      "score": 10.0,
+      "evidence": "提出MANTA框架，使多智能体通信拓扑在推理时自适应演化",
+      "first_seen_at": "2026-08-22 02:43:34 UTC",
+      "updated_at": "2026-08-22 02:43:34 UTC"
+    },
+    {
+      "paper_id": "2608.04634v1",
+      "route": "20260724-20260822/2608.04634v1-helenahierarchical-sparse-coordination-over-a-union-of-complementary-topologies-for-mas",
+      "title": "HELENA:Hierarchical Sparse Coordination over a Union of Complementary Topologies for MAS",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "multi-agent"
+        }
+      ],
+      "score": 10.0,
+      "evidence": "通过MCTS和DPP合并互补拓扑来设计多智能体系统拓扑",
+      "first_seen_at": "2026-08-22 02:43:34 UTC",
+      "updated_at": "2026-08-22 02:43:34 UTC"
+    },
+    {
+      "paper_id": "2608.12921v2",
+      "route": "20260724-20260822/2608.12921v2-discovering-efficient-and-explainable-communication-topologies-for-llm-based-multi-agent-systems-via-causal-inference",
+      "title": "Discovering Efficient and Explainable Communication Topologies for LLM-based Multi-Agent Systems via Causal Inference",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "multi-agent"
+        }
+      ],
+      "score": 10.0,
+      "evidence": "通信拓扑生成与可解释分析，直接面向智能体通信图设计",
+      "first_seen_at": "2026-08-22 02:43:34 UTC",
+      "updated_at": "2026-08-22 02:43:34 UTC"
+    },
+    {
+      "paper_id": "2608.20099v1",
+      "route": "20260724-20260822/2608.20099v1-reward-guided-autoregressive-graph-generation-for-efficient-multi-agent-communication-topology-design",
+      "title": "Reward-Guided Autoregressive Graph Generation for Efficient Multi-Agent Communication Topology Design",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "multi-agent"
+        }
+      ],
+      "score": 10.0,
+      "evidence": "直接提出奖励引导的自回归图生成方法用于高效多智能体通信拓扑设计",
+      "first_seen_at": "2026-08-22 02:43:34 UTC",
+      "updated_at": "2026-08-22 02:43:34 UTC"
+    },
+    {
+      "paper_id": "2607.28679v1",
+      "route": "20260724-20260822/2607.28679v1-multi-agent-planning-with-spatio-temporal-and-topological-constraints-using-stl-go",
+      "title": "Multi-Agent Planning with Spatio-Temporal and Topological Constraints using STL-GO",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "multi-agent"
+        }
+      ],
+      "score": 9.0,
+      "evidence": "感知、通信、任务等拓扑约束的图形式化与多智能体交互组织",
+      "first_seen_at": "2026-08-22 02:43:34 UTC",
+      "updated_at": "2026-08-22 02:43:34 UTC"
+    },
+    {
+      "paper_id": "2608.05967v1",
+      "route": "20260724-20260822/2608.05967v1-m3prune-hierarchical-collaborative-pruning-for-efficient-multi-modal-multi-agent-retrieval-augmented-generation",
+      "title": "M$^3$Prune: Hierarchical Collaborative Pruning for Efficient Multi-Modal Multi-Agent Retrieval-Augmented Generation",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "multi-agent"
+        }
+      ],
+      "score": 9.0,
+      "evidence": "提出层次化通信图剪枝，跨模态和模态内删除冗余通信边，直接设计智能体通信图。",
+      "first_seen_at": "2026-08-22 02:43:34 UTC",
+      "updated_at": "2026-08-22 02:43:34 UTC"
+    },
+    {
+      "paper_id": "2608.07196v1",
+      "route": "20260724-20260822/2608.07196v1-emas-stabilizing-multi-agent-system-evolution-through-evidence-guided-revision",
+      "title": "EMAS: Stabilizing Multi-Agent System Evolution through Evidence-Guided Revision",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "multi-agent"
+        }
+      ],
+      "score": 9.0,
+      "evidence": "在演化过程中根据证据修订多智能体系统的拓扑与提示词，明确是设计MAS拓扑的方法。",
+      "first_seen_at": "2026-08-22 02:43:34 UTC",
+      "updated_at": "2026-08-22 02:43:34 UTC"
+    },
+    {
+      "paper_id": "2607.23678v1",
+      "route": "20260724-20260822/2607.23678v1-focus-is-all-you-need-adaptive-goal-aware-attention-orchestration-for-multi-agent-graph-systems",
+      "title": "Focus Is All You Need: Adaptive Goal-aware Attention Orchestration for Multi-Agent Graph Systems",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "multi-agent"
+        }
+      ],
+      "score": 8.0,
+      "evidence": "多智能体图系统的图结构编排与自适应注意力分配",
+      "first_seen_at": "2026-08-22 02:43:34 UTC",
+      "updated_at": "2026-08-22 02:43:34 UTC"
+    },
+    {
+      "paper_id": "2607.26212v1",
+      "route": "20260724-20260822/2607.26212v1-multi-agent-debate-strategies-survey-taxonomy-and-challenges",
+      "title": "Multi-Agent Debate Strategies: Survey, Taxonomy, and Challenges",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "multi-agent"
+        }
+      ],
+      "score": 8.0,
+      "evidence": "对多智能体辩论中交互机制的系统分类，涵盖参与者、交流结构和协议",
+      "first_seen_at": "2026-08-22 02:43:34 UTC",
+      "updated_at": "2026-08-22 02:43:34 UTC"
+    },
+    {
+      "paper_id": "2607.27942v1",
+      "route": "20260724-20260822/2607.27942v1-scaling-llm-driven-multi-agent-systems-design-principles-and-architectural-scalability-analysis",
+      "title": "Scaling LLM-Driven Multi-Agent Systems: Design Principles and Architectural Scalability Analysis",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "multi-agent"
+        }
+      ],
+      "score": 8.0,
+      "evidence": "从现有工作中提炼出可扩展多智能体架构的四条设计原则，直接面向交互结构设计。",
+      "first_seen_at": "2026-08-22 02:43:34 UTC",
+      "updated_at": "2026-08-22 02:43:34 UTC"
+    },
+    {
+      "paper_id": "2608.03833v1",
+      "route": "20260724-20260822/2608.03833v1-history-matters-meta-policy-delegation-with-heterogeneous-multi-agent-reinforcement-learning",
+      "title": "History Matters: Meta-policy Delegation with Heterogeneous Multi-agent Reinforcement Learning",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "multi-agent"
+        }
+      ],
+      "score": 8.0,
+      "evidence": "异构多智能体强化学习中的预设委托拓扑与交互结构",
+      "first_seen_at": "2026-08-22 02:43:34 UTC",
+      "updated_at": "2026-08-22 02:43:34 UTC"
+    },
+    {
+      "paper_id": "2608.07810v1",
+      "route": "20260724-20260822/2608.07810v1-mobility-memory-and-network-structure-in-agent-based-models-of-convention-tipping-and-convergence",
+      "title": "Mobility, Memory, and Network Structure in Agent-Based Models of Convention Tipping and Convergence",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "multi-agent"
+        }
+      ],
+      "score": 8.0,
+      "evidence": "研究网络拓扑与连接模式如何影响基于智能体模型的临界转变阈值",
+      "first_seen_at": "2026-08-22 02:43:34 UTC",
+      "updated_at": "2026-08-22 02:43:34 UTC"
+    },
+    {
+      "paper_id": "2608.13616v1",
+      "route": "20260724-20260822/2608.13616v1-adjacency-based-spectral-proxy-control-of-mobile-communication-agents",
+      "title": "Adjacency-Based Spectral Proxy Control of Mobile Communication Agents",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "multi-agent"
+        }
+      ],
+      "score": 8.0,
+      "evidence": "谱图指标用于移动多智能体网络布局的连通性控制",
+      "first_seen_at": "2026-08-22 02:43:34 UTC",
+      "updated_at": "2026-08-22 02:43:34 UTC"
+    },
+    {
+      "paper_id": "2608.15133v1",
+      "route": "20260724-20260822/2608.15133v1-consensusability-of-continuous-time-multi-agent-systems-with-unbounded-heterogeneous-constant-delays-a-signed-laplacian-perspective",
+      "title": "Consensusability of Continuous-Time Multi-Agent Systems With Unbounded Heterogeneous Constant Delays: A Signed Laplacian Perspective",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "multi-agent"
+        }
+      ],
+      "score": 8.0,
+      "evidence": "利用符号拉普拉斯矩阵刻画时延下多智能体系统的连接模式与一致性",
+      "first_seen_at": "2026-08-22 02:43:34 UTC",
+      "updated_at": "2026-08-22 02:43:34 UTC"
+    },
+    {
+      "paper_id": "2608.15519v1",
+      "route": "20260724-20260822/2608.15519v1-topological-collapse-of-higher-order-interactions-bottlenecks-collective-intelligence-in-ai-agent-societies",
+      "title": "Topological collapse of higher-order interactions bottlenecks collective intelligence in AI agent societies",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "multi-agent"
+        }
+      ],
+      "score": 8.0,
+      "evidence": "发现AI智能体社会中的拓扑坍塌现象：中心节点主导使高阶交互退化为星型广播模式，直接影响集体智能。",
+      "first_seen_at": "2026-08-22 02:43:34 UTC",
+      "updated_at": "2026-08-22 02:43:34 UTC"
+    },
+    {
+      "paper_id": "2608.17282v1",
+      "route": "20260724-20260822/2608.17282v1-dear-decentralized-agentic-reasoning-via-capability-grounding-and-collaborative-thought-navigation",
+      "title": "DeAR: Decentralized Agentic Reasoning via Capability Grounding and Collaborative Thought Navigation",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "multi-agent"
+        }
+      ],
+      "score": 8.0,
+      "evidence": "去中心化点对点协作与拓扑更新机制，属于交互结构设计方法",
+      "first_seen_at": "2026-08-22 02:43:34 UTC",
+      "updated_at": "2026-08-22 02:43:34 UTC"
+    }
+  ]
+}
