@@ -1,0 +1,262 @@
+{
+  "mode": "standard",
+  "generated_at": "2026-09-14T22:26:12.944355+00:00",
+  "stats": {
+    "mode": "standard",
+    "tag_count": 0,
+    "deep_divecandidates": 6,
+    "deep_cap": 5,
+    "deep_selected": 5,
+    "quick_candidates": 1,
+    "quick_skim_target": 10,
+    "quick_selected": 1
+  },
+  "deep_dive": [
+    {
+      "id": "2609.05298v1",
+      "source": "arxiv",
+      "title": "Online Change-point Detection for Cooperative Multi-Agent Reinforcement Learning",
+      "abstract": "Cooperative multi-agent reinforcement learning (MARL) systems rely on past experience for learning coordinated behaviour, but this experience may become unreliable if the environment or task objective changes during training. In such cases, agents first need a way to recognize that the situation has changed before deciding how to adapt. This paper studies online change-point detection for cooperative MARL using reward-derived signals. We propose \\emph{Patterns of Past Rewards} (PPR), a lightweight algorithm-agnostic detector that smooths agents' return streams, highlights recent changes, and applies a statistical drift detector to flag significant shifts. We evaluate PPR in a custom Speaker-Listener environment based on the Multi-Agent Particle Environment under two controlled non-stationarity scenarios. Our results show a trade-off between detection speed and alarm stability. A smoothed-return baseline detects earlier but produces many repeated alarms. In contrast, applying the detector directly to raw returns often misses the shift. PPR offers a more balanced approach by limiting redundant detections while still identifying the controlled shifts. These findings highlight PPR as a lightweight, reward-based monitoring tool that enables cooperative MARL systems to reliably identify major changes during training.",
+      "authors": [
+        "Fatemeh Saberi Khomami",
+        "Julita Vassileva"
+      ],
+      "primary_category": "cs.MA",
+      "categories": [
+        "cs.MA",
+        "cs.LG"
+      ],
+      "published": "2026-09-04T15:49:42+00:00",
+      "link": "https://arxiv.org/pdf/2609.05298v1",
+      "tags": [
+        "keyword:agents",
+        "keyword:multi-agent",
+        "query:agents",
+        "query:multi-agent"
+      ],
+      "llm_score": 8.0,
+      "llm_evidence_en": "online change-point detection for cooperative multi-agent reinforcement learning",
+      "llm_evidence_cn": "协作式多智能体强化学习的在线变点检测",
+      "llm_evidence": "协作式多智能体强化学习的在线变点检测",
+      "canonical_evidence": "协作式多智能体强化学习的在线变点检测",
+      "llm_tldr_en": "Cooperative MARL relies on past experience, which becomes unreliable when tasks change. The paper proposes PPR, a lightweight algorithm-agnostic online change-point detector using reward signals, evaluated in a Speaker-Listener task.",
+      "llm_tldr_cn": "协作式多智能体强化学习依赖历史经验学习协调行为，但环境或任务目标发生变化时，旧经验会变得不可靠。本文研究基于奖励信号的在线变点检测，提出轻量且与算法无关的PPR检测器，通过平滑回报流、突出近期变化并施加统计漂移检测来标记显著变化。在基于多智能体粒子环境的Speaker-Listener定制场景中，该方法能及时识别变化点，为智能体在适应前提供变化感知能力。",
+      "llm_tldr": "协作式多智能体强化学习依赖历史经验学习协调行为，但环境或任务目标发生变化时，旧经验会变得不可靠。本文研究基于奖励信号的在线变点检测，提出轻量且与算法无关的PPR检测器，通过平滑回报流、突出近期变化并施加统计漂移检测来标记显著变化。在基于多智能体粒子环境的Speaker-Listener定制场景中，该方法能及时识别变化点，为智能体在适应前提供变化感知能力。",
+      "llm_tags": [
+        "query:agents"
+      ],
+      "matched_query_tag": "query:agents",
+      "matched_query_text": "Methods for multi agent reinforcement learning and cooperation",
+      "matched_requirement_id": "req-10",
+      "selection_source": "carryover_cache",
+      "paper_id": "2609.05298v1"
+    },
+    {
+      "id": "2609.08366v1",
+      "source": "arxiv",
+      "title": "Reachability-Certified Subteam Decomposition for Locally Interacting Multi-Agent MDPs",
+      "abstract": "Persistent communication limits force a multi-agent system to decide which agents may coordinate throughout a rollout. Current proximity alone is insufficient: separated agents may interact later, whereas a large pair reward may remain unreachable until it is heavily discounted. We introduce Reachability-Certified Subteam Decomposition (RCSD) for finite multi-agent Markov decision processes with factorized physical dynamics, finite-range ordered pair rewards, and almost-sure motion bounds. RCSD combines a speed-limit lower bound on pairwise contact time with a reward envelope to form a current-state affinity. For any capacity-valid persistent partition, the sum of cut affinities bounds the reward-deletion error of every unchanged stationary Markov state-feedback policy. A product of team-optimal policies for the resulting cut MDP incurs at most twice this certificate in regret against the centralized optimum. Both bounds are worst-case tight. On a controlled five-agent family, RCSD-Exact reduces aggregate normalized execution regret by 56.0%, 28.8%, and 25.3% relative to uniform, distance-only, and envelope-only partitions. A separate stochastic two-dimensional study finds no bound violation over 384 exact-partition and 1,440 restricted-controller evaluations. Exact four-agent evidence favors RCSD over uniform and distance-only grouping; raw evidence for current contact is borderline and envelope-only is unresolved. Across balanced 8-20-agent strata, controller-library utility is mixed: pointwise paired intervals favor RCSD over distance and current contact, include zero for uniform, and favor envelope-only and Value-MIP over RCSD. Partition construction remains subsecond in median up to 100 agents; this last result does not include affinity formation or MDP planning.",
+      "authors": [
+        "Xiangwu Wang",
+        "Chengwei Cao",
+        "Hongyuan Tang"
+      ],
+      "primary_category": "cs.MA",
+      "categories": [
+        "cs.MA"
+      ],
+      "published": "2026-09-08T07:35:00+00:00",
+      "link": "https://arxiv.org/pdf/2609.08366v1",
+      "tags": [
+        "keyword:agents",
+        "keyword:multi-agent",
+        "query:agents",
+        "query:multi-agent"
+      ],
+      "llm_score": 8.0,
+      "llm_evidence_en": "subteam decomposition deciding which agents coordinate under communication limits",
+      "llm_evidence_cn": "通信受限下决定智能体协同子团队分解",
+      "llm_evidence": "通信受限下决定智能体协同子团队分解",
+      "canonical_evidence": "通信受限下决定智能体协同子团队分解",
+      "llm_tldr_en": "Communication limits force multi-agent systems to decide which agents coordinate. RCSD uses speed-limit contact-time bounds and reward envelopes to certify subteam partitions, bounding reward-deletion error for locally interacting multi-agent MDPs.",
+      "llm_tldr_cn": "持续通信受限迫使多智能体系统决定哪些智能体在整个执行过程中可以相互协调，而仅凭当前邻近性并不充分：分离的智能体可能日后交互，大额配对奖励也可能在重折扣前不可达。本文提出可达性认证子团队分解RCSD，面向具有因子化动力学与有限范围配对奖励的多智能体马尔可夫决策过程，结合速度上限给出的接触时间下界与奖励包络构造状态亲和度。该方法为持久划分提供了奖励删除误差界，从而在通信受限下实现有依据的协同结构划分。",
+      "llm_tldr": "持续通信受限迫使多智能体系统决定哪些智能体在整个执行过程中可以相互协调，而仅凭当前邻近性并不充分：分离的智能体可能日后交互，大额配对奖励也可能在重折扣前不可达。本文提出可达性认证子团队分解RCSD，面向具有因子化动力学与有限范围配对奖励的多智能体马尔可夫决策过程，结合速度上限给出的接触时间下界与奖励包络构造状态亲和度。该方法为持久划分提供了奖励删除误差界，从而在通信受限下实现有依据的协同结构划分。",
+      "llm_tags": [
+        "query:multi-agent"
+      ],
+      "matched_query_tag": "query:multi-agent",
+      "matched_query_text": "the structure and arrangement of connections among multiple autonomous agents",
+      "matched_requirement_id": "req-11",
+      "selection_source": "carryover_cache",
+      "paper_id": "2609.08366v1"
+    },
+    {
+      "id": "2609.06586v2",
+      "source": "arxiv",
+      "title": "Certifying cooperation: a novel approach to cooperative multi-agent task generation",
+      "abstract": "A shared reward gives agents a common objective, but leaves open when, how and even whether they must cooperate to succeed. We address these questions in the Laser Learning Environment, a multi-agent path-finding environment where cooperation materializes as one agent blocking a laser to let a teammate pass safely. We represent these interactions through temporal cooperation graphs whose timed edges connect helpers to beneficiaries, define six cooperation profiles as overlapping graph predicates, and prove that every cooperative trajectory satisfies at least one. By encoding the environment dynamics and profile predicates as propositional formulae, we distinguish tasks that admit}a profile in some winning trajectory from those that require it in every winning trajectory within a specified horizon. Used as filters, these queries turn a random layout sampler into a generator of tasks with certified cooperation requirements. Experiments with five multi-agent reinforcement learning algorithms show that training diversity improves joint success on unseen tasks when cooperation-free solutions exist. When cooperation is required, greater diversity improves individual-agent exits, but joint success remains near zero. Across five profile-certified pools, final exit rates averaged over algorithms separate the pools into four statistically distinguishable levels but this ordering primarily reflects partial completion: policies collect rewards for individual exits but rarely exhibit the profile required for joint success. Our framework exposes this gap between rewarded partial completion and realized cooperation by certifying what cooperation successful completion requires and using temporal cooperation graphs to reveal what policies exhibit.",
+      "authors": [
+        "Yannick Molinghen",
+        "Hugo Charels",
+        "Tom Lenaerts"
+      ],
+      "primary_category": "cs.MA",
+      "categories": [
+        "cs.MA",
+        "cs.AI",
+        "cs.LG"
+      ],
+      "published": "2026-09-06T13:08:51+00:00",
+      "link": "https://arxiv.org/pdf/2609.06586v2",
+      "tags": [
+        "keyword:agents",
+        "keyword:multi-agent",
+        "query:agents",
+        "query:multi-agent"
+      ],
+      "llm_score": 8.0,
+      "llm_evidence_en": "temporal cooperation graphs connect helpers to beneficiaries",
+      "llm_evidence_cn": "用时间合作图刻画智能体间的协作",
+      "llm_evidence": "用时间合作图刻画智能体间的协作",
+      "canonical_evidence": "用时间合作图刻画智能体间的协作",
+      "llm_tldr_en": "Shared reward gives agents a common objective but not when or whether they must cooperate. Using temporal cooperation graphs and six profiles, this work certifies which multi-agent tasks require cooperation.",
+      "llm_tldr_cn": "共享奖励只给智能体共同目标，却无法刻画它们何时、如何甚至是否必须合作。本文在激光学习环境中将合作形式化为一个智能体挡住激光让同伴安全通过，并用时间合作图连接帮助者与受益者，定义六种合作剖面并证明每条合作轨迹至少满足其一。通过将环境动态与剖面编码为命题公式，作者区分了可在某条获胜轨迹中满足某剖面的任务与必须满足的任务，为协作式多智能体任务生成提供可认证的形式化工具。",
+      "llm_tldr": "共享奖励只给智能体共同目标，却无法刻画它们何时、如何甚至是否必须合作。本文在激光学习环境中将合作形式化为一个智能体挡住激光让同伴安全通过，并用时间合作图连接帮助者与受益者，定义六种合作剖面并证明每条合作轨迹至少满足其一。通过将环境动态与剖面编码为命题公式，作者区分了可在某条获胜轨迹中满足某剖面的任务与必须满足的任务，为协作式多智能体任务生成提供可认证的形式化工具。",
+      "llm_tags": [
+        "query:agents"
+      ],
+      "matched_query_tag": "query:agents",
+      "matched_query_text": "How do multiple agents communicate and coordinate to solve tasks?",
+      "matched_requirement_id": "req-9",
+      "selection_source": "carryover_cache",
+      "paper_id": "2609.06586v2"
+    },
+    {
+      "id": "2609.08452v1",
+      "source": "arxiv",
+      "title": "SRPO: Setwise Relative Policy Optimization for Multi-Agent LLMs",
+      "abstract": "Multi-agent large language models solve complex tasks by coordinating several policies in a shared environment. However, existing reinforcement learning methods usually optimize each response or trajectory separately, even when several outputs jointly cause one state transition. Consequently, the update unit differs from the action executed by the system. To address this problem, we propose SRPO (Setwise Relative Policy Optimization), which treats the active set the minimal set of outputs consumed by one transition, as one multi-agent action. Specifically, SRPO combines member log-ratios into one cardinality-normalized set ratio, assigns one relative advantage, and clips the set once. This formulation unifies division of labor and joint co-evolution as actions with different set sizes. Experiments on mathematical reasoning and multi-turn search demonstrate one training interface for fixed, mixed, and dynamically routed workflows across four model scales, with the strongest macro-average results among the reported comparisons. Optimization diagnostics further characterize its stability under different event reductions and set sizes.",
+      "authors": [
+        "Shengtian Yang",
+        "Ziyu Xiong",
+        "Yu Li",
+        "Yewen Li",
+        "Qingpeng Cai",
+        "Lei Feng"
+      ],
+      "primary_category": "cs.AI",
+      "categories": [
+        "cs.AI"
+      ],
+      "published": "2026-09-08T08:52:23+00:00",
+      "link": "https://arxiv.org/pdf/2609.08452v1",
+      "tags": [
+        "keyword:agents",
+        "keyword:multi-agent",
+        "query:agents",
+        "query:multi-agent"
+      ],
+      "llm_score": 8.0,
+      "llm_evidence_en": "reinforcement learning optimization for multi-agent LLMs",
+      "llm_evidence_cn": "面向多智能体LLM的强化学习优化",
+      "llm_evidence": "面向多智能体LLM的强化学习优化",
+      "canonical_evidence": "面向多智能体LLM的强化学习优化",
+      "llm_tldr_en": "Multi-agent LLM RL usually optimizes each response separately, mismatching the system action. This paper proposes SRPO, treating the minimal output set behind one transition as a single multi-agent action.",
+      "llm_tldr_cn": "多智能体大语言模型通过协调多个策略在共享环境中求解复杂任务，但现有强化学习方法通常单独优化每个回复或轨迹，即便若干输出联合导致同一次状态转移，造成更新单元与系统实际执行的动作不一致。本文提出集合式相对策略优化SRPO，把一次状态转移所消耗的最小输出集合视为一个多智能体动作，将成员对数比合并为基数归一化的集合比并赋予单一相对优势后整体裁剪。该方法统一了分工与联合演化，使优化单元与系统动作对齐。",
+      "llm_tldr": "多智能体大语言模型通过协调多个策略在共享环境中求解复杂任务，但现有强化学习方法通常单独优化每个回复或轨迹，即便若干输出联合导致同一次状态转移，造成更新单元与系统实际执行的动作不一致。本文提出集合式相对策略优化SRPO，把一次状态转移所消耗的最小输出集合视为一个多智能体动作，将成员对数比合并为基数归一化的集合比并赋予单一相对优势后整体裁剪。该方法统一了分工与联合演化，使优化单元与系统动作对齐。",
+      "llm_tags": [
+        "query:agents"
+      ],
+      "matched_query_tag": "query:agents",
+      "matched_query_text": "reinforcement learning in multi-agent environments",
+      "matched_requirement_id": "req-5",
+      "selection_source": "carryover_cache",
+      "paper_id": "2609.08452v1"
+    },
+    {
+      "id": "2609.08802v1",
+      "source": "arxiv",
+      "title": "Graph-Based Safe Reinforcement Learning for Multi-Agent Systems with Time-Varying Topology",
+      "abstract": "This paper presents a graph-based safe multi-agent reinforcement learning (MARL) framework for cooperative navigation with time-varying topology. To address the critical challenge of ensuring safety in environments with sensing constraints, a safety-decoupled mechanism is introduced through a Control Barrier-Like Function (CBLF) action screening layer. This mechanism bridges the gap between discrete LiDAR perception and continuous safety constraints, ensuring that physical safety constraints are strictly satisfied regardless of the learning progress. Building upon this safety foundation, a unified structural architecture is proposed, integrating a attention-based actor and a Graph Attention Network (GAT) centralized critic. The actor utilizes a value vector reconstruction mechanism that explicitly encodes relative geometric relations through a collaborative tracking error matrix, enabling scale-insensitive policy learning under time-varying communication topologies. Meanwhile, the GAT-based critic models evolving interaction structures for accurate global value estimation. The proposed framework is validated on real differential-drive robot platforms, and experimental results demonstrate superior stability and safety in dynamic scenarios with limited fields-of-view.",
+      "authors": [
+        "Xiao Sizhe",
+        "Dong Lijing",
+        "Bai Rui",
+        "Tan Xin"
+      ],
+      "primary_category": "cs.RO",
+      "categories": [
+        "cs.RO"
+      ],
+      "published": "2026-09-08T14:30:06+00:00",
+      "link": "https://arxiv.org/pdf/2609.08802v1",
+      "tags": [
+        "keyword:agents",
+        "keyword:multi-agent",
+        "query:agents",
+        "query:multi-agent"
+      ],
+      "llm_score": 8.0,
+      "llm_evidence_en": "graph-based safe MARL with time-varying topology",
+      "llm_evidence_cn": "面向时变拓扑的图基安全多智能体强化学习",
+      "llm_evidence": "面向时变拓扑的图基安全多智能体强化学习",
+      "canonical_evidence": "面向时变拓扑的图基安全多智能体强化学习",
+      "llm_tldr_en": "This paper presents a graph-based safe MARL framework for cooperative navigation under time-varying topology, combining a control-barrier-like action screening layer with an attention actor and GAT centralized critic.",
+      "llm_tldr_cn": "在感知受限的环境中，多智能体协同导航面临时变拓扑与严格安全约束的双重挑战，传统MARL难以兼顾。本文提出图基安全多智能体强化学习框架，通过类控制障碍函数动作筛选层把离散LiDAR感知与连续安全约束衔接，并采用注意力actor与图注意力网络集中式critic的统一结构。实验表明该机制无论学习进度如何都能严格满足物理安全约束。其贡献在于为时变通信拓扑下的安全多智能体协作提供可复用方法。",
+      "llm_tldr": "在感知受限的环境中，多智能体协同导航面临时变拓扑与严格安全约束的双重挑战，传统MARL难以兼顾。本文提出图基安全多智能体强化学习框架，通过类控制障碍函数动作筛选层把离散LiDAR感知与连续安全约束衔接，并采用注意力actor与图注意力网络集中式critic的统一结构。实验表明该机制无论学习进度如何都能严格满足物理安全约束。其贡献在于为时变通信拓扑下的安全多智能体协作提供可复用方法。",
+      "llm_tags": [
+        "query:agents"
+      ],
+      "matched_query_tag": "query:agents",
+      "matched_query_text": "reinforcement learning in multi-agent environments",
+      "matched_requirement_id": "req-5",
+      "selection_source": "carryover_cache",
+      "paper_id": "2609.08802v1"
+    }
+  ],
+  "quick_skim": [
+    {
+      "id": "2609.11737v1",
+      "source": "arxiv",
+      "title": "ORCH: Organizational Principles Enable Collective Intelligence in Embodied AI",
+      "abstract": "Collective intelligence depends not only on the capabilities of individual members, but also on how those members are organized. Yet artificial multi-agent systems are typically assembled using fixed organizational structures, even when the physical tasks they perform impose fundamentally different coordination requirements. Here we show that principles from human organization theory can be operationalized to organize large, heterogeneous collectives of embodied artificial agents. We introduce ORCH (Organizing Roles and Coordination Hierarchies), which constructs task-specific hierarchical organizations by combining pooled interdependence for work that can proceed concurrently with sequential interdependence for work governed by prerequisite relationships. Across 25 wildfire-response missions spanning reconnaissance, rescue, transportation, resource management, containment and suppression, we evaluated teams of up to 50 heterogeneous agents using eight large language models. Organizations constructed using these principles consistently outperformed four representative embodied multi-agent approaches across mission outcome, execution efficiency, exploration and computational resource use. Human-designed ORCH organizations improved final score by 63.97% and execution efficiency by 74.29% on average relative to the four prior frameworks. Organizations generated automatically by language models improved these measures by 43.63% and 52.53%, respectively. These advantages persisted across missions and underlying language models. Notably, collective performance was not monotonically determined by model scale. Analysis of long-horizon missions showed that hierarchical organization enabled teams to preserve concurrent activity within specialized groups while coordinating ordered transitions between mission phases.",
+      "authors": [
+        "Zhengran Ji",
+        "Jonathan Hyun",
+        "Boyuan Chen"
+      ],
+      "primary_category": "cs.MA",
+      "categories": [
+        "cs.MA",
+        "cs.AI",
+        "cs.LG",
+        "cs.RO"
+      ],
+      "published": "2026-09-10T15:52:35+00:00",
+      "link": "https://arxiv.org/pdf/2609.11737v1",
+      "tags": [
+        "keyword:agents",
+        "keyword:multi-agent",
+        "query:agents",
+        "query:multi-agent"
+      ],
+      "llm_score": 8.0,
+      "llm_evidence_en": "task-specific hierarchical organizations for coordinating embodied multi-agent collectives",
+      "llm_evidence_cn": "为具身多智能体集体构建任务特定的层级组织结构",
+      "llm_evidence": "为具身多智能体集体构建任务特定的层级组织结构",
+      "canonical_evidence": "为具身多智能体集体构建任务特定的层级组织结构",
+      "llm_tldr_en": "ORCH operationalizes human organization theory to build task-specific hierarchical organizations for large heterogeneous collectives of embodied agents, matching coordination structure to task requirements.",
+      "llm_tldr_cn": "集体智能不仅取决于个体能力，还取决于成员如何被组织，但现有人工多智能体系统通常采用固定组织结构，即使物理任务对协调的需求截然不同。ORCH借鉴人类组织理论，将可并行工作的汇集式相互依赖与受前置关系约束的顺序式相互依赖相结合，为大规模异构具身智能体集体构建任务特定的层级组织。该工作表明组织原则可被操作化，使协调结构与任务需求相匹配。",
+      "llm_tldr": "集体智能不仅取决于个体能力，还取决于成员如何被组织，但现有人工多智能体系统通常采用固定组织结构，即使物理任务对协调的需求截然不同。ORCH借鉴人类组织理论，将可并行工作的汇集式相互依赖与受前置关系约束的顺序式相互依赖相结合，为大规模异构具身智能体集体构建任务特定的层级组织。该工作表明组织原则可被操作化，使协调结构与任务需求相匹配。",
+      "llm_tags": [
+        "query:agents"
+      ],
+      "matched_query_tag": "query:agents",
+      "matched_query_text": "coordination mechanisms for multiple autonomous agents",
+      "matched_requirement_id": "req-6",
+      "selection_source": "carryover_cache",
+      "paper_id": "2609.11737v1",
+      "quick_tier": "8plus"
+    }
+  ]
+}

@@ -1,0 +1,105 @@
+{
+  "date": "20260914",
+  "date_label": "",
+  "generated_at": "2026-09-14 22:33:19 UTC",
+  "recommend_exists": true,
+  "run_count": 1,
+  "papers": [
+    {
+      "paper_id": "2609.05298v1",
+      "route": "202609/14/2609.05298v1-online-change-point-detection-for-cooperative-multi-agent-reinforcement-learning",
+      "title": "Online Change-point Detection for Cooperative Multi-Agent Reinforcement Learning",
+      "section": "deep",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "agents"
+        }
+      ],
+      "score": 8.0,
+      "evidence": "协作式多智能体强化学习的在线变点检测",
+      "first_seen_at": "2026-09-14 22:33:19 UTC",
+      "updated_at": "2026-09-14 22:33:19 UTC"
+    },
+    {
+      "paper_id": "2609.06586v2",
+      "route": "202609/14/2609.06586v2-certifying-cooperation-a-novel-approach-to-cooperative-multi-agent-task-generation",
+      "title": "Certifying cooperation: a novel approach to cooperative multi-agent task generation",
+      "section": "deep",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "agents"
+        }
+      ],
+      "score": 8.0,
+      "evidence": "用时间合作图刻画智能体间的协作",
+      "first_seen_at": "2026-09-14 22:33:19 UTC",
+      "updated_at": "2026-09-14 22:33:19 UTC"
+    },
+    {
+      "paper_id": "2609.08366v1",
+      "route": "202609/14/2609.08366v1-reachability-certified-subteam-decomposition-for-locally-interacting-multi-agent-mdps",
+      "title": "Reachability-Certified Subteam Decomposition for Locally Interacting Multi-Agent MDPs",
+      "section": "deep",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "multi-agent"
+        }
+      ],
+      "score": 8.0,
+      "evidence": "通信受限下决定智能体协同子团队分解",
+      "first_seen_at": "2026-09-14 22:33:19 UTC",
+      "updated_at": "2026-09-14 22:33:19 UTC"
+    },
+    {
+      "paper_id": "2609.08452v1",
+      "route": "202609/14/2609.08452v1-srpo-setwise-relative-policy-optimization-for-multi-agent-llms",
+      "title": "SRPO: Setwise Relative Policy Optimization for Multi-Agent LLMs",
+      "section": "deep",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "agents"
+        }
+      ],
+      "score": 8.0,
+      "evidence": "面向多智能体LLM的强化学习优化",
+      "first_seen_at": "2026-09-14 22:33:19 UTC",
+      "updated_at": "2026-09-14 22:33:19 UTC"
+    },
+    {
+      "paper_id": "2609.08802v1",
+      "route": "202609/14/2609.08802v1-graph-based-safe-reinforcement-learning-for-multi-agent-systems-with-time-varying-topology",
+      "title": "Graph-Based Safe Reinforcement Learning for Multi-Agent Systems with Time-Varying Topology",
+      "section": "deep",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "agents"
+        }
+      ],
+      "score": 8.0,
+      "evidence": "面向时变拓扑的图基安全多智能体强化学习",
+      "first_seen_at": "2026-09-14 22:33:19 UTC",
+      "updated_at": "2026-09-14 22:33:19 UTC"
+    },
+    {
+      "paper_id": "2609.11737v1",
+      "route": "202609/14/2609.11737v1-orch-organizational-principles-enable-collective-intelligence-in-embodied-ai",
+      "title": "ORCH: Organizational Principles Enable Collective Intelligence in Embodied AI",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "agents"
+        }
+      ],
+      "score": 8.0,
+      "evidence": "为具身多智能体集体构建任务特定的层级组织结构",
+      "first_seen_at": "2026-09-14 22:33:19 UTC",
+      "updated_at": "2026-09-14 22:33:19 UTC"
+    }
+  ]
+}
