@@ -1,0 +1,1775 @@
+{
+  "mode": "standard",
+  "generated_at": "2026-10-31T02:25:38.841549+00:00",
+  "stats": {
+    "mode": "standard",
+    "tag_count": 3,
+    "deep_divecandidates": 66,
+    "deep_cap": 8,
+    "deep_selected": 29,
+    "quick_candidates": 85,
+    "quick_skim_target": 13,
+    "quick_selected": 13
+  },
+  "deep_dive": [
+    {
+      "id": "2610.06695v1",
+      "source": "arxiv",
+      "title": "MedPrune: Topology-Efficient Multimodal Multi-Agent Communication Evolution for Medical VQA Tasks",
+      "abstract": "While medical multimodal large language models (Med-MLLMs) advance medical visual question answering (VQA), existing clinical workflow-inspired multi-agent frameworks suffer from interaction patterns and excessive computational overhead caused by redundant communication topologies. In this paper, we propose MedPrune, an efficient medical multimodal multi-agent collaboration framework that dynamically prunes both nodes and edges from the communication topology to enhance reasoning ability and token efficiency. Specifically, we first formulate the diagnostic process as a heterogeneous communication graph, where nodes represent specialist agents from various departments and edges capture intra- and inter-departmental interactions. Building on this graph, we introduce two sparsification mechanisms to enable adaptive collaborative evolution: (1) Heterogeneous Node Sparsification, which eliminates task-irrelevant specialist agents irrelevant to the current multimodal question via reinforcement learning-driven topological optimization, and (2) Heterogeneous Edge Sparsification, which selectively retains only the most diagnostically salient intra- and inter-departmental connections by jointly optimizing task performance and topological complexity. Extensive medical VQA experiments under full-set and few-shot training settings prove MedPrune surpasses multi-agent baselines and boosts token efficiency with strong adversarial robustness.",
+      "authors": [
+        "Jiuheng Wan",
+        "Runze Li",
+        "Chen Chen",
+        "Tingyuan Hu",
+        "Daiyang Yu",
+        "Yimin Jing",
+        "Taolin Zhang",
+        "Richang Hong"
+      ],
+      "primary_category": "cs.CL",
+      "categories": [
+        "cs.CL"
+      ],
+      "published": "2026-10-05T16:55:58+00:00",
+      "link": "https://arxiv.org/pdf/2610.06695v1",
+      "tags": [
+        "keyword:agents",
+        "keyword:multi-agent",
+        "query:agents",
+        "query:multi-agent"
+      ],
+      "llm_score": 9.0,
+      "llm_evidence_en": "Dynamically prunes nodes and edges in a heterogeneous agent communication graph",
+      "llm_evidence_cn": "在异构智能体通信图中动态剪枝节点与边",
+      "llm_evidence": "在异构智能体通信图中动态剪枝节点与边",
+      "canonical_evidence": "在异构智能体通信图中动态剪枝节点与边",
+      "llm_tldr_en": "Proposes MedPrune, a medical multimodal multi-agent framework that represents diagnosis as a heterogeneous communication graph and dynamically prunes nodes and edges to reduce redundant topology and token cost while improving reasoning.",
+      "llm_tldr_cn": "针对医学多模态多智能体框架中冗余通信拓扑带来交互模式混乱和计算开销过高的问题，论文提出MedPrune协作框架。该方法将诊断过程建模为异构通信图，节点为不同科室的专家智能体、边表示科内与科间交互，并动态剪枝节点和边以优化拓扑。实验表明该框架在提升推理能力的同时提高令牌效率，为医学视觉问答中的多智能体通信结构设计提供高效方案。",
+      "llm_tldr": "针对医学多模态多智能体框架中冗余通信拓扑带来交互模式混乱和计算开销过高的问题，论文提出MedPrune协作框架。该方法将诊断过程建模为异构通信图，节点为不同科室的专家智能体、边表示科内与科间交互，并动态剪枝节点和边以优化拓扑。实验表明该框架在提升推理能力的同时提高令牌效率，为医学视觉问答中的多智能体通信结构设计提供高效方案。",
+      "llm_tags": [
+        "query:multi-agent"
+      ],
+      "matched_query_tag": "query:multi-agent",
+      "matched_query_text": "how to design the communication graph for agents",
+      "matched_requirement_id": "req-14",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2610.07578v1",
+      "source": "arxiv",
+      "title": "Cooperating with Future Collaborators: Multi-Agent RL under Staggered Participation",
+      "abstract": "In cooperative Multi-Agent Reinforcement Learning (MARL), agents are often trained under concurrent participation, while in many tasks some agents act earlier and leave task-relevant information that becomes useful to agents participating later. We study this setting as staggered participation (SP), which introduces a cross-time, cross-agent learning dependency because an early action may affect the return through the information it provides and the later policy that uses it. Learning under SP therefore requires both identifying what information is useful for future decisions and learning how later agents should use it. We propose Staggered Participation Learning (SPL), a training-time augmentation that addresses these two parts with prospective acquisition supervision for earlier agents and outcome-supervised receiver learning for later agents. We evaluate SPL across multiple policy-based MARL backbones, environments, and staggered-participation patterns. Across 60 MPE/RWARE backbone setting comparisons, SPL achieves higher observed mean task completion in every case, with an average difference of 14.1%. The gains also extend to eight-agent teams and a physics-based UAV-UGV environment in Isaac Lab, providing evidence across algorithmic, temporal, and embodied settings.",
+      "authors": [
+        "Jianglin Qiao",
+        "Siyi Hu",
+        "Thien Hoang Nguyen",
+        "Zehong Cao",
+        "Salah Sukkarieh"
+      ],
+      "primary_category": "cs.AI",
+      "categories": [
+        "cs.AI"
+      ],
+      "published": "2026-10-06T01:13:24+00:00",
+      "link": "https://arxiv.org/pdf/2610.07578v1",
+      "tags": [
+        "keyword:agents",
+        "keyword:multi-agent",
+        "query:agents",
+        "query:gen-memory",
+        "query:multi-agent"
+      ],
+      "llm_score": 9.0,
+      "llm_evidence_en": "cooperative multi-agent reinforcement learning under staggered participation",
+      "llm_evidence_cn": "交错参与下的合作式多智能体强化学习",
+      "llm_evidence": "交错参与下的合作式多智能体强化学习",
+      "canonical_evidence": "交错参与下的合作式多智能体强化学习",
+      "llm_tldr_en": "Introduces staggered participation in cooperative MARL and proposes Staggered Participation Learning, a training augmentation helping early agents leave useful information and later agents exploit it.",
+      "llm_tldr_cn": "合作式多智能体强化学习通常假设所有智能体同时参与训练，但许多任务中先行动者会留下对后续智能体有用的信息。论文将这一设定形式化为交错参与，指出其带来跨时间、跨智能体的学习依赖。为此提出交错参与学习SPL训练增强方法，通过前瞻机制识别有用信息并教会后续智能体加以利用。实验表明该方法能在该设定下改善协作表现。工作拓展了MARL的合作场景，为异步参与的多智能体协作提供了训练方案。",
+      "llm_tldr": "合作式多智能体强化学习通常假设所有智能体同时参与训练，但许多任务中先行动者会留下对后续智能体有用的信息。论文将这一设定形式化为交错参与，指出其带来跨时间、跨智能体的学习依赖。为此提出交错参与学习SPL训练增强方法，通过前瞻机制识别有用信息并教会后续智能体加以利用。实验表明该方法能在该设定下改善协作表现。工作拓展了MARL的合作场景，为异步参与的多智能体协作提供了训练方案。",
+      "llm_tags": [
+        "query:agents"
+      ],
+      "matched_query_tag": "query:agents",
+      "matched_query_text": "reinforcement learning in multi-agent environments",
+      "matched_requirement_id": "req-5",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2610.07704v1",
+      "source": "arxiv",
+      "title": "Independent Multi-Agent Reinforcement Learning with Counterfactual Semantic-Social World Models",
+      "abstract": "Fully decentralized multi-agent reinforcement learning (MARL), also referred to as independent learning, requires each agent to learn and act using only its local information and experience, without a centralized critic or inter-agent communication. Such a stringent information structure renders the conventional reward signal ambiguous. A poor return may result from an ineffective ego action, an incompatible teammate response, or an effective opponent response, yet scalar rewards alone do not reveal which explanation is responsible. We argue that agents can learn more effectively by prospectively comparing the consequences of candidate actions rather than diagnosing failures only from realized returns. We introduce CASTLE (Counterfactual Action-conditioned Semantic Tokens for Local Execution in Decentralized MARL), an offline-training, online-in-context guidance framework with two complementary world models. A Local Dynamics World Model, offline pre-trained over agents' local trajectories, summarizes the agent's local trajectory dynamics and partial observability, while a Semantic-Social World Model predicts compact short-horizon task and social consequences for each candidate ego action. The latter is trained from counterfactual simulator rollouts that expose plausible teammate and opponent responses to alternative actions taken from the same logged rollout state. During online learning and execution, both world models remain frozen and are queried by agents using only locally available information. Their prediction logits provide in-context guidance to an independent PPO policy. Across 30 matched seeds on Tag, Spread, and Adversary in the benchmark multi-particle environments, our proposed CASTLE achieves the highest mean final score among the evaluated methods, exceeding the strongest baseline on each task by 10.67, 6.46, and 0.33 normalized points, respectively.",
+      "authors": [
+        "Fernando Martinez",
+        "Tao Li",
+        "Yingdong Lu",
+        "Juntao Chen"
+      ],
+      "primary_category": "cs.MA",
+      "categories": [
+        "cs.MA",
+        "cs.LG"
+      ],
+      "published": "2026-10-06T03:53:47+00:00",
+      "link": "https://arxiv.org/pdf/2610.07704v1",
+      "tags": [
+        "keyword:agents",
+        "keyword:multi-agent",
+        "query:agents",
+        "query:gen-memory",
+        "query:multi-agent"
+      ],
+      "llm_score": 9.0,
+      "llm_evidence_en": "Fully decentralized multi-agent reinforcement learning with counterfactual semantic-social world models",
+      "llm_evidence_cn": "结合反事实语义社会世界模型的全去中心化多智能体强化学习",
+      "llm_evidence": "结合反事实语义社会世界模型的全去中心化多智能体强化学习",
+      "canonical_evidence": "结合反事实语义社会世界模型的全去中心化多智能体强化学习",
+      "llm_tldr_en": "Introduces CASTLE, a fully decentralized multi-agent reinforcement learning method that uses counterfactual semantic-social world models to prospectively compare candidate action consequences and resolve ambiguous local rewards.",
+      "llm_tldr_cn": "针对全去中心化多智能体强化学习仅依赖本地信息、标量奖励难以区分自身动作、队友反应与对手策略的问题，论文提出CASTLE方法。该方法构建反事实语义社会世界模型，让智能体前瞻性地比较候选动作的后果，而不是仅从已实现回报中诊断失败。研究面向独立学习场景，在无中心评论家与智能体通信的条件下提升学习效果，为多智能体强化学习中的信用分配与协作训练提供新思路。",
+      "llm_tldr": "针对全去中心化多智能体强化学习仅依赖本地信息、标量奖励难以区分自身动作、队友反应与对手策略的问题，论文提出CASTLE方法。该方法构建反事实语义社会世界模型，让智能体前瞻性地比较候选动作的后果，而不是仅从已实现回报中诊断失败。研究面向独立学习场景，在无中心评论家与智能体通信的条件下提升学习效果，为多智能体强化学习中的信用分配与协作训练提供新思路。",
+      "llm_tags": [
+        "query:agents"
+      ],
+      "matched_query_tag": "query:agents",
+      "matched_query_text": "reinforcement learning in multi-agent environments",
+      "matched_requirement_id": "req-5",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2610.07835v1",
+      "source": "arxiv",
+      "title": "DHCG: Dynamic Construction of Hierarchical Collaboration Graphs for LLM-Based Multi-Agent Reasoning",
+      "abstract": "LLM-based multi-agent systems (MAS) have demonstrated strong capabilities in solving complex problems across diverse domains. Recently, the dynamic orchestration of agent systems has become an important research direction. However, existing methods suffer from limited composition, misaligned dependencies, and inflexible scale, restricting their ability to adapt to reasoning requirements during execution. To address these limitations, we reframe MAS design as a partially observable Markov decision process, in which both the composition and scale of the MAS are dynamically determined. We propose DHCG, a novel framework that coordinates three modules (Planner, Worker, and Generator) to progressively construct a dynamic hierarchical collaboration graph from scratch based on the query and evolving execution feedback. At each step, guided by feedback, the Planner generates a set of distinct and complementary roles tailored to the current reasoning needs and selectively routes relevant information to each role. It can also finalize the hierarchical collaboration graph early or progressively expand it when additional reasoning is required. We further introduce action-aware preference optimization to train the Planner to make more effective decisions when constructing hierarchical collaboration graphs. We systematically evaluate DHCG across code generation, mathematical reasoning, and domain-specific reasoning benchmarks. DHCG achieves state-of-the-art average performance among the compared methods, improving over the single-agent baseline by 13.06 points and outperforming both static and dynamic MAS baselines by 2.77-8.02 points. Additional experiments further demonstrate its generalization across different Planner backbones and unseen Worker models.",
+      "authors": [
+        "Jie Ren",
+        "Jiakang Yuan",
+        "Chenyu Huang",
+        "Hezeer Ma",
+        "Jiayuan Fan",
+        "Tao Chen"
+      ],
+      "primary_category": "cs.AI",
+      "categories": [
+        "cs.AI"
+      ],
+      "published": "2026-10-06T06:33:40+00:00",
+      "link": "https://arxiv.org/pdf/2610.07835v1",
+      "tags": [
+        "keyword:agents",
+        "keyword:multi-agent",
+        "query:agents",
+        "query:multi-agent"
+      ],
+      "llm_score": 9.0,
+      "llm_evidence_en": "dynamically constructs hierarchical collaboration graphs to orchestrate LLM multi-agent systems",
+      "llm_evidence_cn": "动态构建层次化协作图以编排大模型多智能体系统",
+      "llm_evidence": "动态构建层次化协作图以编排大模型多智能体系统",
+      "canonical_evidence": "动态构建层次化协作图以编排大模型多智能体系统",
+      "llm_tldr_en": "Reframes LLM multi-agent design as a POMDP and proposes DHCG, whose Planner, Worker and Generator modules progressively build dynamic hierarchical collaboration graphs that adapt to reasoning needs.",
+      "llm_tldr_cn": "现有大模型多智能体系统编排存在构成受限、依赖错配和规模僵化等问题，难以在执行中适应推理需求。作者将多智能体设计重构为部分可观测马尔可夫决策过程，提出DHCG框架，由规划器、工作者与生成器三个模块逐步构建动态层次化协作图。该方法可动态决定智能体的组成与规模，从而更灵活地组织协作拓扑。该工作为多智能体拓扑的动态设计提供了新范式。",
+      "llm_tldr": "现有大模型多智能体系统编排存在构成受限、依赖错配和规模僵化等问题，难以在执行中适应推理需求。作者将多智能体设计重构为部分可观测马尔可夫决策过程，提出DHCG框架，由规划器、工作者与生成器三个模块逐步构建动态层次化协作图。该方法可动态决定智能体的组成与规模，从而更灵活地组织协作拓扑。该工作为多智能体拓扑的动态设计提供了新范式。",
+      "llm_tags": [
+        "query:multi-agent:composite"
+      ],
+      "matched_query_tag": "query:multi-agent:composite",
+      "matched_query_text": "Papers central to 多智能体拓扑设计的方式, especially work that connects or combines: the structure and arrangement of connections among multiple autonomous agents; the network layout and connectivity patterns in multi-agent systems; approaches for designing the interaction structure of multi-agent systems; how to design the communication graph for agents; graph-based organization of multi-agent interactions; topological arrangement enabling agent collaboration; How to design the topology of a multi agent system; What are the common methods for constructing agent communication topologies.",
+      "matched_requirement_id": "req-composite-multi-agent",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2610.07860v1",
+      "source": "arxiv",
+      "title": "WorkflowOps: Learning Agent Collaboration Priors for Multi-Agent Workflow Orchestration",
+      "abstract": "Multi-agent systems are increasingly deployed for complex knowledge work, yet their orchestration layers remain largely memoryless: each new task is decomposed, assigned, and executed from scratch with no benefit from prior successful executions. We present WorkflowOps, a multi-agent workflow orchestration framework that learns agent collaboration priors from historical workflows and expands its agent pool on demand to cover new capability requirements. Our approach introduces three coupled mechanisms. First, a transition probability matrix captures pairwise agent collaboration frequencies from past workflows and applies them as soft guidance during DAG workflow construction through intra-layer ordering optimization, probability-thresholded edge suggestion, and transitive reduction for parallelism maximization. Second, a sufficiency-driven agent creation loop detects capability gaps via semantic matching scores, generates specialized agents through an LLM, and simultaneously injects them into the collaboration matrix, so that newly created agents are immediately usable with predicted collaboration priors. Third, a layered semantic matching strategy uses pre-trained sentence embeddings for fast, deterministic capability matching as a first pass, invoking LLM verification only for low-confidence cases, thereby reducing LLM routing calls by over 80\\% compared to pure-LLM approaches. Experiments on mixed code, math, and question-answering suites show that WorkflowOps improves end-to-end pass rates over recent workflow-construction baselines, with the largest gains on structured, decomposable tasks where past agent handoff patterns transfer.",
+      "authors": [
+        "Qi Cheng",
+        "Shengyu Chen",
+        "Wei Cheng",
+        "Zhengzhang Chen",
+        "Xiaowei Jia",
+        "Haoyu Wang",
+        "Haifeng Chen"
+      ],
+      "primary_category": "cs.AI",
+      "categories": [
+        "cs.AI"
+      ],
+      "published": "2026-10-06T07:01:38+00:00",
+      "link": "https://arxiv.org/pdf/2610.07860v1",
+      "tags": [
+        "keyword:agents",
+        "keyword:multi-agent",
+        "query:agents",
+        "query:gen-memory",
+        "query:multi-agent"
+      ],
+      "llm_score": 9.0,
+      "llm_evidence_en": "learns agent collaboration priors and builds DAG workflows with transition probability guidance",
+      "llm_evidence_cn": "学习智能体协作先验,借助转移概率引导构建DAG工作流",
+      "llm_evidence": "学习智能体协作先验,借助转移概率引导构建DAG工作流",
+      "canonical_evidence": "学习智能体协作先验,借助转移概率引导构建DAG工作流",
+      "llm_tldr_en": "WorkflowOps addresses memoryless multi-agent orchestration by learning collaboration priors from historical workflows and expanding the agent pool on demand, guiding DAG construction with pairwise transition probabilities.",
+      "llm_tldr_cn": "现有多智能体编排层缺乏记忆,每个新任务都需从头分解、分配与执行,无法复用历史成功经验。WorkflowOps从历史工作流中学习智能体协作先验,利用成对协作频率构成转移概率矩阵,在DAG工作流构建时做软引导,并按需扩展智能体池以覆盖新能力需求。该框架把协作结构设计与能力扩展耦合起来,提升了复杂知识工作的编排效率与可复用性。",
+      "llm_tldr": "现有多智能体编排层缺乏记忆,每个新任务都需从头分解、分配与执行,无法复用历史成功经验。WorkflowOps从历史工作流中学习智能体协作先验,利用成对协作频率构成转移概率矩阵,在DAG工作流构建时做软引导,并按需扩展智能体池以覆盖新能力需求。该框架把协作结构设计与能力扩展耦合起来,提升了复杂知识工作的编排效率与可复用性。",
+      "llm_tags": [
+        "query:multi-agent:composite"
+      ],
+      "matched_query_tag": "query:multi-agent:composite",
+      "matched_query_text": "Papers central to 多智能体拓扑设计的方式, especially work that connects or combines: the structure and arrangement of connections among multiple autonomous agents; the network layout and connectivity patterns in multi-agent systems; approaches for designing the interaction structure of multi-agent systems; how to design the communication graph for agents; graph-based organization of multi-agent interactions; topological arrangement enabling agent collaboration; How to design the topology of a multi agent system; What are the common methods for constructing agent communication topologies.",
+      "matched_requirement_id": "req-composite-multi-agent",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2610.10302v1",
+      "source": "arxiv",
+      "title": "Continual Graph Multi-Agent Reinforcement Learning",
+      "abstract": "In Continual Multi-Agent Reinforcement Learning (CMARL), agents learn cooperative policies across sequences of tasks, aiming to adapt effectively to new tasks while preserving the ability to solve previously encountered ones. In many applications, tasks differ in their underlying structure, which can represent, for example, distinct operational conditions or target configurations (e.g., different network topologies in power grids or arrangements in formation control). Existing CMARL methods lack dedicated mechanisms to leverage this structural information when learning new tasks, failing to promote transfer and mitigate forgetting. To fill this gap, we propose Continual Graph Multi-Agent Reinforcement Learning (CGMARL), a novel framework for CMARL problems in which task sequences are mapped into a series of attributed graphs, each modeling a task-specific structure. In CGMARL, each graph determines the environment dynamics (next states and/or rewards) and the number of agents for the corresponding task. Then, we present Graph-based Formation (GRAFO), the first CGMARL benchmark, and show how forgetting arises in this setting. Finally, to address this limitation, we propose Frozen Graph Encoder (FROG), a method that relies on a frozen graph backbone to preserve past structural information in graph-based CMARL policies. Experiments on GRAFO show that pairing FROG with existing CL methods substantially improves performance on multiple CGMARL scenarios.",
+      "authors": [
+        "Tommaso Marzi",
+        "Ahmed Hendawy",
+        "Jan Peters",
+        "Carlo D'Eramo",
+        "Andrea Cini",
+        "Cesare Alippi"
+      ],
+      "primary_category": "cs.LG",
+      "categories": [
+        "cs.LG"
+      ],
+      "published": "2026-10-07T15:56:31+00:00",
+      "link": "https://arxiv.org/pdf/2610.10302v1",
+      "tags": [
+        "keyword:agents",
+        "keyword:multi-agent",
+        "query:agents",
+        "query:gen-memory",
+        "query:multi-agent"
+      ],
+      "llm_score": 9.0,
+      "llm_evidence_en": "continual multi-agent reinforcement learning leveraging task graph structure for cooperative policy transfer",
+      "llm_evidence_cn": "利用任务图结构进行持续多智能体强化学习以迁移协作策略",
+      "llm_evidence": "利用任务图结构进行持续多智能体强化学习以迁移协作策略",
+      "canonical_evidence": "利用任务图结构进行持续多智能体强化学习以迁移协作策略",
+      "llm_tldr_en": "Proposes CGMARL, a continual multi-agent RL framework that exploits task structural information such as network topologies to promote transfer and mitigate forgetting across sequences of cooperative tasks.",
+      "llm_tldr_cn": "持续多智能体强化学习要求智能体在连续任务间迁移协作策略并避免遗忘，但现有方法未利用任务背后的结构信息，如电网拓扑或编队构型。本文提出CGMARL框架，借助图结构刻画任务差异，在学习新任务时复用结构信息以促进迁移并抑制遗忘。该工作将图结构与持续多智能体学习结合，为结构化任务序列下的协作策略学习提供了新思路。",
+      "llm_tldr": "持续多智能体强化学习要求智能体在连续任务间迁移协作策略并避免遗忘，但现有方法未利用任务背后的结构信息，如电网拓扑或编队构型。本文提出CGMARL框架，借助图结构刻画任务差异，在学习新任务时复用结构信息以促进迁移并抑制遗忘。该工作将图结构与持续多智能体学习结合，为结构化任务序列下的协作策略学习提供了新思路。",
+      "llm_tags": [
+        "query:agents"
+      ],
+      "matched_query_tag": "query:agents",
+      "matched_query_text": "Methods for multi agent reinforcement learning and cooperation",
+      "matched_requirement_id": "req-10",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2610.12124v1",
+      "source": "arxiv",
+      "title": "Use and Disuse: Intent-Structured Experience Consolidation for Memory and Learning in LLM Agents",
+      "abstract": "The evolution of Large Language Model agents from single-task execution to long-term autonomous operation highlights the critical challenge of transforming continuous experiences into reusable knowledge. To address this, we propose Hippocam, a hierarchical memory and continual learning architecture. Hippocam draws inspiration from two characteristics of human memory: cognitive processes selectively maintain information relevant to current goals, while long-term memories form gradually through repeated consolidation. Accordingly, Hippocam structures an agent's ongoing work as nested intents. The active context remains centered on the current intent, while completed intents are consolidated into the task-relevant outcomes and state needed for subsequent work, rather than carrying forward their full working details. Concurrently, a recursive prefix consolidation mechanism repeatedly consolidates earlier history, causing long-unused experiences to become increasingly abstract. Original interactions are preserved, allowing the agent to progressively recover finer-grained details through the hierarchy and stop once sufficient information is available. Crucially, when past experiences are recalled and reintegrated into active work, they undergo subsequent consolidation alongside new experiences, thereby being reinforced, supplemented, and updated. Through this memory dynamic of use and disuse, Hippocam connects working context, long-term memory, knowledge accumulation, and skill learning within a single continuously evolving experiential process. This enables agents to learn and evolve capabilities through their own experiences without parameter updates.",
+      "authors": [
+        "Xiangyi Zeng",
+        "Baihang Liu",
+        "Xutong Wang",
+        "Ze Jin",
+        "Yunpeng Li",
+        "Qixu Liu"
+      ],
+      "primary_category": "cs.AI",
+      "categories": [
+        "cs.AI"
+      ],
+      "published": "2026-10-08T15:16:56+00:00",
+      "link": "https://arxiv.org/pdf/2610.12124v1",
+      "tags": [
+        "keyword:agents",
+        "keyword:gen-memory",
+        "keyword:multi-agent",
+        "query:agents",
+        "query:gen-memory",
+        "query:multi-agent"
+      ],
+      "llm_score": 9.0,
+      "llm_evidence_en": "hierarchical memory and consolidation for long-term LLM agents",
+      "llm_evidence_cn": "面向长期LLM智能体的分层记忆与巩固机制",
+      "llm_evidence": "面向长期LLM智能体的分层记忆与巩固机制",
+      "canonical_evidence": "面向长期LLM智能体的分层记忆与巩固机制",
+      "llm_tldr_en": "Proposes Hippocam, a hierarchical memory and continual learning architecture that structures agent work as nested intents and consolidates completed intents into reusable long-term knowledge.",
+      "llm_tldr_cn": "LLM智能体从单任务执行走向长期自主运行，如何将连续经验转化为可复用知识成为关键难题。论文受人类记忆启发提出Hippocam分层记忆与持续学习架构，把智能体的工作组织为嵌套意图，使活跃上下文始终聚焦当前意图，并将已完成意图整合为任务相关成果逐步沉淀为长期记忆。该设计模拟了选择性保持与重复巩固两种机制。工作为生成式智能体的长期记忆与经验巩固提供了可行架构。",
+      "llm_tldr": "LLM智能体从单任务执行走向长期自主运行，如何将连续经验转化为可复用知识成为关键难题。论文受人类记忆启发提出Hippocam分层记忆与持续学习架构，把智能体的工作组织为嵌套意图，使活跃上下文始终聚焦当前意图，并将已完成意图整合为任务相关成果逐步沉淀为长期记忆。该设计模拟了选择性保持与重复巩固两种机制。工作为生成式智能体的长期记忆与经验巩固提供了可行架构。",
+      "llm_tags": [
+        "query:gen-memory"
+      ],
+      "matched_query_tag": "query:gen-memory",
+      "matched_query_text": "What mechanisms enable memory consolidation and long term memory in generative agents?",
+      "matched_requirement_id": "req-22",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2610.13144v1",
+      "source": "arxiv",
+      "title": "Competence-Aware Orchestration for LLM-Based Multi-Agent Systems",
+      "abstract": "LLM-based multi-agent systems (MAS) have emerged as a promising paradigm for enhancing complex reasoning through role specialization and collaboration, yet a key challenge remains: how can collaboration be adapted to a backbone's competence on the current query? This problem matters because more collaboration is not always better--richer coordination may help on difficult cases, but it also incurs additional token cost and redundant interactions. We propose a two-stage competence-aware framework for automatic MAS orchestration. It first models the LLM backbone's task-conditioned competence for the current query, and then uses this signal to adapt role activation and the communication graph. Across six benchmarks, our method achieves an average score of 93.81%. Experiments with six LLM backbones of varying competence levels further show that our method adjusts collaboration according to the inferred competence: for higher-competence backbones, it improves average accuracy from 87.22 to 89.97 while reducing token cost by 36.26%; for lower-competence backbones, it yields a further average gain of 4.58 points over existing methods. The same trend also holds on unseen backbones.",
+      "authors": [
+        "Songmiao Wang",
+        "Yuchen Wang",
+        "Chenglin Yu",
+        "Hongxia Yang",
+        "Ming Li"
+      ],
+      "primary_category": "cs.AI",
+      "categories": [
+        "cs.AI"
+      ],
+      "published": "2026-10-09T07:33:42+00:00",
+      "link": "https://arxiv.org/pdf/2610.13144v1",
+      "tags": [
+        "keyword:agents",
+        "keyword:multi-agent",
+        "query:agents",
+        "query:multi-agent"
+      ],
+      "llm_score": 9.0,
+      "llm_evidence_en": "adapts role activation and the communication graph based on backbone competence",
+      "llm_evidence_cn": "依据骨干模型能力自适应调整角色激活与通信图",
+      "llm_evidence": "依据骨干模型能力自适应调整角色激活与通信图",
+      "canonical_evidence": "依据骨干模型能力自适应调整角色激活与通信图",
+      "llm_tldr_en": "A two-stage competence-aware framework models the backbone LLM task-conditioned competence and uses it to adapt role activation and the communication graph, reaching 93.81 average across six benchmarks.",
+      "llm_tldr_cn": "大模型多智能体系统通过角色分工与协作增强复杂推理，但协作并非越多越好，更丰富的协调会带来额外 token 成本与冗余交互。作者提出两阶段能力感知编排框架，先建模骨干模型对当前查询的任务条件能力，再据此自适应激活角色并调整通信图。在六个基准上平均得分 93.81，说明按需编排可在性能与成本之间取得平衡，为通信图设计提供了动态化思路。",
+      "llm_tldr": "大模型多智能体系统通过角色分工与协作增强复杂推理，但协作并非越多越好，更丰富的协调会带来额外 token 成本与冗余交互。作者提出两阶段能力感知编排框架，先建模骨干模型对当前查询的任务条件能力，再据此自适应激活角色并调整通信图。在六个基准上平均得分 93.81，说明按需编排可在性能与成本之间取得平衡，为通信图设计提供了动态化思路。",
+      "llm_tags": [
+        "query:multi-agent"
+      ],
+      "matched_query_tag": "query:multi-agent",
+      "matched_query_text": "how to design the communication graph for agents",
+      "matched_requirement_id": "req-14",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2610.16120v1",
+      "source": "arxiv",
+      "title": "Scaling Multi-Agent Intelligence with Substrate-Centric Coordination",
+      "abstract": "Existing large language model (LLM) based multi-agent systems have been shown to scale poorly, and we identify three problems: reading burden that grows with the group, useful information diluted by shared work of unknown quality, and fragility to failed agents. We argue that the problems are largely due to agent-centric designs: the coordination structure is wired into fixed workflows, central coordinators, or peer-to-peer messaging, and recent blackboard-style methods that move the coordination into a shared medium relieve only the last problem. To close the gaps, we build ScaleMAS, where asynchronous agents interact with a shared datastore of linked messages via three operations: publishing messages with optional references to earlier ones that they build on, searching for messages by content, and visiting messages by address. Search returns at most $k$ messages, so an agent's read stays bounded at any group size; results are ranked by relevance and by how often they are cited, which we find to be an effective proxy for quality; and messages persist after their producers leave, so the group carries on when individual agents fail. Across four agentic tasks, ScaleMAS outperforms agent-centric and blackboard-style baselines at lower inference compute, continues to scale up to 128 agents, and tolerates losing agents midway.",
+      "authors": [
+        "Zhenting Qi",
+        "Zhuokai Zhao",
+        "Rulin Shao",
+        "Kerem Oktar",
+        "Zhiyuan Yao",
+        "Himabindu Lakkaraju",
+        "Wen-tau Yih",
+        "Ansong Ni",
+        "Bhargavi Paranjape",
+        "Yilun Du"
+      ],
+      "primary_category": "cs.CL",
+      "categories": [
+        "cs.CL",
+        "cs.MA"
+      ],
+      "published": "2026-10-12T03:37:39+00:00",
+      "link": "https://arxiv.org/pdf/2610.16120v1",
+      "tags": [
+        "keyword:agents",
+        "keyword:multi-agent",
+        "query:agents",
+        "query:gen-memory",
+        "query:multi-agent"
+      ],
+      "llm_score": 9.0,
+      "llm_evidence_en": "substrate-centric coordination for scalable LLM multi-agent systems",
+      "llm_evidence_cn": "面向可扩展LLM多智能体系统的基底中心协调机制",
+      "llm_evidence": "面向可扩展LLM多智能体系统的基底中心协调机制",
+      "canonical_evidence": "面向可扩展LLM多智能体系统的基底中心协调机制",
+      "llm_tldr_en": "LLM multi-agent systems scale poorly due to reading burden, diluted information and fragility to failed agents; the authors blame agent-centric coordination and propose ScaleMAS, a shared linked-message substrate for asynchronous agents.",
+      "llm_tldr_cn": "现有基于大语言模型的多智能体系统难以扩展，存在阅读负担随群体增长、有效信息被低质量共享工作稀释以及对失效智能体脆弱三大问题。作者认为根源在于以智能体为中心的设计把协调结构固化进固定工作流或中心协调者。为此提出ScaleMAS，让异步智能体通过发布、引用等操作与共享链接消息数据存储交互。该基底中心设计缓解了扩展性瓶颈，为多智能体协调提供了新的结构范式。",
+      "llm_tldr": "现有基于大语言模型的多智能体系统难以扩展，存在阅读负担随群体增长、有效信息被低质量共享工作稀释以及对失效智能体脆弱三大问题。作者认为根源在于以智能体为中心的设计把协调结构固化进固定工作流或中心协调者。为此提出ScaleMAS，让异步智能体通过发布、引用等操作与共享链接消息数据存储交互。该基底中心设计缓解了扩展性瓶颈，为多智能体协调提供了新的结构范式。",
+      "llm_tags": [
+        "query:agents"
+      ],
+      "matched_query_tag": "query:agents",
+      "matched_query_text": "coordination mechanisms for multiple autonomous agents",
+      "matched_requirement_id": "req-6",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2610.17143v1",
+      "source": "arxiv",
+      "title": "OpenDGO: Benchmarking Multi-Agent Organizations Across Diverse Application Domains",
+      "abstract": "Large language model (LLM)-based multi-agent systems are increasingly applied across diverse domains, yet different applications require different forms of agent organization. Existing studies typically adopt predefined organizations, such as Star, Chain, and Tree, or learn communication graphs to improve performance on specific tasks. However, these methods are largely designed and evaluated within a limited set of application domains, providing little understanding of whether an organization effective in one domain remains suitable for others with different collaboration requirements. We present \\textbf{OpenDGO}, a controlled benchmark and analysis framework covering six real-world domains and three collaboration settings: Sequential Dependency, Parallel Decomposition, and Information Integration. Under matched tasks, agents, tools, and resource limits, OpenDGO compares fixed and learned organizations while separately examining communication graphs, role assignments, input assignments, resource budgets, and component failures. Our results show that there is no ``one-organization-for-all'' solution: preferred organizations vary across applications, and even the same communication graph can yield different outcomes under different role and input assignments. These findings highlight the need for application-dependent organization design, aiming to understand \\emph{which organization is suitable for a given application, under what conditions, and why}.",
+      "authors": [
+        "Xunkai Li",
+        "Miao Zhang",
+        "Zekai Chen",
+        "Xuaner Chen",
+        "Yu liu",
+        "Rui Qian",
+        "Xun Wu",
+        "Hongchao Qin",
+        "Rong-Hua Li"
+      ],
+      "primary_category": "cs.LG",
+      "categories": [
+        "cs.LG"
+      ],
+      "published": "2026-10-12T17:26:45+00:00",
+      "link": "https://arxiv.org/pdf/2610.17143v1",
+      "tags": [
+        "keyword:agents",
+        "keyword:multi-agent",
+        "query:agents",
+        "query:multi-agent"
+      ],
+      "llm_score": 9.0,
+      "llm_evidence_en": "benchmarking predefined and learned multi-agent organizations such as Star Chain and Tree across domains",
+      "llm_evidence_cn": "跨领域评测星型链型树型等预设与学习型多智能体组织",
+      "llm_evidence": "跨领域评测星型链型树型等预设与学习型多智能体组织",
+      "canonical_evidence": "跨领域评测星型链型树型等预设与学习型多智能体组织",
+      "llm_tldr_en": "OpenDGO is a controlled benchmark over six real-world domains and three collaboration settings that tests whether multi-agent organizations like Star, Chain, Tree, or learned communication graphs transfer across application domains.",
+      "llm_tldr_cn": "大模型多智能体系统在不同应用领域需要不同的组织形态，但已有研究多在有限领域内预设或学习通信图，难以判断某种组织能否跨领域迁移。OpenDGO 构建覆盖六个真实领域、三种协作设置的受控基准与分析框架，系统比较星型、链型、树型及学习得到的通信图。结果揭示了组织形态与领域协作需求的匹配关系，为多智能体拓扑设计提供了可复用的评测基础。",
+      "llm_tldr": "大模型多智能体系统在不同应用领域需要不同的组织形态，但已有研究多在有限领域内预设或学习通信图，难以判断某种组织能否跨领域迁移。OpenDGO 构建覆盖六个真实领域、三种协作设置的受控基准与分析框架，系统比较星型、链型、树型及学习得到的通信图。结果揭示了组织形态与领域协作需求的匹配关系，为多智能体拓扑设计提供了可复用的评测基础。",
+      "llm_tags": [
+        "query:multi-agent:composite"
+      ],
+      "matched_query_tag": "query:multi-agent:composite",
+      "matched_query_text": "Papers central to 多智能体拓扑设计的方式, especially work that connects or combines: the structure and arrangement of connections among multiple autonomous agents; the network layout and connectivity patterns in multi-agent systems; approaches for designing the interaction structure of multi-agent systems; how to design the communication graph for agents; graph-based organization of multi-agent interactions; topological arrangement enabling agent collaboration; How to design the topology of a multi agent system; What are the common methods for constructing agent communication topologies.",
+      "matched_requirement_id": "req-composite-multi-agent",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2610.17751v1",
+      "source": "arxiv",
+      "title": "Degrees of Freedom in Multi-Agent Coordination: Between Centralized and Decentralized Regimes",
+      "abstract": "Large language model (LLM)-based multi-agent systems (MAS) are commonly organized around two coordination regimes. Centralized coordination provides explicit control but can create a bottleneck at a single coordination locus, whereas decentralized coordination offers local autonomy but must achieve effective collaboration through distributed decisions and experience. These trade-offs motivate a systematic study of the space between the two regimes. We introduce Degrees of Freedom (DoF), a continuous configuration framework that quantifies the size of the decision space delegated to downstream agents. DoF controls the granularity of delegated work and the target probability that each task unit is assigned to the branches. Its endpoints recover the two coordination regimes. Across multiple task domains, DoF reveals a hierarchy of organizational effects. Delegated granularity and within-regime routing produce structured but bounded profile reallocations, whereas task domain and retained experience are associated with stronger differences between the centralized- and decentralized-branch profiles. The resulting performance landscape is task-dependent: different domains favor different DoF configurations, while atomic-target conditions are more consistent across runs. In-domain retained experience brings the two branch profiles closer together. The same controlled sweep reveals a task-dependent coordination landscape: some domains exhibit higher-performing configurations, whereas others show flatter responses and no single configuration dominates across domains. In five of the six evaluated state, an intermediate DoF configuration achieves higher mean accuracy than both endpoints, demonstrating the value of exploring the coordination space between them. Together, these findings provide empirical guidance for studying and designing intermediate coordination regimes in LLM-based MAS.",
+      "authors": [
+        "Yiqing Peng",
+        "Hehai Lin",
+        "Zixuan Wang",
+        "Dongyi Zhang",
+        "Zhengjie Zhu",
+        "Yi Han",
+        "Yangyang Zheng",
+        "Hao Wang",
+        "Qian Li",
+        "Chengwei Qin"
+      ],
+      "primary_category": "cs.MA",
+      "categories": [
+        "cs.MA",
+        "cs.AI",
+        "cs.LG"
+      ],
+      "published": "2026-10-13T05:32:27+00:00",
+      "link": "https://arxiv.org/pdf/2610.17751v1",
+      "tags": [
+        "keyword:agents",
+        "keyword:multi-agent",
+        "query:agents",
+        "query:multi-agent"
+      ],
+      "llm_score": 9.0,
+      "llm_evidence_en": "Continuous framework for studying coordination regimes between centralized and decentralized multi-agent systems",
+      "llm_evidence_cn": "研究集中式与去中心化多智能体协调机制之间的连续框架",
+      "llm_evidence": "研究集中式与去中心化多智能体协调机制之间的连续框架",
+      "canonical_evidence": "研究集中式与去中心化多智能体协调机制之间的连续框架",
+      "llm_tldr_en": "Introduces Degrees of Freedom, a continuous configuration framework that quantifies decision space delegated to downstream agents to systematically explore coordination regimes between centralized and decentralized LLM multi-agent systems.",
+      "llm_tldr_cn": "针对LLM多智能体系统在集中式协调的瓶颈与去中心化协调的分布式决策难题之间的权衡，论文提出自由度框架。该方法用连续配置量化下放给下游智能体的决策空间大小，并控制任务委派粒度与分支分配概率。研究系统考察两种协调机制之间的中间地带，揭示不同自由度对协作表现的影响，为多智能体协调结构设计提供可调参数。",
+      "llm_tldr": "针对LLM多智能体系统在集中式协调的瓶颈与去中心化协调的分布式决策难题之间的权衡，论文提出自由度框架。该方法用连续配置量化下放给下游智能体的决策空间大小，并控制任务委派粒度与分支分配概率。研究系统考察两种协调机制之间的中间地带，揭示不同自由度对协作表现的影响，为多智能体协调结构设计提供可调参数。",
+      "llm_tags": [
+        "query:agents"
+      ],
+      "matched_query_tag": "query:agents",
+      "matched_query_text": "multi-agent system coordination",
+      "matched_requirement_id": "req-2",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2610.18808v1",
+      "source": "arxiv",
+      "title": "Optimizing Team Behavior via Extremum-seeking Control in Multi-agent Reinforcement Learning",
+      "abstract": "In cooperative Multi-Agent Reinforcement Learning (MARL), agents must learn to coordinate their actions to achieve shared objectives. A key indicator of effective coordination is behavioral diversity, i.e., the agents' potential to enact distinct yet complementary control policies given the same set of observations. Although behavioral diversity can enable role specialization and richer joint behaviors, its appropriate level is highly context- and task-dependent and often costly to tune. We propose Adaptive Diversity Control (ADiCo), a two-timescale framework that adapts behavioral diversity online during training. On a fast timescale, Diversity Control (DiCo) regulates system diversity toward a target value. On a slower timescale, an Extremum Seeking Controller (ESC) adjusts this target using only mean episodic returns, without requiring an explicit model or analytical gradient of the diversity-performance landscape. We evaluate ADiCo on six configurations across two cooperative MARL tasks, where it maintains task-appropriate diversity levels: low diversity when homogeneous policies are beneficial and higher diversity when heterogeneous policies are required. Through this adaptation, ADiCo matches or exceeds the mean performance of DiCo (best grid-searched diversity target) and Unconstrained DiCo (diversity allowed to emerge without target regulation). These results demonstrate that incorporating classical feedback control into MARL training enables effective coordination by providing a systematic alternative to task-specific manual selection of the diversity target.",
+      "authors": [
+        "Svar Rajankumar Patel",
+        "Kshitij Jerath"
+      ],
+      "primary_category": "cs.MA",
+      "categories": [
+        "cs.MA",
+        "cs.AI",
+        "cs.RO",
+        "eess.SY"
+      ],
+      "published": "2026-10-13T17:46:27+00:00",
+      "link": "https://arxiv.org/pdf/2610.18808v1",
+      "tags": [
+        "keyword:agents",
+        "keyword:multi-agent",
+        "query:agents",
+        "query:gen-memory",
+        "query:multi-agent"
+      ],
+      "llm_score": 9.0,
+      "llm_evidence_en": "adaptive behavioral diversity control for cooperative multi-agent reinforcement learning",
+      "llm_evidence_cn": "面向合作式多智能体强化学习的自适应行为多样性控制",
+      "llm_evidence": "面向合作式多智能体强化学习的自适应行为多样性控制",
+      "canonical_evidence": "面向合作式多智能体强化学习的自适应行为多样性控制",
+      "llm_tldr_en": "Proposes ADiCo, a two-timescale framework that adapts behavioral diversity online during cooperative MARL training, avoiding costly manual tuning while enabling role specialization and richer joint behaviors.",
+      "llm_tldr_cn": "合作式多智能体强化学习中，智能体需协调动作以达成共同目标，行为多样性是有效协调的重要标志，但其合适水平高度依赖任务且难以调参。本文提出自适应多样性控制ADiCo，采用双时间尺度框架：快时间尺度将系统多样性调节至目标值，慢时间尺度在线调整目标。该方法在训练中动态平衡多样性与协作，促进角色分化与更丰富的联合行为，为多智能体强化学习合作提供了实用机制。",
+      "llm_tldr": "合作式多智能体强化学习中，智能体需协调动作以达成共同目标，行为多样性是有效协调的重要标志，但其合适水平高度依赖任务且难以调参。本文提出自适应多样性控制ADiCo，采用双时间尺度框架：快时间尺度将系统多样性调节至目标值，慢时间尺度在线调整目标。该方法在训练中动态平衡多样性与协作，促进角色分化与更丰富的联合行为，为多智能体强化学习合作提供了实用机制。",
+      "llm_tags": [
+        "query:agents"
+      ],
+      "matched_query_tag": "query:agents",
+      "matched_query_text": "Methods for multi agent reinforcement learning and cooperation",
+      "matched_requirement_id": "req-10",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2610.21243v1",
+      "source": "arxiv",
+      "title": "A Responsibility-Centered Coordination Mechanism for Decentralized Multi-Agent Systems",
+      "abstract": "Centralized orchestration provides comprehensive multi-agent coordination but creates bottlenecks in scalability, adaptability, and collective performance. Decentralized approaches alleviate these bottlenecks by distributing coordination across agents, yet often leave responsibility for delegated dependencies and failure recovery unclear. To address this gap, we propose RCM, a responsibility-centered coordination mechanism that leverages commitments to couple task delegation with explicit responsibilities of the involved parties. Through recursive delegation, agents retain their upstream responsibilities while locally orchestrating downstream commitments, thereby preserving accountability across delegation chains, creating a network of local orchestration. We operationalize this mechanism locally through responsibility-constrained decision-making and a responsibility-oriented communication protocol (RCP), enabling agents to autonomously establish, manage, and terminate commitments. As agents act in parallel, their local actions continuously evolve the commitment graph, allowing global coordination to emerge and adapt toward a shared mission without centralized control. Experiments across reasoning, coding, and executable agent environments demonstrate that RCM outperforms strong centralized and decentralized coordination baselines by up to 18.7 points in task performance and 10.2 points in Responsibility, while improving failure and harm detection without task-specific training.",
+      "authors": [
+        "Thi-Nhung Nguyen",
+        "Viet-Thanh Pham",
+        "Linhao Luo",
+        "Thuy-Trang Vu",
+        "Dinh Phung"
+      ],
+      "primary_category": "cs.MA",
+      "categories": [
+        "cs.MA",
+        "cs.AI"
+      ],
+      "published": "2026-10-15T04:39:57+00:00",
+      "link": "https://arxiv.org/pdf/2610.21243v1",
+      "tags": [
+        "keyword:agents",
+        "keyword:multi-agent",
+        "query:agents",
+        "query:multi-agent"
+      ],
+      "llm_score": 9.0,
+      "llm_evidence_en": "responsibility-centered coordination mechanism for decentralized multi-agent systems",
+      "llm_evidence_cn": "面向去中心化多智能体的责任中心协调机制",
+      "llm_evidence": "面向去中心化多智能体的责任中心协调机制",
+      "canonical_evidence": "面向去中心化多智能体的责任中心协调机制",
+      "llm_tldr_en": "Proposes RCM, a responsibility-centered coordination mechanism that couples task delegation with explicit commitments and recursive delegation to preserve accountability across decentralized multi-agent delegation chains.",
+      "llm_tldr_cn": "集中式编排虽能实现全面多智能体协调，却在可扩展性与适应性上形成瓶颈；去中心化方法虽缓解瓶颈，却使委派依赖与故障恢复的责任归属不清。本文提出责任中心的协调机制RCM，利用承诺将任务委派与各方显式责任耦合，并通过递归委派让智能体在本地编排下游承诺的同时保留上游责任。该机制在委派链上维持问责，形成可追溯的协调网络。",
+      "llm_tldr": "集中式编排虽能实现全面多智能体协调，却在可扩展性与适应性上形成瓶颈；去中心化方法虽缓解瓶颈，却使委派依赖与故障恢复的责任归属不清。本文提出责任中心的协调机制RCM，利用承诺将任务委派与各方显式责任耦合，并通过递归委派让智能体在本地编排下游承诺的同时保留上游责任。该机制在委派链上维持问责，形成可追溯的协调网络。",
+      "llm_tags": [
+        "query:agents"
+      ],
+      "matched_query_tag": "query:agents",
+      "matched_query_text": "coordination mechanisms for multiple autonomous agents",
+      "matched_requirement_id": "req-6",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2610.22322v2",
+      "source": "arxiv",
+      "title": "Learning Self-Orchestration in Decentralized Agent Swarms",
+      "abstract": "The capabilities of an agent swarm depend on both its individual members and how they coordinate. Yet existing multi-agent systems often train agents within fixed orchestration structures, separating the learning of individual capabilities from the organization of collective behavior. We introduce market-based post-training (MPT), a framework for jointly learning action policies and self-orchestration in decentralized agent swarms. Agents express their willingness to participate through bids, which determine who acts and how collective outcomes provide local training credit. Learning both action and bidding behavior allows individual capabilities and patterns of participation to adapt together without a central coordinating agent. We evaluate MPT on embodied crafting, robot navigation, and deep research. Results show gains over monolithic post-training and confirm that agent participation indeed evolves with learning. With the same post-trained action policies, learned self-orchestration outperforms alternative coordination strategies. Ablations show that both action and bidding benefit from learning, and that learned bids provide more effective action-training signals. Beyond the original training objectives, trained swarms adapt faster to related tasks and achieve better performance with larger populations at inference time. Larger populations also suffer smaller performance losses under agent dropout, demonstrating that learned self-orchestration supports reuse, scaling, and robustness in decentralized agent swarms. More details are available on our project page at https://guoweixu.com/mpt/.",
+      "authors": [
+        "Guowei Xu",
+        "Zhenting Qi",
+        "Amani Kiruga",
+        "Himabindu Lakkaraju",
+        "Yilun Du"
+      ],
+      "primary_category": "cs.MA",
+      "categories": [
+        "cs.MA",
+        "cs.AI",
+        "cs.CL"
+      ],
+      "published": "2026-10-15T17:51:57+00:00",
+      "link": "https://arxiv.org/pdf/2610.22322v2",
+      "tags": [
+        "keyword:agents",
+        "keyword:multi-agent",
+        "query:agents",
+        "query:gen-memory",
+        "query:multi-agent"
+      ],
+      "llm_score": 9.0,
+      "llm_evidence_en": "Jointly learns action policies and self-orchestration in decentralized agent swarms without a central coordinator",
+      "llm_evidence_cn": "在无中心协调者的去中心化智能体集群中联合学习行动策略与自组织",
+      "llm_evidence": "在无中心协调者的去中心化智能体集群中联合学习行动策略与自组织",
+      "canonical_evidence": "在无中心协调者的去中心化智能体集群中联合学习行动策略与自组织",
+      "llm_tldr_en": "Proposes market-based post-training, a framework that jointly learns action policies and self-orchestration in decentralized agent swarms via bidding, allowing participation patterns and individual capabilities to adapt without a central coordinator.",
+      "llm_tldr_cn": "针对现有多智能体系统常在固定编排结构中训练、将个体能力学习与集体行为组织割裂的问题，论文提出市场式后训练框架。该方法让智能体通过投标表达参与意愿，由投标决定谁行动，并利用集体结果为本地训练分配信用，从而联合学习行动策略与自组织行为。在具身协作任务上的评估表明，个体能力与参与模式能够协同演化，为无中心协调者的集群协调提供新方法。",
+      "llm_tldr": "针对现有多智能体系统常在固定编排结构中训练、将个体能力学习与集体行为组织割裂的问题，论文提出市场式后训练框架。该方法让智能体通过投标表达参与意愿，由投标决定谁行动，并利用集体结果为本地训练分配信用，从而联合学习行动策略与自组织行为。在具身协作任务上的评估表明，个体能力与参与模式能够协同演化，为无中心协调者的集群协调提供新方法。",
+      "llm_tags": [
+        "query:agents"
+      ],
+      "matched_query_tag": "query:agents",
+      "matched_query_text": "coordination mechanisms for multiple autonomous agents",
+      "matched_requirement_id": "req-6",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2610.25851v1",
+      "source": "arxiv",
+      "title": "Learning Who Talks to Whom: Role-Aware Communication Topology Scheduling for Efficient LLM Multi-Agent Collaboration",
+      "abstract": "Multi-agent systems driven by large language models (LLMs) rely on structured communication topologies to facilitate information exchange and collaborative reasoning. However, effectively scheduling these topologies to dynamically determine who talks to whom and when to communicate remains a fundamental challenge in balancing collective reasoning performance against exponential token overhead. Existing topology scheduling approaches either enforce static communication graphs that cannot adapt to dynamic problem-solving states, or overlook agent role complementarity while failing to explicitly incorporate the synthesized graph structure into team-level decision evaluation. To tackle these limitations, we propose ACTS, a role-aware adaptive communication topology scheduling framework for efficient LLM multi-agent collaboration. Orchestrated within a Centralized Training with Decentralized Execution (CTDE) paradigm, ACTS introduces a novel dual-attention mechanism. Specifically, a Role-conditioned Relational Attention module dynamically selects variable-cardinality interaction partners based on agent roles and evolving execution states, while a Topological Attention Mixer explicitly embeds the directed communication topology into team value decomposition for precise credit assignment. Comprehensive evaluations across 9 challenging benchmarks covering code generation, multi-step reasoning, general knowledge, and competitive mathematics demonstrate that ACTS consistently outperforms state-of-the-art baselines, boosting average accuracy by up to 6.19 percentage points while reducing token consumption by over 15%. The project website is available at https://acts-mas.github.io/ACTS/.",
+      "authors": [
+        "Haibin Li",
+        "Wenya Yu",
+        "Xuefeng Jiang",
+        "Jia Li",
+        "Xiao Han",
+        "Shuai Su",
+        "Wei Wei"
+      ],
+      "primary_category": "cs.MA",
+      "categories": [
+        "cs.MA"
+      ],
+      "published": "2026-10-19T06:07:25+00:00",
+      "link": "https://arxiv.org/pdf/2610.25851v1",
+      "tags": [
+        "keyword:agents",
+        "keyword:multi-agent",
+        "query:agents",
+        "query:multi-agent"
+      ],
+      "llm_score": 9.0,
+      "llm_evidence_en": "role-aware scheduling of communication topologies deciding who talks to whom and when",
+      "llm_evidence_cn": "角色感知地调度通信拓扑，决定谁与谁通信以及何时通信",
+      "llm_evidence": "角色感知地调度通信拓扑，决定谁与谁通信以及何时通信",
+      "canonical_evidence": "角色感知地调度通信拓扑，决定谁与谁通信以及何时通信",
+      "llm_tldr_en": "Proposes role-aware communication topology scheduling that dynamically decides who talks to whom and when within LLM multi-agent teams, balancing collective reasoning quality against exponential token overhead.",
+      "llm_tldr_cn": "LLM多智能体系统依赖结构化通信拓扑进行信息交换，但如何在推理性能与指数级令牌开销之间动态调度拓扑仍是难题。现有方法或使用无法适应问题状态的静态图，或忽视智能体角色的互补性。本文提出角色感知的通信拓扑调度方法，动态决定谁与谁、何时通信，并把合成图结构纳入团队级决策评估。实验表明该方法在降低开销的同时保持甚至提升协作推理表现。",
+      "llm_tldr": "LLM多智能体系统依赖结构化通信拓扑进行信息交换，但如何在推理性能与指数级令牌开销之间动态调度拓扑仍是难题。现有方法或使用无法适应问题状态的静态图，或忽视智能体角色的互补性。本文提出角色感知的通信拓扑调度方法，动态决定谁与谁、何时通信，并把合成图结构纳入团队级决策评估。实验表明该方法在降低开销的同时保持甚至提升协作推理表现。",
+      "llm_tags": [
+        "query:multi-agent:composite"
+      ],
+      "matched_query_tag": "query:multi-agent:composite",
+      "matched_query_text": "Papers central to 多智能体拓扑设计的方式, especially work that connects or combines: the structure and arrangement of connections among multiple autonomous agents; the network layout and connectivity patterns in multi-agent systems; approaches for designing the interaction structure of multi-agent systems; how to design the communication graph for agents; graph-based organization of multi-agent interactions; topological arrangement enabling agent collaboration; How to design the topology of a multi agent system; What are the common methods for constructing agent communication topologies.",
+      "matched_requirement_id": "req-composite-multi-agent",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2610.26554v1",
+      "source": "arxiv",
+      "title": "BetaMem: Learning to Remember a Changing World for Embodied Agents",
+      "abstract": "Long-horizon embodied agents face temporal confusion and incomplete or distorted records, recurring errors from fixed memory rules, and growing storage and retrieval costs. We present BetaMem, a framework for building and evolving traceable long-term memory through six linked layers: working, spatial, entity, episodic, experiential, and procedural memory. A dual-level write contract constrains operation executability and source support for content: supervised fine-tuning learns compliant memory operations, while reinforcement learning combines repeated sampling with teacher verification of the original observations to reward complete, accurate records and penalize omissions, distortion, and unsupported content. We formulate failure-driven policy recursive self-improvement through diagnosis along the causal sequence of memory operations and local rule repairs gated by independent replay. Atomic tools frame storage, updates, retrieval, and forgetting as cost-utility allocation under storage and read budgets. Using the open-source Qwen3.5-9B model for memory generation, BetaMem achieves overall scores of 48.08% on M3-Bench-robot, 92.08% on LoCoMo, 72.6% on OpenEQA EM-EQA, and 62.4% on EgoLifeQA, the highest among the listed memory methods under their respective evaluation protocols. Training the model for memory generation raises the contract pass rate from 50.9% to 86.2% while reducing output tokens per stored action by 47.3%. A separate Qwen3-VL-8B-Instruct evaluation on EMem-Bench achieves an average success rate of 38.4% and an average error recurrence rate of 24.9%. We perform best among evaluated methods using comparably sized open-source models. Category results show that we have advantages in integrating information across observations, recalling events over long histories, and inferring personal habits.",
+      "authors": [
+        "Mai Liu",
+        "He Sun",
+        "Siru Zhong",
+        "Kerun Chen",
+        "Hao Yan",
+        "Xiaohui Lv",
+        "Shuai Tao",
+        "Wulong Liu"
+      ],
+      "primary_category": "cs.AI",
+      "categories": [
+        "cs.AI"
+      ],
+      "published": "2026-10-19T15:13:56+00:00",
+      "link": "https://arxiv.org/pdf/2610.26554v1",
+      "tags": [
+        "keyword:agents",
+        "keyword:gen-memory",
+        "keyword:multi-agent",
+        "query:agents",
+        "query:gen-memory",
+        "query:multi-agent"
+      ],
+      "llm_score": 9.0,
+      "llm_evidence_en": "long-term memory construction and consolidation for embodied agents",
+      "llm_evidence_cn": "具身智能体的长期记忆构建与巩固",
+      "llm_evidence": "具身智能体的长期记忆构建与巩固",
+      "canonical_evidence": "具身智能体的长期记忆构建与巩固",
+      "llm_tldr_en": "BetaMem builds evolving, traceable long-term memory for embodied agents via six memory layers plus a dual-level write contract trained with SFT and RL verification.",
+      "llm_tldr_cn": "长程具身智能体面临时序混淆、记忆记录失真以及存储检索成本上升等问题。作者提出BetaMem，构建工作、空间、实体、情节、经验与程序六层可追溯长期记忆，并用双层写入契约约束操作可执行性与内容来源。方法结合监督微调与强化学习采样加教师验证，奖励完整准确的记录并惩罚遗漏与失真，为智能体长期记忆巩固提供可演化机制。",
+      "llm_tldr": "长程具身智能体面临时序混淆、记忆记录失真以及存储检索成本上升等问题。作者提出BetaMem，构建工作、空间、实体、情节、经验与程序六层可追溯长期记忆，并用双层写入契约约束操作可执行性与内容来源。方法结合监督微调与强化学习采样加教师验证，奖励完整准确的记录并惩罚遗漏与失真，为智能体长期记忆巩固提供可演化机制。",
+      "llm_tags": [
+        "query:gen-memory"
+      ],
+      "matched_query_tag": "query:gen-memory",
+      "matched_query_text": "What mechanisms enable memory consolidation and long term memory in generative agents?",
+      "matched_requirement_id": "req-22",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2610.29276v1",
+      "source": "arxiv",
+      "title": "Design and Tuning of Multi-Agent Systems Using Bayesian Evolutionary Optimization",
+      "abstract": "Designing effective multi-agent systems (MAS) remains a challenging and resource-intensive task. We propose a Bayesian Evolutionary Optimization framework for automatically discovering task-specific MAS topologies. The approach combines evolutionary operators to generate diverse workflow graphs with Bayesian optimization to focus cost intensive evaluations on promising candidates. In contrast to LLM-based candidate selection, our approach uses a graph-aware Gaussian Process and Expected Improvement to provide an explicit selection criterion during evolutionary search. We evaluate the method on BigCodeBench for code generation and on a tabular preprocessing benchmark using TabPFN. On BigCodeBench, evolved architectures achieve the highest overall performance among the evaluated agent systems. On temporal tabular datasets, optimized MAS preprocessing improves over the default TabPFN model on several tasks, while remaining competitive on IID datasets. Overall, the results demonstrate the potential of Bayesian selection for guiding evolutionary MAS search under expensive evaluation budgets.",
+      "authors": [
+        "Dominik Jehle",
+        "Tom Zehle"
+      ],
+      "primary_category": "cs.LG",
+      "categories": [
+        "cs.LG",
+        "cs.MA"
+      ],
+      "published": "2026-10-21T06:31:27+00:00",
+      "link": "https://arxiv.org/pdf/2610.29276v1",
+      "tags": [
+        "keyword:agents",
+        "keyword:multi-agent",
+        "query:agents",
+        "query:gen-memory",
+        "query:multi-agent"
+      ],
+      "llm_score": 9.0,
+      "llm_evidence_en": "automatically discovers task-specific multi-agent topologies via Bayesian evolutionary optimization over workflow graphs",
+      "llm_evidence_cn": "通过工作流图上的贝叶斯进化优化自动发现任务特定的多智能体拓扑",
+      "llm_evidence": "通过工作流图上的贝叶斯进化优化自动发现任务特定的多智能体拓扑",
+      "canonical_evidence": "通过工作流图上的贝叶斯进化优化自动发现任务特定的多智能体拓扑",
+      "llm_tldr_en": "The paper frames MAS design as topology search, using evolutionary operators to generate diverse workflow graphs and a graph-aware Gaussian Process with Expected Improvement to select promising candidates for costly evaluation.",
+      "llm_tldr_cn": "设计有效的多智能体系统仍然困难且耗费资源,拓扑结构往往依赖人工设定。作者提出贝叶斯进化优化框架,用进化算子生成多样化的智能体工作流图,再用图感知高斯过程与期望改进准则引导代价高昂的评估,自动发现任务特定的多智能体拓扑。在BigCodeBench代码生成与TabPFN表格预处理基准上,进化出的架构取得最高整体表现,表明自动拓扑搜索可替代手工设计与大模型式选择。",
+      "llm_tldr": "设计有效的多智能体系统仍然困难且耗费资源,拓扑结构往往依赖人工设定。作者提出贝叶斯进化优化框架,用进化算子生成多样化的智能体工作流图,再用图感知高斯过程与期望改进准则引导代价高昂的评估,自动发现任务特定的多智能体拓扑。在BigCodeBench代码生成与TabPFN表格预处理基准上,进化出的架构取得最高整体表现,表明自动拓扑搜索可替代手工设计与大模型式选择。",
+      "llm_tags": [
+        "query:multi-agent:composite"
+      ],
+      "matched_query_tag": "query:multi-agent:composite",
+      "matched_query_text": "Papers central to 多智能体拓扑设计的方式, especially work that connects or combines: the structure and arrangement of connections among multiple autonomous agents; the network layout and connectivity patterns in multi-agent systems; approaches for designing the interaction structure of multi-agent systems; how to design the communication graph for agents; graph-based organization of multi-agent interactions; topological arrangement enabling agent collaboration; How to design the topology of a multi agent system; What are the common methods for constructing agent communication topologies.",
+      "matched_requirement_id": "req-composite-multi-agent",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2610.30429v1",
+      "source": "arxiv",
+      "title": "RoleFlow: Self-Evolving Multi-Role Agentic Collaboration via Structural Adaptation",
+      "abstract": "Large language model (LLM) based multi-agent systems often rely on predefined collaboration structures, limiting their adaptability to evolving task requirements. Although recent approaches enable dynamic orchestration, trajectory-level rewards they apply assign one outcome to each decision, ofen struggling to identify the contributions of individual structural changes. We propose RoleFlow, a self-evolving multi-role agentic system that refines collaboration structures through feedback-driven atomic edits and on-demand role synthesis. To make structural adaptation learnable, we introduce Single-Edit Counterfactual Policy Optimization (SECPO), which evaluates each edit against its no-edit counterpart at the same chain state and assigns targeted credit to edit-specific tokens. Across seven benchmarks spanning four domains, RoleFlow achieves the optimal average performance, surpassing the strongest competitor by 4.7 points. It leads on all three multi-hop QA benchmarks by 3.2-7.5 F1 points and also shows supremacy on mathematical reasoning, web interaction, and code generation. Further analyses demonstrate cross-benchmark transferability, training-data efficiency, and cross-executor generalization.",
+      "authors": [
+        "Yi Ge",
+        "Pan Wang",
+        "Xuehao Cui",
+        "Zian Zeng",
+        "Xu Hu",
+        "Heng Huang",
+        "Furong Huang"
+      ],
+      "primary_category": "cs.AI",
+      "categories": [
+        "cs.AI"
+      ],
+      "published": "2026-10-21T20:37:32+00:00",
+      "link": "https://arxiv.org/pdf/2610.30429v1",
+      "tags": [
+        "keyword:agents",
+        "keyword:multi-agent",
+        "query:agents",
+        "query:gen-memory",
+        "query:multi-agent"
+      ],
+      "llm_score": 9.0,
+      "llm_evidence_en": "refines multi-agent collaboration structures via feedback-driven structural edits",
+      "llm_evidence_cn": "通过反馈驱动的结构编辑改进多智能体协作结构",
+      "llm_evidence": "通过反馈驱动的结构编辑改进多智能体协作结构",
+      "canonical_evidence": "通过反馈驱动的结构编辑改进多智能体协作结构",
+      "llm_tldr_en": "RoleFlow is a self-evolving multi-role agentic system that adapts collaboration structures through atomic structural edits and role synthesis, trained with single-edit counterfactual policy optimization.",
+      "llm_tldr_cn": "现有LLM多智能体系统依赖预定义协作结构，难以适应变化的任务需求，而轨迹级奖励又难以归因单次结构改动。本文提出RoleFlow，通过反馈驱动的原子编辑与按需角色合成来自演化协作结构，并引入单编辑反事实策略优化SECPO对每次编辑做对照评估。实验表明该方法能有效学习结构适配，提升多角色协作的任务表现，为多智能体交互结构的设计与优化提供了可学习范式。",
+      "llm_tldr": "现有LLM多智能体系统依赖预定义协作结构，难以适应变化的任务需求，而轨迹级奖励又难以归因单次结构改动。本文提出RoleFlow，通过反馈驱动的原子编辑与按需角色合成来自演化协作结构，并引入单编辑反事实策略优化SECPO对每次编辑做对照评估。实验表明该方法能有效学习结构适配，提升多角色协作的任务表现，为多智能体交互结构的设计与优化提供了可学习范式。",
+      "llm_tags": [
+        "query:multi-agent"
+      ],
+      "matched_query_tag": "query:multi-agent",
+      "matched_query_text": "approaches for designing the interaction structure of multi-agent systems",
+      "matched_requirement_id": "req-13",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2610.30443v1",
+      "source": "arxiv",
+      "title": "SpecMAGIC: Specification-Guided Multi-Task Generalization in Multi-Agent Reinforcement Learning",
+      "abstract": "Multi-task generalization is an important yet underexplored problem in multi-agent reinforcement learning (MARL). Many real-world applications require multi-agent systems to generalize across complex, temporally extended tasks with diverse inter-agent coordination requirements. We introduce a specification language that combines temporal-logic task specifications with operators for expressing such requirements. We propose SpecMAGIC, a hierarchical framework that leverages the automaton structure of task specifications for subtask decomposition. A centralized high-level planner identifies and allocates compatible subtask sequences across agents, while decentralized low-level policies execute individual subtasks. This enables zero-shot generalization to new tasks by composing reusable subtask policies according to new specifications, without retraining. We establish soundness and probabilistic completeness of the high-level planner. Experiments on multi-agent navigation tasks show that SpecMAGIC substantially outperforms existing approaches on unseen task specifications and maintains strong performance as the number of agents increases.",
+      "authors": [
+        "Zijian Guo",
+        "İlker Işık",
+        "H. M. Sabbir Ahmad",
+        "Wenchao Li"
+      ],
+      "primary_category": "cs.AI",
+      "categories": [
+        "cs.AI"
+      ],
+      "published": "2026-10-21T20:52:48+00:00",
+      "link": "https://arxiv.org/pdf/2610.30443v1",
+      "tags": [
+        "keyword:agents",
+        "keyword:multi-agent",
+        "query:agents",
+        "query:gen-memory",
+        "query:multi-agent"
+      ],
+      "llm_score": 9.0,
+      "llm_evidence_en": "hierarchical MARL framework for multi-task generalization across coordination requirements",
+      "llm_evidence_cn": "面向多样协调需求的多任务泛化分层MARL框架",
+      "llm_evidence": "面向多样协调需求的多任务泛化分层MARL框架",
+      "canonical_evidence": "面向多样协调需求的多任务泛化分层MARL框架",
+      "llm_tldr_en": "Introduces SpecMAGIC, a hierarchical MARL framework using a temporal-logic specification language and automaton-based subtask decomposition with a centralized planner and decentralized policies for multi-task generalization.",
+      "llm_tldr_cn": "多智能体强化学习在跨复杂、时序延展且协调需求多样的任务泛化上仍研究不足。本文提出SpecMAGIC分层框架，用结合时序逻辑的规范语言描述任务，借助自动机结构分解子任务，由集中式高层规划器分配子任务、去中心化底层策略执行。实验表明其能实现零样本多任务泛化。该工作为多智能体强化学习的环境泛化提供了规范驱动的新途径。",
+      "llm_tldr": "多智能体强化学习在跨复杂、时序延展且协调需求多样的任务泛化上仍研究不足。本文提出SpecMAGIC分层框架，用结合时序逻辑的规范语言描述任务，借助自动机结构分解子任务，由集中式高层规划器分配子任务、去中心化底层策略执行。实验表明其能实现零样本多任务泛化。该工作为多智能体强化学习的环境泛化提供了规范驱动的新途径。",
+      "llm_tags": [
+        "query:agents"
+      ],
+      "matched_query_tag": "query:agents",
+      "matched_query_text": "reinforcement learning in multi-agent environments",
+      "matched_requirement_id": "req-5",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2610.31709v1",
+      "source": "arxiv",
+      "title": "Mining the Design Space of Multi-Agent Workflows",
+      "abstract": "Designing large language model (LLM) multi-agent systems (MAS) still relies on trial and error and informal \"folk wisdom.\" Manual studies test only a few communication structures or topologies (e.g., sequential, parallel, shared-memory, or debate), while automated optimizers discard search trajectories after selecting a task-specific workflow. We present a two-phase pipeline for mining reproducible design principles from workflow code and execution traces. We repurpose AFlow's MCTS optimizer across six composable operators and 26 deterministically verified Enigmata tasks, retaining all intermediate rounds to build a corpus of 28,568 executable workflows. A sandboxed AutoResearch loop then mines orchestration code and prompt templates under an $L_0$-penalized validation objective and tests candidate principles on held-out searches. Across 300 feature-mining trials, we identify effects that persist on held-out searches across three levels of workflow design: workflows beginning with independent solvers and one-shot aggregation (Star-first) perform worse ($Δ= -0.045$); persistent shared documents (SharedMemory) outperform debate ($Δ= +0.135$); and prompt specificity and placeholder-based context routing yield gains comparable to communication-structure selection ($Δ= +0.118$). More broadly, our pipeline and results show the feasibility of turning discarded search trajectories into a statistical testbed for discovering and validating multi-agent workflow design principles.",
+      "authors": [
+        "Xavier Cadet",
+        "Junyan Cheng",
+        "Peter Chin",
+        "Kyle Richardson"
+      ],
+      "primary_category": "cs.SE",
+      "categories": [
+        "cs.SE",
+        "cs.AI"
+      ],
+      "published": "2026-10-22T00:31:39+00:00",
+      "link": "https://arxiv.org/pdf/2610.31709v1",
+      "tags": [
+        "keyword:agents",
+        "keyword:multi-agent",
+        "query:agents",
+        "query:multi-agent"
+      ],
+      "llm_score": 9.0,
+      "llm_evidence_en": "mining design principles for multi-agent workflow topologies",
+      "llm_evidence_cn": "挖掘多智能体工作流拓扑的设计原则",
+      "llm_evidence": "挖掘多智能体工作流拓扑的设计原则",
+      "canonical_evidence": "挖掘多智能体工作流拓扑的设计原则",
+      "llm_tldr_en": "Mines 28,568 executable LLM multi-agent workflows using AFlow MCTS and a sandboxed AutoResearch loop to extract reproducible design principles for orchestration topologies.",
+      "llm_tldr_cn": "针对LLM多智能体系统设计依赖试错、人工研究仅覆盖少量通信结构或拓扑的问题，论文提出两阶段流水线，复用AFlow的MCTS优化器在六类可组合算子和26个确定性验证任务上保留全部中间轮次，构建包含28568个可执行工作流的语料。随后用沙箱AutoResearch循环在L0惩罚验证目标下挖掘编排代码与提示模板中的设计规律。该工作为多智能体工作流拓扑和通信结构设计提供可复现的设计原则与系统化方法。",
+      "llm_tldr": "针对LLM多智能体系统设计依赖试错、人工研究仅覆盖少量通信结构或拓扑的问题，论文提出两阶段流水线，复用AFlow的MCTS优化器在六类可组合算子和26个确定性验证任务上保留全部中间轮次，构建包含28568个可执行工作流的语料。随后用沙箱AutoResearch循环在L0惩罚验证目标下挖掘编排代码与提示模板中的设计规律。该工作为多智能体工作流拓扑和通信结构设计提供可复现的设计原则与系统化方法。",
+      "llm_tags": [
+        "query:multi-agent:composite"
+      ],
+      "matched_query_tag": "query:multi-agent:composite",
+      "matched_query_text": "Papers central to 多智能体拓扑设计的方式, especially work that connects or combines: the structure and arrangement of connections among multiple autonomous agents; the network layout and connectivity patterns in multi-agent systems; approaches for designing the interaction structure of multi-agent systems; how to design the communication graph for agents; graph-based organization of multi-agent interactions; topological arrangement enabling agent collaboration; How to design the topology of a multi agent system; What are the common methods for constructing agent communication topologies.",
+      "matched_requirement_id": "req-composite-multi-agent",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2610.32060v1",
+      "source": "arxiv",
+      "title": "Understanding Communication Failures in Multi-Agent LLM Systems",
+      "abstract": "Multi-agent LLM systems aim to improve reasoning through debate, evidence sharing, and mutual correction, but interaction can also introduce failures that final accuracy alone cannot explain. Agents may converge too early, ignore dissent, suppress correct minority answers, or preserve a wrong framing across rounds. We present a corpus-grounded taxonomy of communication failures, built from 3,211 failed multi-round trajectories across medical QA, coding, finance, multi-hop reasoning, ethics, and embodied text tasks. Using this taxonomy, we analyze failure distributions across datasets and system designs, round-level error dynamics, recovery hardness, majority transitions, minority-signal suppression, and self-reported confidence. We find that failures are dominated by recovery/correction and consensus/decision problems rather than isolated first-round mistakes, with many emerging after agents first observe peer responses. Based on these findings, we recommend stronger disagreement handling, evidence verification, minority-signal preservation, and recovery checks before finalization.",
+      "authors": [
+        "Priya Pitre",
+        "Jun Hou",
+        "Yi Fang",
+        "Naren Ramakrishnan",
+        "Xuan Wang"
+      ],
+      "primary_category": "cs.AI",
+      "categories": [
+        "cs.AI"
+      ],
+      "published": "2026-10-23T01:55:07+00:00",
+      "link": "https://arxiv.org/pdf/2610.32060v1",
+      "tags": [
+        "keyword:agents",
+        "keyword:multi-agent",
+        "query:agents",
+        "query:multi-agent"
+      ],
+      "llm_score": 9.0,
+      "llm_evidence_en": "taxonomy of communication failures in multi-agent LLM systems",
+      "llm_evidence_cn": "多智能体LLM系统通信失败分类体系",
+      "llm_evidence": "多智能体LLM系统通信失败分类体系",
+      "canonical_evidence": "多智能体LLM系统通信失败分类体系",
+      "llm_tldr_en": "Builds a taxonomy of communication failures from 3,211 failed multi-round trajectories in multi-agent LLM systems, analyzing error dynamics, dissent suppression, and recovery hardness.",
+      "llm_tldr_cn": "多智能体大模型系统通过辩论与互相纠错提升推理，但交互本身也会引入过早收敛、忽视异议等失败。作者基于3211条失败的多轮轨迹构建通信失败分类体系，分析各数据集与系统设计下的失败分布、轮级错误动态、少数意见压制与恢复难度。研究发现失败呈现系统性模式，为诊断和改进多智能体协作提供了可操作依据。",
+      "llm_tldr": "多智能体大模型系统通过辩论与互相纠错提升推理，但交互本身也会引入过早收敛、忽视异议等失败。作者基于3211条失败的多轮轨迹构建通信失败分类体系，分析各数据集与系统设计下的失败分布、轮级错误动态、少数意见压制与恢复难度。研究发现失败呈现系统性模式，为诊断和改进多智能体协作提供了可操作依据。",
+      "llm_tags": [
+        "query:agents"
+      ],
+      "matched_query_tag": "query:agents",
+      "matched_query_text": "What are the main challenges in multi agent coordination?",
+      "matched_requirement_id": "req-8",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2610.34450v1",
+      "source": "arxiv",
+      "title": "EvolveMAS: A Unified Self-Evolution Framework for Decentralized Multi-Agent Systems",
+      "abstract": "Decentralized multi-agent systems (MAS) enable large language model agents to interact without centralized control. Agents need to adapt to other agents at test time and reuse accumulated experience to refine their interaction strategies for future interactions across cooperative, mixed-motive, and adversarial settings. However, existing approaches often develop adaptation mechanisms for particular interaction settings. This raises a central question: how can decentralized MAS support test-time adaptation and reliable experience reuse across interaction settings? We propose EvolveMAS, a unified self-evolution framework that supports experience-driven adaptation within and across episodes. EvolveMAS pairs each main agent with a dedicated MemoryAgent for test-time memory governance, which maintains isolated Structured Memory outside the main agent's reasoning context. EvolveMAS organizes adaptation into two complementary processes: Within-Episode Online Adaptation and Cross-Episode Knowledge Evolution. During Within-Episode Online Adaptation, MemoryAgent updates episodic, semantic, and working memory from interaction evidence to inform subsequent actions. During Cross-Episode Knowledge Evolution, the main agent uses memory and episode outcomes to distill reusable interaction knowledge comprising partner profiles and interaction strategies for subsequent episodes. Across five benchmarks and six evaluation configurations spanning the three interaction settings, EvolveMAS achieves the highest normalized average score of 77.2 among the compared methods. Ablations show that test-time memory governance and cross-episode knowledge reuse both improve performance. Interaction traces further illustrate how updated memory and distilled knowledge guide subsequent interactions. These results support experience-driven adaptation in decentralized MAS without updating model parameters.",
+      "authors": [
+        "Yalun Wu",
+        "Qiwei Ma",
+        "Bingbing Xu",
+        "Dan Zhang",
+        "Long Bai",
+        "Boyang Wang",
+        "Jiatong Li",
+        "Zheqi Lv",
+        "Shaozu Yuan",
+        "Peiying Wang",
+        "Jiawei Wang",
+        "An Zhang",
+        "Tat-Seng Chua"
+      ],
+      "primary_category": "cs.MA",
+      "categories": [
+        "cs.MA",
+        "cs.AI"
+      ],
+      "published": "2026-10-25T17:09:49+00:00",
+      "link": "https://arxiv.org/pdf/2610.34450v1",
+      "tags": [
+        "keyword:agents",
+        "keyword:multi-agent",
+        "query:agents",
+        "query:gen-memory",
+        "query:multi-agent"
+      ],
+      "llm_score": 9.0,
+      "llm_evidence_en": "unified self-evolution framework for decentralized LLM multi-agent coordination and experience reuse",
+      "llm_evidence_cn": "面向去中心化多智能体协同与经验复用的统一自进化框架",
+      "llm_evidence": "面向去中心化多智能体协同与经验复用的统一自进化框架",
+      "canonical_evidence": "面向去中心化多智能体协同与经验复用的统一自进化框架",
+      "llm_tldr_en": "EvolveMAS is a unified self-evolution framework for decentralized LLM multi-agent systems that pairs each main agent with a dedicated meta-agent to enable test-time adaptation and cross-episode experience reuse.",
+      "llm_tldr_cn": "去中心化多智能体系统虽能让大模型智能体在无集中控制下交互，但现有方法往往只针对单一交互场景设计适配机制，难以在测试时复用经验。EvolveMAS 提出统一的自进化框架，为每个主智能体配备专属元智能体，实现回合内与跨回合的经验驱动适配。该框架面向合作、混合动机与对抗等多种场景，支持交互策略的持续改进与可靠经验复用，为去中心化多智能体协同提供通用方案。",
+      "llm_tldr": "去中心化多智能体系统虽能让大模型智能体在无集中控制下交互，但现有方法往往只针对单一交互场景设计适配机制，难以在测试时复用经验。EvolveMAS 提出统一的自进化框架，为每个主智能体配备专属元智能体，实现回合内与跨回合的经验驱动适配。该框架面向合作、混合动机与对抗等多种场景，支持交互策略的持续改进与可靠经验复用，为去中心化多智能体协同提供通用方案。",
+      "llm_tags": [
+        "query:agents:composite"
+      ],
+      "matched_query_tag": "query:agents:composite",
+      "matched_query_text": "Papers central to 找和多智能体相关的内容, especially work that connects or combines: intelligent agent technology; multi-agent system coordination; task-oriented agent goal completion; reinforcement learning agent training; reinforcement learning in multi-agent environments; coordination mechanisms for multiple autonomous agents; How do autonomous agents perceive and interact with their environment?; What are the main challenges in multi agent coordination?; How do multiple agents communicate and coordinate to solve tasks?; Methods for multi agent reinforcement learning and cooperation.",
+      "matched_requirement_id": "req-composite-agents",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2610.34467v2",
+      "source": "arxiv",
+      "title": "DynaFlow: Learning Free-Form Multi-Agent Orchestration",
+      "abstract": "Multi-agent systems often rely on predefined collaboration structures, limiting their ability to adapt to diverse task requirements. We introduce DynaFlow, a framework that integrates free-form executable workflow synthesis into the action space of the main agent. The agent decides when collaboration is needed and generates task-specific programs that coordinate sub-agents through sequential or parallel execution, structured information exchange, and verification. Execution results and traces inform subsequent actions, enabling the agent to adapt collaboration as reasoning progresses. We train only the main agent through supervised fine-tuning on distilled trajectories, followed by refinement on examples filtered for unsupported premises, biased verification, and information-flow defects. All sub-agents remain fixed, separating orchestration learning from executor capability improvement. Across six benchmarks spanning mathematical reasoning, scientific question answering, and multi-hop retrieval, DynaFlow achieves 88.08% overall accuracy in Forced mode, outperforming the strongest evaluated baseline by 10.90 percentage points with the same Qwen3.5-27B backbone. Workflow analysis finds more explicit use, verification, and refinement of upstream outputs after training, highlighting cross-stage information flow as a key dimension of multi-agent orchestration.",
+      "authors": [
+        "Ruhao Liu",
+        "Qi Li",
+        "Shizun Wang",
+        "Xinchao Wang"
+      ],
+      "primary_category": "cs.MA",
+      "categories": [
+        "cs.MA"
+      ],
+      "published": "2026-10-25T17:38:55+00:00",
+      "link": "https://arxiv.org/pdf/2610.34467v2",
+      "tags": [
+        "keyword:agents",
+        "keyword:multi-agent",
+        "query:agents",
+        "query:gen-memory",
+        "query:multi-agent"
+      ],
+      "llm_score": 9.0,
+      "llm_evidence_en": "agent generates task-specific programs orchestrating sub-agents, adapting collaboration structure on the fly",
+      "llm_evidence_cn": "主智能体生成任务级程序编排子智能体,动态调整协作结构",
+      "llm_evidence": "主智能体生成任务级程序编排子智能体,动态调整协作结构",
+      "canonical_evidence": "主智能体生成任务级程序编排子智能体,动态调整协作结构",
+      "llm_tldr_en": "DynaFlow removes predefined collaboration structures by putting free-form executable workflow synthesis into the main agent's action space, letting it decide when and how to coordinate sub-agents and adapt as reasoning proceeds.",
+      "llm_tldr_cn": "现有多智能体系统依赖预先设定的协作结构,难以适应多样任务需求。作者提出DynaFlow,将自由形式的可执行工作流合成纳入主智能体的动作空间,由智能体自行判断何时需要协作,并生成顺序或并行执行、结构化信息交换与验证的任务级程序。仅通过蒸馏轨迹的监督微调训练主智能体,再用过滤样本精炼。该框架使协作结构可随推理进展动态调整,为灵活的多智能体编排提供了新范式。",
+      "llm_tldr": "现有多智能体系统依赖预先设定的协作结构,难以适应多样任务需求。作者提出DynaFlow,将自由形式的可执行工作流合成纳入主智能体的动作空间,由智能体自行判断何时需要协作,并生成顺序或并行执行、结构化信息交换与验证的任务级程序。仅通过蒸馏轨迹的监督微调训练主智能体,再用过滤样本精炼。该框架使协作结构可随推理进展动态调整,为灵活的多智能体编排提供了新范式。",
+      "llm_tags": [
+        "query:multi-agent:composite"
+      ],
+      "matched_query_tag": "query:multi-agent:composite",
+      "matched_query_text": "Papers central to 多智能体拓扑设计的方式, especially work that connects or combines: the structure and arrangement of connections among multiple autonomous agents; the network layout and connectivity patterns in multi-agent systems; approaches for designing the interaction structure of multi-agent systems; how to design the communication graph for agents; graph-based organization of multi-agent interactions; topological arrangement enabling agent collaboration; How to design the topology of a multi agent system; What are the common methods for constructing agent communication topologies.",
+      "matched_requirement_id": "req-composite-multi-agent",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2610.35219v2",
+      "source": "arxiv",
+      "title": "Multi-Agent Relay Thinking",
+      "abstract": "Existing multi-agent collaboration (MAC) methods have primarily explored a group thinking collaboration topology, where agents independently generate solutions and aggregate their outputs. In this work, we investigate an alternative relay thinking topology, where reasoning ownership is dynamically transferred across agents, allowing subsequent agents to inherit and refine an evolving reasoning trajectory. We introduce Multi-Agent Confidence-guided Relay (MACR), a framework that enables dynamical relay collaboration among agents. The key challenge is determining when reasoning should be relayed and which agent should continue the process. method addresses this challenge through confidence-guided relay triggering and a bidding mechanism that selects the next agent based on its confidence. Experiments on four benchmarks show that method outperforms the strongest single-model strategies in accuracy, e.g., +3.3% on MathVista and +3.9% on MMStar, and remains on par with multi-agent strategies while consuming 6.0x less token overhead on HallusionBench and MMStar. Further analysis demonstrates that relay collaboration enables heterogeneous agents to progressively integrate complementary insights, combining heterogeneous capabilities across reasoning stages. Our source code is available at https://github.com/67L1/MACR.",
+      "authors": [
+        "Xu Liu",
+        "Jungang Qiao",
+        "Guikun Chen",
+        "Xiaojuan Qi",
+        "Wenguan Wang"
+      ],
+      "primary_category": "cs.CV",
+      "categories": [
+        "cs.CV"
+      ],
+      "published": "2026-10-26T11:10:10+00:00",
+      "link": "https://arxiv.org/pdf/2610.35219v2",
+      "tags": [
+        "keyword:agents",
+        "keyword:multi-agent",
+        "query:agents",
+        "query:multi-agent"
+      ],
+      "llm_score": 9.0,
+      "llm_evidence_en": "relay thinking topology transferring reasoning ownership across agents",
+      "llm_evidence_cn": "接力思维拓扑在智能体间转移推理所有权",
+      "llm_evidence": "接力思维拓扑在智能体间转移推理所有权",
+      "canonical_evidence": "接力思维拓扑在智能体间转移推理所有权",
+      "llm_tldr_en": "MACR introduces a relay thinking topology where reasoning ownership is dynamically transferred across agents via confidence-guided relay triggering and a bidding mechanism for selecting the next agent.",
+      "llm_tldr_cn": "现有多智能体协作方法多采用群体思维拓扑，即各智能体独立生成方案再聚合输出。本文研究另一种接力思维拓扑，让推理所有权在智能体之间动态转移，后续智能体继承并精化演进中的推理轨迹。MACR 通过置信度引导的接力触发与基于置信度的竞标机制决定何时接力、由谁继续。实验表明该拓扑能有效提升协作推理质量，为多智能体拓扑设计提供了新范式。",
+      "llm_tldr": "现有多智能体协作方法多采用群体思维拓扑，即各智能体独立生成方案再聚合输出。本文研究另一种接力思维拓扑，让推理所有权在智能体之间动态转移，后续智能体继承并精化演进中的推理轨迹。MACR 通过置信度引导的接力触发与基于置信度的竞标机制决定何时接力、由谁继续。实验表明该拓扑能有效提升协作推理质量，为多智能体拓扑设计提供了新范式。",
+      "llm_tags": [
+        "query:multi-agent"
+      ],
+      "matched_query_tag": "query:multi-agent",
+      "matched_query_text": "topological arrangement enabling agent collaboration",
+      "matched_requirement_id": "req-16",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2610.35398v1",
+      "source": "arxiv",
+      "title": "Belief-Conditioned Multi-Agent Actor Critic for Decentralized LLM Collaboration",
+      "abstract": "Recent work has explored optimizing LLM collaboration through Multi-Agent Reinforcement Learning (MARL), but many approaches still rely on predefined workflows, limiting efficiency and scalability. Decentralized LLM collaboration is challenging because agents execute independently with limited communication, share a joint objective, and must infer useful information from communication traces. In this paper, we propose BCMAAC, a Belief-Conditioned Multi-Agent Actor-Critic method that maintains beliefs over contextual information and uses them to facilitate training. Experiments on Minecraft game-playing, web searching and tool-using tasks show that BCMAAC improves task performance and collaborative behavior compared to naive actor-critic baselines. The improvements are particularly pronounced in multi-turn tasks with richer contextual information, where belief modeling provides a clear advantage.",
+      "authors": [
+        "Tianle Chen",
+        "Shuo Liu",
+        "Christopher Amato"
+      ],
+      "primary_category": "cs.AI",
+      "categories": [
+        "cs.AI",
+        "cs.LG",
+        "cs.MA"
+      ],
+      "published": "2026-10-26T13:12:41+00:00",
+      "link": "https://arxiv.org/pdf/2610.35398v1",
+      "tags": [
+        "keyword:agents",
+        "keyword:multi-agent",
+        "query:agents",
+        "query:gen-memory",
+        "query:multi-agent"
+      ],
+      "llm_score": 9.0,
+      "llm_evidence_en": "belief-conditioned multi-agent actor-critic for decentralized LLM collaboration",
+      "llm_evidence_cn": "面向去中心化大模型协作的信念条件多智能体演员评论家方法",
+      "llm_evidence": "面向去中心化大模型协作的信念条件多智能体演员评论家方法",
+      "canonical_evidence": "面向去中心化大模型协作的信念条件多智能体演员评论家方法",
+      "llm_tldr_en": "Proposes BCMAAC, a belief-conditioned multi-agent actor-critic method that maintains beliefs over contextual information to train decentralized LLM agents with limited communication on a shared objective.",
+      "llm_tldr_cn": "现有基于多智能体强化学习的大模型协作方法多依赖预定义工作流，效率与可扩展性受限。作者提出BCMAAC，一种信念条件的多智能体演员评论家方法，在训练中维护对上下文信息的信念，帮助通信受限的独立智能体推断有用信息。在Minecraft游戏、网页搜索与工具使用任务上，该方法相比朴素演员评论家基线提升了任务表现与协作行为。该工作为去中心化多智能体强化学习协作提供了新方法。",
+      "llm_tldr": "现有基于多智能体强化学习的大模型协作方法多依赖预定义工作流，效率与可扩展性受限。作者提出BCMAAC，一种信念条件的多智能体演员评论家方法，在训练中维护对上下文信息的信念，帮助通信受限的独立智能体推断有用信息。在Minecraft游戏、网页搜索与工具使用任务上，该方法相比朴素演员评论家基线提升了任务表现与协作行为。该工作为去中心化多智能体强化学习协作提供了新方法。",
+      "llm_tags": [
+        "query:agents"
+      ],
+      "matched_query_tag": "query:agents",
+      "matched_query_text": "Methods for multi agent reinforcement learning and cooperation",
+      "matched_requirement_id": "req-10",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2610.35736v1",
+      "source": "arxiv",
+      "title": "Preference-Guided Cooperation in Multi-Objective Multi-Agent Reinforcement Learning",
+      "abstract": "Multi-objective multi-agent reinforcement learning (MOMARL) addresses agent coordination and objective trade-offs simultaneously while optimising overall system performance. Existing work tends to treat multi-agent cooperation and multi-objective optimisation as largely independent components of a learning problem, which amounts to an exorbitant complexity except in trivial cases. We study here whether the structure provided by multiple objectives can itself be exploited to facilitate cooperation, rather than being treated as an additional optimisation challenge. We formulate MOMARL at both the team and individual levels and introduce objective-wise counterfactual credit assignment to evaluate each agent's contribution across the team objectives. We propose Meta-Gradient Informed Multi-Objective Multi-Agent Reinforcement Learning (MIRL), with static (MIRL-S) and dynamic (MIRL-D) variants. By incorporating meta-gradient information, MIRL enables agents to learn how to prioritise objectives individually while collectively optimising the system-level objective, allowing the multi-objective structure to directly guide cooperation. Experiments on a multi-objective multiple particle environment show that our methods improve Pareto-front quality over baselines, with the dynamic variant achieving the strongest performance.",
+      "authors": [
+        "Qiyue Xia",
+        "J. Michael Herrmann"
+      ],
+      "primary_category": "cs.MA",
+      "categories": [
+        "cs.MA",
+        "cs.LG"
+      ],
+      "published": "2026-10-26T16:53:25+00:00",
+      "link": "https://arxiv.org/pdf/2610.35736v1",
+      "tags": [
+        "keyword:agents",
+        "keyword:multi-agent",
+        "query:agents",
+        "query:multi-agent"
+      ],
+      "llm_score": 9.0,
+      "llm_evidence_en": "multi-objective multi-agent reinforcement learning for agent cooperation",
+      "llm_evidence_cn": "面向智能体合作的多目标多智能体强化学习",
+      "llm_evidence": "面向智能体合作的多目标多智能体强化学习",
+      "canonical_evidence": "面向智能体合作的多目标多智能体强化学习",
+      "llm_tldr_en": "Studies multi-objective multi-agent reinforcement learning, formulating it at team and individual levels and introducing objective-wise counterfactual credit assignment to exploit objective structure for cooperation.",
+      "llm_tldr_cn": "多目标多智能体强化学习需同时处理智能体协调与目标权衡，现有方法将二者视为独立问题导致复杂度极高。论文在团队与个体两个层面形式化该问题，并提出目标级反事实信用分配来评估各智能体对不同目标的贡献。方法利用多目标结构本身促进合作，在降低优化复杂度的同时提升整体系统性能，为多智能体强化学习与协作提供新思路。",
+      "llm_tldr": "多目标多智能体强化学习需同时处理智能体协调与目标权衡，现有方法将二者视为独立问题导致复杂度极高。论文在团队与个体两个层面形式化该问题，并提出目标级反事实信用分配来评估各智能体对不同目标的贡献。方法利用多目标结构本身促进合作，在降低优化复杂度的同时提升整体系统性能，为多智能体强化学习与协作提供新思路。",
+      "llm_tags": [
+        "query:agents"
+      ],
+      "matched_query_tag": "query:agents",
+      "matched_query_text": "Methods for multi agent reinforcement learning and cooperation",
+      "matched_requirement_id": "req-10",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2610.39193v1",
+      "source": "arxiv",
+      "title": "Goal-Aware Dynamic Multi-Agent Collaboration for Long-Horizon Tasks",
+      "abstract": "LLM-based agents are increasingly used to complete complex, long-horizon tasks without human intervention. To make progress toward the task goal, agents need to perform different duties, such as planning and verification, when needed. To understand how single agents manage these duties during long-horizon execution, we conduct a preliminary study. Our analysis shows that verification has the strongest association with task success, but often occurs late, leaving limited opportunities for correction. We also find that the proportion of duty-relevant information decreases as records from different duties accumulate in a shared context. These findings lead us to examine whether multi-agent systems (MAS) can address these problems by assigning duties to agents with separate contexts. Our analysis shows that this separation alone is insufficient. Agents can lose track of the overall goal and repeat prior investigations. They may also lack necessary background while receiving irrelevant information from others. To maintain goal awareness and coordinate collaboration as task needs change, we propose Goal-Aware Dynamic Multi-Agent Collaboration (GAD). It uses a growing execution graph to organize subtasks and their dependencies. To keep agents focused on their goals, each context retains the original instruction and the assigned task's goal and acceptance conditions. To adapt collaboration and information sharing during execution, agents can divide tasks into subtasks and specify dependencies based on execution evidence. These dependencies guide when agents work and which results they receive. Verification and recovery check subtask results and full task completion against their goals, providing feedback for repair when checks fail.",
+      "authors": [
+        "Xu Shen",
+        "Lingyong Yan",
+        "Shuaiqiang Wang",
+        "Jianmin Wu",
+        "Zhikai Chen",
+        "Jiliang Tang",
+        "Jie Ren"
+      ],
+      "primary_category": "cs.AI",
+      "categories": [
+        "cs.AI"
+      ],
+      "published": "2026-10-29T02:15:35+00:00",
+      "link": "https://arxiv.org/pdf/2610.39193v1",
+      "tags": [
+        "keyword:agents",
+        "keyword:multi-agent",
+        "query:agents",
+        "query:multi-agent"
+      ],
+      "llm_score": 9.0,
+      "llm_evidence_en": "dynamic multi-agent collaboration assigns duties for long-horizon goal completion",
+      "llm_evidence_cn": "面向长时程目标完成动态分配职责的多智能体协作",
+      "llm_evidence": "面向长时程目标完成动态分配职责的多智能体协作",
+      "canonical_evidence": "面向长时程目标完成动态分配职责的多智能体协作",
+      "llm_tldr_en": "Addresses long-horizon LLM agent duties and late verification by dynamically assigning planning and verification roles to multiple agents, showing duty-aware collaboration improves task execution.",
+      "llm_tldr_cn": "针对长时程任务中单一LLM智能体职责混杂、验证滞后和共享上下文信息稀释的问题，作者先分析规划与验证等职责对任务成功的影响，再提出目标感知的动态多智能体协作框架，将不同职责分配给专门智能体并按需协调。实验表明验证与成功关联最强且多智能体分工能改善信息利用，为长时程自主任务提供可扩展的协作组织方式。",
+      "llm_tldr": "针对长时程任务中单一LLM智能体职责混杂、验证滞后和共享上下文信息稀释的问题，作者先分析规划与验证等职责对任务成功的影响，再提出目标感知的动态多智能体协作框架，将不同职责分配给专门智能体并按需协调。实验表明验证与成功关联最强且多智能体分工能改善信息利用，为长时程自主任务提供可扩展的协作组织方式。",
+      "llm_tags": [
+        "query:agents"
+      ],
+      "matched_query_tag": "query:agents",
+      "matched_query_text": "task-oriented agent goal completion",
+      "matched_requirement_id": "req-3",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2610.39680v1",
+      "source": "arxiv",
+      "title": "Federated Agentic AI for Interference-Aware Adaptive Spectrum Coordination",
+      "abstract": "Emerging intelligent wireless networks increasingly rely on autonomous AI agents to adapt spectrum usage to dynamic and heterogeneous operating conditions. However, collective learning is challenging when agents experience different local interference environments and cannot exchange raw observations due to communication-overhead and privacy constraints. We propose Federated Agentic Spectrum Coordination with Interference Awareness (FASCIA), a federated multi-agent deep reinforcement learning framework for adaptive spectrum coordination. In FASCIA, each network manager acts as an autonomous AI agent that perceives its local interference environment, accumulates experience in a persistent local memory, and learns an adaptive spectrum coordination policy through local interactions. Coordination among agents is achieved through periodic federated aggregation of locally trained models, without exchanging raw sensing data or experience. Since spectrum decisions made by one agent alter the environments observed by others, local learning is inherently heterogeneous and coupled. FASCIA employs proximal regularization to mitigate the resulting model drift and explicitly accounts for inter-carrier interference arising from partially overlapping channels. FASCIA is the first federated agentic AI framework to address this challenging interference-coupled spectrum coordination setting. Extensive simulations demonstrate that FASCIA achieves performance close to the centralized benchmark while avoiding raw-experience exchange and maintaining effectiveness across heterogeneous network configurations.",
+      "authors": [
+        "Tomer Baziza Paz",
+        "Yaniv Cohen",
+        "Kobi Cohen"
+      ],
+      "primary_category": "cs.NI",
+      "categories": [
+        "cs.NI"
+      ],
+      "published": "2026-10-29T09:28:10+00:00",
+      "link": "https://arxiv.org/pdf/2610.39680v1",
+      "tags": [
+        "keyword:agents",
+        "keyword:multi-agent",
+        "query:agents",
+        "query:multi-agent"
+      ],
+      "llm_score": 9.0,
+      "llm_evidence_en": "federated multi-agent deep RL where autonomous agents perceive local environment and learn coordination",
+      "llm_evidence_cn": "联邦多智能体深度强化学习，智能体感知本地环境并学习协同",
+      "llm_evidence": "联邦多智能体深度强化学习，智能体感知本地环境并学习协同",
+      "canonical_evidence": "联邦多智能体深度强化学习，智能体感知本地环境并学习协同",
+      "llm_tldr_en": "Proposes FASCIA, a federated multi-agent deep RL framework where each network manager is an autonomous agent that perceives local interference, keeps persistent local memory, and learns adaptive spectrum coordination without sharing raw observations.",
+      "llm_tldr_cn": "针对无线网络中智能体本地干扰环境各异、且因隐私与通信开销无法交换原始观测的问题，本文提出FASCIA联邦多智能体深度强化学习框架，让每个网络管理器作为自主智能体感知本地干扰、在持久本地记忆中积累经验并学习自适应频谱协调策略。该框架在受限信息共享条件下实现集体学习，为隐私敏感的分布式多智能体协同提供了可复用范式。",
+      "llm_tldr": "针对无线网络中智能体本地干扰环境各异、且因隐私与通信开销无法交换原始观测的问题，本文提出FASCIA联邦多智能体深度强化学习框架，让每个网络管理器作为自主智能体感知本地干扰、在持久本地记忆中积累经验并学习自适应频谱协调策略。该框架在受限信息共享条件下实现集体学习，为隐私敏感的分布式多智能体协同提供了可复用范式。",
+      "llm_tags": [
+        "query:agents"
+      ],
+      "matched_query_tag": "query:agents",
+      "matched_query_text": "reinforcement learning in multi-agent environments",
+      "matched_requirement_id": "req-5",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2610.39790v1",
+      "source": "arxiv",
+      "title": "Long-Term Agent Memory through Complementary Curation and Consolidation",
+      "abstract": "Long-horizon dialogue agents require effective memory systems to recall facts, events, and relationships from interaction histories. In this work, we propose a hybrid-memory architecture comprising episodic memories and structured relational memories and a consolidation mechanism which preserves efficiency. We conduct an empirical study across two benchmarks: LoCoMo and LongMemEval-S. Our experiments demonstrate that the two memory types are consistently complementary, combining both outperform state-of-the-art memory frameworks and achieves 90.2% accuracy on LoCoMo and 85.5% on LongMemEval-S.",
+      "authors": [
+        "Abhishek Gupta",
+        "Dongge Han",
+        "Daniel Madrigal Diaz",
+        "Wei-Ning Chen",
+        "Mayukh Das",
+        "Victor Rühle",
+        "Saravan Rajmohan"
+      ],
+      "primary_category": "cs.AI",
+      "categories": [
+        "cs.AI",
+        "cs.MA"
+      ],
+      "published": "2026-10-29T10:40:18+00:00",
+      "link": "https://arxiv.org/pdf/2610.39790v1",
+      "tags": [
+        "keyword:agents",
+        "keyword:gen-memory",
+        "keyword:multi-agent",
+        "query:agents",
+        "query:gen-memory",
+        "query:multi-agent"
+      ],
+      "llm_score": 9.0,
+      "llm_evidence_en": "hybrid memory with consolidation mechanism for long-term agent memory",
+      "llm_evidence_cn": "面向长期智能体记忆的混合记忆与巩固机制",
+      "llm_evidence": "面向长期智能体记忆的混合记忆与巩固机制",
+      "canonical_evidence": "面向长期智能体记忆的混合记忆与巩固机制",
+      "llm_tldr_en": "Long-horizon dialogue agents need memory for facts, events and relations; the paper proposes a hybrid episodic plus structured relational memory with a consolidation mechanism, beating prior frameworks at 90.2% on LoCoMo and 85.5% on LongMemEval-S.",
+      "llm_tldr_cn": "长程对话智能体需要有效记忆系统来回想交互历史中的事实、事件与关系。本文提出由情节记忆与结构化关系记忆组成的混合记忆架构，并设计保持效率的记忆巩固机制。在LoCoMo与LongMemEval-S两个基准上，两类记忆持续互补，组合后优于现有最先进记忆框架，分别达到90.2%与85.5%的准确率。该结果说明记忆类型互补与巩固机制对构建长期智能体记忆至关重要。",
+      "llm_tldr": "长程对话智能体需要有效记忆系统来回想交互历史中的事实、事件与关系。本文提出由情节记忆与结构化关系记忆组成的混合记忆架构，并设计保持效率的记忆巩固机制。在LoCoMo与LongMemEval-S两个基准上，两类记忆持续互补，组合后优于现有最先进记忆框架，分别达到90.2%与85.5%的准确率。该结果说明记忆类型互补与巩固机制对构建长期智能体记忆至关重要。",
+      "llm_tags": [
+        "query:gen-memory"
+      ],
+      "matched_query_tag": "query:gen-memory",
+      "matched_query_text": "What mechanisms enable memory consolidation and long term memory in generative agents?",
+      "matched_requirement_id": "req-22",
+      "selection_source": "fresh_fetch"
+    }
+  ],
+  "quick_skim": [
+    {
+      "id": "2610.04672v1",
+      "source": "arxiv",
+      "title": "MASBench: Benchmarking LLM-based Multi-Agent Collaboration under Partial Observability",
+      "abstract": "Large language models (LLMs) have progressively evolved into the core of autonomous agents. Building on this progress, LLM-based multi-agent systems (MAS) coordinate multiple agents into a synergistic team to accomplish complex tasks that exceed the capabilities of individual agents. The effectiveness of such systems depends not only on the agents themselves, but also on how collaboration mechanisms are designed and organized. Note that real-world collaboration is typically partially observable, where each agent can only access partial information about the environment due to physical or privacy-related constraints. However, many existing multi-agent benchmarks assume global observability, and leave limited support for systematically evaluating collaboration mechanisms. To bridge this gap, we introduce MASBench, a multi-agent collaboration benchmark designed under partially observable constraints. It is organized into three progressive task categories: Reasoning, Scheduling, and Game. Through this structure, we progressively evaluate three representative collaboration mechanisms: Protocol, Memory, and Routing. MASBench further provides deterministic evaluation metrics, including performance score, communication cost, and cost effectiveness, to characterize both collaboration outcomes and communication overhead. Experiments across diverse LLM backbones and mechanism configurations offer empirical guidance for effective MAS design. Code is available at: https://github.com/BUPT-GAMMA/MASBench",
+      "authors": [
+        "Qizhi Chu",
+        "Zekai Yu",
+        "Sijie Wen",
+        "Yang Liu",
+        "Chen Qian",
+        "Cheng Yang",
+        "Chuan Shi",
+        "Zhiyuan Liu"
+      ],
+      "primary_category": "cs.AI",
+      "categories": [
+        "cs.AI"
+      ],
+      "published": "2026-10-03T17:40:24+00:00",
+      "link": "https://arxiv.org/pdf/2610.04672v1",
+      "tags": [
+        "keyword:agents",
+        "keyword:multi-agent",
+        "query:agents",
+        "query:multi-agent"
+      ],
+      "llm_score": 8.0,
+      "llm_evidence_en": "benchmark for LLM multi-agent collaboration under partial observability",
+      "llm_evidence_cn": "部分可观测下LLM多智能体协作基准",
+      "llm_evidence": "部分可观测下LLM多智能体协作基准",
+      "canonical_evidence": "部分可观测下LLM多智能体协作基准",
+      "llm_tldr_en": "MASBench benchmarks LLM-based multi-agent collaboration under partial observability, systematically evaluating how collaboration mechanisms and organization affect team performance.",
+      "llm_tldr_cn": "现有LLM多智能体基准多假设全局可观测，难以系统评估真实受限条件下的协作机制。作者提出MASBench，在部分可观测设定下构建任务与评测框架，考察协作机制如何设计与组织对团队表现的影响。该基准支持对多智能体协调策略进行可控比较，揭示了协作结构设计在复杂任务中的关键作用，为后续方法研究提供统一评测基础。",
+      "llm_tldr": "现有LLM多智能体基准多假设全局可观测，难以系统评估真实受限条件下的协作机制。作者提出MASBench，在部分可观测设定下构建任务与评测框架，考察协作机制如何设计与组织对团队表现的影响。该基准支持对多智能体协调策略进行可控比较，揭示了协作结构设计在复杂任务中的关键作用，为后续方法研究提供统一评测基础。",
+      "llm_tags": [
+        "query:agents"
+      ],
+      "matched_query_tag": "query:agents",
+      "matched_query_text": "multi-agent system coordination",
+      "matched_requirement_id": "req-2",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "8plus"
+    },
+    {
+      "id": "2610.03140v1",
+      "source": "arxiv",
+      "title": "Tracking State Footprints: How Agents Can Transact",
+      "abstract": "Can AI agents transact? We argue that they must: as multi-agent systems (MASs) increasingly write code, deploy infrastructure, modify databases, and call web services, lost updates or stale reads can be catastrophic. Although MASs increasingly execute plans in parallel, current orchestrators do not track the state that agents read and write. As a result, concurrency anomalies manifest even in simple coding tasks. We frame MAS coordination as a data management problem and propose to describe agents by their state footprint: the state they read and write across their own local context and state, as well as the state of the orchestrator and external systems. We posit that MASs require guarantees similar to those of databases, but providing them raises new challenges and opportunities: unlike database transactions, agents do not read from a fixed schema or an isolated snapshot, and cannot be replayed deterministically upon failure. They can, however, resolve conflicts semantically instead of aborting, enabling new forms of concurrency control and conflict resolution. Towards agents that can transact, we outline a vision for next-generation agent orchestrators and transactional interfaces for external systems to participate in agentic transactions.",
+      "authors": [
+        "Oto Mraz",
+        "Rares Şerban",
+        "Kyriakos Psarakis",
+        "Burcu Kulahcioglu Ozkan",
+        "Asterios Katsifodimos"
+      ],
+      "primary_category": "cs.DB",
+      "categories": [
+        "cs.DB"
+      ],
+      "published": "2026-10-02T11:06:29+00:00",
+      "link": "https://arxiv.org/pdf/2610.03140v1",
+      "tags": [
+        "keyword:agents",
+        "keyword:multi-agent",
+        "query:agents",
+        "query:gen-memory",
+        "query:multi-agent"
+      ],
+      "llm_score": 7.0,
+      "llm_evidence_en": "frames multi-agent coordination as a data management problem with state footprints",
+      "llm_evidence_cn": "将多智能体协调建模为带状态足迹的数据管理问题",
+      "llm_evidence": "将多智能体协调建模为带状态足迹的数据管理问题",
+      "canonical_evidence": "将多智能体协调建模为带状态足迹的数据管理问题",
+      "llm_tldr_en": "Proposes describing agents by the state they read and write so that multi-agent orchestrators can detect concurrency anomalies and offer database-like transactional guarantees.",
+      "llm_tldr_cn": "多智能体系统并行执行计划时，现有编排器无法追踪智能体读写的状态，导致丢失更新与陈旧读取等并发异常。作者将多智能体协调重新表述为数据管理问题，提出用状态足迹刻画智能体在本地上下文、编排器与外部系统中的读写范围。基于该抽象可借鉴数据库事务思想为多智能体提供一致性保证，并指出其中的新挑战。该工作为多智能体协调的可靠性提供了新视角。",
+      "llm_tldr": "多智能体系统并行执行计划时，现有编排器无法追踪智能体读写的状态，导致丢失更新与陈旧读取等并发异常。作者将多智能体协调重新表述为数据管理问题，提出用状态足迹刻画智能体在本地上下文、编排器与外部系统中的读写范围。基于该抽象可借鉴数据库事务思想为多智能体提供一致性保证，并指出其中的新挑战。该工作为多智能体协调的可靠性提供了新视角。",
+      "llm_tags": [
+        "query:agents"
+      ],
+      "matched_query_tag": "query:agents",
+      "matched_query_text": "multi-agent system coordination",
+      "matched_requirement_id": "req-2",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "7"
+    },
+    {
+      "id": "2610.07415v1",
+      "source": "arxiv",
+      "title": "Understanding Conflict and Compatibility Conditions for Agents in AI-RAN",
+      "abstract": "Disaggregated mobile networks expose open interfaces for independent agents to control the Radio Access Network (RAN). The interactions between agents with contrasting objectives can result in conflicts. However, existing conflict mitigation methods treat agents that control the same parameter as being in a conflict that requires arbitration of their actions, without assessing whether their objectives can be satisfied simultaneously. In this paper, we introduce a control-theoretic approach to determine when agents can coexist and share control of the same parameters. We model threshold-based agents often encountered in the literature as sampled deadband feedback controllers and represent their objectives through Key Performance Indicator (KPI) targets and tolerances that define acceptable deadband bounds. We derive compatibility conditions from these bounds and show that compatibility for any number of agents and monitored KPIs can be established through pairwise tests. We propose a conflict mitigation policy that allows compatible agents to share control of the same network parameters while restricting arbitration to cases where their objectives cannot be satisfied simultaneously. We evaluate our policy through simulations using NIST's ns3-oran extension of ns-3, and our results show that it enables agents to share control with near-zero Service Level Agreement (SLA) drift when their objectives are compatible and the shared acceptable range is attainable, while matching Priority Mitigation when their objectives are incompatible.",
+      "authors": [
+        "Arshia Zolghadr",
+        "Joao F. Santos",
+        "Imtiaz Nasim",
+        "Deniz Aytemiz",
+        "Nicholas J. Kaminski",
+        "Jacek Kibilda"
+      ],
+      "primary_category": "cs.NI",
+      "categories": [
+        "cs.NI",
+        "eess.SY"
+      ],
+      "published": "2026-10-05T21:24:42+00:00",
+      "link": "https://arxiv.org/pdf/2610.07415v1",
+      "tags": [
+        "keyword:agents",
+        "keyword:multi-agent",
+        "query:agents",
+        "query:multi-agent"
+      ],
+      "llm_score": 6.0,
+      "llm_evidence_en": "analyzes when agents with contrasting objectives can coexist and share control",
+      "llm_evidence_cn": "分析目标冲突的智能体何时能够共存并共享控制",
+      "llm_evidence": "分析目标冲突的智能体何时能够共存并共享控制",
+      "canonical_evidence": "分析目标冲突的智能体何时能够共存并共享控制",
+      "llm_tldr_en": "Models threshold-based RAN control agents as deadband controllers and derives control-theoretic conditions for when agents with conflicting objectives can coexist rather than require arbitration.",
+      "llm_tldr_cn": "在解耦移动网络中，独立智能体控制同一无线接入网参数时常产生目标冲突，而现有方法直接假定冲突并仲裁动作。作者提出控制论方法，将阈值型智能体建模为采样死区反馈控制器，并用KPI目标刻画其目标。据此可判断多个智能体何时能够同时满足目标而共存。该工作为多智能体共享控制的冲突分析提供了理论条件。",
+      "llm_tldr": "在解耦移动网络中，独立智能体控制同一无线接入网参数时常产生目标冲突，而现有方法直接假定冲突并仲裁动作。作者提出控制论方法，将阈值型智能体建模为采样死区反馈控制器，并用KPI目标刻画其目标。据此可判断多个智能体何时能够同时满足目标而共存。该工作为多智能体共享控制的冲突分析提供了理论条件。",
+      "llm_tags": [
+        "query:agents"
+      ],
+      "matched_query_tag": "query:agents",
+      "matched_query_text": "What are the main challenges in multi agent coordination?",
+      "matched_requirement_id": "req-8",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "6"
+    },
+    {
+      "id": "2610.07432v1",
+      "source": "arxiv",
+      "title": "Entropy-Gated Belief Coordination for Decentralized Multi-Agent Search Under Intermittent Communication",
+      "abstract": "We study decentralized multi-agent target search where homogeneous agents communicate intermittently at Poisson-distributed times. Standard unconditional belief fusion wastes communication opportunities by synchronizing agents during high-entropy exploration, when diverse independent beliefs provide better coverage than a premature consensus. We introduce \\emph{entropy-gated belief coordination}, in which agents skip fusion while their collective entropy ratio exceeds a threshold~\\(θ\\) and merge only during exploitation, consistent with the bifurcation structure of nonlinear opinion dynamics and the submodular structure of the per-step information gain objective. We further derive \\(\\Istep(α,β)\\), the expected mutual information per observation step between two agents' binary sensors, as an interpretable, communication-free measure of sensor informativeness that motivates the gating design and guides system-level analysis. Experiments across 103{,}680 trials (nine grid sizes up to \\(100{\\times}100\\), Poisson communication timing, four target movement patterns) show that the Entropy-Gated Trust-Decay Planner (\\textsc{EG-TDP}), which adds a detection-probability planner switch in exploitation mode, achieves mean belief quality \\(\\bar{Q}=0.300\\) (mean belief mass at the true target cell, averaged across all trials and steps), a \\(58.9\\%\\) gain over arithmetic mean and a \\(37.4\\%\\) gain over visit-weighted fusion. On representative configurations, EG-TDP also outperforms a joint-Bayesian reference that uses all agents'~observations at every step, despite operating under random intermittent contact only.",
+      "authors": [
+        "Mohamed Abdelnaby",
+        "Kevin Leahy"
+      ],
+      "primary_category": "cs.RO",
+      "categories": [
+        "cs.RO"
+      ],
+      "published": "2026-10-05T21:39:51+00:00",
+      "link": "https://arxiv.org/pdf/2610.07432v1",
+      "tags": [
+        "keyword:agents",
+        "keyword:multi-agent",
+        "query:agents",
+        "query:gen-memory",
+        "query:multi-agent"
+      ],
+      "llm_score": 8.0,
+      "llm_evidence_en": "entropy-gated belief fusion decides when decentralized agents communicate and coordinate beliefs",
+      "llm_evidence_cn": "熵门控信念融合决定去中心化智能体何时通信与协调信念",
+      "llm_evidence": "熵门控信念融合决定去中心化智能体何时通信与协调信念",
+      "canonical_evidence": "熵门控信念融合决定去中心化智能体何时通信与协调信念",
+      "llm_tldr_en": "For decentralized multi-agent search with intermittent communication, entropy-gated belief coordination skips fusion during high-entropy exploration and merges beliefs only during exploitation, saving communication effort.",
+      "llm_tldr_cn": "去中心化多智能体目标搜索中,智能体仅在泊松分布时刻间歇通信,无条件信念融合会在高熵探索阶段过早达成共识而浪费通信机会。作者提出熵门控信念协调:当集体熵比超过阈值时跳过融合,仅在利用阶段合并信念,并给出每步信息增益的期望互信息分析。该方法与非线性观点动力学的分岔结构相契合,为通信受限下的多智能体协调提供了理论支撑。",
+      "llm_tldr": "去中心化多智能体目标搜索中,智能体仅在泊松分布时刻间歇通信,无条件信念融合会在高熵探索阶段过早达成共识而浪费通信机会。作者提出熵门控信念协调:当集体熵比超过阈值时跳过融合,仅在利用阶段合并信念,并给出每步信息增益的期望互信息分析。该方法与非线性观点动力学的分岔结构相契合,为通信受限下的多智能体协调提供了理论支撑。",
+      "llm_tags": [
+        "query:agents"
+      ],
+      "matched_query_tag": "query:agents",
+      "matched_query_text": "How do multiple agents communicate and coordinate to solve tasks?",
+      "matched_requirement_id": "req-9",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "8plus"
+    },
+    {
+      "id": "2610.08155v1",
+      "source": "arxiv",
+      "title": "Token-Efficient Multi-Agent Collaboration via System One-Guided Computational Division of Labor",
+      "abstract": "Large language model (LLM)-based multi-agent systems (MAS) have become a promising paradigm for complex information-seeking and reasoning tasks by enabling collaborative problem solving among specialized agents. However, existing MAS frameworks tightly couple task reasoning with coordination operations, including task selection, role assignment, message routing, and context management. As interactions grow, using powerful LLMs for these bounded control decisions introduces substantial token overhead and latency, limiting the scalability of agentic Web services. In this paper, we investigate whether coordination can be decoupled from expensive reasoning without compromising collaborative performance. We propose S1-MAS, a token-efficient multi-agent framework based on System One-guided computational division of labor. S1-MAS assigns bounded coordination decisions to lightweight System One models while reserving open-ended reasoning for capable LLM workers. Specifically, a lightweight controller selects inspection conditions, chooses subsequent tasks, and determines termination, while a compact reader retrieves condition-relevant evidence from authorized sources to support these decisions. Through a decision-evidence loop, selected tasks dynamically determine worker roles and source access, enabling adaptive collaboration without task-specific training. Extensive experiments on seven diverse benchmarks demonstrate that S1-MAS achieves superior accuracy while substantially reducing the inference cost. Across individual comparisons with AgentVerse, DyLAN, and SelfOrg on seven benchmarks, S1-MAS reduces GPT-4o token consumption by 44.9%-97.2% and measured end-to-end latency by 37.8%-93.0%. These results highlight its potential for scalable and cost-effective agentic Web applications.",
+      "authors": [
+        "Zihan Zhou",
+        "Xinzhe Hu",
+        "Hanxu Yang",
+        "Liangjian Wen",
+        "Zhao Kang"
+      ],
+      "primary_category": "cs.MA",
+      "categories": [
+        "cs.MA",
+        "cs.AI"
+      ],
+      "published": "2026-10-06T11:11:05+00:00",
+      "link": "https://arxiv.org/pdf/2610.08155v1",
+      "tags": [
+        "keyword:agents",
+        "keyword:multi-agent",
+        "query:agents",
+        "query:multi-agent"
+      ],
+      "llm_score": 7.0,
+      "llm_evidence_en": "decouples coordination operations from reasoning in LLM multi-agent collaboration",
+      "llm_evidence_cn": "在LLM多智能体协作中将协同操作与推理解耦",
+      "llm_evidence": "在LLM多智能体协作中将协同操作与推理解耦",
+      "canonical_evidence": "在LLM多智能体协作中将协同操作与推理解耦",
+      "llm_tldr_en": "Proposes S1-MAS, which decouples coordination operations such as task selection and message routing from expensive LLM reasoning via a System-1 style controller, cutting token overhead and latency while preserving collaboration quality.",
+      "llm_tldr_cn": "现有LLM多智能体系统将任务推理与任务选择、角色分配、消息路由等协同操作紧密耦合，交互增多时带来巨大令牌开销与延迟。本文提出S1-MAS，用系统一式的轻量控制模块将协同操作与昂贵推理解耦。实验表明该方法在保持协作性能的同时显著降低令牌消耗与延迟。该工作为可扩展的智能体Web服务提供了高效的多智能体协同范式。",
+      "llm_tldr": "现有LLM多智能体系统将任务推理与任务选择、角色分配、消息路由等协同操作紧密耦合，交互增多时带来巨大令牌开销与延迟。本文提出S1-MAS，用系统一式的轻量控制模块将协同操作与昂贵推理解耦。实验表明该方法在保持协作性能的同时显著降低令牌消耗与延迟。该工作为可扩展的智能体Web服务提供了高效的多智能体协同范式。",
+      "llm_tags": [
+        "query:agents"
+      ],
+      "matched_query_tag": "query:agents",
+      "matched_query_text": "multi-agent system coordination",
+      "matched_requirement_id": "req-2",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "7"
+    },
+    {
+      "id": "2610.10265v1",
+      "source": "arxiv",
+      "title": "Stale, Misattributed, or Late: Where Personal Memory Fails Before Generation",
+      "abstract": "Personal memory for language agents is usually judged by whether the final an- swer is correct. That score hides errors that arise before generation: the memory block may contain an obsolete value, a fact about the wrong person, or no use- ful fact before the serving deadline. We measure these failures directly. Using Personal Fact Memory (PFM) as a reference layer, we find that temporal validity is primarily a property of memory construction in our setting. On a controlled revision benchmark, serving only the active value of each correctly keyed slot eliminates observed stale exposure; without update resolution, 70.3% of prompts expose a superseded value. Once retrievers share the same active store and par- ticipant information, participant-aware BM25 is equivalent to the reference ranker within a prespecified 0.02 margin. The harder problem is assigning revisions to the right slot. Missed merges leave stale values active, whereas false merges silently remove current values; four LLM key assigners achieve higher key re- call than a rule extractor yet produce lower clean-retrieval rates, and open-domain merge recall on LongMemEval never exceeds 0.062. Misattribution survives va- lidity filtering: an entity posterior reduces same-name exposure on controlled data but cannot distinguish identically named speakers in LoCoMo. Two frozen lan- guage models reproduce prompt errors in generated text. Retrieval latency varies across rankers, but prompt prefill dominates turn-level latency on our hardware. These results argue for evaluating agent memory before generation, separating stored-state validity, identity resolution, abstention, and serving latency.",
+      "authors": [
+        "Haonan Deng",
+        "Park Sinchaisri"
+      ],
+      "primary_category": "cs.AI",
+      "categories": [
+        "cs.AI"
+      ],
+      "published": "2026-10-07T15:37:12+00:00",
+      "link": "https://arxiv.org/pdf/2610.10265v1",
+      "tags": [
+        "keyword:gen-memory",
+        "query:gen-memory"
+      ],
+      "llm_score": 6.0,
+      "llm_evidence_en": "memory construction and update resolution for personal agent memory",
+      "llm_evidence_cn": "面向个人智能体记忆的构建与更新解析",
+      "llm_evidence": "面向个人智能体记忆的构建与更新解析",
+      "canonical_evidence": "面向个人智能体记忆的构建与更新解析",
+      "llm_tldr_en": "Personal memory for language agents is judged only by final answer correctness, hiding pre-generation failures; measuring stale, misattributed and late facts shows temporal validity is a property of memory construction, with 70.3% of prompts exposing superseded values.",
+      "llm_tldr_cn": "个人记忆智能体通常只以最终答案正确与否来评价，掩盖了生成前发生的记忆失效，如过时值、错配人物或截止前无可用事实。本文以个人事实记忆为参照层直接测量这些失效，发现时间有效性主要取决于记忆构建。在受控修订基准上，仅提供正确键槽的活动值即可消除过时暴露，否则70.3%的提示会暴露已被取代的值。",
+      "llm_tldr": "个人记忆智能体通常只以最终答案正确与否来评价，掩盖了生成前发生的记忆失效，如过时值、错配人物或截止前无可用事实。本文以个人事实记忆为参照层直接测量这些失效，发现时间有效性主要取决于记忆构建。在受控修订基准上，仅提供正确键槽的活动值即可消除过时暴露，否则70.3%的提示会暴露已被取代的值。",
+      "llm_tags": [
+        "query:gen-memory"
+      ],
+      "matched_query_tag": "query:gen-memory",
+      "matched_query_text": "generative models for constructing and updating memory representations",
+      "matched_requirement_id": "req-19",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "6"
+    },
+    {
+      "id": "2610.07556v2",
+      "source": "arxiv",
+      "title": "Decoupled Multi-Agent Orchestration",
+      "abstract": "Learned orchestration can automatically construct effective language-model multi-agent systems, but existing approaches couple planning to fixed worker pools and train decomposition and collaboration from the same terminal outcome, limiting transfer and obscuring credit assignment. We introduce DeOrch, which separates worker-agnostic planning from concrete worker selection. Its two-stage planner first decomposes the task without worker information, then chooses collaboration operations using compact, worker-identity-free matchability feedback from the pool, enabling conditional credit assignment to decomposition and collaboration decisions. A lightweight matcher estimates worker suitability from behavior on a fixed probe set and adapts online with a contextual bandit, allowing new workers to be incorporated without retraining the planner or matcher. Across diverse in- and out-of-distribution tasks, DeOrch outperforms prior automatic MAS orchestration methods with fewer worker calls than competing learned orchestrators, remains effective when transferred to an entirely unseen worker pool without retraining, and shows consistent gains from both components.",
+      "authors": [
+        "Xinle Wu",
+        "Yao Lu"
+      ],
+      "primary_category": "cs.AI",
+      "categories": [
+        "cs.AI"
+      ],
+      "published": "2026-10-06T00:41:46+00:00",
+      "link": "https://arxiv.org/pdf/2610.07556v2",
+      "tags": [
+        "keyword:agents",
+        "keyword:multi-agent",
+        "query:agents",
+        "query:gen-memory",
+        "query:multi-agent"
+      ],
+      "llm_score": 8.0,
+      "llm_evidence_en": "decoupled task decomposition and collaboration decisions for learned multi-agent orchestration",
+      "llm_evidence_cn": "解耦任务分解与协作决策的学习式多智能体编排",
+      "llm_evidence": "解耦任务分解与协作决策的学习式多智能体编排",
+      "canonical_evidence": "解耦任务分解与协作决策的学习式多智能体编排",
+      "llm_tldr_en": "DeOrch decouples worker-agnostic task planning from concrete worker selection, using matchability feedback and a contextual-bandit matcher to improve credit assignment and transfer in learned MAS orchestration.",
+      "llm_tldr_cn": "已有学习式编排方法将规划绑定到固定工作者池，并用同一终局结果训练任务分解与协作，导致迁移性差且信用分配不清。DeOrch 将不依赖工作者的规划与具体工作者选择解耦，两阶段规划器先分解任务再选择协作操作，并用上下文赌博机在线适配工作者匹配度。该设计实现分解与协作决策的条件化信用分配，并支持新工作者灵活接入。",
+      "llm_tldr": "已有学习式编排方法将规划绑定到固定工作者池，并用同一终局结果训练任务分解与协作，导致迁移性差且信用分配不清。DeOrch 将不依赖工作者的规划与具体工作者选择解耦，两阶段规划器先分解任务再选择协作操作，并用上下文赌博机在线适配工作者匹配度。该设计实现分解与协作决策的条件化信用分配，并支持新工作者灵活接入。",
+      "llm_tags": [
+        "query:agents"
+      ],
+      "matched_query_tag": "query:agents",
+      "matched_query_text": "multi-agent system coordination",
+      "matched_requirement_id": "req-2",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "8plus"
+    },
+    {
+      "id": "2610.08489v1",
+      "source": "arxiv",
+      "title": "Topology Design for Distributed Consensus with Relay-Assisted Communication",
+      "abstract": "This paper focuses on relay-assisted topology optimization to accelerate the convergence of distributed consensus algorithms over weakly connected networks. Instead of permanently adding a fixed set of relay links, we introduce a time-sharing framework where multiple relay configurations are activated in a probabilistic manner. An ActiveSet-based algorithm incrementally constructs candidate relay edge sets and jointly optimizes the mixing matrices and the associated relay set activation probabilities, allowing adaptive relay selection in the optimization process. Simulation results demonstrate a substantially improved performance-cost trade-off compared with fixed-cardinality relay selection strategies.",
+      "authors": [
+        "Shuyi Ren",
+        "Zheng Chen",
+        "Erik G. Larsson"
+      ],
+      "primary_category": "eess.SY",
+      "categories": [
+        "eess.SY",
+        "math.OC"
+      ],
+      "published": "2026-10-06T15:02:48+00:00",
+      "link": "https://arxiv.org/pdf/2610.08489v1",
+      "tags": [
+        "keyword:agents",
+        "keyword:multi-agent",
+        "query:agents",
+        "query:multi-agent"
+      ],
+      "llm_score": 7.0,
+      "llm_evidence_en": "relay-assisted topology optimization for distributed consensus networks",
+      "llm_evidence_cn": "面向分布式共识网络的继电器辅助拓扑优化",
+      "llm_evidence": "面向分布式共识网络的继电器辅助拓扑优化",
+      "canonical_evidence": "面向分布式共识网络的继电器辅助拓扑优化",
+      "llm_tldr_en": "Proposes relay-assisted topology optimization with probabilistic time-sharing and ActiveSet edge selection to accelerate distributed consensus over weakly connected networks.",
+      "llm_tldr_cn": "针对弱连接网络中分布式共识收敛慢、固定增加继电器链路成本高的问题，论文提出继电器辅助的拓扑优化方法，采用时间共享框架让多个继电器配置按概率激活，并用ActiveSet算法增量构建候选继电器边集，联合优化混合矩阵和激活概率。仿真结果表明该方法比固定基数继电器选择取得更好的性能成本折中，为多节点网络的拓扑设计与共识加速提供可借鉴方案。",
+      "llm_tldr": "针对弱连接网络中分布式共识收敛慢、固定增加继电器链路成本高的问题，论文提出继电器辅助的拓扑优化方法，采用时间共享框架让多个继电器配置按概率激活，并用ActiveSet算法增量构建候选继电器边集，联合优化混合矩阵和激活概率。仿真结果表明该方法比固定基数继电器选择取得更好的性能成本折中，为多节点网络的拓扑设计与共识加速提供可借鉴方案。",
+      "llm_tags": [
+        "query:multi-agent"
+      ],
+      "matched_query_tag": "query:multi-agent",
+      "matched_query_text": "How to design the topology of a multi agent system",
+      "matched_requirement_id": "req-17",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "7"
+    },
+    {
+      "id": "2610.11177v1",
+      "source": "arxiv",
+      "title": "Dynamic Mechanism and Information Design in AI-Agent Environments: A General Analytical Framework",
+      "abstract": "This paper develops a general framework for dynamic mechanism and information design with AI agents, encompassing optimal contracting and integrating evolving hidden information and hidden action with partial verification, technological authorization, and multi-agent interaction. It nests conventional dynamic screening, hidden-action contracting, and conditional dynamic information design, while allowing reporting, action, and information-use decisions to interact through a common continuation mechanism. We establish a dynamic revelation principle and a recursive characterization of implementability in which truthful reporting and post-report obedience are jointly determined through continuation incentives. In quasilinear optimal-contracting environments, dynamic envelope and integral-monotonicity methods yield a verification-adjusted dynamic virtual-surplus representation and identify three distinct margins: dynamic information rents, verification rents, and the implementation cost of hidden action. These margins generate a branched hierarchy separating conventional dynamic screening, hidden-action contracting, and their joint problem. We also study the joint design of monitoring, information use, and incentives: more informative monitoring capacity expands the designer's opportunity set, but full disclosure need not be optimal, and information use can itself alter hidden-action incentives. With multiple agents, correlated information, peer discipline, coupled incentives, joint feasibility, and continuation opportunities create additional strategic interactions. Although motivated by AI-agent environments, the framework applies more broadly to dynamic agency settings with similar economic features.",
+      "authors": [
+        "Guoqiang Tian"
+      ],
+      "primary_category": "econ.TH",
+      "categories": [
+        "econ.TH"
+      ],
+      "published": "2026-10-08T03:36:43+00:00",
+      "link": "https://arxiv.org/pdf/2610.11177v1",
+      "tags": [
+        "keyword:agents",
+        "keyword:multi-agent",
+        "query:agents",
+        "query:gen-memory",
+        "query:multi-agent"
+      ],
+      "llm_score": 6.0,
+      "llm_evidence_en": "framework for dynamic mechanism design with AI agents and multi-agent interaction",
+      "llm_evidence_cn": "面向AI智能体与多智能体互动的动态机制设计框架",
+      "llm_evidence": "面向AI智能体与多智能体互动的动态机制设计框架",
+      "canonical_evidence": "面向AI智能体与多智能体互动的动态机制设计框架",
+      "llm_tldr_en": "Develops a general framework for dynamic mechanism and information design with AI agents, unifying hidden information and hidden action under multi-agent interaction with a dynamic revelation principle and recursive implementability.",
+      "llm_tldr_cn": "论文针对智能体环境中动态机制与信息设计缺乏统一分析工具的问题，提出一个涵盖隐藏信息、隐藏行动与多智能体互动的通用框架。作者引入部分验证与技术授权，建立动态显示原理并给出可实施性的递归刻画，使真实报告与报告后服从通过延续激励共同确定。该框架统一并推广了传统动态筛选与隐藏行动契约等经典情形，为智能体环境下的机制设计提供理论基础。",
+      "llm_tldr": "论文针对智能体环境中动态机制与信息设计缺乏统一分析工具的问题，提出一个涵盖隐藏信息、隐藏行动与多智能体互动的通用框架。作者引入部分验证与技术授权，建立动态显示原理并给出可实施性的递归刻画，使真实报告与报告后服从通过延续激励共同确定。该框架统一并推广了传统动态筛选与隐藏行动契约等经典情形，为智能体环境下的机制设计提供理论基础。",
+      "llm_tags": [
+        "query:agents"
+      ],
+      "matched_query_tag": "query:agents",
+      "matched_query_text": "intelligent agent technology",
+      "matched_requirement_id": "req-1",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "6"
+    },
+    {
+      "id": "2610.07787v1",
+      "source": "arxiv",
+      "title": "OOPMAS: Object-Oriented Multi-Agent Systems for Query-Level Workflow Generation",
+      "abstract": "Multi-agent systems (MAS) powered by large language models have shown strong performance across code generation, mathematical reasoning, and question answering. However, existing methods for automating MAS design mostly operate at the task level, producing a single fixed workflow per benchmark that is applied uniformly to all queries. This assumption fails under realistic conditions. Query difficulty varies widely within a task, and real-world workloads mix heterogeneous task types. We introduce OOPMAS, a training-free framework that generates both the agent set and the coordination workflow at the granularity of individual queries. Agents are represented as object-oriented class definitions with dedicated roles, tools, and persistent state, and workflows are expressed as executable main functions over these agent objects. A dynamic skill library accumulates structured lessons from execution feedback across optimization rounds, enabling in-context improvement without any gradient updates or fine-tuning. On a mixed-task benchmark of queries spanning code, math, and QA, OOPMAS achieves 89.6% accuracy, outperforming the strongest baseline by 18.1 percentage points. A model-swap study across four LLM backbones shows consistent scaling, reaching 92.4% with the strongest model.",
+      "authors": [
+        "Qi Cheng",
+        "Shengyu Chen",
+        "Wei Cheng",
+        "Yiqun Xie",
+        "Xiaowei Jia",
+        "Haoyu Wang",
+        "Haifeng Chen"
+      ],
+      "primary_category": "cs.AI",
+      "categories": [
+        "cs.AI"
+      ],
+      "published": "2026-10-06T05:31:29+00:00",
+      "link": "https://arxiv.org/pdf/2610.07787v1",
+      "tags": [
+        "keyword:agents",
+        "keyword:multi-agent",
+        "query:agents",
+        "query:multi-agent"
+      ],
+      "llm_score": 8.0,
+      "llm_evidence_en": "generates agent set and coordination workflow per query for multi-agent collaboration",
+      "llm_evidence_cn": "按查询生成智能体集合与协作工作流",
+      "llm_evidence": "按查询生成智能体集合与协作工作流",
+      "canonical_evidence": "按查询生成智能体集合与协作工作流",
+      "llm_tldr_en": "OOPMAS is a training-free framework that generates both the agent set and the coordination workflow per query, representing agents as object-oriented classes with roles, tools, and persistent state.",
+      "llm_tldr_cn": "现有自动化多智能体系统设计多在任务层面生成一套固定工作流并统一应用于所有查询，难以应对查询难度差异与异构任务混合。OOPMAS 提出免训练框架，将智能体表示为带角色、工具与持久状态的对象类定义，在单条查询粒度上同时生成智能体集合与协作工作流。该设计使多智能体协作能随查询动态调整，为查询级多智能体组织提供了新思路。",
+      "llm_tldr": "现有自动化多智能体系统设计多在任务层面生成一套固定工作流并统一应用于所有查询，难以应对查询难度差异与异构任务混合。OOPMAS 提出免训练框架，将智能体表示为带角色、工具与持久状态的对象类定义，在单条查询粒度上同时生成智能体集合与协作工作流。该设计使多智能体协作能随查询动态调整，为查询级多智能体组织提供了新思路。",
+      "llm_tags": [
+        "query:agents"
+      ],
+      "matched_query_tag": "query:agents",
+      "matched_query_text": "multi-agent system coordination",
+      "matched_requirement_id": "req-2",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "8plus"
+    },
+    {
+      "id": "2610.08901v1",
+      "source": "arxiv",
+      "title": "Sequential Probabilistic Uncertainty Estimation for Parallel Multi-Agent Reasoning Systems",
+      "abstract": "LLM-based multi-agent systems (MAS) have attracted growing attention for improving reasoning through interaction among multiple agents. In this work, we focus on parallel multi-agent reasoning systems, where several agents solve the same problem over multiple rounds and aggregate their outputs into a final answer. Despite their strong reasoning performance, uncertainty estimation for such systems remains underexplored: the reliability of a MAS depends not only on individual generations, but also on how agents interact and evolve across rounds. We propose SAUCE (Sequential Agent Uncertainty through Consensus Evolution), a lightweight, training-free uncertainty estimator that formulates MAS uncertainty as sequential inference over a latent system-level belief. SAUCE aggregates round-level agreement and generation-uncertainty signals through a filtering-style update. Across five backbones, five benchmarks, and two MAS protocols, SAUCE improves misclassification detection, selective prediction, and calibration over a broad set of uncertainty estimation baselines, including standard log-likelihood-based methods and MAS-specific estimators.",
+      "authors": [
+        "Tunyu Zhang",
+        "Zihao Zhao",
+        "Yusong Zhao",
+        "Haizhou Shi",
+        "Zhuohang Li",
+        "Haoxian Chen",
+        "Hao Wang",
+        "Dimitris N. Metaxas"
+      ],
+      "primary_category": "cs.AI",
+      "categories": [
+        "cs.AI"
+      ],
+      "published": "2026-10-06T17:58:43+00:00",
+      "link": "https://arxiv.org/pdf/2610.08901v1",
+      "tags": [
+        "keyword:agents",
+        "keyword:multi-agent",
+        "query:agents",
+        "query:gen-memory",
+        "query:multi-agent"
+      ],
+      "llm_score": 7.0,
+      "llm_evidence_en": "uncertainty estimation for parallel multi-agent reasoning interaction",
+      "llm_evidence_cn": "面向并行多智能体推理交互的不确定性估计",
+      "llm_evidence": "面向并行多智能体推理交互的不确定性估计",
+      "canonical_evidence": "面向并行多智能体推理交互的不确定性估计",
+      "llm_tldr_en": "SAUCE is a training-free uncertainty estimator that models parallel multi-agent reasoning as sequential inference over consensus evolution across rounds.",
+      "llm_tldr_cn": "LLM多智能体系统虽提升推理表现，但其不确定性估计仍被忽视，可靠性取决于智能体如何交互并在多轮中演化。本文提出免训练的估计器SAUCE，将多智能体系统的不确定性建模为关于共识演化的序列推断，从而刻画各轮交互对最终答案可靠性的影响。该工作为多智能体协同推理的可信度评估提供了轻量而有效的工具。",
+      "llm_tldr": "LLM多智能体系统虽提升推理表现，但其不确定性估计仍被忽视，可靠性取决于智能体如何交互并在多轮中演化。本文提出免训练的估计器SAUCE，将多智能体系统的不确定性建模为关于共识演化的序列推断，从而刻画各轮交互对最终答案可靠性的影响。该工作为多智能体协同推理的可信度评估提供了轻量而有效的工具。",
+      "llm_tags": [
+        "query:agents"
+      ],
+      "matched_query_tag": "query:agents",
+      "matched_query_text": "multi-agent system coordination",
+      "matched_requirement_id": "req-2",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "7"
+    },
+    {
+      "id": "2610.11613v1",
+      "source": "arxiv",
+      "title": "AgentEvolver: System-Wide Self-Evolution Through Task Execution",
+      "abstract": "An agent can complete a task without improving how it works. Turning task experience into reusable capability requires connecting the changed component to its evaluation and subsequent use. We present AgentEvolver, a system for developing capabilities during task execution while keeping the foundation model fixed. Eight entity families expose reusable operations, methods, agents, control flow, interfaces, and supporting state to revision through a common versioned lifecycle. A shared Runtime coordinates ongoing work, while persistent planning and recoverable context preserve task direction and supporting evidence. We evaluate task outcomes on SWE-bench Pro Public and examine capability changes in six application cases. The team reports an 82.08\\% resolution rate with evolution, exceeding its reported baseline without evolution. The cases show retained capabilities entering later website, game, and research work, while also documenting incomplete objectives and an unsuccessful strategy. These findings distinguish improvement in a reusable component from success on the final task. AgentEvolver provides a concrete basis for studying capability accumulation through execution; independent-task transfer and total development cost remain open questions.",
+      "authors": [
+        "Wentao Zhang",
+        "Fuchao Yang",
+        "Yilei Zhao",
+        "Xinrun Wang",
+        "Bo An"
+      ],
+      "primary_category": "cs.AI",
+      "categories": [
+        "cs.AI"
+      ],
+      "published": "2026-10-08T09:55:05+00:00",
+      "link": "https://arxiv.org/pdf/2610.11613v1",
+      "tags": [
+        "keyword:agents",
+        "keyword:gen-memory",
+        "keyword:multi-agent",
+        "query:agents",
+        "query:gen-memory",
+        "query:multi-agent"
+      ],
+      "llm_score": 6.0,
+      "llm_evidence_en": "agent develops reusable capability through task execution",
+      "llm_evidence_cn": "智能体在执行任务中积累可复用能力",
+      "llm_evidence": "智能体在执行任务中积累可复用能力",
+      "canonical_evidence": "智能体在执行任务中积累可复用能力",
+      "llm_tldr_en": "Agents can complete tasks without improving how they work. AgentEvolver exposes eight entity families to a versioned lifecycle with a shared runtime and persistent planning, enabling system-wide self-evolution during execution while the base model stays fixed.",
+      "llm_tldr_cn": "针对智能体能完成任务却无法把经验转化为可复用能力的问题，论文提出AgentEvolver系统。该系统以八类实体暴露可复用操作、方法、智能体与控制流，通过共享运行时与可恢复上下文支持任务执行中的持续演化，同时保持基础模型不变。在SWE-bench Pro Public上取得82.08%的解决率并在六个应用案例中验证能力变化。该工作展示了面向任务完成的智能体自我进化路径。",
+      "llm_tldr": "针对智能体能完成任务却无法把经验转化为可复用能力的问题，论文提出AgentEvolver系统。该系统以八类实体暴露可复用操作、方法、智能体与控制流，通过共享运行时与可恢复上下文支持任务执行中的持续演化，同时保持基础模型不变。在SWE-bench Pro Public上取得82.08%的解决率并在六个应用案例中验证能力变化。该工作展示了面向任务完成的智能体自我进化路径。",
+      "llm_tags": [
+        "query:agents"
+      ],
+      "matched_query_tag": "query:agents",
+      "matched_query_text": "task-oriented agent goal completion",
+      "matched_requirement_id": "req-3",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "6"
+    },
+    {
+      "id": "2610.09858v1",
+      "source": "arxiv",
+      "title": "Training Advisors for LLM Agents from Task Outcomes",
+      "abstract": "Large language model agents tackle multi-step tasks by interleaving reasoning and tool calls with observations from the environment. Prior work has shown that natural-language feedback can help these agents revise their decisions during task execution. We introduce Caddie, a method for training critics to provide natural-language analysis and advice as agents work through a task. Unlike approaches that rely on step-level labels or reference critiques, Caddie learns from whether the agent ultimately succeeds after receiving the critic's feedback. We optimize the critic through reinforcement learning while keeping the base model frozen. Trained on multi-hop question answering with a single base model, our Qwen3-4B critic improves success rates across four base models of different scales and architectures, including three not used during critic training. On the MuSiQue benchmark, the trained critic improves Qwen3-4B's success rate by more than 25 percentage points, surpassing the performance of Kimi K3 without a critic. The same critic also yields gains on out-of-domain interactive benchmarks, including $τ^3$ and DeepDive, with no additional training. Our results show that agents can decide when to seek help from a critic at inference time and that outcome-based critic training can produce guidance that transfers across base models and task domains.",
+      "authors": [
+        "Sergei Polezhaev",
+        "Barys Liskavets",
+        "Ori Press",
+        "Alexander Golubev"
+      ],
+      "primary_category": "cs.CL",
+      "categories": [
+        "cs.CL",
+        "cs.AI",
+        "cs.LG"
+      ],
+      "published": "2026-10-07T11:14:26+00:00",
+      "link": "https://arxiv.org/pdf/2610.09858v1",
+      "tags": [
+        "keyword:agents",
+        "keyword:multi-agent",
+        "query:agents",
+        "query:gen-memory",
+        "query:multi-agent"
+      ],
+      "llm_score": 8.0,
+      "llm_evidence_en": "reinforcement learning training of a critic for LLM agents",
+      "llm_evidence_cn": "用强化学习训练LLM智能体的评论者",
+      "llm_evidence": "用强化学习训练LLM智能体的评论者",
+      "canonical_evidence": "用强化学习训练LLM智能体的评论者",
+      "llm_tldr_en": "Caddie trains a critic with reinforcement learning using only final task success as reward, giving LLM agents natural-language advice during multi-step execution.",
+      "llm_tldr_cn": "LLM智能体在多步任务中需要及时反馈来修正决策，但逐步标签或参考批评难以获得。作者提出Caddie，仅以智能体收到建议后是否最终成功作为奖励，用强化学习训练评论者生成自然语言分析与建议，同时冻结基础模型。在多跳问答上，Qwen3-4B评论者提升了多个基座模型的成功率，表明结果级信号足以训练有效的执行期指导。",
+      "llm_tldr": "LLM智能体在多步任务中需要及时反馈来修正决策，但逐步标签或参考批评难以获得。作者提出Caddie，仅以智能体收到建议后是否最终成功作为奖励，用强化学习训练评论者生成自然语言分析与建议，同时冻结基础模型。在多跳问答上，Qwen3-4B评论者提升了多个基座模型的成功率，表明结果级信号足以训练有效的执行期指导。",
+      "llm_tags": [
+        "query:agents"
+      ],
+      "matched_query_tag": "query:agents",
+      "matched_query_text": "reinforcement learning agent training",
+      "matched_requirement_id": "req-4",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "8plus"
+    }
+  ]
+}

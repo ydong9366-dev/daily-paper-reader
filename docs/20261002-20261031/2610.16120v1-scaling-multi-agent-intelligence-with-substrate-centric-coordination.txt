@@ -1,0 +1,899 @@
+Title: Scaling Multi-Agent Intelligence with Substrate-Centric Coordination
+
+URL Source: https://arxiv.org/pdf/2610.16120v1
+
+Published Time: Wed, 14 Oct 2026 02:22:55 GMT
+
+Number of Pages: 29
+
+Markdown Content:
+# Scaling Multi-Agent Intelligence with Substrate-Centric Coordination 
+
+Zhenting Qi 1,3,∗, Zhuokai Zhao 2, Rulin Shao 1, Kerem Oktar 1, Zhiyuan Yao 1, Himabindu Lakkaraju 3,
+
+Wen-tau Yih 1, Ansong Ni 1,†, Bhargavi Paranjape 1,†, Yilun Du 3,4,†
+
+> 1
+
+FAIR at Meta, 2Meta AI, 3Harvard, 4Kempner Institute 
+
+> ∗
+
+Work done at Meta , †Joint last author 
+
+Existing large language model (LLM) based multi-agent systems have been shown to scale poorly, and we identify three problems: reading burden that grows with the group, useful information diluted by shared work of unknown quality, and fragility to failed agents. We argue that the problems are largely due to agent-centric designs: the coordination structure is wired into fixed workflows, central coordinators, or peer-to-peer messaging, and recent blackboard-style methods that move the coordination into a shared medium relieve only the last problem. To close the gaps, we build 
+
+ScaleMAS , where asynchronous agents interact with a shared datastore of linked messages via three operations: publishing messages with optional references to earlier ones that they build on, searching for messages by content, and visiting messages by address. Search returns at most k messages, so an agent’s read stays bounded at any group size; results are ranked by relevance and by how often they are cited, which we find to be an effective proxy for quality; and messages persist after their producers leave, so the group carries on when individual agents fail. Across four agentic tasks, ScaleMAS 
+
+outperforms agent-centric and blackboard-style baselines at lower inference compute, continues to scale up to 128 agents, and tolerates losing agents midway. 
+
+Date: October 14, 2026 
+
+Correspondence: Zhenting Qi at zhentingqi@g.harvard.edu 2M 5M 10M 20M 50M 100M 20 30 40 50 60 70              
+
+> Accuracy (%)
+> BrowseComp-Plus
+> 500k 1M 2M 5M 10M 20M 10 20 30 40 50 60
+> Accuracy (%)
+> FATE-M
+> 5M 10M 20M 50M 40 60 80
+> Accuracy (%)
+> SWE-Bench Veri fi ed
+> 2M 5M 10M 20M 010 20 30
+> Evidence recall (%)
+> Contradiction Audit (x4)
+> Mean input + output tokens per example
+> Parallel ReAct AOrchestra DeLM Multi-Agent Debate ScaleMAS
+
+Figure 1 ScaleMAS shows stronger scalability. Task performance v.s. inference compute per example (log scale) with Qwen3.5-9B. Each point is one group size, scaled from 1 to 2, 4, 8, and 16 agents; AOrchestra, whose coordinator decides how many sub-agents to launch, is a single point. At matched compute, ScaleMAS reaches higher performance than Multi-Agent Debate (all-to-all message-passing), AOrchestra (coordinator-based), DeLM (blackboard-style shared context), and parallel ReAct agents without communication, and it improves with group size up to eight agents on every benchmark. 
+
+## 1 Introduction 
+
+Scaling a group of cooperative agents should increase its collective capability, but this benefit is not automatic in current large language model (LLM) based multi-agent systems (MAS). Empirical studies report superlinearly increased inference compute, diminishing or negative returns from additional agents, and settings in which a group underperforms a single agent given the same inference budget (Smit et al., 2023; Zhang et al., 2026; Kim et al., 2026b; Zheng et al., 2026). 1arXiv:2610.16120v1 [cs.CL] 12 Oct 2026 Agent-centric   
+
+> workflow
+> agent
+> coordinator message-passing
+> structure among agents message
+
+# Substrate-centric   
+
+> substrate
+> write read
+> structure among messages Figure 2 Two design principles for multi-agent coordination. Left:
+
+agent-centric designs wire coordination structure into the agents. A workflow-based system fixes agents’ successors, a coordinator-based system routes results through one main agent, and a message-passing system lets agents address others. Right: substrate-centric designs place the coordination in a shared medium. Messages are pushed to a datastore, organized with certain structures; agents interact only with the medium by writing to and reading from it. 
+
+We identify three major problems that grow with the number of agents and that many of the current designs leave unsolved. First, what each agent must read increases with the group: message-passing systems deliver all senders’ outputs to a receiver agent (Du et al., 2023; Liu et al., 2026), and coordinator-based systems route every sub-agent’s result into a central agent’s context (Su et al., 2025; Ruan et al., 2026), thus a larger group floods its readers with input that could exceed context limits. Second, the useful information dilutes as the group grows: even with bounded reading, an agent must find the few relevant results in an ever larger body of partial work shared by others, and it is hard to tell the quality of the shared information. Third, failure becomes the routine rather than the exception: the more agents run, the more likely some of them stall or crash, yet workflow-based systems fix each agent’s role and successor at design time (Hong et al., 2024; Qian et al., 2024) and coordinator-based systems route everything through one agent (Cemri et al., 2026), so a lost agent could easily cause the system to crash. What these methods share is that they adopt agent-centric designs by wiring coordination structures into agents’ instructions and loops. Another design principle has been adopted for decades since early blackboard systems (Newell, 1962; Nii, 1986; Erman et al., 1980): rather than engineering agents for better coordination, one can design the substrate 1 where agents only interact with a shared environment and self-coordinate (Figure 2). Recent work in LLM-based multi-agent systems has been trying to adopt this principle by giving LLM agents either a shared context (Mao and Mirhoseini, 2026; Park et al., 2026; Qi et al., 2026) or a shared filesystem (Qu et al., 2026; Kim et al., 2026a). This could alleviate the third problem: no agent waits on a particular peer, so a stalled agent blocks no one; and results persist after their producers leave, so a failed agent loses only its unfinished work. However, it leaves the first two problems unsolved. A shared context grows linearly with the group size, which still could cause context overflow; a shared filesystem bounds nothing, and leaves each agent to search a growing pile of files with no signal of their quality. A scalable substrate for LLM agents therefore needs more than a shared medium: it must bound each agent’s reading as the group’s output grows, while maintaining effective information discovery for every agent. Both requirements have a working precedent at the scale of billions of readers and writers: the Web. Its scalability comes in part from avoiding readers having to read everything: search bounds attention by returning a small set of relevant results, while hypertextual links make information navigable on demand and also provide signals of its importance (Brin and Page, 1998; Page et al., 1999). Drawing on these principles, we build ScaleMAS , a task-agnostic substrate on which LLM agents self-coordinate at scale. The agent substrate maintains a datastore of persistent messages interconnected through references, and a search engine indexed over them. Agents run asynchronously, and each interacts only with the substrate through three operations: it publishes messages to the datastore, optionally referencing earlier ones; it searches for messages by content and gets at most k returned results; and it visits messages for details by address. When a new 
+
+> 1Throughout this paper, we define an agent substrate as a combination of: a datastore that organizes agents’ messages, operations for reads and writes, and deterministic rules that connect the datastore and the operations.
+
+2message references earlier ones, the referenced messages gain importance weight, which combines with lexical relevance to rank subsequent search results. Every message is displayed with its references and with the later messages that reference it, but never with its author or its weight. Several properties follow from the design. First, an agent takes in bounded messages per read operation, regardless of how many agents are writing or how large the datastore has grown. Second, the importance of shared information is earned through reuse: weight accumulates only when others build on a message, so search surfaces what the group has actually relied on, and the signal is enhanced as the datastore grows. Third, membership is flexible to change. Because messages outlive their producers, a newcomer reads the datastore and can catch up by searching for and visiting messages, and an agent that leaves takes nothing with it. Moreover, lineage of shared results is inspectable, as each message carries references and its citers, and a reader can check what a claim rests on before building on it. We evaluate ScaleMAS on four agentic tasks spanning deep research (Chen et al., 2025b), theorem prov-ing (Jiang et al., 2026), software engineering (Jimenez et al., 2024), and contradiction audit, a benchmark we construct in which agents identify contradictions in large document corpora. We use two LLMs as backbones and compare against multi-agent debate (all-to-all message-passing) (Du et al., 2023), DeLM (blackboard-style shared context) (Mao and Mirhoseini, 2026), AOrchestra (coordinator-based delegation) (Ruan et al., 2026), and parallel ReAct agents without communication (Yao et al., 2022). Our experiments examine how collective performance and inference compute change with group size, with additional scaling studies extending to 128 
+
+agents. We also evaluate resilience to unreliable membership and ablate citation-based ranking to assess its contribution. A group of N agents with one failed agent performs comparably to N − 1 healthy agents, indicating that the remaining agents can continue cooperating despite the loss of individual participants. These results suggest that multi-agent systems scale further when coordination is designed into the substrate the agents share rather than wired into the agents themselves. 
+
+## 2 Method 
+
+ScaleMAS is an agent substrate with three parts: 1) a datastore of messages, 2) three operations that agents use to write to it and read from it, and 3) deterministic rules that decide what is written and what a read returns. N agents run the same harness under the same prompt. Each is an ordinary tool-using LLM agent that keeps the tools of its task and gains the three extra operations, which are its only access to the datastore. No agent holds a role, sends messages to another agent, or assigns work to other agents, and the agents run asynchronously. Figure 3 shows an example that traces two agents through the substrate. 
+
+2.1 The datastore 
+
+The datastore D is an append-only sequence of messages. A message m = ( u, a, r, R ) records one piece of completed work: the sub-task u the agent carried out, stated in the words someone about to do the same work would search for; the artifact a that the work produced; a short rationale r; and a set R of references to what the work built on. A reference names either an earlier message or a resource exposed by the task’s own tools, such as a corpus snippet or a repository file. Each message receives the next address when it is written and is never edited or deleted, so a reference always resolves to the text it was written against, and the references form a directed acyclic graph over D that grows only at its newest end. Each message also carries a citation weight sm ∈ [0 , 1) , which the rules maintain and which search uses for ranking. The sub-task and artifact together are limited to 256 or 1,024 tokens depending on the benchmark (Table 6), and a message carries at most 32 references. 
+
+2.2 The operations 
+
+publish (u, a, r, R ) appends a message and makes it readable by every agent from that moment on. The two read operations match the two ways a reader can know what it wants. search (q) takes a free-text description of what the agent needs and returns the k highest-ranked messages. visit (m1, . . . , m j ) returns the named messages, for an agent that a search result or a message’s references has already pointed somewhere specific. Both return each message as its four fields, the messages it references, and the most recent of the messages 3Query : She holds an MBA and a Master's degree, and as of 2023, she was a PhD candidate and the resident pastor of a ministry in West Africa. In 2018, she hosted a podcast consisting of six episodes… What is her name?               
+
+> Message 0
+> I've compiled professional and academic background for the female pastor… Eno Ebele Jerry — Resident Pastor of Streams of Joy…
+> Message 1
+> I've verified the 2018 podcast hosted by Eno Ebele Jerry consists of six episodes. “Joy Rains with Eno Jerry” published April 17, 2018… Message 2
+> I've concluded the identification of the individual meeting all criteria.
+> CONCLUSION: Eno Ebele Jerry…
+> Agent 0
+> publish browser_search browser_open search publish
+> Agent 1
+> browser_search browser_open search search visit publish Figure 3 A minimal example of two agents working through the substrate
+
+on a deep research query. Each row is one agent’s trajectory, with the three operations in blue and the task’s own tools in gray. A dashed stem marks the step that published a message, and a dotted arrow points from a referenced message to the message that cites it. 
+
+that reference it, up to eight. The author and the citation weight are never shown, so a reader judges a message by its content and its links. An agent ends by submitting its answer together with references and a rationale in the same form as a message, except on SWE-bench Verified, where the answer is a patch. The messages an answer cites, followed transitively through their references, form the answer’s evidence chain ,which Section 3.4 uses to trace where correct answers come from. 
+
+A walk-through. Figure 3 shows how the operations combine on a deep research query. Agent 0 publishes Message 0, a candidate answer with the background it has gathered, then browses further, searches the datastore, and publishes Message 1, which verifies one clue of the query and cites Message 0. Agent 1 has meanwhile browsed on its own; it searches the datastore, finds Message 1, follows its reference to Message 0 with visit , and publishes Message 2, which combines the two into a conclusion and cites both. Neither agent addresses the other or waits for it: Agent 1 learns of Agent 0’s work only by reading the datastore, and its final message rests on evidence it did not gather itself. 
+
+2.3 The rules 
+
+What is written. publish accepts a message only if every reference names something that exists and the rationale names every reference and states what it contributed. A message that breaks either rule is rejected with the offending reference named, and nothing is written. The first rule keeps references pointing backward in time. The second turns a reference into a stated dependency that a reader can check against the cited text, rather than an incidental mention. These are the only constraints ScaleMAS places on what an agent writes. 
+
+How weight is assigned. A new message starts at weight s0 = 0 . When a message references m, the weight of 
+
+m moves a fraction α of the way toward one, sm ← sm + α(1 − sm), once per citing message, and at every step of the group all weights decay, sm ← γs m. A message that later work builds on therefore gains weight, and one that the group stops building on loses it. References to task resources carry no weight. 
+
+What a read returns. The search index ranks messages by 
+
+score( q, m ) = sm + Rel( q, m )max m′∈D Rel( q, m ′) . (1) The citation weight plus a retrieval score normalized to [0 , 1] ; any retrieval function can serve as Rel , and we use BM25 (Robertson and Zaragoza, 2009). Only messages with a positive retrieval score are ranked, ties go to the earlier message, and the top k are returned, so the weight reorders relevant messages but cannot surface an unrelated one. The citation weight follows the idea of PageRank (Brin and Page, 1998; Page et al., 1999), with links written by the agents as they work. visit likewise accepts at most k addresses per call. Every read therefore adds at most k messages of bounded length to an agent’s context, however many agents are writing and however large D has grown: an agent’s intake grows with how often it reads, which the agent decides, and not with the size of the group. 4Table 1 Example of a cross-file contradiction from the SymPy documentation corpus. The injected text is in red, and the clashing claims are underlined.          
+
+> modules/solvers/solveset.rst modules/sets.rst (edited) . . . Set objects conform to Pythonic conventions when possible, i.e., x in A and for i in A
+> both work when they can be computed. . . . By contrast, x in y always gives TypeError for SymPy sets, even when the membership could easily be computed.
+
+## 3 Experiments 
+
+3.1 Contradiction Audit 
+
+Few existing tasks allow multi-agent systems to be studied at different scales under control. Also, on many existing agentic benchmarks a single agent already performs well, which leaves little room to measure how performance changes with group size. We therefore construct a new task, Contradiction Audit, which is designed to reward combining information spread across agents: The agents receive a large software documentation corpus with injected factual contradictions, and are tasked with reporting as many pairs of contradicting passages as they can find. The corpus can grow while the injected contradictions stay fixed, so difficulty can be varied without changing the task. More details are given in Section B.  
+
+> Benchmark construction.
+
+We source the Markdown and reStructuredText documentation files from 16 open-source software projects, including CPython, the Linux kernel, and PyTorch, and exclude files that disagree with the rest by design (changelogs, release notes, deprecation notices). We use GPT-5.6 to select pairs of document snippets on a common subject and rewrite the prose of one to contradict the other. An edit is kept only if a diff against the original snippet shows that it changes a few sentences and leaves the rest intact, and a second round of LLM judge (also with GPT-5.6) confirms that the edited snippet reads naturally, is not trivial (so that LLMs will not find it by memorization), is self-consistent, and truly conflicts with its partner. The LLM judge will run four times, and a snippet will be accepted iff. all four judges are positive. Each corpus receives twenty injected contradictions over forty distinct snippets, ten within one file and ten across files.  
+
+> Difficulty and scoring.
+
+Level xn pads the forty contradiction snippets with seeded random distractors to 40 n
+
+snippets, so the corpus grows while the answers stay fixed. For example, a x8 split means besides the 20 pairs of snippets that a system should really focus on, there are 40 × 8 − 40 = 280 other irrelevant snippets as distractions. We use a relaxed metric for evaluation: A contradiction counts as found when a reported pair includes its edited snippet, and extra reports are not penalized. The score is the fraction of the twenty found, averaged over 16 corpora. In the example of Table 1, each passage reads naturally on its own and the two sit in different documents, so detecting the contradiction requires reading one snippet and locating the other. 
+
+3.2 Setup  
+
+> Benchmarks.
+
+Beyond Contradiction Audit, we select three more benchmarks that stress a group of LLM agents in different ways. BrowseComp-Plus (Chen et al., 2025b) is search-intensive: the evidence for each question is scattered across a large corpus of web documents, reached through a search index. FATE (Jiang et al., 2026) is reasoning-intensive: each theorem proving problem asks for a complete Lean 4 proof that the compiler checks. SWE-bench Verified (Jimenez et al., 2024) measures the resolution of real GitHub issues, and requires multiple steps of verification and revision. ScaleMAS is harness-agnostic: we run it on a standard ReAct loop (Yao et al., 2022), implemented with the Hugging Face smolagents library 2, for BrowseComp-Plus, FATE, and Contradiction Audit, and on mini-SWE-agent (Yang et al., 2024) for SWE-bench Verified. More benchmark details are presented in Section C.3.  
+
+> Baselines and parity.
+
+We compare against the following methods: Parallel ReAct (Yao et al., 2022) runs N
+
+agents without communication between them. Multi-Agent Debate (MAD) (Du et al., 2023) is agent-centric with all-to-all message passing: agents exchange their intermediate work, each reading what every other produced. 
+
+> 2https://github.com/huggingface/smolagents
+
+5500k 1M 2M 5M 10M 20M 40 50 60 70 80            
+
+> Accuracy (%)
+> BrowseComp-Plus
+> 500k 1M 2M 5M 10M20M 50M 10 20 30 40 50
+> Accuracy (%)
+> FATE-H
+> 200k 500k 1M 2M 5M 10M 20M 020 40 60
+> Evidence recall (%)
+> Contradiction Audit (x8)
+> Mean input + output tokens per example
+> Parallel ReAct AOrchestra DeLM Multi-Agent Debate ScaleMAS Figure 4 Scaling study with Claude-5-Sonnet.
+
+Task performance v.s. inference compute per example (log scale) on BrowseComp-Plus, FATE, and Contradiction Audit. Each point is one group size, scaled from 1 to 2, 4, and 8 agents. At matched compute, ScaleMAS outperforms every baseline, and its lead on Contradiction Audit widens as the group grows. 1 2 4 8 
+
+> Number of agents
+> 100 150 200 250 300 350
+> Mean turns
+> Qwen3.5-9B · BCP Qwen3.5-9B · CA Sonnet5 · BCP Sonnet5 · CA
+> Figure 5 Number of turns
+
+, aver-aged over agents and examples, on BrowseComp-Plus (BCP) and Con-tradiction Audit x8 (CA) with both LLMs. 
+
+AOrchestra (Ruan et al., 2026) is agent-centric with a central coordinator: a main agent decomposes the task and delegates to sub-agents, each of which reports back once. DeLM (Mao and Mirhoseini, 2026) is blackboard-style: agents write to a shared context that all of them read, without addressing one another. For parallel ReAct, MAD, DeLM, and ScaleMAS , an agent stops once it outputs a final answer, and the system stops when all agents stop. For AOrchestra, the system stops once the coordinator agent stops. Every method runs with Qwen3.5-9B on all four benchmarks and with Claude-5-Sonnet on all but SWE-bench Verified. The stronger model gets the harder benchmark splits (FATE-H and Contradiction Audit x8 ; Qwen3.5-9B gets FATE-M and x4 ). All methods share identical benchmark task prompts, per-benchmark limit on action steps, and the benchmark’s tools and evaluation harness. 
+
+3.3 Main results 
+
+Performance grows with group size. Figures 1 and 4 plot performance against the inference compute per example, one point per group size. With Qwen3.5-9B, scaling ScaleMAS from one agent to sixteen raises performance on every benchmark, from 38 .1% to 65 .3% on BrowseComp-Plus, from 24 .0% to 56 .0% on FATE-M, and from 4.1% to 29 .4% on Contradiction Audit x4 . On SWE-bench Verified, it levels off after eight agents, where parallel ReAct saturates as well, which points to the limit of the LLM’s capability. Parallel ReAct also improves with group size but stays below ScaleMAS at every group size on all four benchmarks. Part of this gap is present with a single agent, where the system degrades to a single agent with a private substrate; Table 2 separates this effect from the benefit of reading one another’s messages. The baselines behave differently: on BrowseComp-Plus and Contradiction Audit, adding agents to MAD or DeLM helps little and sometimes hurts, and neither exceeds 7% on Contradiction Audit at any group size. Both methods deliver the group’s outputs into each agent’s context, so adding agents enlarges the reading burden of every member. Experiments with Claude-5-Sonnet show similar patterns (Figure 4), most visibly on Contradiction Audit x8 , where ScaleMAS rises from 10 .6% with one agent to 57 .5% with eight. 
+
+Scaling is more compute-efficient. At matched inference compute, ScaleMAS is ahead of baselines on every benchmark (Figures 1 and 4). For example, with Qwen3.5-9B (Figure 1), at a similar compute of about 
+
+20 M tokens per example on BrowseComp-Plus, 8 ScaleMAS agents reach 60 .0% while 16 DeLM agents reach 26 .0% ; and on SWE-bench Verified, 4 ScaleMAS agents reach the same 80 .0% as 8 ReAct agents with about half the tokens ( 15 .3M against 28 .3M). The difference grows with the group: independent ReAct agents repeat each other’s searching and reading, so their tokens per example roughly double with every doubling of the group, whereas on BrowseComp-Plus and Contradiction Audit the tokens used by ScaleMAS grow more slowly than its size, because agents reuse what others have already published instead of rediscovering it. The pattern holds with Claude-5-Sonnet: at about 3.5M tokens per example on BrowseComp-Plus, eight 
+
+ScaleMAS agents reach 79 .8% , against 73 .0% for eight MAD agents and 72 .0% for four ReAct agents. Adding agents to MAD, in contrast, increases tokens without improving accuracy: on BrowseComp-Plus with Qwen3.5-9B, its tokens per example grow from 5.6M with two agents to 48 .5M with sixteen, while its accuracy stays between 28% and 32% .620 21 22 23 24 25 26 27          
+
+> 10 20 30 40 50 60
+> Accuracy (%)
+> FATE-M
+> 2021222324252627
+> 010 20 30 40 50
+> Evidence recall (%)  Contradiction Audit (x4)
+> Number of agents
+> DeLM Multi-Agent Debate ScaleMAS Figure 6 Scaling to 128 agents
+
+with Qwen3.5-9B on FATE-M and Contradiction Audit x4 , comparing ScaleMAS 
+
+to other multi-agent systems: DeLM and MAD. 0.0 0.2 0.4 0.6 0.8 010 20 30 40 50          
+
+> Accuracy (%)
+> FATE-M (Qwen3.5-9B)
+> 0.0 0.2 0.4 0.6 0.8 020 40 60
+> Evidence recall (%)
+> Contradiction Audit x8 (Sonnet5)
+> Agent dropout probability
+> N=1 N=2 N=4 N=8 AOrchestra
+> Figure 7 Resilience to unreliable membership.
+
+Each agent drops out of each step independently with probability p. FATE-M with Qwen3.5-9B and Contradiction Audit x8 with Claude-5-Sonnet, 1 to 8 agents, AOrchestra for reference. 
+
+Agents take fewer turns in larger groups. Figure 5 reports the mean number of turns an agent takes before it submits. It falls as the group grows, from 304 with one agent to 205 with eight on BrowseComp-Plus with Qwen3.5-9B and from 150 to 94 with Claude-5-Sonnet, and it also falls on Contradiction Audit with both backbones. The total work of the group therefore grows more slowly than its size: eight Qwen3.5-9B agents on BrowseComp-Plus take about 5.4 times as many turns in total as a single agent. One reason is that an 
+
+ScaleMAS agent that finds the result it needs already published can build on it instead of deriving it again; Section 3.4 further tests whether correct answers indeed draw on other agents’ work. The turns an agent saves are mostly calls to the task’s own tools: with Claude-5-Sonnet on BrowseComp-Plus, an agent calls them 80 times per example in a group of eight against 134 times alone. On Contradiction Audit x8 , these calls fall from 131 to 98 while the agent’s searches of the datastore rise from 12 to 65 , so agents in larger groups explore the task less on their own and read more of what the others have found. 
+
+3.4 Analysis 
+
+Scaling continues to 128 agents. Figure 6 extends the sweep to N = 128 agents with Qwen3.5-9B. On FATE-M, 
+
+ScaleMAS makes most of its improvement by N = 16 and then levels off just below 60% , whereas MAD peaks at N = 32 and declines afterwards, and DeLM ends lower at N = 128 than at N = 8 . On Contradiction Audit x4 , ScaleMAS improves at every doubling and reaches 50 .9% at N = 128 , while DeLM and MAD never exceed 7% . The baselines thus show the diminishing or negative returns that prior studies report when multi-agent systems grow (Kim et al., 2026b), which we attribute to their unbounded reads. In turn, 
+
+ScaleMAS keeps agents’ reads lightweight and turns additional agents into higher performance. 
+
+Peer citations automatically curate the datastore. The substrate never judges the quality of a message; the only quality-related signal is which messages the agents choose to cite. We test whether this signal is informative on all BrowseComp-Plus runs of ScaleMAS , using two complementary criteria. The first is use : whether a message lies on the evidence chain of a correct final answer, that is, whether the answer cites it directly or through a chain of references. Ranking the messages within each run by citation count, the fraction on such a chain increases monotonically from 29% in the least-cited quintile to 85% in the most-cited (Figure 8a). Because the evidence chain itself follows citations, this measure reflects connectivity as well as relevance. The second criterion is independent of any answer: whether a message names a gold evidence document annotated by BrowseComp-Plus. Among messages that name a source, those naming gold evidence receive about twice as many citations from other agents as those naming other documents (Figure 8b). These results show that, without any central ranking, peer citations can effectively single out the messages that matter: those that final answers build on, and those that hold genuine evidence. 
+
+Correct answers are assembled across agents. Using BrowseComp-Plus runs with Qwen3.5-9B, we ask whether a correct answer’s evidence chain contains a message, written by another agent, that names a gold document the submitting agent never opened itself. The share of correct answers built this way grows with the group, from 9% with two agents to 24% with eight, and the trend holds under a stricter criterion that also excludes documents the submitter saw in its own search results (Figure 9). This indicates that a division of labor 7least cited 20 –40% 40 –60% 60 –80% most cited 
+
+> Messages, grouped by how often they are cited
+> 025 50 75 100
+> Used by a correct answer (%)
+> average of all messages: 49%
+> 29% 85%
+> (a) Cited messages are the ones correct answers build on
+> cite the TRUE evidence cite some other source
+> Messages that ...
+> 0.0 0.5 1.0
+> Times cited by other agents, per message  0.98 0.49
+> (b) True-evidence messages get 2× the peer citations
+
+Figure 8 Peer citations curate the datastore (BrowseComp-Plus, all Scale-MAS runs). (a) Share of messages on the evidence chain of a correct answer, by fifth of within-run citation count, over the 413 examples whose correct answer cites a message; dashed: all messages. (b) Mean citations from other agents for source-citing messages that name a gold evidence document or another document, weighting examples equally. Error bars: 
+
+95% bootstrap CIs. 1 2 4 8
+
+> Agents
+> 010 20 30 40
+> Correct answers (%)
+> 24% 8%
+> Answers use evidence found by others
+> not in submitter's browser_open not in submitter's browser_open or browser_search
+
+Figure 9 Correct answers use evidence found by peers (BrowseComp-Plus, Qwen3.5-9B). Share of correct answers whose citation chain holds other’s message naming a gold document the submitter never opened, or never saw in its searches either. 
+
+emerges although no agent is ever assigned a sub-task: agents increasingly answer by combining evidence that others found, and more correct answers rest on it as the group grows. 
+
+Individual failures do not break the group. Figure 11 adds one agent that fails on every step (i.e. it always returns error messages), holding the number of healthy agents fixed. For ScaleMAS , a group with one failing agent scores about as well as its healthy agents alone; with seven healthy agents, for instance, both reach 
+
+19 .4% . This is because ScaleMAS does not assign jobs to agents, and does not require an agent to finish anything: a failing agent simply publishes nothing, while the healthy agents keep finding and building on each other’s messages, so the group loses only the failing agent’s accumulated context. DeLM, in contrast, falls below 1% when one of its members fails. This may be partially due to its task decomposition design, which could be susceptible to individual failures when the errors are injected in the decomposition step. 
+
+Agents can leave and rejoin at any time. In Figure 7, each agent drops out of each step independently with probability p, so agents keep leaving and returning over the course of a run; at p = 0 .8, an agent is absent from four of every five steps on average and the group’s membership changes constantly. ScaleMAS keeps working throughout: even at p = 0 .8, eight agents still solve 22 .0% of FATE-M problems, and on Contradiction Audit 
+
+x8 , eight agents that drop out of two of every five steps still score higher than every baseline without dropout. This is because nothing in ScaleMAS waits on a particular agent, and what an agent has published stays in the datastore while it is away, so a returning agent picks up the group’s progress and continues. Larger groups absorb dropout better (at p = 0 .8 on FATE-M, 22 .0% with eight agents against 2.0% with one), whereas AOrchestra, which routes every result through a single coordinator, loses more than half of its score already at p = 0 .2 because it cannot tolerate the loss of the coordinator. 
+
+3.5 Ablation Studies 
+
+Does the citation weight improve what search returns? Figure 10 compares the default ranking, which adds the citation weight to lexical relevance, with BM25 alone and with a random order over matching messages. Removing the citation weight lowers accuracy at every group size on BrowseComp-Plus and Contradiction Audit x4 without reducing tokens read: at N = 8 , 60 .0% against 40 .8% and 23 .1% against 9.7% . On FATE-M the two stay within four points up to N = 4 and separate at N = 8 (49 .0% against 42 .0% ), where BM25 alone also reads twice the tokens ( 5.7M against 2.7M). A random ranking does as well as BM25 alone at N = 8 on all three benchmarks, so lexical relevance alone recovers little of what the citation weight adds. 
+
+Is the improvement from communication, or from running more agents? Table 2 holds the group at four agents and removes communication in two steps. A private substrate, partitioned by author so that each agent reads only its own messages, lowers accuracy on every benchmark, by 8.3 points on BrowseComp-Plus and 
+
+8.4 on SWE-bench Verified. Removing the datastore, which leaves four independent ReAct agents, lowers it further on three of the four benchmarks (on Contradiction Audit, 8.1% against 6.6% ). Reading one another’s 85M 10M 20M 20 30 40 50 60        
+
+> Accuracy (%)
+> BrowseComp-Plus
+> 500k 1M 2M 5M 10 20 30 40 50
+> Accuracy (%)
+> FATE-M
+> 2M 5M 10M 0510 15 20 25
+> Evidence recall (%)
+> Contradiction Audit (x4)
+> Mean input + output tokens per example
+> Standard BM25 only Random ranking
+
+Figure 10 Ablating citation weight in search ranking. Task performance versus mean tokens per example with Qwen3.5-9B, ranking by lexical relevance plus the citation weight (standard), by BM25 alone, or at random. Each point is a group size from 1 to 8. 1 2 3 4 5 6 7 8
+
+> Number of agents
+> 0510 15 20
+> Evidence recall (%)  Contradiction Audit (x4)
+> ScaleMAS DeLM ScaleMAS, 1 failed agent DeLM, 1 failed agent
+
+Figure 11 One permanently failing agent on Contradiction Audit x4 with Qwen3.5-9B. Dashed: one agent always fails; solid: all agents are healthy. 
+
+Table 2 Ablating cross-agent communication. Performance (%) with four Qwen3.5-9B agents. Private substrate partitions the datastore by author, so each agent reads only its own messages; w/o substrate runs independent ReAct agents. 
+
+BrowseComp-Plus FATE-M SWE-benchVerified ContradictionAudit ( x4 )
+
+ScaleMAS 55.1 42.0 80.0 10.0 
+
+- private substrate 46.8 38.0 71.6 6.6 
+
+- w/o substrate (ReAct) 38.0 36.0 68.0 8.1 
+
+messages accounts for about half or more of the improvement over independent sampling. 
+
+## 4 Related Work 
+
+LLM-based multi-agent systems revisit three coordination structures from classic distributed problem solving: agents that address one another directly, a designated agent that mediates, and a shared blackboard. Agents address one another directly in Du et al. (2023) and along the edges of a topology in Qian et al. (2025); a designated agent mediates in Fourney et al. (2024) and Ruan et al. (2026); and the blackboard has been revived repeatedly, with Han and Zhang (2025) removing direct contact between agents entirely and Mao and Mirhoseini (2026) placing typed notes in a context every agent reads. A further line asks which agents should be connected: Zhuge et al. (2024) optimizes graph connectivity together with node prompts, and Zhang et al. (2024) generates a task-specific topology. These methods change who is connected to whom. What arrives in a reader’s context is still chosen by whoever sends along those edges, so the question of who selects is left where these structures put it. We discuss earlier work and further related lines in Section A. 
+
+## 5 Conclusion 
+
+We identified three problems that grow with the number of agents: the reading burden on each agent, the dilution of useful shared work of unknown quality, and fragility to failing agents. ScaleMAS addresses them with an agent substrate: agents interact only through a shared datastore of linked messages, every read returns at most k messages ranked by relevance and by how often they are cited, and messages persist after their producers leave. Across four benchmarks and two backbones, ScaleMAS improves with group size up to eight agents on every benchmark, and with Qwen3.5-9B up to sixteen on three of the four, while reaching higher performance than message-passing, coordinator-based, and blackboard-style baselines at matched inference compute. Our analysis shows the mechanisms at work: peer citations concentrate attention on messages that hold genuine evidence, correct answers increasingly draw on evidence found by other agents, and the group tolerates both a permanently failing agent and agents that drop out at any step. 
+
+Limitations and future work. Due to limited compute, our experiments scale groups up to 128 agents; larger groups are left to future work. ScaleMAS is also used only at inference time, and training agents to coordinate through the substrate is another direction for future work. 9References 
+
+Nicholas J Belkin and W Bruce Croft. Information filtering and information retrieval: Two sides of the same coin? 
+
+Communications of the ACM , 35(12):29–38, 1992. Tim Berners-Lee. Information management: A proposal. http://www. w3. org/History/1989/proposal. html , 1989. Sergey Brin and Lawrence Page. The anatomy of a large-scale hypertextual web search engine. Computer networks and ISDN systems , 30(1-7):107–117, 1998. Vannevar Bush et al. As we may think. The atlantic monthly , 176(1):101–108, 1945. Mert Cemri, Melissa Z Pan, Shuyi Yang, Lakshya A Agrawal, Bhavya Chopra, Rishabh Tiwari, Kurt Keutzer, Aditya Parameswaran, Dan Klein, Kannan Ramchandran, et al. Why do multi-agent llm systems fail? Advances in Neural Information Processing Systems , 38, 2026. Weize Chen, Jiarui Yuan, Chen Qian, Cheng Yang, Zhiyuan Liu, and Maosong Sun. Optima: Optimizing effectiveness and efficiency for llm-based multi-agent system. In Findings of the Association for Computational Linguistics: ACL 2025 , pages 11534–11557, 2025a. Zijian Chen, Xueguang Ma, Shengyao Zhuang, Ping Nie, Kai Zou, Andrew Liu, Joshua Green, Kshama Patel, Ruoxi Meng, Mingyi Su, et al. Browsecomp-plus: A more fair and transparent evaluation benchmark of deep-research agent. arXiv preprint arXiv:2508.06600 , 2025b. Danny Dolev and Tomás Feder. Multiparty communication complexity. In 30th Annual Symposium on Foundations of Computer Science , pages 428–433. IEEE Computer Society, 1989. Yilun Du, Shuang Li, Antonio Torralba, Joshua B Tenenbaum, and Igor Mordatch. Improving factuality and reasoning in language models through multiagent debate. arXiv preprint arXiv:2305.14325 , 2023. E. H. Durfee, V. R. Lesser, and D. D. Corkill. Trends in cooperative distributed problem solving. IEEE Trans. on Knowl. and Data Eng. , 1(1):63–83, March 1989. ISSN 1041-4347. doi: 10.1109/69.43404. https://doi.org/10.1109/69.43404 .Lee D. Erman, Frederick Hayes-Roth, Victor R. Lesser, and D. Raj Reddy. The hearsay-ii speech-understanding system: Integrating knowledge to resolve uncertainty. ACM Comput. Surv. , 12(2):213–253, June 1980. ISSN 0360-0300. doi: 10.1145/356810.356816. https://doi.org/10.1145/356810.356816 .Adam Fourney, Gagan Bansal, Hussein Mozannar, Cheng Tan, Eduardo Salinas, Friederike Niedtner, Grace Proebsting, Griffin Bassman, Jack Gerrits, Jacob Alber, et al. Magentic-one: A generalist multi-agent system for solving complex tasks. arXiv preprint arXiv:2411.04468 , 2024. David Gelernter. Generative communication in linda. ACM Transactions on Programming Languages and Systems (TOPLAS) , 7(1):80–112, 1985. Bochen Han and Songmao Zhang. Exploring advanced llm multi-agent systems based on blackboard architecture. 
+
+arXiv preprint arXiv:2507.01701 , 2025. Sirui Hong, Mingchen Zhuge, Jonathan Chen, Xiawu Zheng, Yuheng Cheng, Jinlin Wang, Ceyao Zhang, Steven Yau, Zijuan Lin, Liyang Zhou, et al. Metagpt: Meta programming for a multi-agent collaborative framework. In 
+
+International Conference on Learning Representations , volume 2024, pages 23247–23275, 2024. Jiedong Jiang, Wanyi He, Wang Yuefeng, Guoxiong Gao, Yongle Hu, Jingting Wang, Nailin Guan, Peihao Wu, Bryan Dai, Liang Xiao, et al. Fate: A formal benchmark series for frontier algebra of multiple difficulty levels. In 
+
+International Conference on Learning Representations , volume 2026, pages 10543–10580, 2026. Carlos E Jimenez, John Yang, Alexander Wettig, Shunyu Yao, Kexin Pei, Ofir Press, and Karthik Narasimhan. Swe-bench: Can language models resolve real-world github issues? In International Conference on Learning Representations , volume 2024, pages 54107–54157, 2024. To Eun Kim, Xuhong He, Dishank Jain, Ambuj Agrawal, Negar Arabzadeh, and Fernando Diaz. Multi-agent transactive memory. arXiv preprint arXiv:2606.19911 , 2026a. Yubin Kim, Ken Gu, Chanwoo Park, Chunjong Park, Samuel Schmidgall, A Ali Heydari, Yao Yan, Zhihan Zhang, Yuchen Zhuang, Yun Liu, et al. Capable language models can outgrow the benefits of collaboration. Nature Machine Intelligence , 8(7):1157–1172, 2026b. Xuecheng Liu, Daman Arora, Gokul Swamy, and Andrea Zanette. Message passing enables efficient reasoning. arXiv preprint arXiv:2607.01077 , 2026. 
+
+10 Yuzhen Mao and Azalia Mirhoseini. Decentralized multi-agent systems with shared context. arXiv preprint arXiv:2606.10662 , 2026. Allen Newell. Some problems of basic organization in problem-solving programs. 1962. https://api.semanticscholar. org/CorpusID:60835107 .H. Penny Nii. Part one: The blackboard model of problem solving and the evolution of blackboard architectures. AI Mag. ,7(2):38–53, June 1986. ISSN 0738-4602. doi: 10.1609/aimag.v7i2.537. https://doi.org/10.1609/aimag.v7i2.537 .Lawrence Page, Sergey Brin, Rajeev Motwani, and Terry Winograd. The pagerank citation ranking : Bringing order to the web. In The Web Conference , 1999. https://api.semanticscholar.org/CorpusID:1508503 .Jongho Park, Vasilis Kontonis, Shivam Garg, Akshay Krishnamurthy, and Dimitris Papailiopoulos. Scaling discovery through test-time communication, 2026. https://arxiv.org/abs/2609.21032 .Joon Sung Park, Joseph O’Brien, Carrie Jun Cai, Meredith Ringel Morris, Percy Liang, and Michael S Bernstein. Generative agents: Interactive simulacra of human behavior. In Proceedings of the 36th annual acm symposium on user interface software and technology , pages 1–22, 2023. Zhenting Qi, Jack Fan, Karly Hou, Daisy Xinlei Lin, Satyaki Chakraborty, Mete Kemertas, Yu Yao, Sophia Simeng Han, Han Zheng, Zihan Wang, Xiangjun Wang, Himabindu Lakkaraju, and Yilun Du. Coact: A minimal coordination substrate for decentralized LLM agents. In Workshop on Failure Modes of Agentic AI at ICML 2026 , 2026. 
+
+https://openreview.net/forum?id=AvxJqQW1X5 .Chen Qian, Wei Liu, Hongzhang Liu, Nuo Chen, Yufan Dang, Jiahao Li, Cheng Yang, Weize Chen, Yusheng Su, Xin Cong, et al. Chatdev: Communicative agents for software development. In Proceedings of the 62nd annual meeting of the association for computational linguistics (volume 1: Long papers) , pages 15174–15186, 2024. Chen Qian, Zihao Xie, YiFei Wang, Wei Liu, Kunlun Zhu, Hanchen Xia, Yufan Dang, Zhuoyun Du, Weize Chen, Cheng Yang, et al. Scaling large language model-based multi-agent collaboration. In International Conference on Learning Representations , volume 2025, pages 41488–41505, 2025. Ao Qu, Han Zheng, Zijian Zhou, Yihao Yan, Yihong Tang, Shao Yong Ong, Fenglu Hong, Kaichen Zhou, Chonghe Jiang, Minwei Kong, et al. Coral: Towards autonomous multi-agent evolution for open-ended discovery. arXiv preprint arXiv:2604.01658 , 2026. Stephen Robertson and Hugo Zaragoza. The probabilistic relevance framework: Bm25 and beyond. Found. Trends Inf. Retr. , 3(4):333–389, April 2009. ISSN 1554-0669. doi: 10.1561/1500000019. https://doi.org/10.1561/1500000019 .Jianhao Ruan, Zhihao Xu, Yiran Peng, Fashen Ren, Zhaoyang Yu, Xinbing Liang, Jinyu Xiang, Yongru Chen, Bang Liu, Chenglin Wu, et al. Aorchestra: Automating sub-agent creation for agentic orchestration. arXiv preprint arXiv:2602.03786 , 2026. Andrew Semenov and Svyatoslav Dorofeev. Beyond compaction: Structured context eviction for long-horizon agents. 
+
+arXiv preprint arXiv:2606.11213 , 2026. Aditi Singh, Abul Ehtesham, Saket Kumar, Tala Talaei Khoei, and Athanasios V Vasilakos. Agentic retrieval-augmented generation: A survey on agentic rag. arXiv preprint arXiv:2501.09136 , 2025. Andries Smit, Paul Duckworth, Nathan Grinsztajn, Thomas D Barrett, and Arnu Pretorius. Should we be going mad? a look at multi-agent debate strategies for llms. arXiv preprint arXiv:2311.17371 , 2023. R. G. Smith. The contract net protocol: high-level communication and control in a distributed problem solver , page 357–366. Morgan Kaufmann Publishers Inc., San Francisco, CA, USA, 1988. ISBN 093461363X. Hongjin Su, Shizhe Diao, Ximing Lu, Mingjie Liu, Jiacheng Xu, Xin Dong, Yonggan Fu, Peter Belcak, Hanrong Ye, Hongxu Yin, et al. Toolorchestra: Elevating intelligence via efficient model and tool orchestration. arXiv preprint arXiv:2511.21689 , 2025. Yong Wu, YanZhao Zheng, TianZe Xu, ZhenTao Zhang, YuanQiang Yu, JiHuai Zhu, Chao Ma, BinBin Lin, BaoHua Dong, HangCheng Zhu, et al. Contextbudget: Budget-aware context management for long-horizon search agents. 
+
+arXiv preprint arXiv:2604.01664 , 2026. Wujiang Xu, Zujie Liang, Kai Mei, Hang Gao, Juntao Tan, and Yongfeng Zhang. A-mem: Agentic memory for llm agents. Advances in Neural Information Processing Systems , 38:17577–17604, 2026. 
+
+11 John Yang, Carlos Jimenez, Alexander Wettig, Kilian Lieret, Shunyu Yao, Karthik Narasimhan, and Ofir Press. Swe-agent: Agent-computer interfaces enable automated software engineering. Advances in Neural Information Processing Systems , 37:50528–50652, 2024. Andrew Chi-Chih Yao. Some complexity questions related to distributive computing(preliminary report). In Proceedings of the Eleventh Annual ACM Symposium on Theory of Computing , STOC ’79, page 209–213, New York, NY, USA, 1979. Association for Computing Machinery. ISBN 9781450374385. doi: 10.1145/800135.804414. https: //doi.org/10.1145/800135.804414 .Shunyu Yao, Jeffrey Zhao, Dian Yu, Nan Du, Izhak Shafran, Karthik Narasimhan, and Yuan Cao. React: Synergizing reasoning and acting in language models. arXiv preprint arXiv:2210.03629 , 2022. Yuting Zeng, Weizhe Huang, Lei Jiang, Tongxuan Liu, Xitai Jin, Chen Tianying Tiana, Jing Li, and Xiaohua Xu. S2-mad: Breaking the token barrier to enhance multi-agent debate efficiency. In Proceedings of the 2025 Conference of the Nations of the Americas Chapter of the Association for Computational Linguistics: Human Language Technologies (Volume 1: Long Papers) , pages 9393–9408, 2025. Guibin Zhang, Yanwei Yue, Xiangguo Sun, Guancheng Wan, Miao Yu, Junfeng Fang, Kun Wang, Tianlong Chen, and Dawei Cheng. G-designer: Architecting multi-agent communication topologies via graph neural networks. arXiv preprint arXiv:2410.11782 , 2024. Yuzhe Zhang, Feiran Liu, Yi Shan, Xinyi Huang, Xin Yang, Yueqi Zhu, Xuxin Cheng, Cao Liu, Ke Zeng, Terry Jingchen Zhang, et al. Silo-bench: A scalable environment for evaluating distributed coordination in multi-agent llm systems. In Proceedings of the 64th Annual Meeting of the Association for Computational Linguistics (Volume 1: Long Papers) , pages 29379–29398, 2026. Yujia Zheng, Zhuokai Zhao, Zijian Li, Yaqi Xie, Mingze Gao, Lizhu Zhang, and Kun Zhang. Thought communication in multiagent collaboration. Advances in Neural Information Processing Systems , 38:123389–123418, 2026. Wanjun Zhong, Lianghong Guo, Qiqi Gao, He Ye, and Yanlin Wang. Memorybank: Enhancing large language models with long-term memory. In Proceedings of the AAAI conference on artificial intelligence , volume 38, pages 19724–19731, 2024. Mingchen Zhuge, Wenyi Wang, Louis Kirsch, Francesco Faccio, Dmitrii Khizbullin, and Jürgen Schmidhuber. Language agents as optimizable graphs. arXiv preprint arXiv:2402.16823 , 2024. 
+
+12 Appendix 
+
+## Content 
+
+A Extended Related Work 14 B Extended Details on Contradiction Audit 14 
+
+B.1 Corpora . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 14 B.2 Splitting into snippets . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 14 B.3 Injecting contradictions . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 15 B.4 Difficulty levels . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 15 B.5 Tools and reporting . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 16 B.6 Scoring . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 16 B.7 Examples . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 16 
+
+C Implementation Details 16 
+
+C.1 Hyperparameters . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 16 C.2 Agent harness . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 16 C.3 Evaluation details . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 16 C.4 Prompts . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 19 
+
+D Case Studies: Coordination behaviors emerge in agent substrate 20 
+
+D.1 Forms of coordination . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 20 D.2 Case 1: citation weight settles a split . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 22 D.3 Case 2: a correction relayed in both directions . . . . . . . . . . . . . . . . . . . . . . . . . . . 23 D.4 Case 3: an objection and its answer . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 24 D.5 Case 4: a two-step relay among sixteen agents . . . . . . . . . . . . . . . . . . . . . . . . . . . 25 D.6 Case 5: a proof divided among four agents . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 26 D.7 Case 6: a lemma found through “referenced by” links . . . . . . . . . . . . . . . . . . . . . . . 27 D.8 Case 7: a message from step 2 completes a match at step 219 . . . . . . . . . . . . . . . . . . 28 D.9 Case 8: a summary recalled by address . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 29 13 A Extended Related Work  
+
+> Cooperative problem solving and coordination.
+
+How a group of problem solvers should divide work and share partial results is an old question, surveyed for the pre-LLM era in Durfee et al. (1989). The three structural answers this paper builds on were fixed in that period. The blackboard metaphor appears in Newell (1962), which already describes workers who each read everything on a shared surface, and was built in Erman et al. (1980), whose knowledge sources are activated by what appears on the blackboard rather than by calls from one another. Direct addressing was put to work for task allocation in Smith (1988), whose nodes exchange messages and share no memory, while Gelernter (1985) gives a shared medium in which writers do not name readers. The communication complexity of such structures was studied in parallel, from Yao (1979) to Dolev and Feder (1989), in terms of bits on a channel. The readers that literature assumes can scan a growing shared surface with little effort, so the amount of reading was never the binding constraint. It becomes one when the reader is a language model.  
+
+> Reducing what agents read.
+
+A second line accepts the delivery structure and makes each delivery smaller. Zeng et al. (2025) propagates only exchanges it judges novel, and Chen et al. (2025a) trains agents to communicate more compactly; a parallel effort operates inside a single agent, compressing or evicting accumulated history to keep a long run within the context window (Wu et al., 2026; Semenov and Dorofeev, 2026). Both reduce the size of what has already been routed to an agent. The bound studied here applies one step earlier, to how much is routed at all, and is set by the reader rather than by the sender. The two are complementary: every method in our experiments, ScaleMAS included, manages its own history in the same way (Section C.2).  
+
+> Retrieval, memory, and information access.
+
+Shared stores for language agents are usually built to persist: Zhong et al. (2024) and Park et al. (2023) maintain per-agent stores across sessions, and Xu et al. (2026) links notes and rewrites older ones. The datastore studied here is not of this kind: it is created for one task and discarded with it, and exists so that agents working at the same time can reach each other’s results. Retrieval by an agent has also been studied where the corpus is fixed in advance (Singh et al., 2025); here the corpus is the group’s own output, so what an agent can find at any moment is what the others have published by that moment. The distinction our substrate rests on is older than either literature: Belkin and Croft (1992) separates systems in which profiles decide what reaches a reader from systems in which a reader expresses a need and initiates retrieval. The three families of Section 1 are of the first kind; the design of Section 2 is of the second, and takes its two access modes from the tradition of Bush et al. (1945) and Berners-Lee (1989), with ranking informed by reference structure as in Brin and Page (1998). 
+
+## B Extended Details on Contradiction Audit 
+
+This section describes details about how Contradiction Audit (Section 3.1) is built and scored. The pipeline has four stages: collecting documentation, splitting it into snippets, injecting contradictions, and deriving difficulty levels. 
+
+B.1 Corpora 
+
+The benchmark covers sixteen open-source projects: CPython, Docker, Godot, JAX, Kubernetes, the Linux kernel, LLVM, NumPy, pandas, PyTorch, Ray, SciPy, scikit-learn, SQLAlchemy, SymPy, and Hugging Face Transformers. From the published documentation of each project we keep only Markdown and reStructuredText files. Files that disagree with the rest of the documentation by design are excluded, since they would contain contradictions we did not inject: release notes, changelogs and “what’s new” pages; deprecation notices, roadmaps and to-do pages, which describe changing state; fragments that are transcluded verbatim into other pages; documentation templates; and contributor, governance and license pages. For a few projects we also exclude version-specific API dumps and migration guides. Table 3 lists the size of each corpus. 
+
+B.2 Splitting into snippets 
+
+Each file is split into paragraphs, that is, runs of non-blank lines, and the paragraphs are packed greedily into snippets of about 1024 tokens ( tiktoken o200k_base ). A paragraph is never split, so every snippet ends at a 14 Table 3 The sixteen documentation corpora of Contradiction Audit, with the number of files kept after filtering and the number of snippets in the full corpus. Project Files Snippets Project Files Snippets CPython 507 2,806 pandas 78 392 Docker 930 2,074 PyTorch 245 597 Godot 1,586 4,512 Ray 534 1,347 JAX 233 920 SciPy 339 635 Kubernetes 1,630 3,115 scikit-learn 102 475 Linux kernel 3,433 8,319 SQLAlchemy 152 583 LLVM 1,229 2,663 SymPy 317 732 NumPy 199 573 Transformers 726 1,507 Total: 12 ,240 files and 31 ,250 snippets. 
+
+paragraph boundary and may run slightly over the target to complete one; a file containing a single paragraph longer than twice the target is skipped. Snippets keep the order of their files, and each snippet begins with a line naming the file it comes from, which the agents see. 
+
+B.3 Injecting contradictions 
+
+Contradictions are injected into pairs of snippets by GPT-5.6, one pair at a time, in five steps.  
+
+> Candidate pairs.
+
+Random pairs of snippets almost never discuss the same subject, so candidates are drawn from lexical overlap. A term is a lowercased word of at least four characters or one containing a digit; a pair is a candidate if the two snippets share at least two terms that each occur in at most eight snippets of the corpus. Candidates are visited in decreasing order of shared terms, with ties broken by a fixed random seed.  
+
+> Shared subject.
+
+The model is shown the two snippets inside their full files, so that names and references can be resolved, and asked for up to three subjects that both snippets discuss and that are central to what their files document, rather than passing mentions. Pairs without such a subject are skipped.  
+
+> Edit.
+
+The model rewrites the prose of one of the two snippets so that it can no longer be true together with the other, and explains why the two now conflict. It may only edit natural-language prose, never code, tables, list entries or headings, and must copy the rest of the snippet unchanged.  
+
+> Mechanical checks.
+
+The edited snippet is compared with the original. The edit is rejected if it changes more than 30% of the snippet, if its changes are spread over more than eight separate places, or if it changes only formatting. Each sentence containing an edit must also occur exactly once in the corpus, so that the injected claim can be located without ambiguity.  
+
+> Judges.
+
+Four independent GPT-5.6 judges then check that the edited snippet reads naturally on its own, that the contradiction is not trivial, so that a model cannot find it from memorized knowledge of the project, that the edited snippet does not contradict itself, and that the two snippets truly cannot both be true. A contradiction is kept only if all four judges accept it. The walk over candidates stops once each corpus holds twenty contradictions: ten whose two snippets come from the same file and ten whose snippets come from different files. Every snippet takes part in at most one contradiction, so the twenty contradictions occupy forty distinct snippets. 
+
+B.4 Difficulty levels 
+
+Level xn keeps the forty contradiction snippets and adds 40( n − 1) distractor snippets drawn at random with a fixed seed, for 40 n snippets in total. Distractors are drawn first from snippets that form a whole file on their own, so that the reduced corpus consists of complete files as far as possible. The kept snippets stay in their original corpus order and are renumbered from zero. The contradictions are identical at every level, so 15 a higher level differs only in how much unrelated text surrounds them. The main experiments use x4 (160 
+
+snippets per corpus) with Qwen3.5-9B and x8 (320 snippets) with Claude-5-Sonnet. 
+
+B.5 Tools and reporting 
+
+Every method receives the same two corpus tools. fetch_snippet returns the full text of a snippet given its index. search_snippet is an exact, case-insensitive text search over the corpus, which returns up to ten matching snippets with the surrounding context of each match. Each agent is told the number of snippets and a starting position; the starting positions of a group are randomly set. A contradiction is reported as a pair of snippet indices with a short reason, and an agent’s final answer is the list of pairs it is confident of. In 
+
+ScaleMAS , a reported contradiction is also published as a message whose rationale quotes the conflicting text of both snippets; a quote that is not verbatim text of the cited snippets is rejected. 
+
+B.6 Scoring 
+
+A contradiction counts as found when some reported pair includes its edited snippet. Reported pairs that match no injected contradiction are not penalized. The score of a run is the fraction of the twenty contradictions found by the pairs its agents report, and the score of a method is this fraction averaged over the sixteen corpora. 
+
+B.7 Examples 
+
+Tables 4 and 5 show one contradiction from each of the sixteen corpora: eight whose two snippets come from the same file and eight whose snippets come from different files. Each excerpt keeps the conflicting sentence and a little of the text around it, and omits the rest of the snippet. In every pair the unedited snippet still states the original claim, while the edited snippet now states one that cannot be true together with it; the last column states the conflict. 
+
+## C Implementation Details 
+
+C.1 Hyperparameters 
+
+Table 6 lists the settings used in all experiments unless stated otherwise. The citation weight follows Section 2.3: a new message starts at weight s0, each message that cites it moves its weight a fraction α of the way toward one, and all weights decay by a factor γ at every step. Each agent may take a limited number of actions, where every tool call counts as one action, including a call that is rejected; a run also ends after a maximum number of steps, at which point every agent still running submits the best answer it can from the work already done. 
+
+C.2 Agent harness 
+
+ScaleMAS shares the identical agent harness with all baselines: ReAct, DeLM, AOrchestra, and MAD. For Contradiction Audit, FATE, and BrowseComp-Plus, the agent summarizes its own history periodically: once the history reaches ten turns, all but the three most recent turns are replaced by a summary of at most 1,024 
+
+tokens written by the same model, and an earlier summary is rewritten together with the newly summarized turns. The mini-SWE-agent harness used on SWE-bench Verified keeps the full history instead. 
+
+C.3 Evaluation details 
+
+For the three third-party benchmarks, we report Pass@N accuracy (where N is the number of agents), following other multi-agent systems work (Park et al., 2026; Mao and Mirhoseini, 2026). This evaluation protocol is shared across all methods we tested. Pass@N measures what the group finds rather than which answer it would commit to; we treat answer selection as orthogonal, and single out the benefit of coordination by comparing with parallel ReAct agents. 16 Table 4 Contradiction Audit examples within one file , one per corpus. Both snippets come from the file named after the project. The injected text is in red, and . . . marks omitted text. 
+
+Unedited snippet Edited snippet Why they conflict  
+
+> CPython
+
+library/math.rst 
+
+. . . atan2(y, x) : atan(y / x) , in radians . . . . . . atan2(y, x) : Return atan(y / x) , in degrees. The result is between -180 and 180 .. . . The function summary gives the result of atan2 in radians; its own entry now gives it in degrees.  
+
+> Kubernetes
+
+reference/access-authn-authz/authentication.md --oidc-issuer-url : URL of the provider that allows the API server to discover public signing keys. Only URLs that use the 
+
+https:// scheme are accepted. . . . The URL scheme may be either http or 
+
+https ; plain http issuers are accepted. An http issuer URL is rejected in one and accepted in the other.  
+
+> LLVM
+
+ProjectGovernance.md 
+
+. . . An individual cannot serve on two area teams . Members of an area team are elected for 1 year terms. . . . Elections for area teams occur in January every third year, and members elected in these elections serve three-year terms. Area team members serve one-year terms in one and three-year terms in the other.  
+
+> NumPy
+
+reference/simd/build-options.rst 
+
+. . . Specifying features to cpu-dispatch or 
+
+cpu-baseline doesn’t explicitly enable them. Features are detected at compile time, and the maximum available features based on your specified options will be enabled according to toolchain and platform support. 
+
+MAX : Enables every known feature unconditionally, even when the compiler or platform does not support it. A requested feature is enabled only if the toolchain and platform support it, so the MAX option cannot enable features unconditionally.  
+
+> pandas
+
+development/developer.rst 
+
+. . . For types other than these, the ’metadata’ 
+
+key can be omitted. Implementations can assume None if the key is not present. . . . The metadata field is always required and must never be None nor omitted; it holds an empty dictionary except for: . . . The metadata key may be omitted for most types in one and must always be present in the other.  
+
+> SciPy
+
+dev/api-dev/array_api.rst 
+
+. . . The restriction that functions be functionally pure to support the JAX JIT necessitates that input-validation that raises with bad input must be skipped when xp is JAX. . . . Functions using the JAX JIT must be functionally pure. They cannot have side effects, cannot mutate data, and their outputs must be determined completely by their inputs. Raising a Python exception, however, is not considered a side-effect and is fully permitted within a JITed function. Input validation that raises must be skipped under the JIT in one, because raising is not allowed there; the other says raising is fully permitted.  
+
+> SQLAlchemy
+
+dialects/postgresql.rst 
+
+. . . native_inet_types=False . With the above parameter, the psycopg , asyncpg and 
+
+pg8000 dialects will disable the DBAPI’s adaptation of these types and will return only strings . . . . . . To normalize all the above DBAPIs to only return strings , use the native_inet_types 
+
+parameter, passing a value of True : . . . Only strings are returned with 
+
+native_inet_types=False in one and with True in the other.  
+
+> SymPy
+
+tutorials/intro-tutorial/manipulation.rst 
+
+. . . There is no subtraction class in SymPy. x- y is represented as x + -y . . . . . . We might expect to see something like 
+
+Div(1, y) , but unlike subtraction, which has its own class, none exists for division. SymPy has no subtraction class in one, and subtraction has its own class in the other. 
+
+17 Table 5 Contradiction Audit examples across two files , one per corpus. Each excerpt is headed by the file its snippet comes from. The injected text is in red, and . . . marks omitted text. 
+
+Unedited snippet Edited snippet Why they conflict 
+
+> Docker
+
+guides/testcontainers-java-lifecycle.md 
+
+. . . Even without explicitly stopping the container in @AfterAll , Testcontainers uses the Ryuk container to clean up containers automatically when the JVM exits. 
+
+guides/ testcontainers-java-getting-started.md 
+
+. . . Note that Testcontainers never removes containers on its own, so you must always stop the container explicitly in @AfterAll ;otherwise it keeps running even after the JVM exits. Testcontainers removes containers automatically when the JVM exits in one, and never removes them in the other. 
+
+> Godot
+
+community/asset_library/ submitting_to_assetlib.rst 
+
+. . . No submodules , or any submodules must be non-essential. GitHub does not include submodules in the downloaded ZIP file, so if the asset needs the contents of the submodule, your asset won’t work. 
+
+community/asset_store/ submitting_to_asset_store.rst 
+
+. . . Submodules are allowed, even essential ones. GitHub includes submodules in the downloaded ZIP file, so if the asset needs the contents of the submodule, it will still work. GitHub’s ZIP download leaves out submodules in one and includes them in the other. 
+
+> JAX
+
+export/export.md 
+
+. . . Note that the rehydrated function does not support any other transformations, e.g., forward-mode AD (jvp), or jax.vmap .
+
+new_docs/501/export.md 
+
+. . . Note that the rehydrated function also supports all other transformations, e.g., forward-mode AD (jvp), and jax.vmap .The rehydrated function supports no other transformations in one, and all of them in the other. 
+
+> Linux kernel
+
+filesystems/proc.rst 
+
+. . . Absolute values of the counters in this line are not accurate because of the failure to allocate memory to track some of the allocations made at this location. 
+
+mm/allocation-profiling.rst 
+
+. . . Runtime info: /proc/allocinfo Memory needed to track allocations is always reserved up front and can never fail to be allocated, so the absolute values of the counters reported in this file are always exact. The counters in 
+
+/proc/allocinfo are inaccurate in one and always exact in the other. 
+
+> PyTorch
+
+user_guide/torch_compiler/compile/ programming_model.compiler_disable.md 
+
+. . . When the compiler crashes, we will just skip tracing the function and try again later.  
+
+> This is not best practice
+
+- it is better to eventually manually add disable annotations as necessary. 
+
+user_guide/torch_compiler/ torch.compiler_troubleshooting.md 
+
+. . . When the compiler crashes, we will just skip tracing the function and try again later. This is the recommended best practice - it is better than eventually manually adding disable annotations. Suppressing compiler errors is not best practice in one, and the recommended practice in the other. 
+
+> Ray
+
+serve/tutorials/stable-diffusion.md 
+
+. . . The autoscaling config sets min_replicas 
+
+to 0, which means the deployment starts with no ObjectDetection replicas. These replicas spawn only when a request arrives. . . . 
+
+serve/tutorials/text-classification.md 
+
+. . . The autoscaling config sets min_replicas 
+
+to 1, because Ray Serve doesn’t support scaling a deployment down to 0 replicas. . . . Ray Serve can scale a deployment down to zero replicas in one, and can never go below one replica in the other. 
+
+> scikit-learn
+
+datasets/sample_generators.rst make_blobs creates a multiclass dataset by allocating each class to one normally-distributed cluster of points. It provides control over the centers and standard deviations of each cluster. This dataset is used to demonstrate clustering. 
+
+developers/minimal_reproducer.rst 
+
+Similarly to make_classification ,
+
+sklearn.datasets.make_blobs creates multiclass datasets using normally-distributed clusters of points. It provides no control regarding the centers and standard deviations of each cluster, which are always drawn at random, so it is not suited to demonstrate clustering. 
+
+make_blobs lets the user set cluster centers and standard deviations in one, and does not in the other. 
+
+> Transformers
+
+model_doc/matcha.md 
+
+. . . MatCha is a model that is trained using 
+
+Pix2Struct architecture. 
+
+model_doc/deplot.md 
+
+. . . DePlot is the only model in the Transformers library that is trained using 
+
+Pix2Struct architecture. MatCha, also in the library, is trained with the same architecture, so DePlot cannot be the only one. 
+
+18 Table 6 Settings of ScaleMAS in all experiments unless stated otherwise. The same temperature, generation limit, and random seeds are shared by every other baseline. Setting BrowseComp-Plus Contradiction Audit FATE SWE-bench Verified Messages returned per search (k) 8
+
+Messages per visit call 8
+
+Retrieval function, BM25 k1 and b BM25, 1.5 and 0.75 
+
+Citation weight α, γ, s0 0.3, 0.98 , 0
+
+References per message (maximum) 32 
+
+Tokens per message (sub-task and artifact) 256 256 1,024 1,024 
+
+Actions per agent (maximum) 300 250 100 300 
+
+Steps per run (maximum) 400 250 120 400 
+
+Context summarization yes yes yes no Temperature 1.0
+
+Generation limit per call (tokens) 16 ,384 
+
+Tool-call format native tool calling Random seed 0, 1, 2
+
+Every method submits a final answer when its action limit is reached: ReAct and MAD through the forced final step of their agent loop, DeLM and AOrchestra by submitting the answer recorded so far. Each baseline follows its released design, adapted to the shared benchmark adapter. 
+
+BrowseComp-Plus. We use the questions and the document corpus of BrowseComp-Plus (Chen et al., 2025b), served through the search service and browser tools of OpenResearcher. Agents have three tools: browser_-search returns the top 20 documents of a BM25 search over the corpus; browser_open opens a document or a link on the current page and shows a window of about 1,024 tokens, which the agent can move; and 
+
+browser_find searches for a text pattern in an open page. Each agent’s final answer is graded by an LLM judge (Qwen3.5-flash) with OpenResearcher’s grading prompt, which extracts the final answer from the response and compares it with the gold answer. Experiments use the first 100 questions. 
+
+FATE. FATE (Jiang et al., 2026) poses problems in abstract algebra as formal statements in Lean 4 with Mathlib, at increasing levels of difficulty; we use FATE-M ( 150 problems) and FATE-H ( 100 problems). Agents have two tools: search_mathlib returns the 10 best-matching declarations from an index of Mathlib, and 
+
+check_lean compiles a candidate proof and returns the compiler’s messages, at most 10 times per agent with a limit of 900 seconds per compilation. A final proof is compiled with Lean 4 (v4.28.0) and counts as correct only if it proves the stated theorem, compiles without errors, and contains no sorry . Experiments use the first 
+
+100 questions of FATE-M, and use all questions of FATE-H. 
+
+SWE-bench Verified. We run SWE-bench Verified (Jimenez et al., 2024) on the mini-SWE-agent scaffold (Yang et al., 2024). Each agent works in its own container holding the repository at the base commit of the issue, runs shell commands with a limit of 60 seconds per command, and submits the diff of its changes as a patch. A patch is graded with the benchmark’s tests: it is applied to a fresh copy of the repository, and the instance counts as resolved only if all tests that the fix must make pass ( FAIL_TO_PASS ) and all tests that must keep passing ( PASS_TO_PASS ) pass. Experiments use the first 100 instances of the test split. 
+
+C.4 Prompts 
+
+The part of the system prompt that describes the datastore and its operations is shared by every benchmark. In it, publish , search , and visit appear as the tools publish_message , search_datastore , and visit_messages :
+
+> You are working on a multi-step task across many sessions. ## The datastore: your record of the work The datastore is a pile of messages holding everything already done on the input task. Every message in it is an earlier work. You resume from them rather than start over.
+
+19 - `publish_message(sub_task, artifact, rationale, refs)` is the ONLY way anything you do leaves a trace. Work you finish but never write down is lost. - Every message records work ALREADY DONE, in three parts: - **sub_task** -- the piece of work you did, in the PRESENT PERFECT (e.g. "I've processed Resource8", "I've ruled out the second candidate"), stated in the words you would later search for to find it again; - **artifact** -- what the work produced: the result that can be picked up and built on without redoing it; - **rationale** -- BRIEFLY, how you got there, NAMING each of your refs and what it contributed (e.g. "Message12 gave the bound"). Plus refs (pointers to other messages or to the resources your tools expose), and an id. Messages are never edited or deleted -- you only add new ones. - Messages carry sequential names -- e.g. Message0, Message23 -- usable in refs. - Any unit of work can be a message -- a digest of something you read, a verification of an earlier message, a consolidation of several, a piece of the deliverable. So can *raising* something: the `sub_task` is "Asked an open question", and the artifact is the question itself. - MOST of what you write should be INTERMEDIATE work: a partial result, a lead worth taking, a dead end, something you ruled out, a step that turned out to be wrong, etc. Write these as messages AS YOU GO rather than saving up a finished answer. ## How to work 1. READ BEFORE YOU WRITE. BEFORE starting a piece of work, search for it -- the wording of the sub-task you are about to do, and the name of anything you would work on. If a message already declares that work, it is DONE: build on it and move to uncovered ground instead of repeating it. TWO READ PATHS: 1) `search_datastore(<query>)` finds messages by their WORDING -- use it when you do not yet know which messages matter. 2) `visit_messages(<message ids>)` fetches messages whose names you ALREADY know: from a message's refs, from a search hit that cited something, from anywhere an id was put in front of you. 2. GROUND EVERYTHING, AND SAY HOW. Refs declare what a message builds on -- e.g. "refs": ["Message23"] is a message building on message 23. A Message ref merges your work into an existing trail instead of starting a new one; a resource ref records what the message draws on so the source can be checked. Only reference names you have actually seen. IF YOU USED A MESSAGE, REFERENCE IT. If an earlier message's result saved you a step, sent you down a route, or you checked, corrected, extended, or contradicted it, put it in your refs. Two rules make a citation checkable, and BREAKING EITHER ONE REJECTS THE WHOLE MESSAGE -- it is not written, and you are told exactly which ref was at fault: - **IT MUST EXIST.** A ref names something you have ACTUALLY SEEN. - **YOUR RATIONALE MUST NAME IT, with what it contributed** -- e.g. "Message23 ruled out the direct route, so this takes the inductive one", "Input7 supplied the figure this checks". 3. WRITE TO BE FOUND. Your message is retrieved by its THREE FIELDS, nothing else, and messages containing a query's **exact wording** score far above messages merely sharing some of its words: use the exact, specific words (and names) that would be searched for later. This matters most in `sub_task`: it is what stops the same work being done twice. Keep `rationale` short -- it is the audit trail, not the payload. 
+
+## D Case Studies: Coordination behaviors emerge in agent substrate 
+
+This section traces how agents coordinate through the datastore in eight runs of ScaleMAS . We selected the cases from main-configuration runs with at least four agents, preferring tasks on which a single agent with the same backbone fails. Every message, step, query and rank in the figures is taken from the run logs. Message text is quoted from the logs, with message and snippet identifiers written in the notation of this paper. 
+
+D.1 Forms of coordination 
+
+No prompt tells an agent which part of a task to take, whose message to trust, or how to combine results with those of others. The eight cases show six forms of coordination that arise nonetheless (Table 7). 
+
+Relay. An agent publishes a partial result, and another agent finds it by search and carries it to the answer. In Case 4, one agent identifies the director named in the question, two other agents find that message and reach the actress a few steps later, and the rest of the group answers from their messages. In Case 2 the relay runs in both directions: one agent contributes the identity of the actor, another contributes the name of his character, and each takes the missing half from the other. 20 Table 7 Forms of coordination in the eight cases. BrowseComp-Plus FATE-H Contradiction Audit Form Case 1 Case 2 Case 3 Case 4 Case 5 Case 6 Case 7 Case 8 Relay • •               
+
+> Correction •••
+> Selection by citation weight ••
+> Division of a proof ••
+> Matching across agents ••
+> Adoption •••••
+> Correction.
+
+An agent overturns a claim that the group has been building on, and the others follow the evidence. In Case 2, all four agents first pursue the same wrong actor until one of them checks the clue nobody had verified. In Case 3, one agent rules out the right poet, and another tests the objection and publishes a reply that answers it. In Case 1, four agents holding the wrong name switch after a single search each.  
+
+> Selection by citation weight.
+
+When the datastore holds competing or redundant results, the one that others have built on is ranked first. Replaying each search on the datastore as it stood at that step reproduces the logged ranking exactly, so the effect of the weight can be measured by removing it. In Case 1, the citation weight puts the cited right answer first in three of four searches, where the uncited wrong answer would otherwise rank first. In Case 7, it places the filed contradiction within the eight returned results of two later searches, which would otherwise not return it.  
+
+> Division of a proof.
+
+Agents prove different pieces of a theorem, and one agent assembles them. In Case 5, all agents start on the same route, and the work divides by lemma instead: one agent checks a skeleton with three open lemmas, and another fills them with lemmas published by two other agents. In Case 6, an agent reaches a proved lemma by following the “referenced by” links that the datastore attaches to each message.  
+
+> Matching across agents.
+
+In Contradiction Audit, the two halves of a contradiction are often read by different agents at different times. A summary that one agent publishes lets another agent recognize the conflict when it reads the other half. In Case 7, a message written at step 2 is matched at step 219; in Case 8, an agent recalls a summary by its address after reading the edited page.  
+
+> Adoption.
+
+Once a result is published, later agents answer from it without redoing the work, often after checking it. Adoption accounts for most of the correct final answers in Cases 3, 4, 7 and 8, and in Case 5 the late agents re-verify the assembled proof before submitting it. Across the cases, search by content is the channel through which agents first meet each other’s work. The other parts of the substrate each appear in at least one case: links between messages (Cases 6 and 8), persistence after the author stops or moves on (Cases 4 and 7), and citation weight (Cases 1 and 7). 21 D.2  Case 1: citation weight settles a split 
+
+> BrowseComp-Plus, Qwen3.5-9B, eight agents. The task is to name the author behind six clues about a set of papers; the answer is Jacek Rojowski. Two candidates enter the datastore one step apart: Muszyńska (Message 1, wrong) and Rojowski (Message 2). Agent 4 cites Message 5 of Agent 1 for Rojowski at step 33, and Agent 1 cites its own Messages 4 and 5, so their weight rises while no Muszyńska message is ever cited. Four agents working on Muszyńska then switch after one search each. With the citation weight, a Rojowski message ranks first in three of these searches; without it, Message 1 ranks first in all four. All eight agents answer Rojowski, while in groups of two and four agents every agent answers Muszyńska. Message 1  Agent 2 · step 18
+> I've searched the datastore for references to the author of papers on biological entities and element extraction
+> CANDIDATE: Bożena Muszyńska - appears as lead author on papers about mushrooms (Lentinula edodes), phenolic acids as primary phenolic compounds, heavy metal content evaluation, …
+> Message 5  Agent 1 · step 31
+> I've established the convergence of evidence pointing to Jacek Rojowski as the author
+> CONVERGENCE: Jacek Rojowski - Lead author whose papers match all 6 clues: 1) Zinc (element 30, between 20-40) extraction from Boletus badius (biological entity). 2) Edible mushrooms for …
+> Message 6  Agent 4 · step 33
+> I've written the convergence report establishing Jacek Rojowski as the author matching all 6 clues
+> CONCLUSION: Jacek Rojowski - The author referenced in all six clues, confirmed by the convergence evidence in Message 5. This author's work on Boletus badius mushroom publication in …
+> Message 7  Agent 1 · step 34
+> I've confirmed Jacek Rojowski as the author matching all 6 clues from multiple papers
+> CONCLUSION: Jacek Rojowski is the author. This conclusion rests on evidence from Message 4 (CANDIDATE report showing Rojowski's 2017 Acta Poloniae Pharmaceutica paper on zinc extraction …
+> Message 11  Agent 0 · step 49
+> I've confirmed Jacek Rojowski as the author matching all 6 clues from datastore reports
+> CONCLUSION: Jacek Rojowski is the author. The datastore reports (Message 4, Message 5, Message 6, Message 7) together establish that Jacek Rojowski is the lead author whose papers match all …
+> Message 12  Agent 2 · step 56
+> I've verified the datastore's conclusion on the author identity
+> CONCLUSION: Jacek Rojowski is the author matching all six clues. Evidence from Message 6 (CONCLUSION) states he is the author of papers on Boletus badius, zinc extraction (element 30, between 20-40), phenolic acids, microwave-assisted digestion, 10 …
+> Agent 4 Agent 1 Agent 3 Agent 0 Agent 5 Agent 2
+> Agents 6 and 7 are not shown.
+> ✓✓✓✓✓✓
+> M1 M4 M5 M6 M7 M8 M10 M11 M12 M13
+> 10  20  30  40  50  60
+> step
+> 0.00 0.36 0.72
+> citation weight  M1  M5  M6  M7  M11  M12
+> working on Muszyńska (wrong) working on Rojowski (right) message in the story other message search or visit returning another agent’s message correct final answer
+
+22 D.3  Case 2: a correction relayed in both directions 
+
+> BrowseComp-Plus, Claude-5-Sonnet, four agents. The task is to name the character that a former college and NFL football player played in a 2010s alien-invasion film; the answer is Rudy Cox. All four agents first pursue the same wrong actor. Building on Message 3 of Agent 3, which a search returns at step 98, Agent 2 traces the clue about releasing the wrong inmate to another actor (Message 6) and confirms his background (Messages 7 and 8). Agent 1 receives these three messages in one search at step 147, finds the film and the character name (Message 10), and Agent 2 takes the name back through a search at step 178 (Message 12). Each correct answer rests on a page that its author never opened. A single agent does not produce an answer. Message 3  Agent 3 · step 43
+> I've found Brad William Henke's NFL team and additional filmography details
+> CANDIDATE: Brad William Henke played for the Denver Broncos, appeared in Super Bowl XXIV (1990) vs San Francisco 49ers, retired from football in 1994 due to injuries, then acted in Space Jam, The Fan, and episodes of Chicago Hope, Nash Bridges, Arli$$, and ER (a medical drama, premiered 1994 though - need to verify premiere date matches 2001-2010 window; note ER premiered 1994, doesn't …
+> Message 5  Agent 2 · step 112
+> I've corrected a misattribution: Grey's Anatomy belongs to Mike Hagerty, NOT Brad William Henke, in ETonline obituary gallery
+> RULED OUT: "Grey's Anatomy" as Henke's medical drama — the ETonline "Stars We've Lost in 2022" page has TWO separate entries; the Grey's Anatomy/Seinfeld/Glee/Brooklyn Nine-Nine mention belongs to Mike Hagerty's entry, not Henke's. Henke's actual entry only lists: OITNB (Desi Piscatella), Justified (Coover Bennett), Dexter, October Road, Lost, The Chicago Code, The Bridge, Sneaky …
+> Message 6  Agent 2 · step 126
+> I've verified which OITNB corrections officer character released the wrong inmate
+> CANDIDATE PIVOT: The "signs out and releases wrong inmate" plot detail belongs to CO Felix Rikerson, NOT Brad William Henke's Desi Piscatella. Per Orange-Is-The-New-Black Fandom wiki page "Felix Rikerson" (https://orange-is-the-new-black.fandom.com/wiki/Felix_Rikerson): "In 'We Can Be Heroes', Rikerson is the CO who signs out Angie …
+> Message 8  Agent 2 · step 133
+> I've confirmed Jimmy Gary Jr.'s favorite role interview and found his sci-fi film title
+> CONVERGENCE: Jimmy Gary Jr. interview confirms "the Nurse Jackie role because of the subject matter... my character suffered from CTE" as the role he most loved playing — Nurse Jackie premiered June 2009, fits medical drama window (2001-2010). Also states "I finished a Science fiction film titled By Dawn" — per "Millennial Magazine" interview at …
+> Message 10  Agent 1 · step 168
+> I've confirmed the sci-fi alien-invasion film "By Dawn" (2018) details and Jimmy Gary Jr.'s character name
+> CONCLUSION: Jimmy Gary Jr. played "Rudy Cox" in the 2018 sci-fi film "By Dawn". Per "By Dawn | Movie 2018" (https://www.cineamo.com/en/movies/by-dawn): plot is "A former marine suffering from severe PTSD prepares his family for war as the deadline for an alien invasion approaches" (confirms alien-invasion premise, release date 5/1/2018, fits 2010-2020 window). Cast …
+> Message 12  Agent 2 · step 180
+> I've finalized the answer to the multi-criteria actor identification task
+> CONCLUSION: The character is "Rudy Cox," played by Jimmy Gary Jr. in the 2018 sci-fi alien-invasion film "By Dawn". Chain: WVU (founded 1867) alumnus, briefly NFL RB for Seattle Seahawks; played CO Felix Rikerson on OITNB, releasing wrong inmate in "We Can Be Heroes"; named Nurse Jackie (2009) as most-loved role due to CTE storyline; starred as "Rudy Cox" in "By Dawn" (2018), where a …
+> Agent 2 Agent 1 Agent 3 Agent 0
+> ✓✓✓
+> M0 M3 M5  M6  M7 M8 M9 M10 M11 M12
+> 0 20  40  60  80  100  120  140  160  180
+> step
+> 0.00 0.28 0.56
+> citation weight  M3  M5  M6  M8  M10  M12
+> working on Henke (wrong) working on Jimmy Gary Jr. (right) message in the story other message search or visit returning another agent’s message correct final answer stopped (API error)
+
+23 D.4  Case 3: an objection and its answer 
+
+> BrowseComp-Plus, Claude-5-Sonnet, four agents. The task is to name the spouse of a writer whose prize was judged by someone who admitted not understanding the work, and who died in a place that was a top cereal producer in the 1840s; the answer is David Kermani. Agent 0 rules out the right poet (Message 1), reading the clue as Rochester, where he was born but did not die. Agent 3 finds Message 1 by search at step 41, shows that the county of Hudson, where he died, was a leading rye producer in the 1840s, and publishes this as a reply that cites Message 1 (Message 3). Agents 1 and 2 answer from Messages 3 and 4. A single agent rules out the poet in the same way and does not answer. Message 0  Agent 3 · step 21
+> I've confirmed the Auden/Ashbery "did not understand" anecdote via Yale University Press book description
+> CONVERGENCE: The Yale University Press page for "Some Trees" by John Ashbery (https://yalebooks.yale.edu/book/9780300246377/some-trees/) states directly: "After the publication of Some Trees, selecting judge W. H. Auden famously confessed that he didn't understand a word of it." This confirms the judge (Auden, who emigrated from England to …
+> Message 1  Agent 0 · step 22
+> I've reconsidered the "cereal crop city" clue as Rochester, NY's historic nickname "The Flour City"
+> CANDIDATE CLUE: Rochester, New York was historically nicknamed "The Flour City" for its status as a top wheat/flour producer in the 1830s-1840s (era of Genesee Valley wheat boom before the flour milling industry declined). This matches the puzzle's clue "a city known in the country as one of the top producers of a cereal crop during the 1840s". So the target writer likely DIED in Rochester, …
+> Message 2  Agent 2 · step 43
+> I've confirmed John Ashbery's spouse and death details.
+> CANDIDATE: John Ashbery's spouse = David Kermani. Per "Poet John Ashbery dies age 90" (theguardian.com/books/2017/sep/03/poet-john-ashbery-dies-age-90): "died at his home in Hudson, New York. His husband, David Kermani, said his death was from natural causes." Death 3 Sept 2017 in Hudson, NY (fits 2015-2018 window). Article also notes Ashbery "often mentioned as a Nobel candidate" but never won (fits …
+> Message 3  Agent 3 · step 57
+> I've searched for a cereal-crop connection between Hudson, NY (Ashbery's death city) and the 1840s
+> CONVERGENCE: Hudson, New York (Columbia County seat) fits the "1840s cereal crop producer" clue via RYE. Per "HVF in the 19th Century" (https://hvfarmscape.org/hvf-19th-century/): "In the 1800s Columbia County was one of New York State's most important rye producers... Tracy used more land for rye than any other crop." Same page: "The Columbia County sheep industry reached its peak …
+> Message 4  Agent 3 · step 58
+> I've concluded the identity of the writer's spouse for this puzzle
+> CONCLUSION: The writer is John Ashbery, and his spouse's name is David Kermani. Chain: Ashbery's "Some Trees" (1956) won the Yale Series of Younger Poets competition, judged by W. H. Auden — an English emigrant to the US renowned for wisdom in England, who "famously confessed that he didn't understand a word of it" (Yale Books page, per Message 0). Ashbery never won the Nobel Prize in Literature (as of Dec 2023). He died 3 September 2017 in …
+> Message 5  Agent 1 · step 95
+> I've verified and finalized the answer to the writer's-spouse puzzle using existing datastore convergence
+> CONCLUSION: The writer's spouse is David Kermani. The writer is John Ashbery: his poetry collection "Some Trees" (1956, within 1954-1957 window) won the Yale Series of Younger Poets competition; judge W. H. Auden (an English emigrant to the US, renowned for wisdom in England) "famously confessed that he didn't understand a word of it" (Yale University Press page for Some …
+> Agent 0 Agent 3 Agent 2 Agent 1  ✓✓✓
+> M0 M1 M2 M3  M4 M5
+> 0 20  40  60  80  100
+> step
+> 0.00 0.25 0.50
+> citation weight  M0  M1  M2  M3  M4  M5
+> message in the story  search or visit returning another agent’s message  correct final answer  stopped (API error)
+
+24 D.5  Case 4: a two-step relay among sixteen agents 
+
+> BrowseComp-Plus, Qwen3.5-9B, sixteen agents. The task is to give the full birth name of a Paris-born actress of the 1920s who appeared in a 1950s comedy whose director died in Cannes; the answer is Jacqueline Georgette Cantrelle. At step 10 Agent 6 identifies the director (Message 0) and turns to other leads. Agents 5 and 10 find Message 0 by search at steps 23 and 26, and Agent 5 publishes the actress at step 31 (Message 6). Agents 3 and 1 receive Message 6 by search and conclude at steps 33 and 35, and Agent 6 later answers from messages built on its own Message 0. All sixteen agents answer correctly, while a single agent fails. Message 0  Agent 6 · step 10
+> I've identified a potential director who died in Cannes 1986-1995: Raymond Leboursier - French director born 1917 in Paris, died 26 July 1987 in Cannes, per 'Raymond Leboursier - …
+> CANDIDATE: Raymond Leboursier was a film director who died in Cannes in 1987 (between 1986-1995 as required).
+> Message 6  Agent 5 · step 31
+> I've identified the target person: Jacqueline Georgette Cantrelle -a French actress born in Paris in 1925 who died in 1994, whose mother Marianne Cantrelle was a comedian, whose …
+> CONVERGENCE: Jacqueline Georgette Cantrelle - satisfies all criteria per multiple pages: - Birth: 23 September 1925, Paris, France (per 'Jacqueline Cantrelle - Wikipedia') - Death: 10 October 1994 (per same page, within 1993-2005 window) - Maternal …
+> Message 7  Agent 10 · step 32
+> I've retrieved Jacqueline Cantrelle's birth name and vital details from Wikipedia
+> CANDIDATE: Jacqueline Georgette Cantrelle - born 23 September 1925 in Paris, France; death 10 October 1994 in Saint-Laurent-du-Var. Birth name confirmed as "Jacqueline Georgette Cantrelle" per 'Jacqueline Cantrelle - Wikipedia' (https://en.wikipedia.org/wiki/Jacqueline_Cantrelle). …
+> Message 8  Agent 3 · step 33
+> I've verified the complete identity and written the conclusion
+> CONCLUSION: Jacqueline Georgette Cantrelle - Full birth name established. This person satisfies all criteria: born 23 September 1925 in Paris (1920s), died 10 October 1994 (1993-2005 window), maternal grandmother Bleuette Bernon was a famous actress born Paris, died 1937 (1930s), mother Marianne Cantrelle was a …
+> Message 9  Agent 1 · step 35
+> I've verified all criteria for the target person against the datastored reports
+> CONCLUSION: Jacqueline Georgette Cantrelle - Full birth name confirmed. Verified against Message 6 and Message 7: Born 23 September 1925 in Paris, died 10 October 1994 (within 1993-2005). Mother Marianne Cantrelle was a comedian/actress. …
+> Message 12  Agent 10 · step 38
+> I've verified Jacqueline Cantrelle meets all criteria for the person in question
+> CONVERGENCE: Jacqueline Georgette Cantrelle - All criteria confirmed: (1) Born 1925 in Paris (1920s) per 'Jacqueline Cantrelle -Wikipedia' (https://en.wikipedia.org/wiki/Jacqueline_Cantrelle); (2) Appeared in comedy "La vie est un jeu" (1951, genre: …
+> Agent 6 Agent 5 Agent 10 Agent 3 Agent 1
+> The other 11 agents are not shown.
+> ✓✓✓✓✓
+> M0 M3 M6 M7 M8 M9 M12
+> 0 10  20  30  40  50  60  70
+> step
+> 0.00 0.36 0.72
+> citation weight  M0  M6  M7  M8  M9  M12
+> message in the story  other message  search or visit returning another agent’s message  correct final answer
+
+25 D.6  Case 5: a proof divided among four agents 
+
+> FATE-H, Claude-5-Sonnet, eight agents. The task is to prove in Lean 4 that  R = Z + XQ[X] is not a unique factorization domain. All agents start on the same route, and the work divides by lemma. Agent 4 publishes the well-foundedness argument and an identity with a warning that  simp  alone does not prove it (Messages 6, 7 and 9), Agent 1 proves that every element of  R has an integer constant term (Message 8), and Agent 6 checks a skeleton with three open lemmas (Message 10). Agent 2 reads all five before its first Lean check, passes on its third check, and publishes the full proof citing all five (Message 11). All agents submit a correct proof, while a single agent and a group of four agents fail. Message 6  Agent 4 · step 29
+> I've found how to extract WellFounded DvdNotUnit from a UniqueFactorizationMonoid instance
+> LEMMA PROVED (helper fact, checked standalone): ``` example {R : Type*} [CommMonoidWithZero R] (h : UniqueFactorizationMonoid R) : WellFounded (DvdNotUnit (α := R)) := by have : IsWellFounded R (DvdNotUnit (α := R)) := h.toIsWellFounded exact this.wf ``` So `h.toIsWellFounded` IS the correct auto-generated projection …
+> Message 7  Agent 4 · step 52
+> I've found the key lemma to derive a contradiction from an infinite DvdNotUnit-descending chain
+> LEMMA FOUND: `wellFounded_iff_isEmpty_descending_chain {α} {r : α → α → Prop} : WellFounded r ↔ IsEmpty { f :  ℕ → α //  ∀ n, r (f (n + 1)) (f n) }` [Mathlib/Order/WellFounded.lean:51]. This directly gives: from `hwf : WellFounded (DvdNotUnit (α := R))` and a chain `a :  ℕ →R` with ` ∀ n, DvdNotUnit (a (n+1)) (a n)`, we get `IsEmpty {f :  ℕ → …
+> Message 8  Agent 1 · step 57
+> I've proved that every element of R = adjoin  ℤ {X*h} has integer constant term (eval at 0)
+> LEMMA PROVED (checked standalone, compiles): ```lean lemma coeff_zero_int (f :  ℚ[X]) (hf : f  ∈ Algebra.adjoin  ℤ ({f |  ∃ h :  ℚ[X], f = X * h} : Set  ℚ[X])) :  ∃ m :  ℤ, f.eval 0 = (m :  ℚ) := by induction hf using Algebra.adjoin_induction with | mem x hx => obtain  ⟨h, hxh ⟩ := hx; exact  ⟨0, by simp [hxh] ⟩ | algebraMap r => exact  ⟨r, by simp ⟩ | add x …
+> Message 9  Agent 4 · step 65
+> I've proved the key algebraic identity a n = 2 * a (n+1) where a n := X * C(1/2^n) in  ℚ[X]
+> LEMMA PROVED: ```lean noncomputable def a (n :  ℕ) :  ℚ[X] := X * C ((1: ℚ)/2^n) example (n :  ℕ) : a n = 2 * a (n+1) := by unfold a have h2 : (2: ℚ[X]) = C (2: ℚ) := (map_ofNat C 2).symm rw [h2, mul_left_comm, ← C_mul] congr 2 field_simp ring ``` Key trick: `map_ofNat C 2 : C (ofNat 2 :  ℚ) = (ofNat 2 :  ℚ[X])`, i.e. `C 2 = 2` as polynomials (since `C` is a `RingHomClass` map and `map_ofNat` applies to …
+> Message 10  Agent 6 · step 78
+> I've built and checked a full skeleton for not_uniqueFactorizationMonoid_adjoin_int reducing it to three helper lemmas
+> SUBGOAL (skeleton CHECKED, compiles with holes): with R := Algebra.adjoin  ℤ {f |  ∃h, f = X*h}, and ``` noncomputable def a (n :  ℕ) : R :=  ⟨X * C ((1/2: ℚ)^n), mem_R _ ⟩ lemma a_coe (n :  ℕ) : (a n :  ℚ[X]) = X * C ((1/2: ℚ)^n) := rfl lemma two_mul_a_succ (n :  ℕ) : (2:R) * a (n+1) = a n := by sorry lemma not_isUnit_two : ¬ IsUnit (2:R) := …
+> Message 11  Agent 2 · step 87
+> I've completed the full proof of not_uniqueFactorizationMonoid_adjoin_int
+> PROOF FOUND (checked, SUCCESS, no sorry): ```lean import Mathlib open Polynomial noncomputable section def R : Subalgebra
+> ℤ ℚ[X] := Algebra.adjoin  ℤ ({f |  ∃ h :  ℚ[X], f = X * h} : Set  ℚ[X]) lemma mem_R (q :  ℚ[X]) : X * q  ∈ R := Algebra.subset_adjoin  ⟨q, rfl ⟩ lemma coeff_zero_int (f :  ℚ[X]) (hf : f  ∈ R) :  ∃ m :  ℤ, f.eval 0 = (m :  ℚ) := by induction hf using Algebra.adjoin_induction with | mem x hx => …
+> Agent 4 Agent 1 Agent 6 Agent 2
+> Agents 0, 3, 5 and 7 are not shown.
+> ✓✓✓✓
+> M6  M7 M8 M9 M10 M11 M13
+> 0 20  40  60  80  100
+> step
+> 0.00 0.36 0.71
+> citation weight  M6  M7  M8  M9  M10  M11
+> message in the story other message search or visit returning another agent’s message Lean check (red: fails, green: passes) code reused without citation correct final answer
+
+26 D.7  Case 6: a lemma found through “referenced by” links 
+
+> FATE-H, Claude-5-Sonnet, eight agents. The task is to prove in Lean 4 that for a Noetherian ring  A and a non-zero-divisor  x, the associated primes of
+> A/xA  and  A/x nA coincide. Agent 0 publishes a one-sentence plan, multiplication by  xn−1 (Message 5), which Agent 1 turns into a checked map and an injectivity lemma (Messages 6 and 7). The search of Agent 2 at step 51 shows Message 5 as referenced by Message 6; following these links, Agent 2 visits Message 7 at step 53 and reuses the lemma verbatim in its verified proof (Message 12), which cites only its own Message 11. Agent 5 assembles a second proof from the messages of three other agents (Message 13). A single agent submits a proof that still contains  sorry .Message 5  Agent 0 · step 6
+> I've claimed a route for associatedPrimes_quot_span_eq_quot_span_pow
+> PLAN: Induction on n using two ingredients. (1) DIRECTION 1 (no induction needed): the A-linear map A/xA → A/x^nA given by a  ↦
+> x^(n-1)*a is well-defined (since x^(n-1)*(xA)  ⊆ x^nA) and INJECTIVE (if x^(n-1)*a  ∈ x^nA i.e. x^(n-1)*a = x^n*c, then x^(n-1)*(a-x*c)=0, and x^(n-1) is a nonzerodivisor since x is, so a=x*c  ∈ xA). …
+> Message 6  Agent 1 · step 39
+> I've defined the well-definedness proof for the multiplication-by-x^(n-1) map from A/(x) to A/(x^n)
+> LEMMA PROVED (definition, compiles): ``` noncomputable def mulPowMap (A : Type) [CommRing A] (x : A) (n :  ℕ) (h : n ≥ 1) : A ⧸ span {x} → ₗ[A] A ⧸ span {x ^ n} := Submodule.mapQ (span {x}) (span {x ^ n}) (LinearMap.mulLeft A (x ^ (n - 1))) (by rw [Ideal.span_singleton_le_iff_mem] rw [Submodule.mem_comap] …
+> Message 7  Agent 1 · step 52
+> I've proved mulPowMap is injective (Direction 1 core lemma)
+> LEMMA PROVED: ``` noncomputable def mulPowMap (A : Type) [CommRing A] (x : A) (n :  ℕ) (h : n ≥ 1) : A ⧸ span {x} → ₗ[A] A ⧸ span {x ^ n} := Submodule.mapQ (span {x}) (span {x ^ n}) (LinearMap.mulLeft A (x ^ (n - 1))) (by rw [Ideal.span_singleton_le_iff_mem] rw [Submodule.mem_comap] simp only [LinearMap.mulLeft_apply] have : x ^ (n-1) * x = x ^ n := by rw …
+> Message 11  Agent 2 · step 88
+> I've proved the exactness of mulPowMap and quotFactorMap for the induction step of Direction 2
+> LEMMA PROVED (compiles standalone, no sorry): ```lean noncomputable def quotFactorMap (A : Type) [CommRing A] (x : A) (n : ℕ) : A ⧸ span {x ^ (n+1)} → ₗ[A] A ⧸ span {x ^ n} := Submodule.mapQ (span {x ^ (n+1)}) (span {x ^ n}) LinearMap.id (by rw [Submodule.comap_id, Ideal.span_singleton_le_iff_mem, Ideal.mem_span_singleton] exact pow_dvd_pow x (Nat.le_succ …
+> Message 12  Agent 2 · step 91
+> I've assembled and verified the complete proof of associatedPrimes_quot_span_eq_quot_span_pow
+> PROOF FOUND: the whole theorem, checked, compiles with no sorry: ```lean import Mathlib open Ideal noncomputable def mulPowMap (A : Type) [CommRing A] (x : A) (n :  ℕ) (h : n ≥ 1) : A ⧸ span {x} → ₗ[A] A ⧸ span {x ^ n} := Submodule.mapQ (span {x}) (span {x ^ n}) (LinearMap.mulLeft A (x ^ (n - 1))) (by rw [Ideal.span_singleton_le_iff_mem, Submodule.mem_comap] …
+> Message 13  Agent 5 · step 93
+> I've completed the full proof of associatedPrimes_quot_span_eq_quot_span_pow (both Direction 1 and Direction 2, assembled and checked)
+> PROOF FOUND: full compiling file (checked via check_lean: SUCCESS, no errors, no sorry): ```lean import Mathlib open Ideal noncomputable def mulPowMap (A : Type) [CommRing A] (x : A) (n :
+> ℕ) (h : n ≥ 1) : A ⧸ span {x} → ₗ[A] A ⧸ span {x ^ n} := Submodule.mapQ (span {x}) (span {x ^ n}) (LinearMap.mulLeft A (x …
+> Agent 0 Agent 1 Agent 2 Agent 5
+> Agents 3, 4, 6 and 7 are not shown.
+> ✗
+> ✓✓✓
+> M5 M6  M7 M11 M12 M13
+> 0 20  40  60  80  100
+> step
+> 0.00 0.36 0.71
+> citation weight  M5  M6  M7  M11  M12  M13
+> message in the story other message search or visit returning another agent’s message code reused without citation correct final answer wrong final answer
+
+27 D.8  Case 7: a message from step 2 completes a match at step 219 
+
+> Contradiction Audit  x8 , Docker documentation, Claude-5-Sonnet, four agents. The case follows one injected pair: snippet 128 says the installer shrank from 960 MB to 400 MB, and the edited snippet 121 says from 960 MB to 720 MB. Agent 0 records the first figure in its first message, at step 2 (Message 0). At step 218 Agent 3 reads snippet 121, searches the datastore with its sentence, and receives Message 0 at rank 1; it reads snippet 128 and files the contradiction (Message 230). Agents 2 and 1 later receive Message 230 at ranks 5 and 6 of searches that, without the citation weight, would not return it. Three of the four final answers list the pair, while a single agent misses it. Message 0  Agent 0 · step 2
+> I've digested snippet 128 (Docker Desktop Windows release notes: Community 2.2.2.0 and prior)
+> Docker Desktop Windows edge release notes. Key checkable facts: installer size was reduced from 960 MB to 400 MB (bug fix note). Community 2.2.2.0 (2020-03-02) upgrades to Kubernetes 1.16.5 and Go 1.13.8; adds experimental WSL2 support for Windows 10 Home (requires Windows Insider Preview Build 19018+); allows sharing individual folders instead of whole drives. Known issue: loopback/unspecified IPv6 addresses (:: and ::1) inside a container do not work.
+> Message 230  Agent 3 · step 225
+> I've checked snippet 121 against snippet 128 for a contradiction
+> Contradiction found: {"pair": [121, 128], "reason": "Both shards describe the same Docker Desktop Windows release (identical bug-fix bullets referencing the same GitHub issues, e.g. for-win#5150, #5376, #5546, #5903, #4526), but they state different installer size reductions: one says the installer shrank from 960 MB to 720 MB, the other says it shrank from 960 MB to 400 MB. The installer cannot have been reduced to two different sizes in the same release."}
+> Message 231  Agent 3 · step 226
+> I've digested snippet 121 (manuals/desktop/previous-versions/2.x-windows.md — Docker Desktop Community 2.x Windows release notes)
+> snippet 121 covers Docker Desktop Community 2.x for Windows release notes. Key claims: installer size reduced from 960 MB to 720 MB; Ceph support removed to save disk space; known issue that Swarm service bind mounts are not always restored correctly under WSL2; bind mounts of files outside the root mount point don't work correctly with multiple containers mounting them; Community 2.2.0.5 (2020-04-02) fixed fsnotify.WRITE events, readlink race condition on mfsymlinks shared volumes, VM time sync, volumes_from bug, …
+> Agent 0 Agent 3 Agent 2 Agent 1  ✓✓✓
+> M0 M230  M231
+> 1 2 218  219  220  225  226  242  244
+> step (columns follow the order of events and are not to scale)
+> 0.00 0.15 0.29
+> citation weight  M0  M230  M231
+> message in the story reads snippet A reads snippet B (edited) search or visit returning another agent’s message final answer lists this contradiction
+
+28 D.9  Case 8: a summary recalled by address 
+
+> Contradiction Audit  x8 , JAX documentation, Claude-5-Sonnet, eight agents. The case follows one injected pair in two copies of the export guide: snippet 148 says the compatibility window counts jaxlib releases, and the edited snippet 237 says JAX releases. Agent 7 summarizes the old copy (Messages 130 and 134). Agent 1, working through the new copy, receives both summaries in a coverage check at step 71; after reading snippet 237 at step 78, it visits Message 134, reads snippet 148, and files the contradiction (Message 205). Later searches by other agents return Message 205 at rank 1, and seven of the eight final answers list the pair, while a single agent misses it. Message 130  Agent 7 · step 54
+> I've digested snippet 147 (export/export.md, compatibility guarantees)
+> snippet 147 documents jax.export compatibility guarantees: exported artifacts support deserialize/call by a consumer up to 6 months …
+> Message 134  Agent 7 · step 56
+> I've digested snippet 148 (export/export.md, ensuring forward/backward compatibility process & debug env vars)
+> snippet 148 documents debugging export via JAX_DUMP_IR_TO (dumps exported and JIT-compiled HLO modules) …
+> Message 200  Agent 1 · step 81
+> I've digested snippet 237 (new_docs/501/export.md, ensuring forward/backward compatibility process)
+> snippet 237 states the compatibility window for custom call targets is defined in terms of JAX releases (not jaxlib releases), because "it …
+> Message 205  Agent 1 · step 83
+> I've checked snippet 237 against snippet 148 for a contradiction over whether the export compatibility window is defined by JAX releases or jaxlib releases
+> Contradiction found: {"pair": [237, 148], "reason": "snippet 237 states the custom-call compatibility window is defined in terms of …
+> Agent 7 Agent 1 Agent 6 Agent 2 Agent 5 Agent 4
+> Agents 0 and 3 are not shown.
+> ✓✓✓✓✓✓
+> M130  M134 M200  M205
+> 54  55  56  71  78  79  80  81  83  140  141  157  198  205
+> step (columns follow the order of events and are not to scale)
+> 0.00 0.11 0.22
+> citation weight  M130  M134  M200  M205
+> message in the story reads snippet A reads snippet B (edited) search or visit returning another agent’s message final answer lists this contradiction
+
+29

@@ -1,0 +1,681 @@
+{
+  "date": "20261002-20261031",
+  "date_label": "2026-10-02 ~ 2026-10-31",
+  "generated_at": "2026-10-31 02:57:38 UTC",
+  "recommend_exists": true,
+  "run_count": 1,
+  "papers": [
+    {
+      "paper_id": "2610.06695v1",
+      "route": "20261002-20261031/2610.06695v1-medprune-topology-efficient-multimodal-multi-agent-communication-evolution-for-medical-vqa-tasks",
+      "title": "MedPrune: Topology-Efficient Multimodal Multi-Agent Communication Evolution for Medical VQA Tasks",
+      "section": "deep",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "multi-agent"
+        }
+      ],
+      "score": 9.0,
+      "evidence": "在异构智能体通信图中动态剪枝节点与边",
+      "first_seen_at": "2026-10-31 02:57:38 UTC",
+      "updated_at": "2026-10-31 02:57:38 UTC"
+    },
+    {
+      "paper_id": "2610.07578v1",
+      "route": "20261002-20261031/2610.07578v1-cooperating-with-future-collaborators-multi-agent-rl-under-staggered-participation",
+      "title": "Cooperating with Future Collaborators: Multi-Agent RL under Staggered Participation",
+      "section": "deep",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "agents"
+        }
+      ],
+      "score": 9.0,
+      "evidence": "交错参与下的合作式多智能体强化学习",
+      "first_seen_at": "2026-10-31 02:57:38 UTC",
+      "updated_at": "2026-10-31 02:57:38 UTC"
+    },
+    {
+      "paper_id": "2610.07704v1",
+      "route": "20261002-20261031/2610.07704v1-independent-multi-agent-reinforcement-learning-with-counterfactual-semantic-social-world-models",
+      "title": "Independent Multi-Agent Reinforcement Learning with Counterfactual Semantic-Social World Models",
+      "section": "deep",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "agents"
+        }
+      ],
+      "score": 9.0,
+      "evidence": "结合反事实语义社会世界模型的全去中心化多智能体强化学习",
+      "first_seen_at": "2026-10-31 02:57:38 UTC",
+      "updated_at": "2026-10-31 02:57:38 UTC"
+    },
+    {
+      "paper_id": "2610.07835v1",
+      "route": "20261002-20261031/2610.07835v1-dhcg-dynamic-construction-of-hierarchical-collaboration-graphs-for-llm-based-multi-agent-reasoning",
+      "title": "DHCG: Dynamic Construction of Hierarchical Collaboration Graphs for LLM-Based Multi-Agent Reasoning",
+      "section": "deep",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "multi-agent"
+        }
+      ],
+      "score": 9.0,
+      "evidence": "动态构建层次化协作图以编排大模型多智能体系统",
+      "first_seen_at": "2026-10-31 02:57:38 UTC",
+      "updated_at": "2026-10-31 02:57:38 UTC"
+    },
+    {
+      "paper_id": "2610.07860v1",
+      "route": "20261002-20261031/2610.07860v1-workflowops-learning-agent-collaboration-priors-for-multi-agent-workflow-orchestration",
+      "title": "WorkflowOps: Learning Agent Collaboration Priors for Multi-Agent Workflow Orchestration",
+      "section": "deep",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "multi-agent"
+        }
+      ],
+      "score": 9.0,
+      "evidence": "学习智能体协作先验,借助转移概率引导构建DAG工作流",
+      "first_seen_at": "2026-10-31 02:57:38 UTC",
+      "updated_at": "2026-10-31 02:57:38 UTC"
+    },
+    {
+      "paper_id": "2610.10302v1",
+      "route": "20261002-20261031/2610.10302v1-continual-graph-multi-agent-reinforcement-learning",
+      "title": "Continual Graph Multi-Agent Reinforcement Learning",
+      "section": "deep",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "agents"
+        }
+      ],
+      "score": 9.0,
+      "evidence": "利用任务图结构进行持续多智能体强化学习以迁移协作策略",
+      "first_seen_at": "2026-10-31 02:57:38 UTC",
+      "updated_at": "2026-10-31 02:57:38 UTC"
+    },
+    {
+      "paper_id": "2610.12124v1",
+      "route": "20261002-20261031/2610.12124v1-use-and-disuse-intent-structured-experience-consolidation-for-memory-and-learning-in-llm-agents",
+      "title": "Use and Disuse: Intent-Structured Experience Consolidation for Memory and Learning in LLM Agents",
+      "section": "deep",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "gen-memory"
+        }
+      ],
+      "score": 9.0,
+      "evidence": "面向长期LLM智能体的分层记忆与巩固机制",
+      "first_seen_at": "2026-10-31 02:57:38 UTC",
+      "updated_at": "2026-10-31 02:57:38 UTC"
+    },
+    {
+      "paper_id": "2610.13144v1",
+      "route": "20261002-20261031/2610.13144v1-competence-aware-orchestration-for-llm-based-multi-agent-systems",
+      "title": "Competence-Aware Orchestration for LLM-Based Multi-Agent Systems",
+      "section": "deep",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "multi-agent"
+        }
+      ],
+      "score": 9.0,
+      "evidence": "依据骨干模型能力自适应调整角色激活与通信图",
+      "first_seen_at": "2026-10-31 02:57:38 UTC",
+      "updated_at": "2026-10-31 02:57:38 UTC"
+    },
+    {
+      "paper_id": "2610.16120v1",
+      "route": "20261002-20261031/2610.16120v1-scaling-multi-agent-intelligence-with-substrate-centric-coordination",
+      "title": "Scaling Multi-Agent Intelligence with Substrate-Centric Coordination",
+      "section": "deep",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "agents"
+        }
+      ],
+      "score": 9.0,
+      "evidence": "面向可扩展LLM多智能体系统的基底中心协调机制",
+      "first_seen_at": "2026-10-31 02:57:38 UTC",
+      "updated_at": "2026-10-31 02:57:38 UTC"
+    },
+    {
+      "paper_id": "2610.17143v1",
+      "route": "20261002-20261031/2610.17143v1-opendgo-benchmarking-multi-agent-organizations-across-diverse-application-domains",
+      "title": "OpenDGO: Benchmarking Multi-Agent Organizations Across Diverse Application Domains",
+      "section": "deep",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "multi-agent"
+        }
+      ],
+      "score": 9.0,
+      "evidence": "跨领域评测星型链型树型等预设与学习型多智能体组织",
+      "first_seen_at": "2026-10-31 02:57:38 UTC",
+      "updated_at": "2026-10-31 02:57:38 UTC"
+    },
+    {
+      "paper_id": "2610.17751v1",
+      "route": "20261002-20261031/2610.17751v1-degrees-of-freedom-in-multi-agent-coordination-between-centralized-and-decentralized-regimes",
+      "title": "Degrees of Freedom in Multi-Agent Coordination: Between Centralized and Decentralized Regimes",
+      "section": "deep",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "agents"
+        }
+      ],
+      "score": 9.0,
+      "evidence": "研究集中式与去中心化多智能体协调机制之间的连续框架",
+      "first_seen_at": "2026-10-31 02:57:38 UTC",
+      "updated_at": "2026-10-31 02:57:38 UTC"
+    },
+    {
+      "paper_id": "2610.18808v1",
+      "route": "20261002-20261031/2610.18808v1-optimizing-team-behavior-via-extremum-seeking-control-in-multi-agent-reinforcement-learning",
+      "title": "Optimizing Team Behavior via Extremum-seeking Control in Multi-agent Reinforcement Learning",
+      "section": "deep",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "agents"
+        }
+      ],
+      "score": 9.0,
+      "evidence": "面向合作式多智能体强化学习的自适应行为多样性控制",
+      "first_seen_at": "2026-10-31 02:57:38 UTC",
+      "updated_at": "2026-10-31 02:57:38 UTC"
+    },
+    {
+      "paper_id": "2610.21243v1",
+      "route": "20261002-20261031/2610.21243v1-a-responsibility-centered-coordination-mechanism-for-decentralized-multi-agent-systems",
+      "title": "A Responsibility-Centered Coordination Mechanism for Decentralized Multi-Agent Systems",
+      "section": "deep",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "agents"
+        }
+      ],
+      "score": 9.0,
+      "evidence": "面向去中心化多智能体的责任中心协调机制",
+      "first_seen_at": "2026-10-31 02:57:38 UTC",
+      "updated_at": "2026-10-31 02:57:38 UTC"
+    },
+    {
+      "paper_id": "2610.22322v2",
+      "route": "20261002-20261031/2610.22322v2-learning-self-orchestration-in-decentralized-agent-swarms",
+      "title": "Learning Self-Orchestration in Decentralized Agent Swarms",
+      "section": "deep",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "agents"
+        }
+      ],
+      "score": 9.0,
+      "evidence": "在无中心协调者的去中心化智能体集群中联合学习行动策略与自组织",
+      "first_seen_at": "2026-10-31 02:57:38 UTC",
+      "updated_at": "2026-10-31 02:57:38 UTC"
+    },
+    {
+      "paper_id": "2610.25851v1",
+      "route": "20261002-20261031/2610.25851v1-learning-who-talks-to-whom-role-aware-communication-topology-scheduling-for-efficient-llm-multi-agent-collaboration",
+      "title": "Learning Who Talks to Whom: Role-Aware Communication Topology Scheduling for Efficient LLM Multi-Agent Collaboration",
+      "section": "deep",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "multi-agent"
+        }
+      ],
+      "score": 9.0,
+      "evidence": "角色感知地调度通信拓扑，决定谁与谁通信以及何时通信",
+      "first_seen_at": "2026-10-31 02:57:38 UTC",
+      "updated_at": "2026-10-31 02:57:38 UTC"
+    },
+    {
+      "paper_id": "2610.26554v1",
+      "route": "20261002-20261031/2610.26554v1-betamem-learning-to-remember-a-changing-world-for-embodied-agents",
+      "title": "BetaMem: Learning to Remember a Changing World for Embodied Agents",
+      "section": "deep",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "gen-memory"
+        }
+      ],
+      "score": 9.0,
+      "evidence": "具身智能体的长期记忆构建与巩固",
+      "first_seen_at": "2026-10-31 02:57:38 UTC",
+      "updated_at": "2026-10-31 02:57:38 UTC"
+    },
+    {
+      "paper_id": "2610.29276v1",
+      "route": "20261002-20261031/2610.29276v1-design-and-tuning-of-multi-agent-systems-using-bayesian-evolutionary-optimization",
+      "title": "Design and Tuning of Multi-Agent Systems Using Bayesian Evolutionary Optimization",
+      "section": "deep",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "multi-agent"
+        }
+      ],
+      "score": 9.0,
+      "evidence": "通过工作流图上的贝叶斯进化优化自动发现任务特定的多智能体拓扑",
+      "first_seen_at": "2026-10-31 02:57:38 UTC",
+      "updated_at": "2026-10-31 02:57:38 UTC"
+    },
+    {
+      "paper_id": "2610.30429v1",
+      "route": "20261002-20261031/2610.30429v1-roleflow-self-evolving-multi-role-agentic-collaboration-via-structural-adaptation",
+      "title": "RoleFlow: Self-Evolving Multi-Role Agentic Collaboration via Structural Adaptation",
+      "section": "deep",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "multi-agent"
+        }
+      ],
+      "score": 9.0,
+      "evidence": "通过反馈驱动的结构编辑改进多智能体协作结构",
+      "first_seen_at": "2026-10-31 02:57:38 UTC",
+      "updated_at": "2026-10-31 02:57:38 UTC"
+    },
+    {
+      "paper_id": "2610.30443v1",
+      "route": "20261002-20261031/2610.30443v1-specmagic-specification-guided-multi-task-generalization-in-multi-agent-reinforcement-learning",
+      "title": "SpecMAGIC: Specification-Guided Multi-Task Generalization in Multi-Agent Reinforcement Learning",
+      "section": "deep",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "agents"
+        }
+      ],
+      "score": 9.0,
+      "evidence": "面向多样协调需求的多任务泛化分层MARL框架",
+      "first_seen_at": "2026-10-31 02:57:38 UTC",
+      "updated_at": "2026-10-31 02:57:38 UTC"
+    },
+    {
+      "paper_id": "2610.31709v1",
+      "route": "20261002-20261031/2610.31709v1-mining-the-design-space-of-multi-agent-workflows",
+      "title": "Mining the Design Space of Multi-Agent Workflows",
+      "section": "deep",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "multi-agent"
+        }
+      ],
+      "score": 9.0,
+      "evidence": "挖掘多智能体工作流拓扑的设计原则",
+      "first_seen_at": "2026-10-31 02:57:38 UTC",
+      "updated_at": "2026-10-31 02:57:38 UTC"
+    },
+    {
+      "paper_id": "2610.32060v1",
+      "route": "20261002-20261031/2610.32060v1-understanding-communication-failures-in-multi-agent-llm-systems",
+      "title": "Understanding Communication Failures in Multi-Agent LLM Systems",
+      "section": "deep",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "agents"
+        }
+      ],
+      "score": 9.0,
+      "evidence": "多智能体LLM系统通信失败分类体系",
+      "first_seen_at": "2026-10-31 02:57:38 UTC",
+      "updated_at": "2026-10-31 02:57:38 UTC"
+    },
+    {
+      "paper_id": "2610.34450v1",
+      "route": "20261002-20261031/2610.34450v1-evolvemas-a-unified-self-evolution-framework-for-decentralized-multi-agent-systems",
+      "title": "EvolveMAS: A Unified Self-Evolution Framework for Decentralized Multi-Agent Systems",
+      "section": "deep",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "agents"
+        }
+      ],
+      "score": 9.0,
+      "evidence": "面向去中心化多智能体协同与经验复用的统一自进化框架",
+      "first_seen_at": "2026-10-31 02:57:38 UTC",
+      "updated_at": "2026-10-31 02:57:38 UTC"
+    },
+    {
+      "paper_id": "2610.34467v2",
+      "route": "20261002-20261031/2610.34467v2-dynaflow-learning-free-form-multi-agent-orchestration",
+      "title": "DynaFlow: Learning Free-Form Multi-Agent Orchestration",
+      "section": "deep",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "multi-agent"
+        }
+      ],
+      "score": 9.0,
+      "evidence": "主智能体生成任务级程序编排子智能体,动态调整协作结构",
+      "first_seen_at": "2026-10-31 02:57:38 UTC",
+      "updated_at": "2026-10-31 02:57:38 UTC"
+    },
+    {
+      "paper_id": "2610.35219v2",
+      "route": "20261002-20261031/2610.35219v2-multi-agent-relay-thinking",
+      "title": "Multi-Agent Relay Thinking",
+      "section": "deep",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "multi-agent"
+        }
+      ],
+      "score": 9.0,
+      "evidence": "接力思维拓扑在智能体间转移推理所有权",
+      "first_seen_at": "2026-10-31 02:57:38 UTC",
+      "updated_at": "2026-10-31 02:57:38 UTC"
+    },
+    {
+      "paper_id": "2610.35398v1",
+      "route": "20261002-20261031/2610.35398v1-belief-conditioned-multi-agent-actor-critic-for-decentralized-llm-collaboration",
+      "title": "Belief-Conditioned Multi-Agent Actor Critic for Decentralized LLM Collaboration",
+      "section": "deep",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "agents"
+        }
+      ],
+      "score": 9.0,
+      "evidence": "面向去中心化大模型协作的信念条件多智能体演员评论家方法",
+      "first_seen_at": "2026-10-31 02:57:38 UTC",
+      "updated_at": "2026-10-31 02:57:38 UTC"
+    },
+    {
+      "paper_id": "2610.35736v1",
+      "route": "20261002-20261031/2610.35736v1-preference-guided-cooperation-in-multi-objective-multi-agent-reinforcement-learning",
+      "title": "Preference-Guided Cooperation in Multi-Objective Multi-Agent Reinforcement Learning",
+      "section": "deep",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "agents"
+        }
+      ],
+      "score": 9.0,
+      "evidence": "面向智能体合作的多目标多智能体强化学习",
+      "first_seen_at": "2026-10-31 02:57:38 UTC",
+      "updated_at": "2026-10-31 02:57:38 UTC"
+    },
+    {
+      "paper_id": "2610.39193v1",
+      "route": "20261002-20261031/2610.39193v1-goal-aware-dynamic-multi-agent-collaboration-for-long-horizon-tasks",
+      "title": "Goal-Aware Dynamic Multi-Agent Collaboration for Long-Horizon Tasks",
+      "section": "deep",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "agents"
+        }
+      ],
+      "score": 9.0,
+      "evidence": "面向长时程目标完成动态分配职责的多智能体协作",
+      "first_seen_at": "2026-10-31 02:57:38 UTC",
+      "updated_at": "2026-10-31 02:57:38 UTC"
+    },
+    {
+      "paper_id": "2610.39680v1",
+      "route": "20261002-20261031/2610.39680v1-federated-agentic-ai-for-interference-aware-adaptive-spectrum-coordination",
+      "title": "Federated Agentic AI for Interference-Aware Adaptive Spectrum Coordination",
+      "section": "deep",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "agents"
+        }
+      ],
+      "score": 9.0,
+      "evidence": "联邦多智能体深度强化学习，智能体感知本地环境并学习协同",
+      "first_seen_at": "2026-10-31 02:57:38 UTC",
+      "updated_at": "2026-10-31 02:57:38 UTC"
+    },
+    {
+      "paper_id": "2610.39790v1",
+      "route": "20261002-20261031/2610.39790v1-long-term-agent-memory-through-complementary-curation-and-consolidation",
+      "title": "Long-Term Agent Memory through Complementary Curation and Consolidation",
+      "section": "deep",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "gen-memory"
+        }
+      ],
+      "score": 9.0,
+      "evidence": "面向长期智能体记忆的混合记忆与巩固机制",
+      "first_seen_at": "2026-10-31 02:57:38 UTC",
+      "updated_at": "2026-10-31 02:57:38 UTC"
+    },
+    {
+      "paper_id": "2610.04672v1",
+      "route": "20261002-20261031/2610.04672v1-masbench-benchmarking-llm-based-multi-agent-collaboration-under-partial-observability",
+      "title": "MASBench: Benchmarking LLM-based Multi-Agent Collaboration under Partial Observability",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "agents"
+        }
+      ],
+      "score": 8.0,
+      "evidence": "部分可观测下LLM多智能体协作基准",
+      "first_seen_at": "2026-10-31 02:57:38 UTC",
+      "updated_at": "2026-10-31 02:57:38 UTC"
+    },
+    {
+      "paper_id": "2610.07432v1",
+      "route": "20261002-20261031/2610.07432v1-entropy-gated-belief-coordination-for-decentralized-multi-agent-search-under-intermittent-communication",
+      "title": "Entropy-Gated Belief Coordination for Decentralized Multi-Agent Search Under Intermittent Communication",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "agents"
+        }
+      ],
+      "score": 8.0,
+      "evidence": "熵门控信念融合决定去中心化智能体何时通信与协调信念",
+      "first_seen_at": "2026-10-31 02:57:38 UTC",
+      "updated_at": "2026-10-31 02:57:38 UTC"
+    },
+    {
+      "paper_id": "2610.07556v2",
+      "route": "20261002-20261031/2610.07556v2-decoupled-multi-agent-orchestration",
+      "title": "Decoupled Multi-Agent Orchestration",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "agents"
+        }
+      ],
+      "score": 8.0,
+      "evidence": "解耦任务分解与协作决策的学习式多智能体编排",
+      "first_seen_at": "2026-10-31 02:57:38 UTC",
+      "updated_at": "2026-10-31 02:57:38 UTC"
+    },
+    {
+      "paper_id": "2610.07787v1",
+      "route": "20261002-20261031/2610.07787v1-oopmas-object-oriented-multi-agent-systems-for-query-level-workflow-generation",
+      "title": "OOPMAS: Object-Oriented Multi-Agent Systems for Query-Level Workflow Generation",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "agents"
+        }
+      ],
+      "score": 8.0,
+      "evidence": "按查询生成智能体集合与协作工作流",
+      "first_seen_at": "2026-10-31 02:57:38 UTC",
+      "updated_at": "2026-10-31 02:57:38 UTC"
+    },
+    {
+      "paper_id": "2610.09858v1",
+      "route": "20261002-20261031/2610.09858v1-training-advisors-for-llm-agents-from-task-outcomes",
+      "title": "Training Advisors for LLM Agents from Task Outcomes",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "agents"
+        }
+      ],
+      "score": 8.0,
+      "evidence": "用强化学习训练LLM智能体的评论者",
+      "first_seen_at": "2026-10-31 02:57:38 UTC",
+      "updated_at": "2026-10-31 02:57:38 UTC"
+    },
+    {
+      "paper_id": "2610.03140v1",
+      "route": "20261002-20261031/2610.03140v1-tracking-state-footprints-how-agents-can-transact",
+      "title": "Tracking State Footprints: How Agents Can Transact",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "agents"
+        }
+      ],
+      "score": 7.0,
+      "evidence": "将多智能体协调建模为带状态足迹的数据管理问题",
+      "first_seen_at": "2026-10-31 02:57:38 UTC",
+      "updated_at": "2026-10-31 02:57:38 UTC"
+    },
+    {
+      "paper_id": "2610.08155v1",
+      "route": "20261002-20261031/2610.08155v1-token-efficient-multi-agent-collaboration-via-system-one-guided-computational-division-of-labor",
+      "title": "Token-Efficient Multi-Agent Collaboration via System One-Guided Computational Division of Labor",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "agents"
+        }
+      ],
+      "score": 7.0,
+      "evidence": "在LLM多智能体协作中将协同操作与推理解耦",
+      "first_seen_at": "2026-10-31 02:57:38 UTC",
+      "updated_at": "2026-10-31 02:57:38 UTC"
+    },
+    {
+      "paper_id": "2610.08489v1",
+      "route": "20261002-20261031/2610.08489v1-topology-design-for-distributed-consensus-with-relay-assisted-communication",
+      "title": "Topology Design for Distributed Consensus with Relay-Assisted Communication",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "multi-agent"
+        }
+      ],
+      "score": 7.0,
+      "evidence": "面向分布式共识网络的继电器辅助拓扑优化",
+      "first_seen_at": "2026-10-31 02:57:38 UTC",
+      "updated_at": "2026-10-31 02:57:38 UTC"
+    },
+    {
+      "paper_id": "2610.08901v1",
+      "route": "20261002-20261031/2610.08901v1-sequential-probabilistic-uncertainty-estimation-for-parallel-multi-agent-reasoning-systems",
+      "title": "Sequential Probabilistic Uncertainty Estimation for Parallel Multi-Agent Reasoning Systems",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "agents"
+        }
+      ],
+      "score": 7.0,
+      "evidence": "面向并行多智能体推理交互的不确定性估计",
+      "first_seen_at": "2026-10-31 02:57:38 UTC",
+      "updated_at": "2026-10-31 02:57:38 UTC"
+    },
+    {
+      "paper_id": "2610.07415v1",
+      "route": "20261002-20261031/2610.07415v1-understanding-conflict-and-compatibility-conditions-for-agents-in-ai-ran",
+      "title": "Understanding Conflict and Compatibility Conditions for Agents in AI-RAN",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "agents"
+        }
+      ],
+      "score": 6.0,
+      "evidence": "分析目标冲突的智能体何时能够共存并共享控制",
+      "first_seen_at": "2026-10-31 02:57:38 UTC",
+      "updated_at": "2026-10-31 02:57:38 UTC"
+    },
+    {
+      "paper_id": "2610.10265v1",
+      "route": "20261002-20261031/2610.10265v1-stale-misattributed-or-late-where-personal-memory-fails-before-generation",
+      "title": "Stale, Misattributed, or Late: Where Personal Memory Fails Before Generation",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "gen-memory"
+        }
+      ],
+      "score": 6.0,
+      "evidence": "面向个人智能体记忆的构建与更新解析",
+      "first_seen_at": "2026-10-31 02:57:38 UTC",
+      "updated_at": "2026-10-31 02:57:38 UTC"
+    },
+    {
+      "paper_id": "2610.11177v1",
+      "route": "20261002-20261031/2610.11177v1-dynamic-mechanism-and-information-design-in-ai-agent-environments-a-general-analytical-framework",
+      "title": "Dynamic Mechanism and Information Design in AI-Agent Environments: A General Analytical Framework",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "agents"
+        }
+      ],
+      "score": 6.0,
+      "evidence": "面向AI智能体与多智能体互动的动态机制设计框架",
+      "first_seen_at": "2026-10-31 02:57:38 UTC",
+      "updated_at": "2026-10-31 02:57:38 UTC"
+    },
+    {
+      "paper_id": "2610.11613v1",
+      "route": "20261002-20261031/2610.11613v1-agentevolver-system-wide-self-evolution-through-task-execution",
+      "title": "AgentEvolver: System-Wide Self-Evolution Through Task Execution",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "agents"
+        }
+      ],
+      "score": 6.0,
+      "evidence": "智能体在执行任务中积累可复用能力",
+      "first_seen_at": "2026-10-31 02:57:38 UTC",
+      "updated_at": "2026-10-31 02:57:38 UTC"
+    }
+  ]
+}

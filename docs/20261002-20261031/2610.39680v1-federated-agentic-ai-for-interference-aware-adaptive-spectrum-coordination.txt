@@ -1,0 +1,758 @@
+Title: Federated Agentic AI for Interference-Aware Adaptive Spectrum Coordination
+
+URL Source: https://arxiv.org/pdf/2610.39680v1
+
+Published Time: Fri, 30 Oct 2026 03:22:24 GMT
+
+Number of Pages: 13
+
+Markdown Content:
+> 1
+
+# Federated Agentic AI for Interference-Aware Adaptive Spectrum Coordination 
+
+Tomer Baziza Paz, Yaniv Cohen, and Kobi Cohen (Senior Member, IEEE) 
+
+Abstract — Emerging intelligent wireless networks increasingly rely on autonomous AI agents to adapt spectrum usage to dynamic and heterogeneous operating conditions. However, col-lective learning is challenging when agents experience differ-ent local interference environments and cannot exchange raw observations due to communication-overhead and privacy con-straints. We propose Federated Agentic Spectrum Coordination with Interference Awareness (FASCIA), a federated multi-agent deep reinforcement learning framework for adaptive spectrum coordination. In FASCIA, each network manager acts as an autonomous AI agent that perceives its local interference environ-ment, accumulates experience in a persistent local memory, and learns an adaptive spectrum coordination policy through local interactions. Coordination among agents is achieved through periodic federated aggregation of locally trained models, without exchanging raw sensing data or experience. Since spectrum decisions made by one agent alter the environments observed by others, local learning is inherently heterogeneous and cou-pled. FASCIA employs proximal regularization to mitigate the resulting model drift and explicitly accounts for inter-carrier interference arising from partially overlapping channels. FASCIA is the first federated agentic AI framework to address this challenging interference-coupled spectrum coordination setting. Extensive simulations demonstrate that FASCIA achieves per-formance close to the centralized benchmark while avoiding raw-experience exchange and maintaining effectiveness across heterogeneous network configurations. 
+
+Index Terms – Agentic AI, deep reinforcement learning (DRL), federated learning (FL), spectrum coordination, inter-carrier interference (ICI). 
+
+I. I NTRODUCTION 
+
+The growing demand for wireless connectivity, coupled with spectrum scarcity and the increasing density of independently managed wireless networks, is driving a transition toward more autonomous and adaptive spectrum coordination. This trend is particularly pronounced in emerging 6G edge environments, where multiple networks may coexist within a shared spectrum band while experiencing rapidly changing traffic, topology, and interference conditions. Effective operation in such en-vironments requires more than static resource allocation or one-shot optimization. Network managers must continuously observe their local wireless environment, learn from previ-ous interactions, adapt their spectrum decisions to changing conditions, and coordinate their behavior with other networks. Adaptive spectrum coordination (ASC) captures this closed-loop decision-making process, in which independently man-
+
+The authors are with the School of Electrical and Computer Engineering, Ben-Gurion University of the Negev, Beer-Sheva 8410501, Israel. Corresponding author: K. Cohen, email: yakovsec@bgu.ac.il This work has been submitted to the IEEE for possible publication. Copyright may be transferred without notice, after which this version may no longer be accessible. 
+
+aged networks dynamically select and revise their spectrum usage according to evolving interference conditions. Dynamic channel allocation constitutes one important realization of ASC. Such adaptive spectrum management is relevant to cognitive radio networks, 6G in-X subnetworks, vehicular ad-hoc networks, wireless sensor and IoT networks, and wireless mesh networks, where independently managed networks must efficiently coexist over shared spectrum resources [1]–[5]. 
+
+A. Challenges of Agentic Interference-Coupled Adaptive Spec-trum Coordination 
+
+A fundamental challenge in ASC is that spectrum interac-tions are considerably more complex than those captured by conventional orthogonal-channel models. Many existing for-mulations assume perfectly orthogonal channels and therefore model interference primarily between networks selecting the same channel. In practical wireless systems, however, spectral leakage, imperfect filtering, and other hardware limitations give rise to inter-carrier interference (ICI), such that trans-missions over partially overlapping channels can significantly affect one another [6]. Consequently, the interference experi-enced by a network depends not only on co-channel transmis-sions but also on activity over neighboring channels, with the impact generally decreasing with spectral separation. Spectrum decisions therefore become interference-coupled: the effect of a local decision depends jointly on spectral separation, network topology, and the simultaneous decisions of other networks. This weighted, non-binary interference structure makes adaptive coordination substantially more challenging than conventional allocation under ideal channel orthogonality. The problem becomes even more challenging when spec-trum coordination must be learned autonomously and exe-cuted in a distributed manner. Each network manager (i.e., agent) has access primarily to its own sensing information and therefore possesses only a partial view of the global interference state, yielding a partially observable decision-making problem [3], [7], [8]. Moreover, the environment experienced by each network is inherently non-stationary: whenever one network modifies its spectrum usage, it changes the interference observed by other networks and consequently affects their observations, rewards, and subsequent decisions. Thus, the agents do not learn in isolated environments; rather, their local learning processes are intrinsically coupled through the shared wireless medium [4], [9]. At the same time, computing the optimal joint spectrum assignment generalizes graph coloring to weighted, non-binary interference and is computationally intractable [10], making repeated centralized optimization unsuitable for rapidly evolving network condi-tions. Finally, adaptation itself incurs a cost, since frequent arXiv:2610.39680v1 [cs.NI] 29 Oct 2026 2
+
+channel changes interrupt ongoing communication and in-crease spectrum mobility. Hence, an effective ASC policy must react rapidly to changing interference conditions while minimizing unnecessary spectrum mobility. Beyond these decision-making challenges, enabling collec-tive learning among autonomous network managers introduces additional communication and privacy concerns. Centralized learning architectures may require locally collected sensing observations and interaction experiences to be transferred to a central entity, resulting in considerable communication overhead and exposing potentially sensitive operational infor-mation [11]–[13]. These limitations become increasingly im-portant as the number of autonomous networks grows and their local operating conditions become more heterogeneous [14], [15]. An effective learning architecture should therefore allow individual network managers to learn continuously from their local interactions while benefiting from knowledge acquired across the network, without requiring the exchange of raw sensing observations or interaction experiences. 
+
+B. Federated Agentic AI under Interference Coupling 
+
+Federated Agentic AI provides a natural framework for realizing this form of distributed intelligence. Rather than centralizing the experience collected throughout the network, autonomous AI agents can maintain and learn from their local observations and interaction histories while periodically sharing learned model information to support collective adap-tation [11], [12], [16]. This paradigm combines the closed-loop autonomy required for ASC with distributed knowledge sharing, allowing agents to adapt locally while coordinating their learning at the network level. Importantly, however, applying federated learning to interference-coupled wireless networks introduces challenges that differ from conventional federated settings: local environments are heterogeneous, and the experience acquired by each agent depends not only on its own spectrum decisions but also on the decisions of neighbor-ing agents through their shared interference environment [4], [9], [15]. Operating effectively under these conditions requires each agent to build its decisions from limited local information while retaining sufficient experience to learn the longer-term consequences of its actions. A network manager does not observe the underlying interference field directly. Instead, its users sense local channel conditions and report highly compressed indicators of whether their SINR satisfies the required QoS level. The manager aggregates these reports into a local quality representation that guides its spectrum decisions (Section II-C). This representation is intentionally compact, but necessarily provides only a partial view of the shared wireless environment. Moreover, the information avail-able to different managers is inherently heterogeneous, since their observations depend on their local topology, interference conditions, and served users [3], [7]. Learning from such observations requires experience to be accumulated over time. The consequence of a spectrum decision may extend beyond its immediate effect: a channel change modifies the interference experienced by neighboring networks, which may subsequently adapt their own decisions and thereby alter the environment observed by the original agent. A single interaction therefore provides only limited in-formation about the longer-term value of a spectrum decision. Rather than pooling these interactions in a centralized replay memory, the federated setting considered in this work allows each agent to maintain a persistent local memory of its own experience. This design keeps raw observations, actions, and rewards at their originating networks while allowing agents to continually refine their local decision policies [17], [18]. The resulting learning problem is particularly demanding because value estimation must remain effective under partial observability and interference-coupled local experience. To support stable local learning, we employ a target-network-free Mellowmax value learner (Section III-A). Its non-expansion backup operator provides a stable basis for extended phases of local model updates, which become especially important when communication with the federating entity is intentionally infrequent [19], [20]. Local adaptation alone, however, cannot provide effective spectrum coordination. The knowledge acquired independently by the agents must be combined so that their policies capture the interference and spatial-reuse relationships that extend beyond any single agent’s observations. In the proposed federated architecture, this coordination is achieved during training through periodic aggregation of locally learned model parameters, rather than through the exchange of raw sensing measurements or interaction experiences [15], [16]. At execu-tion time, each network manager acts autonomously using only its locally available information, without requiring message exchange with neighboring agents or a centralized controller. This architecture creates a fundamental tension between local learning and global coordination. Increasing the number of local updates between aggregation rounds reduces the frequency of model exchange and allows agents to exploit their persistent local experience, but it also increases the risk that their models drift apart as they learn from heterogeneous and interference-coupled local experience. Conversely, frequent aggregation can improve alignment among agents at the cost of greater communication [14], [15], [21]. The central challenge is therefore not merely to federate the learning process, but to preserve effective collective spectrum coordination when agents optimize over heterogeneous local experience that is coupled through interference. Addressing this challenge forms the basis for the FASCIA framework developed in this paper. 
+
+C. Main Results 
+
+Motivated by the challenges above, this work investigates how federated agentic AI can enable effective adaptive spec-trum coordination when autonomous network managers learn from heterogeneous local experience while remaining coupled through a shared interference environment. The objective is to retain the benefits of collective learning without requiring centralized collection of raw sensing observations or interac-tion histories, while accounting for the partial observability, interference coupling, and communication constraints inherent to distributed wireless operation. The main contributions and results of this work are summarized as follows. 3
+
+1) Federated Agentic AI Framework for Interference-Coupled ASC: We formulate a challenging federated agentic AI setting for ASC, in which autonomous network managers learn and act based on partial local SINR observations while interacting through a shared interference environment. Unlike conventional federated learning settings, the agents do not interact with isolated local environments. Their operating con-ditions are heterogeneous, and the SINR observations available to each agent depend jointly on its own spectrum decisions and those of neighboring agents. Consequently, the local experiences used for learning are intrinsically coupled through the shared wireless medium. At the same time, collecting raw sensing observations and interaction histories at a central entity is undesirable due to communication overhead and privacy concerns. The resulting framework therefore requires agents to learn from heterogeneous and interference-coupled local experience, benefit from collective knowledge while limiting information exchange, and ultimately execute their spectrum decisions autonomously. To the best of our knowledge, this is the first federated agentic AI framework to address this chal-lenging interference-coupled spectrum coordination setting. 
+
+2) Algorithm Development for Coupled and Heterogeneous Learning: To address this setting, we develop FASCIA (Federated Agentic Spectrum Coordination with Interference Awareness ), a federated multi-agent DRL algorithm tailored to the distinctive learning dynamics of interference-coupled ASC. Each agent continuously accumulates its locally acquired experience in a persistent replay buffer, retained across interac-tion episodes, and employs a target-network-free Mellowmax value learner to derive its spectrum-coordination policy under partial observability. At each federated round, agents perform 
+
+E local learning updates using exclusively their own accumu-lated experience and periodically exchange only their learned model parameters for global aggregation; raw observations, actions, rewards, and transition tuples remain local. This design eliminates the need for centralized experience pooling while allowing agents to benefit from knowledge acquired across the network. The local learning problems, however, can differ substan-tially across network topologies, loads, user populations, and interference conditions. Moreover, the experience collected by different agents is not independent: the SINR measurements and rewards observed by one agent depend on the spec-trum decisions of neighboring agents through inter-network interference. Consequently, prolonged local optimization over heterogeneous and interference-coupled experience can drive the locally learned models in different directions, resulting in substantial model drift and degrading collective learning. To mitigate this effect, FASCIA incorporates proximal regular-ization into the federated optimization to penalize excessive deviation of locally updated models from the global model. We further investigate the effect of the number of local updates 
+
+E on coordination performance under heterogeneous and interference-coupled local experience. The resulting algorithm supports collective learning during training while enabling each network manager to execute its learned spectrum policy autonomously and without inter-agent message exchange after training. 
+
+3) Comprehensive Performance Evaluation: We conduct an extensive simulation study across heterogeneous network configurations, interference conditions, and deployment scales to evaluate both the spectrum-coordination performance and the learning behavior of FASCIA. The results demonstrate that FASCIA achieves performance close to the centralized benchmark despite relying on partial local observations and without centrally pooling raw interaction experience. We fur-ther compare alternative federated aggregation strategies and evaluate the effect of the number of local updates on learning behavior and coordination performance. The results show that FASCIA maintains strong performance across heterogeneous and interference-coupled operating conditions and generalizes effectively to network configurations beyond those encoun-tered during training. Overall, the experiments demonstrate that effective collective spectrum coordination can be achieved through federated agentic learning while keeping raw network experience local and retaining autonomous, message-free ex-ecution. 
+
+4) Open-Source Implementation: To facilitate reproducibil-ity and further research, we make the implementation of FAS-CIA, together with the simulation and evaluation environment, publicly available as open-source code at [22]. The released code provides the training and evaluation pipeline required to reproduce the reported results and offers the research commu-nity a platform for further investigation of federated agentic AI, multi-agent learning, and adaptive spectrum coordination in interference-coupled wireless networks. 
+
+D. Related Work 
+
+Learning-based spectrum coordination has been extensively studied using multi-armed bandits (MABs), restless MABs (RMABs), game-theoretic methods, and, more recently, deep reinforcement learning (DRL). Representative MAB/RMAB approaches include [1], [2], [26]–[32], while distributed spectrum-learning and access mechanisms have also been developed using stable matching and game-theoretic optimiza-tion [33]–[38]. DRL and multi-agent RL (MARL) subse-quently enabled spectrum policies to be learned directly from interaction [3], [4], [7]–[9], [39], [40]. In particular, C ARL - 
+
+> TON
+
+[5] developed a centralized-training-with-decentralized-execution (CTDE)-based MARL framework for distributed channel allocation under partially overlapping channels and inter-carrier interference. These works establish the effective-ness of learning-based spectrum adaptation, but the training of high-performance MARL policies commonly relies on centrally collected experience or centralized learning. Federated learning (FL) provides an alternative approach in which clients train locally and periodically aggregate model information without centrally pooling their raw data. FED AVG [16] established the standard federated averaging paradigm, while subsequent work studied communication ef-ficiency and learning under heterogeneous client data [14], [21]. In particular, F ED PROX [15] penalizes excessive local deviation from the global model, while SCAFFOLD [41] uses control variates to reduce client drift. FL has also been widely investigated for wireless and edge intelligence [11]– [13], [42]. Federated reinforcement learning extends this idea 4                                                            
+
+> TABLE I COMPARISON WITH REPRESENTATIVE LEARNING -BASED SPECTRUM AND WIRELESS RESOURCE COORDINATION APPROACHES .
+> Work Distributed Federated Experience ICI-Spectrum-mobility Training execution learning remains local aware awareness paradigm
+> QDSA [23] Yes No No No No Centralized DQN MADDQN-DCA [9] Yes No No No No Multi-agent DDQN IDSA [8] Yes No No No No Deep recurrent RL MARL-RM [4] Yes No No No No Multi-agent RL CARLTON [5] Yes No No Yes Yes CTDE FRL-V2X [24] Yes Yes Yes No No Federated RL FeDRL-D2D [25] Yes Yes Yes No No Federated DDQN
+> FASCIA (this work) Yes Yes Yes Yes Yes Federated Mellowmax DRL
+
+to agents that generate their own experience through interac-tion [17], [18], with recent applications to wireless resource allocation in V2X and D2D-assisted networks [24], [25]. Unlike conventional FRL settings in which clients typically learn from distinct local environments, the network managers considered here interact through the same wireless medium: the SINR measurements and rewards observed by one agent depend directly on the spectrum decisions of neighboring agents. Hence, the local learning experiences are not only heterogeneous but also intrinsically interference-coupled. More recently, agentic AI has emerged as a framework for autonomous and closed-loop operation of next-generation wireless networks, including AI-native RAN control, au-tonomous network management, and multi-agent network op-timization [43], [44]. Of particular relevance, recent work has explicitly investigated federated agentic AI for wireless networks [45], illustrating how federated learning can support distributed agentic intelligence without centralizing raw local data. These emerging studies, however, do not address the interference-coupled adaptive spectrum coordination problem considered here, where the actions of one autonomous net-work manager directly affect the observations and learning experience of the others. FASCIA addresses this intersection through federated multi-agent DRL with persistent local ex-perience, model-level coordination, and explicit treatment of inter-carrier interference. Table I positions FASCIA against the most closely re-lated representative learning-based approaches for spectrum and wireless resource coordination. The comparison considers distributed execution, federated learning, explicit awareness of ICI between partially overlapping or adjacent channels, whether raw interaction experience remains local rather than being transferred to a centralized learner, and spectrum-mobility awareness, i.e., whether unnecessary channel changes are explicitly considered by the learning or decision mech-anism. As shown in Table I, existing approaches capture different subsets of these properties. In particular, C ARLTON 
+
+considers ICI and spectrum mobility but relies on centralized training, whereas recent federated RL approaches enable dis-tributed learning with local experience but do not explicitly address ICI between partially overlapping channels or un-necessary spectrum mobility. To the best of our knowledge, FASCIA is the first federated agentic AI framework that jointly addresses these aspects for interference-coupled adap-tive spectrum coordination.                                                             
+
+> TABLE II SUMMARY OF THE MAIN NOTATION .
+> Symbol Meaning
+> N,Nnnumber of networks; network nMn,Mmax number of users in Nn; maximum number
+> K,Bnumber of channels; per-channel bandwidth
+> cnoperating channel of Nn
+> T(k, ˜k)ICI attenuation between channels kand ˜k
+> SINR ∗minimum network-level QoS-SINR requirement
+> SINR TSINR threshold used to construct BSINR BSINR nj,k binary QoS report of user jon channel k
+> QV nquality vector of Nn
+> sn(τ),an(τ)state and action of agent nat step τrppersonal reward of the local agent
+> LCBR number of bits in the channel binary representation
+> Dn,Szlocal replay buffer of client n; buffer capacity
+> w,dwmodel parameters; number of model parameters
+> T,tdecision steps per episode; federated round index
+> E,bzlocal update steps per round; mini-batch size
+> Ct,Ntparticipating clients in round t; their number
+> Fn(w),F(w)local and global federated objectives
+> μFED PROX proximal coefficient
+> ωmellowmax temperature
+
+The remainder of this paper is organized as follows. Sec-tion II formalizes the system model and the constrained DCA objective, and maps them onto a federated optimization prob-lem. Section III presents the FASCIA algorithm. Section IV reports the experimental study, and Section V concludes the paper. II. S YSTEM MODEL AND PROBLEM FORMULATION 
+
+A. Description of the System 
+
+We consider a shared-spectrum environment consisting of N coexisting wireless networks, represented by N =
+
+{N 1, . . . , N N }. Each network N n serves M n users, where 
+
+M n ∈ { 1, 2, . . . , M max } and Mmax is the maximum number of users among the networks. The total available bandwidth is partitioned into K equal-sized overlapping channels of bandwidth B, indexed by K = {1, 2, . . . , K }. At each time slot, every network operates on a single channel. A key characteristic of the considered spectrum environ-ment is that the channels are non-orthogonal . Consequently, transmissions on different channels are not necessarily isolated from one another, and ICI may arise between partially over-lapping channels. The channels are indexed according to their serial positions in K, as illustrated in Fig. 1. This setting leads to an interference-coupled spectrum-coordination problem in 5frequency PSD                   
+
+> f1f2f3f4fK−1fK· · ·
+> C1C2C3C4CK
+> fk+1 −fk
+> ICI: residual overlap attenuated by T(k, ˜k)
+> Fig. 1. Illustration of the partially overlapping, non-orthogonal channel partition. Channel i, denoted by Ci, corresponds to carrier frequency fi.
+
+which the communication quality experienced by one network depends not only on its own channel selection, but also on the channels occupied by the other networks. We characterize the interference among the networks using the Egli propagation model [46], a well-established model for outdoor UHF and VHF radio propagation. Accordingly, the SINR experienced by each user on each available channel incorporates both the aggregate interference generated by the other networks and the additive thermal noise at the receiver. To describe the corresponding quantities, we use the index-ing notation 
+
+(·)l,n m,j,k (1) for a parameter associated with a pair of users m ∈ N l and j ∈N n, evaluated with respect to channel k. When a quantity is associated with only one user, the second user index is omitted. Consider users i, j ∈ N n, where user i transmits a message to user j while network N n operates on channel k ∈ K . The SINR measured at the receiver of user j is SINR n,n i,j,k = PR n,n i,j,k 
+
+IT + Inj,k 
+
+, (2) where PR n,n i,j,k denotes the received signal power, IT is the additive thermal noise power, and Inj,k is the interference power observed by user j ∈ N n on channel k. The latter accounts for transmissions originating from all networks in N \ N n,including ICI caused by transmissions on partially overlapping channels. Interference among users belonging to the same network is assumed to be handled by the Medium Access Control (MAC) scheduler. The received signal power is computed as PR n,n i,j,k = PT nj,k − PL n,n i,j,k − χn,n i,j,k − ψn,n i,j,k , (3) where PT nj,k is the transmitter power of user j ∈ N n on channel k (possibly a broadcast signal irrespective of user 
+
+j ∈ N n) in dBW, PL n,n i,j,k denotes the path loss between users j ∈ N n and i ∈ N n on channel k, and χn,n i,j,k and 
+
+ψn,n i,j,k represent the small-scale fading and shadowing effects, respectively. The interference produced by the remaining networks N \ N n at user j ∈ N n on channel k is 
+
+Inj,k = X 
+
+> l∈{ 1,...,n −1,n +1 ,...,N }
+
+Φn,l j,k 
+
+where 
+
+Φn,l j,k ≜ X 
+
+> m∈{ 1,...,M l}
+
+ϕn,l j,m,k ,
+
+(4) where ϕn,l j,m,k denotes the interference contribution of user m ∈N l and is given by 
+
+ϕn,l j,m,k = PR n,l j,m,k − T (k, ˜k), (5) where ˜k is the channel occupied by network N l and T (k, ˜k)
+
+is the attenuation observed at channel k with respect to channel ˜k [47]. Hence, the effect of an interfering network is determined not only by its received power but also by the spectral relation between its operating channel and the channel of interest. This explicitly captures the ICI associated with the partially overlapping channel structure. 
+
+B. Federated Agentic Learning Model 
+
+Spectrum coordination is carried out by a network manager associated with each network N n. In the proposed framework, the network manager acts as an autonomous AI agent: it ob-tains measurements generated within its own network, selects the operating channel, observes the resulting communication quality, and uses this interaction experience to improve its subsequent spectrum decisions. Thus, the agents operate lo-cally while remaining coupled through the shared wireless environment, since the channel selected by one network affects the interference experienced by the others. Unlike centralized-training approaches, we do not assume that the interaction experience generated by the different network managers is collected by a central learner. Instead, network manager n is identified with federated client n and retains locally the information generated through its inter-action with the spectrum environment. In particular, its per-user BSINR measurements, locally constructed observations, selected channels, received rewards, and stored interaction experience remain at the corresponding network. Coordination of the learning process is performed at the model level through periodic federated aggregation rather than by pooling the agents’ raw experience. This architecture is particularly relevant to the interference-coupled setting considered here. Although the agents ulti-mately learn a common spectrum coordination capability, the experience available to different network managers need not follow identical distributions. Networks may serve different numbers of users, experience different interference neighbor-hoods, and observe different channel conditions. Moreover, the actions taken by neighboring agents directly affect the local measurements observed by a given network. Consequently, the federated clients learn from heterogeneous and interference-coupled local experience. The above architecture specifies the information structure under which learning takes place: interaction experience re-mains local, while model information is periodically ex-changed for federated learning. The precise local learning ob-jective, model aggregation procedure, and the resulting FAS-CIA algorithm are developed in Section III. We emphasize that retaining raw experience locally provides an architectural separation between the participating networks; federation by itself, however, does not constitute a formal privacy guarantee. 6
+
+C. Problem Formulation and Objective 
+
+Let cn ∈ { 1, ..., K } denote the operating channel selected by network N n, and let SINR nj,c n denote the average SINR of user j ∈ N n, accounting for the messages received from the other M n − 1 users in the same network. It is given by SINR nj,c n = 1
+
+M n − 1 
+
+> Mn
+
+X
+
+> i=1
+> i̸=j
+
+SINR n,n j,i,c n . (6) The corresponding average SINR of network N n, denoted by SINR ncn , is SINR ncn = 1
+
+M nM n
+
+X
+
+> j=1
+
+SINR nj,c n . (7) At the network level, the adaptive spectrum coordination objective is to select the operating channels so as to maximize the average communication quality across the participating networks, while requiring every network to satisfy a target QoS-SINR level, denoted by SINR ∗. Accordingly, the desired spectrum configuration is characterized by 
+
+max 
+
+> {cn}N
+
+1
+
+N
+
+> N
+
+X
+
+> n=1
+
+SINR ncn
+
+subject to SINR ncn ≥ SINR ∗ ∀n ∈ N .
+
+(8) The QoS constraints in (8) are important because uncon-strained maximization of the average SINR can favor some networks at the expense of others. Requiring every network to exceed the prescribed QoS-SINR threshold prevents an improvement in aggregate performance from being obtained by allowing individual networks to experience unacceptable communication quality. This formulation therefore combines high aggregate performance with a minimum QoS requirement for each participating network. We further consider a setting in which only a very small amount of measurement information is exchanged within each network. To this end, the SINR measurement is binarized with respect to a target QoS-SINR sensitivity threshold SINR T :BSINR nj,k = 1(SINR nj,k > SINR T ), (9) where 1 is the indicator function, equal to one when SINR nj,k > SINR T and zero otherwise. Under this limited-information representation, the spectrum-coordination objective becomes 
+
+max 
+
+> {cn}N
+
+1
+
+N
+
+> N
+
+X
+
+> n=1
+
+BSINR ncn
+
+subject to SINR ncn ≥ SINR ∗ ∀n ∈ N ,
+
+(10) where BSINR ncn ≜ 1 
+
+> Mn
+
+PM n 
+
+> j=1
+
+BSINR nj,c n .Equations (8)–(10) characterize the desired network-level outcome. Importantly, however, we do not assume that the channel vector {cn}Nn=1 is repeatedly computed by a cen-tralized optimizer. Instead, each network manager must learn how to select its operating channel from locally available information. Hence, the learning objective is to obtain, through federated training, a model that enables the autonomous agents to collectively realize high-quality spectrum configurations according to (10), while retaining their locally generated interaction experience within their respective networks. This distinction between the operational spectrum objective and the federated learning mechanism is central to the proposed FASCIA framework. We assume that users can measure SINR values across all available channels. Although wideband spectrum sensing has traditionally presented implementation challenges, includ-ing power consumption and signal-processing requirements, advances in processing capabilities, spectrum-sensing algo-rithms, and software-defined radio (SDR) have made flexible wideband measurements increasingly practical [48], [49]. Finally, the considered setting places two important require-ments on the learning framework. First, spectrum decisions should adapt rapidly to changes in the interference environ-ment, motivating a short learning and adaptation time. Second, channel selection must be executable locally by the network managers to support scalable operation without relying on a centralized decision maker. These requirements, together with the federated information structure described above, motivate the learning and coordination mechanism developed in the following sections. III. T HE FEDERATED AGENTIC SPECTRUM 
+
+COORDINATION WITH INTERFERENCE AWARENESS 
+
+(FASCIA) A LGORITHM 
+
+This section develops FASCIA, a federated agentic learning framework for interference-aware adaptive spectrum coordi-nation. In FASCIA, each network manager acts as an au-tonomous learning agent that interacts with its local wireless environment, maintains its own experience, and performs local value-function updates. The agents periodically coordinate through federated model aggregation, such that locally gen-erated interaction experience is not pooled at a central learner. The resulting architecture combines local spectrum decision making with model-level coordination across the participating networks. Fig. 2 illustrates the main distinction between the considered training paradigms. In the centralized-training architecture, the interaction tuples generated by the network managers are collected in a global replay memory, from which a cen-tral learner performs the model updates. In contrast, under FASCIA, each network manager maintains a persistent local replay buffer and performs E local learning steps. Only model parameters are periodically communicated to the aggregation server, which combines the local models and redistributes the resulting global model. Thus, the interaction experience used for learning remains at the network managers throughout training. The remainder of this section develops the components of FASCIA. We first present the Mellowmax-based local value-learning mechanism, followed by the agent observation and ac-tion spaces, exploration strategy, and local reward design. We then formulate the federated training and model-aggregation procedures and discuss their operation under heterogeneous local experience. 7               
+
+> Global Replay Memory Central Learner
+> all NEgradient updates
+> NM 1NM 2NM N· · ·
+> Temporary buffer D1Temporary buffer D2Temporary buffer DN
+> Local experience transferred to global memory interaction tuple (s, a, r, s ′)
+> mini-batches bz
+> broadcast w
+
+(a) Centralized Training (CTDE)                   
+
+> Experience centrally collected •central-ized model updates •global replay memory
+> Aggregation Server
+> FED AVG / F ED PROX
+> wt+1 =P
+> knknwt+1
+> k
+> NM 1
+> AI agent NM 2
+> AI agent NM N
+> AI agent
+> · · ·
+> Local replay buffer D1Local replay buffer D2Local replay buffer DN
+> Elocal updates – experience remains local
+> wt+1 1
+> broadcast wt
+
+(b) FASCIA: Federated Training     
+
+> Experience remains local •distributed model updates •federated model aggregation
+
+Fig. 2. Comparison of centralized and federated training architectures for adaptive spectrum coordination. (a) Under CTDE, locally generated interaction experience is collected in a global replay memory and used for centralized model updates. (b) In FASCIA, each network manager (NM) acts as an AI agent, maintains a local replay buffer, performs local learning updates, and periodically exchanges model parameters with the aggregation server. Thus, interaction experience remains local in FASCIA, while spectrum decisions are executed locally by the NMs in both architectures. 
+
+A. Mellowmax-Based Local Value Learning 
+
+Each network manager operates as an autonomous AI agent that interacts with its local wireless environment to perform adaptive spectrum coordination. At each decision step, the agent observes its local state, selects an operating channel, and receives a scalar reward reflecting the resulting spectrum configuration. We adopt a value-based reinforcement-learning approach, in which the agent estimates the action-value func-tion Qπ (s, a ) = Eπ
+
+hP 
+
+> i≥0
+
+γir(t+i+1) S(t) = s, A (t) = a
+
+i
+
+,where γ ∈ (0 , 1) is the discount factor. The action-value function is approximated by a neural network Q(s, a ; w)
+
+with parameter vector w, whose parameters are learned by minimizing the temporal-difference (TD) error [50]. For local value learning, FASCIA employs DeepMel-low [19]. In contrast to the hard maximization commonly used in deep Q-learning, DeepMellow employs the mellowmax operator [20], 
+
+mm ω
+
+ Q(s, · ; w) = 1
+
+ω log 1
+
+K
+
+> K
+
+X
+
+> k=1
+
+e ω Q (s,k ;w)
+
+!
+
+, (11) where ω controls the degree of smoothing. The operator approaches the mean as ω → 0 and the maximum as ω → ∞ .Moreover, mellowmax is a non-expansion and provides a smooth alternative to the hard maximum used in conventional 
+
+Q-learning. Importantly for the proposed federated architec-ture, DeepMellow enables local value learning using a single parameter vector w, without maintaining a separate delayed target network. Consequently, the model state periodically coordinated among the federated agents can be represented by a single value-network parameter vector. Accordingly, the TD target used by client n is 
+
+Y n(t) = rn(t+1)+ γ  1−d(t+1)  mm ω
+
+ sg  Q(sn(t+1) , · ; w) ,
+
+(12) where sg( ·) denotes the stop-gradient operator and d is the terminal indicator. Defining the TD error as en(t) = Y n(t) −
+
+Q(sn(t), a n(t); w), we use the Huber loss Lδ=1 .0(e) as the local loss function. Its linear behavior for large errors reduces the sensitivity of local updates to occasional large TD errors, which may arise from the heterogeneous and interference-coupled experience observed by the agents. For the implementation evaluated in this paper, the action-value function is approximated by a three-layer residual multilayer perceptron with 128 units per layer, Leaky-ReLU activations with slope 0.2, an identity output layer of width K,and PyTorch ’s default Kaiming-uniform initialization [51]. With input dimension LCBR +K, where LCBR = ⌊log 2 K⌋+1 
+
+as in (15), the number of trainable parameters is 
+
+dw(K) = 33 , 152 + 128 LCBR + 257 K. (13) The same value-network architecture is used by all learning-based methods compared in Section IV. 
+
+B. Observation Space, Action Space, and Exploration 
+
+The local observation of each AI agent is constructed from the communication quality experienced by its network. Specifically, using the binary SINR indicators defined in Section II-C, network manager n constructs the quality vector 
+
+QV n ∈ [0 , 1] K , whose kth entry is 
+
+QV nk = 1
+
+M nM n
+
+X
+
+> j=1
+
+BSINR nj,k . (14) Thus, QV nk represents the fraction of users in network N n
+
+that satisfy the prescribed SINR threshold on channel k. This normalized representation provides the agent with a local view of the available spectrum quality while removing the direct dependence of the observation dimension on the number of users in the network. To support adaptive spectrum coordination while accounting for unnecessary channel changes, the agent combines the 8
+
+quality vector with a binary representation of its currently occupied channel. The resulting state is 
+
+sn(t) = CBR n(t); QV n(t) ∈ R LCBR +K ,LCBR = ⌊log 2 K⌋ + 1 , (15) where CBR n(t) ∈ { 0, 1}LCBR denotes the channel binary representation of the channel currently occupied by network 
+
+N n, representing the previous action of the agent in binary representation. Including this information enables the agent to distinguish between retaining its current channel and switching to another one, thereby allowing spectrum mobility to be incorporated into the learned decision policy. The action space is the channel set K, with an(t) = k indicating the selection of channel k. Accordingly, the value network produces one action value for each of the K available channels. Action selection combines feasibility-based masking with exploration. First, a channel for which QV nk = 0 is excluded from the candidate actions by defining eQ(sn, k ; w) = −∞ if 
+
+QV nk = 0 and Q(sn, k ; w) otherwise. Hence, the agent does not explore channels for which none of its users currently satisfies the prescribed QoS threshold. In the degenerate case 
+
+QV n = 0, no new channel is selected and the current channel is retained. Exploration over the remaining candidate channels follows a Boltzmann policy based on the masked action values, 
+
+Pr  an(t) = k | sn(t) = e β eQ(sn(t),k ;w)
+
+P 
+
+> k′∈K
+
+e β eQ(sn(t),k ′;w) , (16) which is sampled with probability ϵb; otherwise, the agent selects the greedy action. In the implementation considered in this paper, ϵb is annealed linearly from 0.5 to 0.01 over the first half of training and is held fixed thereafter. The exploration schedule is indexed by the communication round and shared by all participating clients, such that the agents follow the same exploration rate in each federated round while collecting experience from their respective local environments. 
+
+C. Reward Design and the Locality of the Learning Signal 
+
+The local reward guides each AI agent toward two com-plementary objectives of adaptive spectrum coordination: se-lecting a channel that provides satisfactory communication quality to its users and avoiding unnecessary channel changes once a suitable spectrum configuration has been reached. To this end, FASCIA uses the personal reward rp defined in Algorithm 1, which depends only on the locally constructed quality vector and the channel selections of the corresponding network manager. For the channel selected by network N n, let v =QV nan(t)(t) denote the fraction of its users satisfying the prescribed SINR threshold. If v ≥ ζ, the selected channel is considered satisfactory and the agent receives the fixed reward 
+
+rdesired . Otherwise, the reward reflects the rank of the selected channel among the K available channels, mapped to [−1, 1] .This provides a relative learning signal that encourages the agent to favor higher-quality channels even when none of the available channels reaches the desired quality level. To control spectrum mobility, an additional multiplicative bonus c1 > 1 is applied when the agent retains its previously 
+
+Algorithm 1 Personal reward rp of network N n
+
+Require: QV n(t), actions an(t), an(t − 1) 
+
+Ensure: rp 
+
+> 1:
+
+v ← QV nan(t)(t) 
+
+> 2:
+
+if v ≥ ζ then  
+
+> 3:
+
+rp ← rdesired  
+
+> 4:
+
+else  
+
+> 5:
+
+SQV n ← sort  QV n(t); i ← 0 
+
+> 6:
+
+while i ≤ K and v ≥ SQV ni do  
+
+> 7:
+
+i ← i + 1  
+
+> 8:
+
+end while  
+
+> 9:
+
+rp ← 2 ( i/K − 0.5) ▷ rank of the chosen channel  
+
+> 10:
+
+end if  
+
+> 11:
+
+if an(t) = an(t − 1) and rp > 0 then  
+
+> 12:
+
+rp ← c1 rp ▷ stability bonus  
+
+> 13:
+
+end if 
+
+occupied channel and the resulting personal reward is positive. Thus, once an agent operates on a channel yielding a favorable local outcome, remaining on that channel is preferred over an unnecessary switch with otherwise comparable reward. The resulting mechanism allows the learned spectrum-coordination policy to account jointly for communication quality and chan-nel stability. An important property of this reward construction is that the learning signal is entirely local. Network manager n evaluates 
+
+rp using its own quality vector and channel history and therefore does not require the rewards, observations, or actions of other network managers. This property is particularly suited to the federated agentic architecture of FASCIA, in which the interaction experience generated by each network manager remains local. Although the agents are coupled through the in-terference environment, no exchange of their local interaction experience is required to construct the reward. Coordination of the learning process is instead performed at the model level through the federated training procedure developed in the following subsections. For the implementation evaluated in this paper, we set ζ =0.9, rdesired = 4 , and c1 = 1 .1. With T = 20 decision points per episode, the maximum attainable accumulated reward is 
+
+T c 1rdesired = 88 , which is used in Section IV as an absolute performance reference. 
+
+D. Federated Training Procedure 
+
+The local learning mechanisms described above are inte-grated into the federated training procedure summarized in Al-gorithm 2. At communication round t, the aggregation server broadcasts the current global model wt to the participating network managers. Each participating network manager then interacts with its local wireless environment as an autonomous AI agent, performs its spectrum decisions, and stores the resulting transitions in its persistent local replay buffer Dn.For a scenario containing Nt networks, the interaction phase consists of T · Nt steps, providing each agent with T decision points. Following the interaction phase, each client performs E
+
+local gradient updates using mini-batches of size bz sampled 9
+
+exclusively from its own replay buffer Dn. If the buffer contains fewer than bz transitions, the corresponding client skips the local update and returns the broadcast model un-changed. After completing the local updates, client n uploads its resulting model wt,E n to the aggregation server. The server then combines the uploaded models to obtain wt+1 , which initializes the next communication round. Thus, spectrum interaction and experience storage remain local to the network managers, whereas coordination across agents is performed through periodic model aggregation. Unlike conventional federated learning over fixed local datasets, the local experience used by FASCIA is generated through interaction with the wireless environment. Conse-quently, the contents of Dn evolve throughout training as the agent’s spectrum-coordination policy and the interference conditions it encounters change. Retaining the replay buffer across communication rounds allows local updates to draw from experience accumulated over multiple interactions rather than only from the most recently generated episode. Moreover, the network realization is regenerated across rounds, exposing the shared model to heterogeneous interference configurations during federated training rather than to a single fixed deploy-ment geometry. The local learning objective at client n is defined as the expected TD loss over its replay buffer, 
+
+Fn(w) = E(s,a,r,s ′)∼D n
+
+Lδ
+
+ e(s, a, r, s ′; w) .
+
+Under FED AVG , each participating client performs E
+
+stochastic-gradient updates to this local objective before its model is aggregated at the server. Because the agents collect heterogeneous and interference-coupled local experience, how-ever, their local optimization directions can differ substantially. Increasing the number of local updates may therefore increase the deviation of locally updated models from the common model wt before aggregation, commonly referred to as client drift. To control this deviation, FASCIA employs F ED PROX [15], which augments the local objective with a proximal regular-ization term, 
+
+hn
+
+ w; wt = Fn(w) + μ
+
+2 w − wt 22, (17) where μ ≥ 0 is the proximal coefficient. The correspond-ing gradient contains the additional term μ(w − wt), which penalizes excessive deviation of the locally updated model from the global model received at the beginning of the com-munication round. This regularization is particularly relevant when the participating agents learn from heterogeneous local experience, since it moderates client-specific model updates before aggregation. Setting μ = 0 recovers the F ED AVG 
+
+local objective, whereas larger values of μ place progressively greater emphasis on remaining close to wt.The resulting procedure therefore combines autonomous local interaction and value learning with periodic model-level coordination. Each AI agent adapts its spectrum decisions using experience generated within its own network, while the proximal local objective limits excessive model drift during the local-training phase. The aggregation step then integrates these locally learned models into the global model used in the subsequent federated round. The precise aggregation rule and its operation under heterogeneous local experience are developed in the following subsection. 
+
+E. Model Aggregation under Heterogeneous Local Experience 
+
+At the end of communication round t, the aggregation server receives the locally updated model wt,E n from each participat-ing client n ∈ C t. In the considered training procedure, every participating AI agent contributes exactly T new interaction transitions during the round. Accordingly, the local models are combined using uniform averaging, 
+
+wt+1 = 1
+
+|C t|
+
+X
+
+> n∈C t
+
+wt,E n . (18) The aggregation is applied to the complete parameter vector and does not require the server to access the local replay buffers, observations, actions, or rewards of the participating network managers. Since all participating clients initialize their local optimiza-tion from the same global model wt, define the local model displacement as 
+
+∆tn = wt,E n − wt. (19) Equation (18) can then equivalently be written as 
+
+wt+1 = wt + 1
+
+|C t|
+
+X
+
+> n∈C t
+
+∆tn. (20) This representation highlights the role of federated coor-dination in FASCIA: each network manager adapts the shared value model using its own locally generated spectrum-interaction experience, while the server combines the resulting model updates into a common model for the subsequent communication round. Because the clients may experience different network sizes, interference conditions, and spectrum configurations, their local updates need not be identical. The proximal regularization in (17) moderates excessive client-specific deviation during local optimization, while (18) inte-grates the resulting updates at the model level. The complete federated training procedure is summarized in Algorithm 2. It combines local spectrum interaction, persistent experience replay, Mellowmax-based value learning, proximal local updates, and periodic model aggregation. Importantly, the interaction tuples generated by the network managers remain in their respective local replay buffers throughout this procedure; only the learned model parameters are exchanged during federated coordination. After federated training, the learned model w∗ is distributed to the network managers for decentralized execution. Each AI agent independently constructs its local state from the measurements available within its network, applies the action mask, and evaluates the learned action-value function to select its operating channel. Hence, FASCIA employs federated model-level coordination during training while retaining lo-cally generated interaction experience at the corresponding network managers. Once training is completed, the resulting ASC decisions are executed locally by the agents without requiring coordination with the aggregation server. 10 
+
+Algorithm 2 FASCIA training procedure 
+
+Require: Communication rounds R, local training steps E,proximal weight μ, batch size bz , buffer capacity Sz ,schedule {ϵb(t)}
+
+Ensure: Global model parameters w∗ 
+
+> 1:
+
+Server initializes w0; each network manager n initializes an empty persistent Dn of capacity Sz 
+
+> 2:
+
+for t = 0 , . . . , R − 1 do  
+
+> 3:
+
+Sample Nt with Nt < K , generate a scenario, and sample participating clients Ct = {1, . . . , N t} 
+
+> 4:
+
+Broadcast: wt, 0 
+
+> n
+
+← wt, ∀n ∈ C t 
+
+> 5:
+
+for τ = 1 , . . . , T do ▷ interaction phase  
+
+> 6:
+
+for n ∈ C t in turn order do  
+
+> 7:
+
+Collect BSINR reports; form QV n by (14) and 
+
+sn(τ ) by (15)  
+
+> 8:
+
+Sample an(τ ) by (16) with ϵb(t); observe rn,
+
+sn(τ +1)  
+
+> 9:
+
+Dn ← D n ∪ { (sn(τ ), a n(τ ), r n, s n(τ +1)) } 
+
+> 10:
+
+end for  
+
+> 11:
+
+end for  
+
+> 12:
+
+for n ∈ C t do ▷ local update, in parallel  
+
+> 13:
+
+if |D n| ≥ bz then  
+
+> 14:
+
+for e = 1 , . . . , E do  
+
+> 15:
+
+Sample a mini-batch of size bz from Dn 
+
+> 16:
+
+wt,e n ← wt,e −1 
+
+> n
+
+− η ∇ bFn + μ 
+
+> 2
+
+∥wt,e −1 
+
+> n
+
+−
+
+wt∥2 
+
+> 17:
+
+end for  
+
+> 18:
+
+else  
+
+> 19:
+
+wt,E n ← wt 
+
+> 20:
+
+end if  
+
+> 21:
+
+Upload wt,E n 
+
+> 22:
+
+end for  
+
+> 23:
+
+Aggregate: wt+1 ← 1
+
+> |C t|
+
+P 
+
+> n∈C t
+
+wt,E n 
+
+> 24:
+
+end for  
+
+> 25:
+
+return w∗ ← wR
+
+IV. E XPERIMENTS AND DISCUSSION 
+
+This section evaluates FASCIA through extensive sim-ulations. We first describe the simulation environment and evaluation metrics, and then examine the learning behavior and convergence of the proposed framework. Finally, we evaluate its ASC performance under different interference conditions and compare it with state-of-the-art spectrum-coordination methods. The complete implementation of FASCIA, together with the code required to reproduce the experiments, is pub-licly available in [22]. 
+
+A. Simulation Setup and Performance Metrics 
+
+The simulation environment follows Section II-A. The available spectrum consists of K = 10 partially overlapping channels. We use the Egli propagation model, the spectral attenuation characteristics specified in Section II-A, and a thermal noise floor of IT = −104 .9 dBm. In each scenario, the number of networks N is drawn randomly, and network N n
+
+serves M n ∼ U {1, . . . , 15 } users distributed around its center according to a bivariate Gaussian distribution with covariance 
+
+diag(50 2, 50 2) m 2. Network centers are placed sequentially at a random radius r ∼ U [50 , 500] m and angle θ ∼ U [0 , 2π]
+
+from a previously placed center. The network manager is the user minimizing the total distance to the other users in its network. Each network receives T = 20 decision points, resulting in a scenario horizon of T · N steps. Training is restricted to N ≤ 7 networks, as in [5]; configurations with N > 7 are therefore unseen during training and are used to evaluate generalization to denser deployments. Each run comprises R = 1000 communication rounds for FASCIA (and the corresponding number of episodes for the centralized baseline), followed by 100 inference episodes with fixed model parameters. The exploration probability ϵb is annealed from 0.5 to 0.01 over the first half of training. We evaluate two configurations of FASCIA against the centralized CTDE reference. FASCIA-FA uses F ED AVG with 
+
+E = 10 local training steps and μ = 0 , whereas FASCIA-FP uses F ED PROX with E = 10 and μ = 0 .01 . The selected values are examined further in Section IV-B. Let cn(T ) denote the final operating channel of network 
+
+N n. The average channel quality across the participating networks and the quality of the worst-performing network are defined as 
+
+CQ = 1
+
+N
+
+> N
+
+X
+
+> n=1
+
+QV ncn(T )(T ), min  
+
+> CQ
+
+= min  
+
+> n
+
+QV ncn(T )(T ).
+
+(21) The composite channel-quality metric is 
+
+CQ comp = E
+
+ CQ + min CQ 
+
+2
+
+
+
+, (22) which accounts for both the average allocation quality and the performance of the worst-served network. The achieved communication rate is evaluated using the Shannon throughput. For user j in network N n operating on channel cn, the achievable rate is 
+
+Rnj = B log 2
+
+ 1 + SINR nj,c n
+
+ , (23) where B is the channel bandwidth. The reported throughput is averaged over the users, participating networks, and evaluation scenarios. Finally, the trained models are evaluated for N ∈{2, . . . , 15 } using 30 independent games for each network size, for a total of 420 evaluation games per method. 
+
+B. Training Dynamics and Parameter Selection 
+
+We first examine the evolution of the achieved Shannon throughput during federated training. For each saved global-model checkpoint, we fix the model parameters and eval-uate the resulting spectrum allocation over a common set of in-sample scenarios. Fig. 3 reports the network-average throughput as a function of the communication round for FED AVG and F ED PROX (mean ± standard deviation over three independent runs). Both methods improve rapidly during the first few hundred rounds and then approach their respective operating regions. F ED AVG subsequently exhibits relatively little change, whereas F ED PROX shows a modest improvement during the later training rounds. 11 0 200 400 600 800 1000 Training round 140 160 180 200 220 User Rate (Mbps)      
+
+> FASCIA-FA (n=3) FASCIA-FP (n=3)
+> 0200 400 600 800 1000 Training round 0.6 0.7 0.8 0.9 1.0 1.1
+> R(t) /  R(T)
+> FASCIA-FA (n=3) FASCIA-FP (n=3)
+
+Fig. 3. Achievable user rate of the learned allocation. (a) Absolute user rate in Mbps. (b) Normalized learning curve R(t)/R (T ), where T is the final training round. Mean ± std over 3 seeds. 12510 15 20 40 60 80 120 200 300    
+
+> Local steps E
+> 0.980 0.985 0.990 0.995
+> [(CQ + min
+> CQ
+> )/2]
+> E= 10 (chosen)
+> 12510 15 20 40 60 80 120 200 300
+> Local steps E
+> 250 260 270 280 290 300 310
+> User Rate (Mbps)
+
+Fig. 4. Sensitivity of F ED PROX (μ = 0 .01 ) to the number of local steps 
+
+E over the dense grid {1, 2, 5, 10 , 15 , 20 , 40 , 60 , 80 , 120 , 200 , 300 }. Left: composite channel quality E[(CQ + min CQ )/2] . Right: User rate [Mbps]. Star shaped markers highlight the pick value in each plot, while the dashed vertical line indicates the selected operating point ( E = 10 ). 
+
+We next examine the number of local update steps E
+
+performed between consecutive model aggregations. Fig. 4 evaluates E ∈ {1, 2, 5, 10 , 15 , 20 , 40 , 60 , 80 , 120 , 200 , 300 }
+
+for F ED PROX with μ = 0.01 . For each value of E, the final global model is evaluated in terms of composite channel quality and Shannon throughput. The results show that neither very small nor very large values of E provide the best performance across the two measures. In particular, E = 10 
+
+provides a favorable operating point and is therefore used in the remaining experiments. 
+
+C. Performance Comparison 
+
+We compare the two implementations of the proposed framework, FASCIA-FA and FASCIA-FP, with three reference methods. The centralized CTDE implementation of C ARL -
+
+TON [5] serves as the learning benchmark, while Jamming Avoidance Response (JAR) and the Random Agent (RA) provide distributed references. JAR [5] switches to an adjacent channel only when the change improves the channel quality by at least 0.05 , whereas RA [37] selects an initial channel and retains it throughout the scenario. All methods are evaluated over the same 420 games, comprising 30 independent games for each N ∈ { 2, . . . , 15 }.Fig. 5 first provides an aggregate comparison by separating the evaluation into two network-density regimes. The in-sample regime contains N ≤ 7, corresponding to network densities represented during training. In this regime, CTDE achieves an average composite channel quality of approxi-mately 0.99 , while FASCIA-FA and FASCIA-FP both achieve approximately 0.98 . Thus, both federated implementations In-sample (#Networks ≤ 7) Out-of-sample (#Networks > 7) 0.0 0.2 0.4 0.6 0.8 1.0     
+
+> E[( CQ  + min  CQ )/2]
+> 0.99
+> CTDE
+> 0.86
+> CTDE
+> 0.98
+> FASCIA-FA
+> 0.84
+> FASCIA-FA
+> 0.98
+> FASCIA-FP
+> 0.85
+> FASCIA-FP
+> 0.94
+> JAR
+> 0.62
+> JAR
+> 0.60
+> RA
+> 0.31
+> RA
+> Algorithm comparison
+> CTDE (centralized) FASCIA-FA FASCIA-FP JAR RA
+
+Fig. 5. In-sample and out-of-sample composite channel quality. The in-sample results average over network densities represented during training (N ≤ 7), whereas the out-of-sample results average over unseen network densities ( N > 7). 2 3 4 5 6 7 8 9 10 11 12 13 14 15 # Networks 0.0 0.2 0.4 0.6 0.8 1.0      
+
+> E[( CQ  + min  CQ )/2]
+> in-sample out-of-sample CTDE (centralized) FASCIA-FA FASCIA-FP JAR RA
+
+Fig. 6. Composite channel quality versus the number of networks. The dashed line separates network densities represented during training ( N ≤ 7)from unseen network densities ( N > 7). 
+
+closely approach the centralized learning benchmark over the range of network densities represented during training. JAR achieves approximately 0.94 , whereas RA obtains 0.60 .The right group of bars in Fig. 5 evaluates generalization to the unseen network-density regime N > 7, up to N = 15 .The average composite channel quality is approximately 0.86 
+
+for CTDE, 0.84 for FASCIA-FA, and 0.85 for FASCIA-FP. Although performance decreases relative to the in-sample regime as more networks compete for the same K = 10 
+
+channels, both federated implementations remain close to the centralized benchmark. In particular, FASCIA-FP is within approximately 0.01 of CTDE when averaged over the unseen network densities. The corresponding values for JAR and RA decrease to approximately 0.62 and 0.31 , respectively, indicating a substantially larger degradation as the network density increases. Fig. 6 complements these aggregate results by reporting the composite channel quality separately for every network size N ∈ { 2, . . . , 15 }. The vertical dashed line separates the network densities represented during training ( N ≤ 7) from those not encountered during training ( N > 7). Within the training regime, CTDE, FASCIA-FA, and FASCIA-FP exhibit 12             
+
+> TABLE III AVERAGE CONVERGENCE -TIME SCORE AND WEIGHTED -SCORE PERFORMANCE
+> Method CTS WS
+> CTDE 0.933 0.931
+> FASCIA-FA 0.933 0.930
+> FASCIA-FP 0.933 0.930
+> JAR 0.945 0.910
+> RA 0.960 0.818
+
+very similar performance, with composite channel quality remaining close to one for the smaller network configurations. As N increases beyond the training range, the performance of all three learning-based methods gradually decreases. Nev-ertheless, both FASCIA implementations continue to closely track CTDE throughout the out-of-sample range, demonstrat-ing that the federated model generalizes to network densities not represented during training. The per-network-density results also clarify the increasing separation from JAR and RA algorithms. JAR remains below FASCIA over the evaluated range, with the gap generally increasing for denser configurations, while RA exhibits a substantially larger degradation. At N = 15 , for example, the composite channel quality remains approximately 0.70 
+
+for CTDE and the two FASCIA implementations, compared with approximately 0.47 for JAR and 0.24 for RA. Hence, the aggregate out-of-sample results in Fig. 5 are not driven by only a small subset of network sizes; Fig. 6 shows that the federated implementations remain close to the centralized benchmark across the full range of unseen network densities. Table III complements the channel-quality results by com-paring the convergence-time score (CTS) and weighted score (WS). FASCIA-FA, FASCIA-FP and CTDE achieve a CTS of approximately 0.933 , indicating essentially comparable convergence behavior. JAR and RA attain higher CTS values of 0.945 and 0.960 , respectively, and therefore stabilize some-what faster. However, this advantage does not translate into better overall spectrum-coordination performance. FASCIA-FA and FASCIA-FP both achieve a WS of 0.930 , nearly identical to the 0.931 obtained by CTDE and higher than the 
+
+0.910 and 0.818 obtained by JAR and RA, respectively. Taken together, Figs. 5–6 and Table III show that FAS-CIA preserves performance close to the centralized CTDE benchmark across both network densities represented during training and denser configurations not encountered during training. This behavior is achieved while retaining locally generated interaction experience at the network managers and coordinating learning through federated model aggregation rather than centralized experience collection. V. C ONCLUSION 
+
+We presented FASCIA, a federated agentic AI framework for interference-aware adaptive spectrum coordination. In FASCIA, each network manager operates as an autonomous AI agent that learns from locally generated interaction ex-perience and makes its spectrum decisions locally, while coordination across agents is achieved through periodic fed-erated model aggregation. By replacing centralized experi-ence collection with persistent local replay and model-level coordination, FASCIA enables collaborative learning across interference-coupled networks without pooling their locally generated interaction experience. The proposed framework combines Mellowmax-based local value learning with federated training and proximal regulariza-tion to accommodate heterogeneous and interference-coupled local experience. The resulting FASCIA-FA and FASCIA-FP implementations achieve spectrum-coordination performance close to the centralized CTDE benchmark while consistently outperforming existing distributed methods. Importantly, this behavior extends beyond the network densities represented during training, demonstrating that the learned federated model can generalize to denser interference environments while maintaining effective decentralized spectrum decisions. Overall, the results demonstrate that federated model-level coordination can provide an effective alternative to centralized training for adaptive spectrum coordination. FASCIA retains the benefits of collaborative learning while allowing interac-tion experience to remain at the individual network managers and preserving decentralized execution. These findings support federated agentic AI as a promising approach for scalable and adaptive spectrum coordination in distributed, interference-coupled wireless networks. REFERENCES [1] K. Liu and Q. Zhao, “Cooperative game in dynamic spectrum access with unknown model and imperfect sensing,” IEEE Transactions on Wireless Communications , vol. 11, no. 4, pp. 1596–1604, 2012. [2] W. Wang, A. Leshem, D. Niyato, and Z. Han, “Decentralized learning for channel allocation in iot networks over unlicensed bandwidth as a contextual multi-player multi-armed bandit game,” IEEE Transactions on Wireless Communications , vol. 21, no. 5, pp. 3162–3178, 2021. [3] R. Adeogun and G. Berardinelli, “Multi-agent dynamic resource alloca-tion in 6g in-x subnetworks with limited sensing information,” Sensors ,vol. 22, no. 13, p. 5062, 2022. [4] X. Du, T. Wang, Q. Feng, C. Ye, T. Tao, L. Wang, Y. Shi, and M. Chen, “Multi-agent reinforcement learning for dynamic resource management in 6G in-X subnetworks,” IEEE Trans. Wireless Commun. , vol. 22, no. 3, pp. 1900–1914, 2023. [5] Y. Cohen, T. Gafni, R. Greenberg, and K. Cohen, “SINR-aware deep reinforcement learning for distributed dynamic channel allocation in cog-nitive interference networks,” IEEE Trans. Wireless Commun. , vol. 24, no. 1, pp. 228–243, Jan. 2025. [6] A. Mishra, V. Shrivastava, S. Banerjee, and W. Arbaugh, “Partially over-lapped channels not considered harmful,” in Proc. ACM SIGMETRICS ,2006, pp. 63–74. [7] O. Naparstek and K. Cohen, “Deep multi-user reinforcement learning for distributed dynamic spectrum access,” IEEE transactions on wireless communications , vol. 18, no. 1, pp. 310–323, 2018. [8] A. Kaur, J. Thakur, M. Thakur, K. Kumar, A. Prakash, and R. Tripathi, “Deep recurrent reinforcement learning-based distributed dynamic spec-trum access in multichannel wireless networks with imperfect feedback,”                
+
+> IEEE Trans. Cogn. Commun. Netw. , vol. 9, no. 2, pp. 281–292, 2023. [9] R. Adeogun and G. Berardinelli, “Distributed channel allocation for mobile 6G subnetworks via multi-agent deep Q-learning,” in Proc. IEEE Wireless Communications and Networking Conference (WCNC) , 2023, pp. 1–6. [10] C. Blum and A. Roli, “Metaheuristics in combinatorial optimiza-tion: Overview and conceptual comparison,” ACM Computing Surveys ,vol. 35, no. 3, pp. 268–308, 2003. [11] S. Niknam, H. S. Dhillon, and J. H. Reed, “Federated learning for wireless communications: Motivation, opportunities, and challenges,”
+> IEEE Commun. Mag. , vol. 58, no. 6, pp. 46–51, 2020. [12] W. Y. B. Lim, N. C. Luong, D. T. Hoang, Y. Jiao, Y.-C. Liang, Q. Yang, D. Niyato, and C. Miao, “Federated learning in mobile edge networks: A comprehensive survey,” IEEE Commun. Surveys Tuts. , vol. 22, no. 3, pp. 2031–2063, 2020. 13
+
+[13] M. Chen, Z. Yang, W. Saad, C. Yin, H. V. Poor, and S. Cui, “A joint learning and communications framework for federated learning over wireless networks,” IEEE Trans. Wireless Commun. , vol. 20, no. 1, pp. 269–283, 2021. [14] P. Kairouz et al. , “Advances and open problems in federated learning,” 
+
+Foundations and Trends in Machine Learning , vol. 14, no. 1–2, pp. 1– 210, 2021. [15] T. Li, A. K. Sahu, M. Zaheer, M. Sanjabi, A. Talwalkar, and V. Smith, “Federated optimization in heterogeneous networks,” in Proc. Machine Learning and Systems (MLSys) , vol. 2, 2020, pp. 429–450. [16] H. B. McMahan, E. Moore, D. Ramage, S. Hampson, and B. A. y Arcas, “Communication-efficient learning of deep networks from decentralized data,” in Proc. Int. Conf. Artificial Intelligence and Statistics (AISTATS) ,2017, pp. 1273–1282. [17] H. H. Zhuo, W. Feng, Y. Lin, Q. Xu, and Q. Yang, “Federated deep reinforcement learning,” arXiv preprint arXiv:1901.08277 , 2019. [18] J. Qi, Q. Zhou, L. Lei, and K. Zheng, “Federated reinforcement learning: Techniques, applications, and open challenges,” Intelligence & Robotics ,vol. 1, no. 1, pp. 18–57, 2021. [19] S. Kim, K. Asadi, M. Littman, and G. Konidaris, “DeepMellow: Re-moving the need for a target network in deep Q-learning,” in Proc. Int. Joint Conf. Artificial Intelligence (IJCAI) , 2019, pp. 2733–2739. [20] K. Asadi and M. L. Littman, “An alternative softmax operator for reinforcement learning,” in Proc. Int. Conf. Machine Learning (ICML) ,2017, pp. 243–252. [21] J. Koneˇ cn´ y, H. B. McMahan, F. X. Yu, P. Richt´ arik, A. T. Suresh, and D. Bacon, “Federated learning: Strategies for improving communication efficiency,” arXiv preprint arXiv:1610.05492 , 2016. [22] T. Baziza, Y. Cohen, and K. Cohen, “Open source code for paper: Federated agentic ai for interference-aware adaptive spectrum coordination,” GitHub repository: https://github.com/ Kobi-Cohen-researchlab/fed-channel-alloc.git , Also available via Dropbox: https://www.dropbox.com/scl/fo/yxkjqhpop9tnujomxzwn9/ AHctM4qxA3dsFV OicHwDh4?rlkey=84zdnll3eu5atoyzi1qpfaw6v& st=kj6cpeix&dl=0, online, 2026. [23] O. Naparstek and K. Cohen, “Deep multi-user reinforcement learning for distributed dynamic spectrum access,” IEEE Trans. Wireless Commun. ,vol. 18, no. 1, pp. 310–323, 2019. [24] K. Xu, S. Zhou, and G. Y. Li, “Federated reinforcement learning for resource allocation in v2x networks,” IEEE Journal of Selected Topics in Signal Processing , vol. 18, no. 7, pp. 1210–1221, 2024. [25] H. M. F. Noman, K. Dimyati, K. A. Noordin, E. Hanafi, and A. Abdrabou, “FeDRL-D2D: Federated deep reinforcement learning-empowered resource allocation scheme for energy efficiency maximiza-tion in d2d-assisted 6g networks,” IEEE Access , vol. 12, pp. 109 775– 109 792, 2024. [26] C. Tekin and M. Liu, “Online learning of rested and restless bandits,” 
+
+IEEE Transactions on Information Theory , vol. 58, no. 8, pp. 5588– 5611, 2012. [27] H. Liu, K. Liu, and Q. Zhao, “Learning in a changing world: Restless multiarmed bandit with unknown dynamics,” IEEE Transactions on Information Theory , vol. 59, no. 3, pp. 1902–1916, 2013. [28] N. Nayyar, D. Kalathil, and R. Jain, “On regret-optimal learning in decentralized multiplayer multiarmed bandits,” IEEE Transactions on Control of Network Systems , vol. 5, no. 1, pp. 597–606, 2016. [29] O. Avner and S. Mannor, “Multi-user lax communications: a multi-armed bandit approach,” in IEEE INFOCOM 2016-The 35th Annual IEEE International Conference on Computer Communications . IEEE, 2016, pp. 1–9. [30] I. Bistritz and A. Leshem, “Distributed multi-player bandits-a game of thrones approach,” in Advances in Neural Information Processing Systems , 2018, pp. 7222–7232. [31] T. Gafni and K. Cohen, “Learning in restless multi-armed bandits via adaptive arm sequencing rules,” IEEE Transactions on Automatic Control , 2020. [32] T. Gafni, M. Yemini, and K. Cohen, “Learning in restless bandits under exogenous global markov process,” IEEE Transactions on Signal Processing , vol. 70, pp. 5679–5693, 2022. [33] A. Leshem, E. Zehavi, and Y. Yaffe, “Multichannel opportunistic carrier sensing for stable channel access control in cognitive radio systems,” 
+
+IEEE Journal on Selected Areas in Communications , vol. 30, no. 1, pp. 82–95, 2012. [34] T. Gafni and K. Cohen, “Distributed learning over markovian fading channels for stable spectrum access,” IEEE Access , vol. 10, pp. 46 652– 46 669, 2022. [35] K. Cohen, A. Leshem, and E. Zehavi, “Game theoretic aspects of the multi-channel ALOHA protocol in cognitive radio networks,” IEEE Journal on Selected Areas in Communications , vol. 31, pp. 2276–2288, 2013. [36] K. Cohen and A. Leshem, “Distributed game-theoretic optimization and management of multichannel aloha networks,” IEEE/ACM Transactions on Networking , vol. 24, no. 3, pp. 1718–1731, 2016. [37] K. Cohen, A. Nedi´ c, and R. Srikant, “Distributed learning algorithms for spectrum sharing in spatial random access wireless networks,” IEEE Trans. Autom. Control , vol. 62, no. 6, pp. 2854–2869, 2017. [38] D. Malachi and K. Cohen, “Queue and channel-based aloha algorithm in multichannel wireless networks,” IEEE Wireless Communications Letters , vol. 9, no. 8, pp. 1309–1313, 2020. [39] O. Naparstek and K. Cohen, “Deep multi-user reinforcement learning for dynamic spectrum access in multichannel wireless networks,” in 
+
+GLOBECOM 2017-2017 IEEE Global Communications Conference .IEEE, 2017, pp. 1–7. [40] Y. Bokobza, R. Dabora, and K. Cohen, “Deep reinforcement learning for simultaneous sensing and channel access in cognitive networks,” IEEE Transactions on Wireless Communications , 2023. [41] S. P. Karimireddy, S. Kale, M. Mohri, S. J. Reddi, S. U. Stich, and A. T. Suresh, “SCAFFOLD: Stochastic controlled averaging for federated learning,” in Proc. Int. Conf. Machine Learning (ICML) , 2020, pp. 5132– 5143. [42] J. Park, S. Samarakoon, M. Bennis, and M. Debbah, “Wireless network intelligence at the edge,” Proc. IEEE , vol. 107, no. 11, pp. 2204–2239, 2019. [43] M. Elkael, S. D’Oro, L. Bonati, M. Polese, Y. Lee, K. Furueda, and T. Melodia, “Agentran: An agentic ai architecture for autonomous control of open 6g networks,” arXiv preprint arXiv:2508.17778 , 2025. [44] M. Ameur, A. Mekrache, B. Brik, and A. Ksentini, “Llm-powered agentic ai for 5g/6g networks: A tutorial and survey on architectures, protocols, and standardization,” arXiv preprint arXiv:2607.16066 , 2026. [45] L. Cai, Y. Zhang, R. Zhang, Y. Liu, T. Jiang, D. Niyato, W. Ni, and A. Jamalipour, “Federated agentic ai for wireless networks: Fundamen-tals, approaches, and applications,” arXiv preprint arXiv:2603.01755 ,2026. [46] J. J. Egli, “Radio propagation above 40 Mc over irregular terrain,” Proc. IRE , vol. 45, no. 10, pp. 1383–1391, 1957. [47] A. Goldsmith, Wireless Communications . Cambridge, U.K.: Cambridge Univ. Press, 2005. [48] Y. Arjoune and N. Kaabouch, “A comprehensive survey on spectrum sensing in cognitive radio networks: Recent advances, new challenges, and future research directions,” Sensors , vol. 19, no. 1, p. 126, 2019. [49] A. Nasser, H. Al Haj Hassan, J. Abou Chaaya, A. Mansour, and K.-C. Yao, “Spectrum sensing for cognitive radio: Recent advances and future challenge,” Sensors , vol. 21, no. 7, p. 2408, 2021. [50] R. S. Sutton and A. G. Barto, Reinforcement Learning: An Introduction ,2nd ed. Cambridge, MA, USA: MIT Press, 2018. [51] K. He, X. Zhang, S. Ren, and J. Sun, “Delving deep into rectifiers: Surpassing human-level performance on ImageNet classification,” in 
+
+Proc. IEEE Int. Conf. Computer Vision (ICCV) , 2015, pp. 1026–1034.

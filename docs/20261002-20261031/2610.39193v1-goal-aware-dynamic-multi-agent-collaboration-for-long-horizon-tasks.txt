@@ -1,0 +1,632 @@
+Title: Goal-Aware Dynamic Multi-Agent Collaboration for Long-Horizon Tasks
+
+URL Source: https://arxiv.org/pdf/2610.39193v1
+
+Published Time: Fri, 30 Oct 2026 02:31:44 GMT
+
+Number of Pages: 13
+
+Markdown Content:
+# Goal-Aware Dynamic Multi-Agent Collaboration for Long-Horizon Tasks 
+
+# Xu Shen 
+
+Michigan State University East Lansing, USA shenxu@msu.edu 
+
+# Lingyong Yan 
+
+Baidu, Inc. Beijing, China 
+
+# Shuaiqiang Wang 
+
+Baidu, Inc. Beijing, China 
+
+# Jianmin Wu 
+
+Baidu, Inc. Beijing, China 
+
+# Zhikai Chen 
+
+Michigan State University East Lansing, USA 
+
+# Jiliang Tang 
+
+Michigan State University East Lansing, USA 
+
+# Jie Ren ∗
+
+Massachusetts Institute of Technology Cambridge, USA rjie@mit.edu 
+
+## Abstract 
+
+LLM-based agents are increasingly used to complete complex, long-horizon tasks without human intervention. To make progress to-ward the task goal, agents need to perform different duties, such as planning and verification, when needed. To understand how sin-gle agents manage these duties during long-horizon execution, we conduct a preliminary study. Our analysis shows that verification has the strongest association with task success, but often occurs late, leaving limited opportunities for correction. We also find that the proportion of duty-relevant information decreases as records from different duties accumulate in a shared context. These find-ings lead us to examine whether multi-agent systems (MAS) can address these problems by assigning duties to agents with separate contexts. Our analysis shows that this separation alone is insuf-ficient. Agents can lose track of the overall goal and repeat prior investigations. They may also lack necessary background while receiving irrelevant information from others. To maintain goal awareness and coordinate collaboration as task needs change, we propose Goal-Aware Dynamic Multi-Agent Collaboration (GAD). It uses a growing execution graph to organize subtasks and their dependencies. To keep agents focused on their goals, each con-text retains the original instruction and the assigned task’s goal and acceptance conditions. To adapt collaboration and information sharing during execution, agents can divide tasks into subtasks and specify dependencies based on execution evidence. These depen-dencies guide when agents work and which results they receive. Verification and recovery check subtask results and full task com-pletion against their goals, providing feedback for repair when checks fail. Experiments with Claude Sonnet 4.6 and Qwen3.7-Plus on Terminal-Bench 2.1 and SWE-bench Pro Hard-51 show perfor-mance improvements over the evaluated baselines and lower token costs than multi-agent baselines on jointly solved tasks. 
+
+## CCS Concepts 
+
+• Computing methodologies → Artificial intelligence .
+
+> ∗Corresponding author.
+
+## Keywords 
+
+large language model, multi-agent system 
+
+## 1 Introduction 
+
+LLM-based agents have shown promising capabilities in completing complex tasks without human intervention, particularly on long-horizon tasks [9, 18]. These tasks can span hundreds of interaction steps, during which agents repeatedly interact with the environ-ment and adapt their actions based on feedback [11, 12]. To guide this process toward successful completion, agents often need to per-form various duties , such as planning, reasoning, verification, and functional responsibilities [1, 5, 8], as needed throughout execution. For example, a web research agent first plans what information to search for [10], then reasons over the retrieved evidence [8], before verifying whether the evidence supports its answer [1]. Analysing these duties is crucial to understand agent trajectories. If an agent cannot allocate and switch duties when needed, it may continue executing outdated plans or leave errors unchecked [12]. There-fore, it is important to understand how agents manage these duties during long-horizon execution. However, allocating duties effectively by a single agent can be challenging. In Section 3.1, we perform a preliminary study to exam-ine how agents manage these duties. Our analysis reveals two key limitations: (1) Among all duties, verification exhibits the strongest association with task success, yet often occurs late in the task pro-cess. Intuitively, early verification of intermediate results can help agents detect and correct errors before they propagate into subse-quent actions. However, agents may continue working on the task without performing the duty of verification, leaving errors unde-tected and limiting opportunities for correction. (2) Agents may struggle to retrieve relevant evidence and prior decisions for the current duty from the extensive accumulated context. Our context analysis shows that as records from different duties accumulate in a shared context, information relevant to the current duty accounts for a decreasing proportion of the interaction history. These two findings motivate us to investigate whether explicitly assigning distinct duties to separate agents using multi-agent systems (MAS) arXiv:2610.39193v1 [cs.AI] 29 Oct 2026 Xu Shen, Lingyong Yan, Shuaiqiang Wang, Jianmin Wu, Zhikai Chen, Jiliang Tang, and Jie Ren 
+
+can address these limitations by maintaining separate contexts and enabling verification when needed. However, the naive adoption of MAS does not resolve the lim-itations of single-agent execution. In Section 3.2, we evaluate six representative multi-agent configurations on duty performance using the same trajectory analysis approach. Our analysis identifies two limitations. (1) Agents can lose track of the overall goal. They might repeat investigations that others have already attempted, spending additional steps without advancing the task. (2) Separate contexts do not automatically improve information management. Agents may lack the background or conditions needed for their duties, while messages from other agents may add irrelevant infor-mation to their contexts. These findings highlight that throughout long-horizon execution, maintaining goal awareness and dynami-cally coordinating duties and information exchange are important. Motivated by these findings, we propose Goal-Aware Dynamic Multi-Agent Collaboration (GAD) for long-horizon tasks. GAD uses a growing execution graph to organize subtasks and guide informa-tion sharing during execution. Each node represents an assigned task, while edges record task decomposition and dependencies. To prevent goal drifting, we retain the original instruction and the assigned task’s goal and acceptance conditions in each agent’s con-text. Each task also retains its goal and the duty to satisfy it as the graph expands. To support dynamic collaboration, agents can divide their assigned tasks into subtasks and specify dependen-cies based on execution evidence. These dependencies guide agent scheduling and dependency-aware context construction to supply relevant results. Verification and recovery check both subtask re-sults and full task completion against their goals and acceptance conditions, providing feedback for repair when checks fail. We conduct experiments on Terminal-Bench 2.1 and SWE-bench Pro Hard-51 with Claude Sonnet 4.6 and Qwen3.7-Plus, demonstrating performance improvements over the evaluated baselines. Further analyses support component effectiveness and show lower token costs than multi-agent baselines on jointly solved tasks. 
+
+## 2 Related Work 2.1 Long-Horizon Agents 
+
+Recent research improves long-horizon agents through supervised fine-tuning and multi-turn reinforcement learning. The former trains agents on synthetic interaction trajectories [23, 24, 30], while the latter develops decision-making policies through feedback from real or synthesised environments [2, 19, 20, 22]. These approaches improve agent behaviour through training, but extended execu-tion also requires managing accumulated information and tracking task progress. MEM1 jointly learns reasoning and compact mem-ory updates [29]. ReSum summarises interaction histories to sup-port continued search [21], while Context-Folding trains agents to handle subtasks in separate trajectories and retain their sum-maries [16]. LongHorizon-Harness further separates task manage-ment, execution, and auditing to maintain independently checked progress [12]. Our method complements policy training by organ-ising collaboration during execution. It connects agent-proposed subtasks, dependency-guided information sharing, and verification through a growing execution graph, while retaining the task goal. 
+
+## 2.2 Multi-Agent Systems 
+
+Multi-agent collaboration has developed from predefined role pro-cedures towards automatically constructed collaboration struc-tures [7]. GPTSwarm optimises agent prompts and graph connec-tions [31], G-Designer learns task-dependent topologies [27], and AFlow searches executable workflows [28]. Graph-of-Agents fur-ther selects relevant models and structures their exchanges for each query [26]. Alongside structure design, another research direction coordinates agents during execution. Magentic-One uses a central orchestrator to track progress and delegate tasks [6]; Evolving Or-chestration learns agent-selection policies [3], and AOrchestra cre-ates specialised subagents on demand [15]. Self-Organizing Agent Teams also retains collaboration experience as reusable organisa-tional strategies [14]. We examine these concerns through duty allocation and information use, then connect agent-proposed de-composition with dependency-guided execution and verification without a central LLM orchestrator. 
+
+## 3 Preliminary study 
+
+Long-horizon tasks require agents to execute autonomously with limited human intervention and take on different duties as execu-tion needs change. We first examine how single agents allocate these duties and use their shared history to obtain relevant infor-mation (Section 3.1). We then study whether assigning duties to separate agents with their own contexts improves duty organisation and information use (Section 3.2). 
+
+Task setting. We study long-horizon tasks specified by a natural-language instruction 𝐼 and an initial environment state 𝑠 0. An agent uses a policy 𝜋 to select actions based on the instruction and its avail-able context, receiving observations from the environment after each action. A harness manages tool execution, context construc-tion, and termination. In a multi-agent system, it also determines when each agent acts and what information it receives. We evaluate task performance using an external verifier 𝑉 after execution stops; during execution, agents rely on environment observations and their own checks without access to feedback from 𝑉 . We examine how single-agent and multi-agent systems allocate duties and use information over extended interactions. 
+
+## 3.1 Auditing long-horizon loops by single agents 
+
+A long-horizon task requires an agent to perform different duties at different stages of execution. Effective duty allocation is important for detecting errors in time and maintaining progress toward the task goal. In this section, we examine how a single agent manages these duties. Our analysis focuses on two aspects. First, we ana-lyze how verification relates to task success and when it occurs during execution. Second, we examine how information relevant to the current duty is represented in the growing interaction history. Specifically, we first introduce the experimental setup, then present these two analyses and summarize the main findings. 
+
+Setup. We audit 193 trajectories, comprising 4,842 agent steps, on a 45-task subset of Terminal-Bench 2 whose difficulty com-position follows that of the full benchmark (4 easy, 26 medium, 15 hard). We use three harnesses with Claude Opus 4.6 (Terminus Goal-Aware Dynamic Multi-Agent Collaboration for Long-Horizon Tasks Opus/KIRA Opus/ReAct Opus/Term-2 Sonnet/ReAct Qwen3.7+/ReAct 
+
+> 0.0 0.2 0.4 0.6 0.8 1.0
+> fraction of output per duty  35% 21% 46% 16% 17%
+> 0-20% 20-40% 40-60% 60-80% 80-100%
+
+position in trajectory 
+
+> 0.0 0.1 0.2 0.3
+> plan / verify fraction of output
+> verify plan
+> low 0.00–0.08 mid 0.08–0.13 high 0.13–0.34
+
+verification share 
+
+> 0.0 0.2 0.4 0.6 0.8 1.0
+> pass rate
+> 23/64 34/64 48/65
+> 0-20% 20-40% 40-60% 60-80% 80-100%
+
+position in trajectory 
+
+> 010 20 30 40
+> number of previous steps
+> 33% 25% 22% 15% 14%
+> not needed needed by current step
+
+(a) execution dominates (b) duty rotates with phase (c) verification tracks success (d) relevant context thins out       
+
+> plan act interpret verify self-correct off-task other
+
+Figure 1: (a) Output share by duty; labels show the fraction of adjacent steps with different dominant duties. (b) Planning (dashed) and verification (solid) output shares across trajectory positions, coloured by configuration. (c) Pass rates for three equal-sized groups ranked by verification share, pooled across configurations; labels show passing/total trajectories. (d) Prior steps needed (dark) or not needed (light) by the current duty; labels show the needed fraction. 
+
+KIRA , a ReAct -based loop, and Terminus 2 ), and three base models with the ReAct loop ( Claude Opus 4.6 , Claude Sonnet 4.6 , and 
+
+Qwen3.7-Plus ). We use another LLM ( GPT-5.5 ) to attribute the content an agent produces at each step, both its stated reasoning and the action it chose, to one of six responsibilities: planning, acting, interpreting an observation, verifying, self-correcting, and working off-task. Content that fits none of them falls into a seventh, unclassified category. Appendix A gives the per-configuration ta-bles and the measurement details. We summarize the experimental results and observations as follows. 
+
+1. The agent spends the least on verification and leaves it to the end, although verification is highly related to task success. As shown in Figure 1a, verification is the smallest of the main duties (those above 10% of the output), taking at most 14% of the agent’s output. Figure 1b shows that it is also the last duty to appear. It is nearly absent early in a trajectory and peaks in the final segment. The agent thus uses verification mainly as a final verify before it stops, rather than interleaving it with execution. Besides, Figure 1c also shows that the pass rate rises from 36% in the lowest-verification group to 74% in the highest. No passing trajectory skips verification. These results suggest that verification is closely associated with task success, making its limited and late allocation notable. Verifying more is still not sufficient, since about a quarter of the trajectories in the highest group fail. 
+
+2. The context mixes all duties, and the proportion relevant to each duty falls as the trajectory grows. A single agent keeps the history of all its duties in one context. To measure how much of this context the duty of a given step actually needs, we sample steps from every configuration and ask the judge to mark the previous steps whose content this duty requires. A previous step counts as relevant only if its content is needed, not merely because it performs the same type of duty. As shown in Figure 1d, the number of previous steps grows from about 5 to about 30 over a trajectory. In contrast, the number of relevant steps grows only from 1 .4 to 3 .0. As a result, the proportion of relevant context falls from 33% to 14%. Each duty has to find what it needs among the growing amount of content produced for other duties. We argue that giving each duty its own context would potentially prevent this, and verify whether it is effective in Section 3.2. 
+
+Discussion. Our study identifies two key limitations of single-agent execution. First, verification often occurs late, despite its strong association with task success, limiting opportunities for correction. Second, records from different duties accumulate in a shared context, reducing the proportion of information relevant to the current duty. This may make it harder for agents to locate the evidence and prior decisions they need. These findings raise a natural question: Can explicitly assigning different duties to separate agents, each with its own context, improve duty allocation and access to relevant information? 
+
+## 3.2 Can multi-agent systems supply what a single agent lacks? 
+
+In this section, we answer the above question and explain why as-signing duties to separate agents with their own contexts does not by itself resolve the limitations of single-agent execution. Our anal-ysis examines two possible reasons. First, we investigate whether individual agents remain aligned with the overall task objective dur-ing collaboration. Second, we examine whether information sharing provides each agent with the background and results needed for its duties. Specifically, we first introduce the experimental setup, then present these two analyses and summarize the main findings. 
+
+Setup. We use the same 45-task subset of Terminal-Bench 2 as in Section 3.1, and the same policy model Claude Sonnet 4.6 . We evaluate six multi-agent paradigms: a MetaGPT-style role pipeline, three static communication topologies (chain, star, and fully con-nected), a Magentic-One-style orchestrator, and Anthropic-style Xu Shen, Lingyong Yan, Shuaiqiang Wang, Jianmin Wu, Zhikai Chen, Jiliang Tang, and Jie Ren single star chain full MetaGPT subagents Magentic   
+
+> 0.0 0.1 0.2 0.3
+> off-track step ratio
+> 2.0x 2.4x 2.2x 2.7x 5.0x 2.5x Magentic chain star full subagents MetaGPT
+> 0.0 0.1 0.2 0.3
+> irrelevant-message ratio
+> star chain full subagents
+> 0.00 0.05 0.10 0.15
+> tool-error rate
+> first 2 steps later
+
+(a) collaboration drifts off-track (b) handoffs carry wrong info (c) agents start blind 
+
+Figure 2: (a) Off-track score of action steps for each system, judged against the original goal. Labels give the ratio to the single agent. (b) Fraction of messages between agents that are irrelevant to the receiving agent. (c) Tool-error rate of delegated agents in their first two steps (dark) and in later steps (light). 
+
+subagents. With the single-agent baseline, this gives seven con-figurations. We judge each step with GPT-5.5 , using the same re-sponsibility audit as that in Section 3.1, now applied to each agent separately. We summarize the experimental results and observa-tions as follows: 
+
+1. Fixed roles fail to keep agents aligned with the overall task objective. Multi-agent systems rely on collaboration among agents, yet such collaboration does not necessarily ensure that in-dividual agents remain aligned with the overall task objective. To investigate this issue, we employ a judge to evaluate each agent’s execution history and determine whether each step contributes to progress toward the overall goal. As shown in Figure 2a, multi-agent systems exhibit off-track behavior 2–5 times more frequently than the single agent. Nearly all off-track steps involve repetitive actions that have already been attempted, indicating that agents become trapped in unproductive cycles. This behavior stems from the rigid organization of existing multi-agent systems: agent roles and execu-tion order are predefined before the task is fully understood, while individual agents operate in isolation without monitoring overall task progress. These systems lack the mechanisms to dynamically adapt agent responsibilities based on feedback from task execution. 
+
+2. Agents lack awareness of one another’s information needs, leading to ineffective information exchange. In multi-agent systems, each agent maintains its own context and exchanges messages with other agents to facilitate collaboration. However, we find that 4%–30% of the exchanged messages are irrelevant to their receivers, with systems employing more aggressive message compression exhibiting the highest irrelevance rates (Figure 2b). This inefficiency arises because senders lack awareness of the in-formation needs of their receivers. While message summarization reduces context consumption, it may also discard critical informa-tion required by downstream agents. Furthermore, newly delegated agents often lack sufficient background information to perform their assigned tasks effectively. As shown in Figure 2c, their first two execution steps exhibit failure rates up to 2 .3 times higher than those of subsequent steps. Both observations highlight a funda-mental limitation: existing systems lack mechanisms for agents to identify and communicate their information needs. Effective multi-agent collaboration therefore requires explicitly modeling information dependencies among agents and enabling information exchange based on these dependencies. 
+
+Discussions. The above analysis reveals two critical capabilities missing from existing multi-agent systems for long-horizon tasks. The first is goal awareness , which requires agents to continuously align their actions with the overall task objective and verify their progress toward that objective throughout execution. Existing sys-tems lack mechanisms to monitor overall task progress, allowing agents to deviate from the goal and repeatedly perform unproduc-tive actions. The second is dynamic collaboration , which requires agents to adapt their responsibilities and information exchange based on the evolving needs and dependencies revealed during task execution. Existing systems instead rely on predefined roles and communication structures, preventing agents from performing the right duties at the right time and exchanging the information needed for effective collaboration. Together, goal awareness and dynamic collaboration are essential for multi-agent systems to suc-cessfully execute long-horizon tasks. 
+
+## 4 Method 
+
+As discussed in the previous section, effective long-horizon collabo-ration requires goal awareness to keep local tasks aligned with the overall objective, and dynamic collaboration to adapt the division of duties and information sharing to execution needs. To provide these capabilities, we propose Goal-Aware Dynamic Multi-Agent Collaboration (GAD). Our framework builds on a growing execu-tion graph that starts from the original task and expands through agent-proposed subtasks and dependencies. Throughout expansion, each node retains its goal and the duty to satisfy it. We first present this graph and its execution loop in Section 4.1. We then introduce two supporting mechanisms in Section 4.2: dependency-aware con-text construction supplies relevant information for node execution, while verification and recovery check results and provide feedback for further execution. Figure 3 illustrates how decomposition ex-pands the graph and verified results allow execution to continue toward integration and final verification of the original task. Goal-Aware Dynamic Multi-Agent Collaboration for Long-Horizon Tasks Root 
+
+> Environment
+
+1 Starting from the root  
+
+> Action
+> I
+> Agent
+> 𝒈 𝒓𝒐𝒐𝒕 = 𝑰
+> Observation
+> Original question
+
+2 On-demand recursive decomposition 
+
+> Agent
+> Root
+> DECOMPOSE request
+> Subtask goals · Acceptance conditions Dependencies · Evidence references
+> Validate & expand
+
+A B 
+
+> Collect evidence Compare findings
+> waits for A One route fully verified
+> Root
+
+A BDC  
+
+> Root
+> integrates
+> Integrating · ACTIVE VERIFIED VERIFIED
+> Verify
+> Root Complete
+> pass
+
+3 Execute in a loop until completion Root 
+
+A BC D 
+
+> Source 1 Source 2
+> DECOMPOSE
+
+Figure 3: Overview of GAD. (1) Execution starts from a root node representing the original task. (2) Agents propose subtasks and dependencies as execution needs emerge; the controller validates these requests before expanding the graph. (3) Execution follows dependencies until the root integrates the results and passes its own verification. 
+
+## 4.1 The Main Framework: Growing Execution Graph 
+
+To support goal awareness and dynamic collaboration, we use a growing execution graph to organise task goals and dependencies. The graph adapts to emerging execution needs while retaining each node’s goal and the duty to satisfy it. In the rest of this subsection, we first define the graph and explain how execution starts from the root. We then introduce agent-proposed decomposition and the controller’s validation and graph updates. Finally, we describe the execution loop and how it returns to the original task for integration and completion. 
+
+Notations. To represent task goals and their dependencies as col-laboration develops, we maintain an execution graph G𝑡 = (N 𝑡 , E𝑡 ),where 𝑡 indexes scheduling steps. Each node 𝑣 represents an as-signed task and stores its specific goal 𝑔 𝑣 , acceptance conditions 𝐾 𝑣 
+
+that determine whether the goal has been achieved, and an execu-tion status 𝜎 𝑣 . Edges connect a task to its subtasks, or to another task whose verified result it requires. 
+
+Step 1. Starting from the root. Initially, N0 = {𝑣 root }, E0 = ∅,and 𝑔 𝑣 root = 𝐼 . We include full satisfaction of 𝐼 as the root’s ac-ceptance condition and then launch an agent whose initial context contains the instruction, this completion requirement, and the root’s status. The graph has not yet expanded, so the root has no depen-dency results to draw on. Its execution history starts empty and accumulates observations as the agent interacts with the environ-ment. These records guide subsequent actions without requiring a complete workflow in advance. The agent starts by interacting directly with the environment and uses the resulting observations to guide subsequent actions, without constructing a complete work-flow in advance. 
+
+Step 2. On-demand recursive decomposition. As agents exe-cute their assigned tasks, new observations may reveal needs for additional subtasks. To adapt the division of duties to these needs, we allow each executing agent to request decomposition. We de-scribe when the agent makes this decision, what it submits, and how the controller uses the request to update the graph. 
+
+• When to decompose. We use on-demand decomposition to adapt the division of duties to needs that emerge during execution. The agent executing each node decides whether to introduce subtasks, without relying on a central LLM orchestrator or a predefined communication topology. We prompt the agent executing node 𝑣 to express its next decision as a structured action 𝑢 𝑡,𝑣 . The core action types are 
+
+Ucore = {RUN , DECOMPOSE , SEARCH , VERIFY }. (1) These actions respectively execute an environment command, request decomposition, retrieve shared artifacts, and request verification. When type (𝑢 𝑡,𝑣 ) = DECOMPOSE , the agent prepares a decomposition request as follows. 
+
+• Submitting decomposition requests. The agent submits a request 
+
+𝑑 𝑣 =  {( ℓ𝑖 , 𝑔 𝑖 , 𝐾 𝑖 , 𝑃 𝑖 )} 𝑚 𝑖 =1, 𝐽 𝑣 
+
+ , (2) where ℓ𝑖 identifies a proposed subtask and 𝑔 𝑖 is its goal. The acceptance conditions 𝐾 𝑖 specify its completion requirements, which we assess through the verification scheme in Section 4.2.2. The dependency set 𝑃 𝑖 lists the subtasks or existing nodes whose verified results it requires. These dependencies guide the sup-ply of results to its execution context through the scheme in Section 4.2.1. The set 𝐽 𝑣 references previous execution steps recorded at 𝑣 , grounding the decomposition in execution evi-dence. The agent submits 𝑑 𝑣 to the controller for validation. 
+
+• How to update the graph. Once an agent submits a decomposition request 𝑑 𝑣 , we need to determine whether it can extend the graph and how execution should proceed after the update. We introduce a lightweight, rule-based harness controller H to validate the request and apply graph updates without additional model inference. It checks 𝑑 𝑣 against the current graph, the node-specific execution history ℎ𝑣 𝑡 , and the remaining resource budgets 𝐵 𝑡 :
+
+(𝑏 𝑣 , 𝑓 𝑣 ) = Check H (𝑑 𝑣 , G𝑡 , ℎ 𝑣 𝑡 , 𝐵 𝑡 ), (3) where 𝑏 𝑣 ∈ { 0, 1} indicates whether the request is accepted and 
+
+𝑓 𝑣 provides feedback. The checks require at least one valid ref-erence to an execution step of 𝑣 , valid subtask and dependency specifications, compliance with resource limits, and an acyclic resulting graph. If 𝑏 𝑣 = 0, the graph remains unchanged and the agent receives 𝑓 𝑣 to revise its next action. Otherwise, H creates or reuses compatible child nodes C𝑣 , resolves the references in Xu Shen, Lingyong Yan, Shuaiqiang Wang, Jianmin Wu, Zhikai Chen, Jiliang Tang, and Jie Ren 
+
+𝑃 𝑖 into dependency edges D𝑣 , and updates the graph: 
+
+N𝑡 +1 = N𝑡 ∪ C 𝑣 ,
+
+E𝑡 +1 = E𝑡 ∪ {( 𝑣, 𝑐 ) : 𝑐 ∈ C 𝑣 } ∪ D 𝑣 . (4) Here, (𝑥, 𝑦 ) ∈ D 𝑣 means that 𝑥 requires the verified result of 
+
+𝑦 . The child set forms a new route 𝜌 𝑣,𝑘 = C𝑣 , where 𝑘 indexes alternative approaches to achieving 𝑔 𝑣 . Node 𝑣 waits while the route remains unresolved. To maintain goal awareness during graph expansion, we keep 𝑔 𝑣 and its full-goal acceptance condi-tion unchanged, with the root goal remaining 𝐼 . Even when a route completes, node 𝑣 must still pass verification against its original goal 𝑔 𝑣 .
+
+Step 3. Execute in a loop until completion. After updating the graph, H selects nodes for subsequent execution. The controller tracks each node’s status through four core states: 
+
+𝜎 𝑣 ∈ { READY , ACTIVE , WAITING , VERIFIED }. (5) These indicate that a node can execute, is currently executing, awaits required results, or has passed verification, respectively. The controller updates these states from dependency and route outcomes and identifies the nodes still needed for the root task, denoted by Nneeded  
+
+> 𝑡
+
+. It constructs the execution frontier 
+
+F𝑡 = 𝑣 ∈ N needed  
+
+> 𝑡
+
+| 𝜎 𝑣 = READY . (6) For each selected node, H launches an agent with a local con-text constructed through our dependency-guided scheme in Sec-tion 4.2.1. This context supplies the recorded observations and relevant results needed to continue the assigned task. The agent executes its task, requests decomposition, or requests verification as described in Section 4.2.2. As execution changes the graph and node states, H recomputes the frontier and repeats this process. A node becomes ready once its required dependencies are veri-fied. When a route completes and the other dependencies of node 
+
+𝑣 are satisfied, 𝑣 resumes to integrate the results and pass its own verification. If all its routes fail, 𝑣 can resume to attempt another approach. The system declares task completion only when the root passes verification against the original instruction 𝐼 and all acceptance conditions in 𝐾 𝑣 root . This can follow direct execution or subtask integration. Execution also stops when the budget runs out or no nodes can execute and no agents remain active, but these cases do not establish task completion. 
+
+## 4.2 Supporting Mechanisms: Context Construction and Verification 
+
+To support execution of the growing graph, we need to provide agents with relevant information and assess whether their results satisfy the assigned goals. We introduce two supporting mecha-nisms: dependency-aware context construction supplies the inputs for each node’s execution, while verification and recovery check its results and provide feedback for further execution. We describe these mechanisms in Sections 4.2.1 and 4.2.2, respectively. 
+
+4.2.1 Dependency-Aware Context Construction. As mentioned in Section 4.1, the execution graph determines which nodes can exe-cute next. The agents launched for these nodes also need relevant background and results to continue execution. Our analysis in Section 3.2 shows that agents can lack this information or receive messages unrelated to their needs. We address this gap through two complementary mechanisms: dependency-based sharing provides verified results from declared dependencies, while dependency-free retrieval supplies additional information without requiring explicit dependency links. 
+
+Context formulation. We maintain a shared collection of re-sults R𝑡 , where the agent executing each node can contribute find-ings with references to supporting execution steps. To share these findings without copying the contributing agent’s full history, the controller selects relevant results and combines them with the node’s task information and execution records. For node 𝑣 , this gives the context 
+
+𝑐 𝑡,𝑣 =
+
+
+
+𝐼, 𝑔 𝑣 , 𝐾 𝑣 , L𝑡 (𝑣 ), Rdep  
+
+> 𝑡
+
+(𝑣 ), Rret  
+
+> 𝑡
+
+(𝑣 )
+
+
+
+, (7) where L𝑡 (𝑣 ) contains recent execution records, the node’s own results, and information about the task that introduced 𝑣 , its depen-dencies, and its routes. These records support continued execution, while 𝐼 , 𝑔 𝑣 , and 𝐾 𝑣 retain the overall goal and current task require-ments. Given 𝑐 𝑡,𝑣 , the agent generates its next structured action as 
+
+𝑢 𝑡,𝑣 ∼ 𝜋 (· | 𝑐 𝑡,𝑣 ), following Eq. (1). 
+
+Dependency-based sharing. The controller uses node 𝑣 ’s de-clared dependencies to identify the results it requires. It directly includes verified results from these dependencies in Rdep  
+
+> 𝑡
+
+(𝑣 ). This connects the dependencies proposed during decomposition to the information available during subsequent execution. 
+
+Dependency-free retrieval. Declared dependencies may not cover all the information needed for the next action. The controller supplements these inputs with relevant results retrieved from R𝑡 ,denoted by Rret  
+
+> 𝑡
+
+(𝑣 ). Retrieval does not require an explicit depen-dency link to 𝑣 . When the agent needs further information, it can autonomously output a SEARCH action with a query. The controller includes the retrieved results in the next context for 𝑣 .
+
+4.2.2 Verification and Recovery. As mentioned in Section 4.1, ver-ified node results allow subsequent tasks to proceed and enable result integration. This requires checking whether each node has satisfied its goal when its agent requests completion. Our analy-sis in Section 3.1 shows that agents often defer verification until late in execution, leaving little opportunity to repair errors. We address this issue through two stages: node verification combines executable checks with an independent semantic review to assess completion; result acceptance and repair uses this assessment to accept the result or return feedback for further execution. 
+
+Node Verification. When the agent executing node 𝑣 outputs 
+
+VERIFY , the controller runs the executable checks in 𝐾 𝑣 and appends their observations to ℎ𝑣 𝑡 . Let 𝑚 𝑣 = 1 indicate that all these checks pass. The controller then invokes a semantic verifier with a fresh context: 
+
+𝑞 𝑣 =
+
+(
+
+Audit 𝜋 (𝑣 ), 𝑚 𝑣 = 1,
+
+0, otherwise . (8) Here, Audit 𝜋 (𝑣 ) ∈ { 0, 1} assesses whether the execution evidence and verified dependency results support 𝑔 𝑣 and every acceptance condition in 𝐾 𝑣 . The verifier must address each condition and cite supporting evidence. When no executable check applies, we set 
+
+𝑚 𝑣 = 1 and assess the recorded evidence directly. This internal Goal-Aware Dynamic Multi-Agent Collaboration for Long-Horizon Tasks 
+
+review differs from the external task verifier 𝑉 , which evaluates the final environment after execution stops. 
+
+Result Acceptance and Repair. If 𝑞 𝑣 = 1, the controller sets 
+
+𝜎 𝑣 = VERIFIED and adds an evidence-linked result to R𝑡 for subse-quent dependency contexts. Otherwise, it returns the failed check or review feedback to node 𝑣 for continued execution and repair. A rejected verification does not by itself fail the route. Both out-comes return to the execution loop in Section 4.1. The pseudo-code algorithm of GAD is provided in Appendix B. 
+
+## 5 Experiments 
+
+In this section, we first describe the experimental setup in Sec-tion 5.1 and present the main results in Section 5.2. We then conduct ablation studies in Section 5.3. Next, we evaluate how our approach addresses the two limitations of MAS in Section 5.4. Finally, we analyze its computational efficiency in Section 5.5. 
+
+## 5.1 Experimental Setup 
+
+Datasets. We evaluate GAD on two challenging benchmarks, namely Terminal-Bench 2.1 [13] and the Hard-51 subset of the 
+
+SWE-Bench Pro V2 [4]. Specifically, Terminal-Bench 2.1 contains 89 tasks covering diverse terminal operations. Hard-51 contains 51 challenging repository-level software engineering tasks. We report task resolution rates using the benchmark verifiers. For SWE-Bench Pro , we evaluate generated patches in fresh environments following the official protocol. 
+
+Baselines. Our single-agent baselines include the following three methods: ReAct based loop [25], Terminus-KIRA , Terminus-2 . For static multi-agent collaboration, we compare Chain, Star, Full [27], MetaGPT [7], and Mixture-of-Agents [17]. For dynamic collabora-tion, we include Subagents, Magentic-One [6], and LongHorizon-Harness [12] with ReAct and Claude Code backends. 
+
+Implementation details. We use Claude Sonnet 4.6 and Qwen3.7-Plus as the base models. We run tasks in containerised environ-ments, with Docker as the default backend. Our method uses the same base model for node execution and semantic verification. We allow up to three concurrent workers per task and include the seven most recent node execution records in each local context. We retrieve up to six shared results per query. Our method per-mits up to 1,000 tool calls and 2,000 model calls per task, without an aggregate token limit. The wall-clock limit is 18,000 seconds on Terminal-Bench; the available Hard-51 runs use 3,000 or 4,500 seconds. Appendix C provides the detailed settings. 
+
+## 5.2 Main Results 
+
+In this section, we compare GAD with three single-agent harnesses and nine multi-agent systems. Table 1 reports the resolution rates. The main findings are as follows. 
+
+GAD consistently outperforms the single-agent harnesses. 
+
+As shown in Table 1, GAD achieves the highest resolution rate across all benchmarks and base models. Compared with the strongest single-agent harness in each setting, it improves resolution rates on Terminal-Bench 2.1 by 14.6 and 7.8 percentage points un-der Sonnet 4.6 and Qwen3.7-Plus , respectively. The correspond-ing gains on Hard-51 of SWE-Bench Pro are 2 .0% and 1 .9%. The improvements are larger on Terminal-Bench, while the strongest single-agent harness remains competitive on Hard-51. We suggest that these improvements result from separating local task execution from independent verification, so checking does not rely solely on the executing agent’s own duty allocation. Node-specific contexts also let agents continue from relevant records without recovering their task state from the mixed history of all duties. 
+
+GAD achieves higher resolution rates than existing multi-agent designs. As shown in Table 1, GAD exceeds the strongest MAS baseline by 6 .7% and 6 .7% on Terminal-Bench 2.1 , and by 23 .6% and 3 .9% on Hard-51, under two base model, respectively. The baseline results also show that multi-agent designs do not consistently outperform single-agent harnesses, and dynamic de-signs do not always improve over fixed topologies. These observa-tions support our preliminary finding that separating duties across agents alone does not ensure effective collaboration. We suggest that these improvements result from adapting the division of du-ties to execution needs while retaining the original goal and each node’s acceptance conditions. Explicit dependencies also connect task scheduling with the results each agent receives, addressing the missing background and irrelevant information exchange observed in existing MAS. In summary, we suggest that these gains result from on-demand decomposition, which lets agents focus on subtasks revealed dur-ing execution, and dependency-aware context construction, which provides the prior results needed to continue without repeating earlier investigations. 
+
+## 5.3 Ablation Studies 
+
+We ablate goal awareness by removing goal-related tracking mech-anisms, and dynamic collaboration by disabling helper requests, inter-agent dependency requests, and decomposition. We then iso-late the contribution of decomposition on tasks where GAD acti-vates it. The main findings are as follows. 
+
+Both goal awareness and dynamic collaboration contribute to performance. As shown in Table 2, removing either component lowers the resolution rate in all four settings. With Sonnet 4.6 
+
+on SWE-Bench Pro , the resolution rate falls from 66 .7% to 58 .8% without goal awareness and to 52 .9% without dynamic collabora-tion. With Qwen3.7-Plus on Terminal-Bench 2.1 , removing goal awareness leads to a larger drop than removing dynamic collabora-tion, with resolution rates of 60 .7% and 61 .8%, respectively. These re-sults suggest that the two components contribute in different ways. Goal awareness applies throughout execution, whereas decompo-sition changes the task structure only when an agent requests it. 
+
+Qwen3.7-Plus decomposes only 2 of the 89 Terminal-Bench 2.1 
+
+tasks, which limits the contribution of decomposition in this setting. 
+
+On-demand decomposition improves task success. We se-lect the tasks that GAD decomposes in its full configuration and rerun the same tasks with decomposition disabled. Each task must then proceed through the root node without creating subtasks. As shown in Figure 4a, the number of solved tasks falls from 7 to 3 among the 15 selected Terminal-Bench 2.1 tasks, and from 15 to 10 among the 24 selected SWE-Bench Pro tasks. These results suggest that decomposition contributes to success on tasks where GAD chooses to introduce subtasks. Xu Shen, Lingyong Yan, Shuaiqiang Wang, Jianmin Wu, Zhikai Chen, Jiliang Tang, and Jie Ren 
+
+Table 1: Task resolution rate (%) on Terminal-Bench 2.1 and SWE-Bench Pro Hard-51 and all methods with same execution budget. †LongHorizon-Harness drives Claude code is incompatible with SWE-Bench Pro’s no-network agent policy. 
+
+Terminal-Bench 2.1 SWE-Bench Pro (Hard-51) Category Method Sonnet 4.6 Qwen3.7-Plus Sonnet 4.6 Qwen3.7-Plus Single agent Single (React loop) 57.3 56.2 27.5 31.4 Single (Terminus-KIRA) 41.6 41.6 49.0 31.4 Single (Terminus-2) 52.8 55.0 64.7 27.5 Static MAS (fixed topology) Chain 58.4 51.7 39.2 25.5 Star 56.2 52.8 43.1 15.7 Full 56.2 49.4 39.2 23.5 MetaGPT 46.1 51.7 31.4 29.4 Mixture-of-Agents 40.4 51.7 13.7 25.5 Dynamic MAS (adaptive) Subagents 52.8 51.7 17.6 27.5 Magentic-One 36.0 48.3 27.5 25.5 LongHorizon-Harness (React loop) 57.3 56.2 11.8 17.6 LongHorizon-Harness (Claude code) 65.2 57.3 –† –†
+
+Ours GAD 71.9 64.0 66.7 33.3 TB2.1 (15 tasks) SWE-Pro (24 tasks) 
+
+0.0 0.2 0.4 0.6 0.8 
+
+> pass rate  7/15 3/15 15/24 10/24
+> GAD decomposition disabled
+> MetaGPT Magentic subagents GAD
+
+0.0 0.1 0.2 0.3 0.4 
+
+> off-subgoal step ratio  37.7 25.3 14.9 10.2 star chain full MetaGPT Magentic subagents GAD
+
+0.0 0.1 0.2 0.3 0.4  
+
+> tool-error rate
+> 12 36 31 12 17 17 10 first 2 steps later steps
+
+10 100 1000 
+
+> median tokens per solved task (k)
+> Single (44) Star (47) Chain (47) Full (47) MetaGPT (39) Magentic (29) Subagents (42) LH (native) (42)
+> 57k 58k 105k 47k 115k 60k 147k 52k 149k 40k 170k 33k 163k 48k 2.6M 49k
+
+(a) decomposed tasks (b) staying on the subgoal (c) start of a new agent (d) tokens on solved tasks 
+
+Figure 4: (a) Pass rate on the decomposed tasks, with and without decomposition. (b) Fraction of steps that leave the assigned subgoal. (c) Tool-error rate of a new agent in its first two steps and later. (d) Each row compares GAD (orange) with one baseline (blue) on the tasks both solve. Dots show median tokens per task; baseline counts indicate task numbers. Table 2: Ablation of GAD. Pass rate (%) in brackets 
+
+Sonnet 4.6 Qwen3.7-Plus 
+
+Method TB2.1 Hard51 TB2.1 Hard51 
+
+GAD 71.9 (64) 66.7 (34) 64.0 (57) 33.3 (17) w/o goal awareness 69.7 (62) 58.8 (30) 60.7 (54) 27.5 (14) w/o dynamic collaboration 67.4 (60) 52.9 (27) 61.8 (55) 23.5 (12) 
+
+## 5.4 Improvement on the two limitations in MAS 
+
+To examine whether GAD provides the goal awareness and dy-namic collaboration that existing multi-agent systems lack, we audited its trajectories with the procedure of Section 3.2. GAD de-composes seven of the 45 Terminal-Bench 2.1 tasks. Only these trajectories involve more than one agent, so the analysis uses these seven tasks. All systems run on Sonnet 4.6 .
+
+Agents in GAD stay on the subgoals they are assigned. As shown in Figure 4b, when each execution step is judged against the subgoal assigned to the agent that took it, only 10 .2% of the steps of GAD leave their subgoal. The rate is 14 .9% for subagents and 37 .7% for MetaGPT. We suggest that a subgoal formed from execution gives each agent a clear target, because it carries its own acceptance criteria. Each agent thus keeps its work tied to the goal. 
+
+Agents in GAD start working as soon as they are assigned. 
+
+As shown in Figure 4c, 10 .1% of the first two steps of a newly assigned agent in GAD end in a tool error. Its later steps fail at a similar rate of 9 .8%. In chain, the first two steps fail in 35 .7% of cases, twice its later rate of 17 .6%. We suggest that GAD gives each agent the verified results of the subgoals it depends on. The agent thus starts from what is already known and does not need to explore the environment first. Goal-Aware Dynamic Multi-Agent Collaboration for Long-Horizon Tasks 
+
+## 5.5 Efficiency Analysis 
+
+We measure cost by the tokens a system consumes on a task. The count adds the input and output tokens of every LLM call made by every agent in the system, including the calls GAD makes for verification. The main findings are as follows. GAD solves the same tasks at lower cost. We compare each baseline with GAD on the tasks both systems solve, and report the median token usage. As shown in Figure 4d, on Terminal-Bench 2.1 with Sonnet 4.6 ,GAD needs about 50k tokens per task. Multi-agent systems need 105–170k on the same tasks, and the long-horizon harness needs 2.6M. We suggest that the cost of existing multi-agent systems comes from coordination that they pay regardless of the task. GAD adds structure only when the goal requires it. On simple tasks it runs like a single agent, so its cost matches the single agent and stays below systems that coordinate on every task. Its accuracy gain does not come from spending more computation. 
+
+## 6 Conclusion 
+
+Long-horizon tasks require LLM agents to manage multiple duties throughout repeated interactions with the environment. Our anal-ysis shows that verification has the strongest association with task success but often comes late, while the proportion of duty-relevant information decreases as the context grows. Existing multi-agent systems can lose track of the overall goal, and context separation alone does not ensure effective information sharing. We propose GAD to maintain goal awareness and organize collaboration as execution reveals new needs. It retains the original instruction and assigned task goals and acceptance conditions in each agent’s con-text. A growing execution graph guides scheduling and information sharing as agents divide tasks and specify dependencies during ex-ecution. Verification and recovery check both subtask results and full task completion, providing feedback for repair. Experiments with Claude Sonnet 4.6 and Qwen3.7-Plus on Terminal-Bench 2.1 and SWE-bench Pro Hard-51 show gains of up to 6.7 percentage points over the strongest baseline. 
+
+## References 
+
+[1] Akari Asai, Zeqiu Wu, Yizhong Wang, Avi Sil, and Hannaneh Hajishirzi. 2024. Self-rag: Learning to retrieve, generate, and critique through self-reflection. In 
+
+International conference on learning representations , Vol. 2024. 9112–9141. [2] Zhaorun Chen, Zhuokai Zhao, Kai Zhang, Bo Liu, Qi Qi, Yifan Wu, Tarun Kalluri, Xuefei Cao, Yuanhao Xiong, Haibo Tong, et al. 2026. Scaling agent learning via experience synthesis. In International Conference on Learning Representations ,Vol. 2026. 121394–121420. [3] Yufan Dang, Chen Qian, Xueheng Luo, Jingru Fan, Zihao Xie, Ruijie Shi, Weize Chen, Cheng Yang, Xiaoyin Che, Ye Tian, et al. 2026. Multi-agent collaboration via evolving orchestration. Advances in neural information processing systems 38 (2026), 165025–165059. [4] Xiang Deng, Jeff Da, Edwin Pan, Yannis Yiming He, Charles Ide, Kanak Garg, Niklas Lauffer, Andrew Park, Nitin Pasari, Chetan Rane, et al. 2025. Swe-bench pro: Can ai agents solve long-horizon software engineering tasks? arXiv preprint arXiv:2509.16941 (2025). [5] Lutfi Eren Erdogan, Hiroki Furuta, Sehoon Kim, Nicholas Lee, Suhong Moon, Gopala Anumanchipalli, Kurt Keutzer, and Amir Gholami. 2025. Plan-and-Act: Improving Planning of Agents for Long-Horizon Tasks. In Forty-second International Conference on Machine Learning . https://openreview.net/forum?i d=ybA4EcMmUZ [6] Adam Fourney, Gagan Bansal, Hussein Mozannar, Cheng Tan, Eduardo Salinas, Friederike Niedtner, Grace Proebsting, Griffin Bassman, Jack Gerrits, Jacob Alber, et al. 2024. Magentic-one: A generalist multi-agent system for solving complex tasks. arXiv preprint arXiv:2411.04468 (2024). [7] Sirui Hong, Mingchen Zhuge, Jonathan Chen, Xiawu Zheng, Yuheng Cheng, Jinlin Wang, Ceyao Zhang, Zili Wang, Steven Ka Shing Yau, Zijuan Lin, Liyang Zhou, Chenyu Ran, Lingfeng Xiao, Chenglin Wu, and Jürgen Schmidhuber. 2024. MetaGPT: Meta Programming for A Multi-Agent Collaborative Framework. In The Twelfth International Conference on Learning Representations . https: //openreview.net/forum?id=VtmBAGCN7o [8] Bowen Jin, Hansi Zeng, Zhenrui Yue, Jinsung Yoon, Sercan O Arik, Dong Wang, Hamed Zamani, and Jiawei Han. 2025. Search-R1: Training LLMs to Reason and Leverage Search Engines with Reinforcement Learning. In Second Conference on Language Modeling . https://openreview.net/forum?id=Rwhi91ideu [9] Han Li, Zhemin Fang, Rili Feng, Yingqi Zhao, Jiaheng Liu, Pengfei Gao, He Ye, Dayi Lin, Qingwei Lin, Saravan Rajmohan, et al. 2026. LoopsBench: From Harness Engineering to Loop Engineering in Coding Agent Evaluation. arXiv preprint arXiv:2608.00267 (2026). [10] Xiaoxi Li, Jiajie Jin, Guanting Dong, Hongjin Qian, Yongkang Wu, Ji-Rong Wen, Yutao Zhu, and Zhicheng Dou. 2026. Webthinker: Empowering large reasoning models with deep research capability. Advances in Neural Information Processing Systems 38 (2026), 120091–120131. [11] Zongxia Li, Zhongzhi Li, Yucheng Shi, Ruhan Wang, Junyao Yang, Zhichao Liu, Xiyang Wu, Anhao Li, Yue Yu, Ninghao Liu, et al. 2026. Long-horizon-terminal-bench: Testing the limits of agents on long-horizon terminal tasks with dense reward-based grading. arXiv preprint arXiv:2607.08964 (2026). [12] Ziyu Ma, Hailang Huang, Shun Zou, Yong Wang, Shidong Yang, Yiming Hu, Fei Wei, and XiangXiang Chu. 2026. Longhorizon-harness: Advancing long-horizon agents for real-world tasks. arXiv preprint arXiv:2608.01964 (2026). [13] Mike Merrill, Alexander Shaw, Nicholas Carlini, Boxuan Li, Harsh Raj, Ivan Bercovich, Lin Shi, Jeong Shin, Thomas Walshe, E Kelly Buchanan, et al. 2026. Terminal-bench: Benchmarking agents on hard, realistic tasks in command line interfaces. In International Conference on Learning Representations , Vol. 2026. 40903–40986. [14] Aneesh Pappu, Mirac Suzgun, Yongchan Kwon, Federico Bianchi, Batu El, Mykel J. Kochenderfer, Hancheng Cao, and James Zou. 2026. Self-Organizing Agent Teams Learn to Reason Together. arXiv:2609.22682 [cs.AI] https://arxiv.org/abs/2609.2 2682 [15] Jianhao Ruan, Zhihao Xu, Yiran Peng, Fashen Ren, Zhaoyang Yu, Xinbing Liang, Jinyu Xiang, Yongru Chen, Bang Liu, Chenglin Wu, et al. 2026. Aorches-tra: Automating sub-agent creation for agentic orchestration. arXiv preprint arXiv:2602.03786 (2026). [16] Weiwei Sun, Miao Lu, Zhan Ling, Kang Liu, Xuesong Yao, Yiming Yang, and Jiecao Chen. 2025. Scaling long-horizon llm agent via context-folding. arXiv preprint arXiv:2510.11967 (2025). [17] Junlin Wang, Jue Wang, Ben Athiwaratkun, Ce Zhang, and James Y Zou. 2025. Mixture-of-agents enhances large language model capabilities. In International Conference on Learning Representations , Vol. 2025. 33944–33963. [18] Yi Wang, Haopeng Zhang, Chengxiang Huang, Rui Dai, Kaikui Liu, Piotr Koniusz, and Xiangxiang Chu. 2026. LoopArena: Benchmarking Models as Runtime Controllers for Loop Engineering. arXiv preprint arXiv:2608.28281 (2026). [19] Zihan Wang, Kangrui Wang, Qineng Wang, Pingyue Zhang, Linjie Li, Zhengyuan Yang, Xing Jin, Kefan Yu, Minh Nhat Nguyen, Licheng Liu, et al. 2025. Ragen: Understanding self-evolution in llm agents via multi-turn reinforcement learning. 
+
+arXiv preprint arXiv:2504.20073 (2025). [20] Zhaoyang Wang, Canwen Xu, Boyi Liu, Yite Wang, Siwei Han, Zhewei Yao, Huaxiu Yao, and Yuxiong He. 2026. Agent world model: Infinity synthetic environments for agentic reinforcement learning. arXiv preprint arXiv:2602.10090 
+
+(2026). [21] Xixi Wu, Kuan Li, Yida Zhao, Liwen Zhang, Litu Ou, Huifeng Yin, Zhongwang Zhang, Xinmiao Yu, Dingchu Zhang, Yong Jiang, et al. 2025. Resum: Unlocking long-horizon search intelligence via context summarization. arXiv preprint arXiv:2509.13313 (2025). [22] Zhiheng Xi, Jixuan Huang, Chenyang Liao, Baodai Huang, Honglin Guo, Jiaqi Liu, Rui Zheng, Junjie Ye, Jiazheng Zhang, Wenxiang Chen, et al. 2025. Agentgym-rl: Training llm agents for long-horizon decision making through multi-turn reinforcement learning. arXiv preprint arXiv:2509.08755 (2025). [23] Yiheng Xu, Dunjie Lu, Zhennan Shen, Junli Wang, Zekun Wang, Yuchen Mao, Caiming Xiong, and Tao Yu. 2025. Agenttrek: Agent trajectory synthesis via guiding replay with web tutorials. In International Conference on Learning Repre-sentations , Vol. 2025. 79822–79843. [24] John Yang, Kilian Lieret, Carlos Jimenez, Alexander Wettig, Kabir Khandpur, Yanzhe Zhang, Binyuan Hui, Ofir Press, Ludwig Schmidt, and Diyi Yang. 2026. Swe-smith: Scaling data for software engineering agents. Advances in Neural Information Processing Systems 38 (2026). [25] Shunyu Yao, Jeffrey Zhao, Dian Yu, Nan Du, Izhak Shafran, Karthik Narasimhan, and Yuan Cao. 2022. React: Synergizing reasoning and acting in language models. 
+
+arXiv preprint arXiv:2210.03629 (2022). [26] Sukwon Yun, Jie Peng, Pingzhi Li, Wendong Fan, Jie Chen, James Zou, Guohao Li, and Tianlong Chen. 2026. Graph-of-Agents: A Graph-based Framework for Multi-Agent LLM Collaboration. In The Fourteenth International Conference on Learning Representations . https://openreview.net/forum?id=34cANdsHKV Xu Shen, Lingyong Yan, Shuaiqiang Wang, Jianmin Wu, Zhikai Chen, Jiliang Tang, and Jie Ren 
+
+[27] Guibin Zhang, Yanwei Yue, Xiangguo Sun, Guancheng Wan, Miao Yu, Junfeng Fang, Kun Wang, Tianlong Chen, and Dawei Cheng. 2025. G-Designer: Archi-tecting Multi-agent Communication Topologies via Graph Neural Networks. In 
+
+Proceedings of the 42nd International Conference on Machine Learning (Proceedings of Machine Learning Research, Vol. 267) , Aarti Singh, Maryam Fazel, Daniel Hsu, Simon Lacoste-Julien, Felix Berkenkamp, Tegan Maharaj, Kiri Wagstaff, and Jerry Zhu (Eds.). PMLR, 76678–76692. https://proceedings.mlr.press/v267/zhang 25cu.html [28] Jiayi Zhang, Jinyu Xiang, Zhaoyang Yu, Fengwei Teng, Xionghui Chen, Jiaqi Chen, Mingchen Zhuge, Xin Cheng, Sirui Hong, Jinlin Wang, et al. 2025. Aflow: Automating agentic workflow generation. In International Conference on Learning Representations , Vol. 2025. 34040–34077. [29] Zijian Zhou, Ao Qu, Zhaoxuan Wu, Sunghwan Kim, Alok Prakash, Daniela Rus, Bryan Kian Hsiang Low, and Paul Liang. 2026. Mem1: Learning to syner-gize memory and reasoning for efficient long-horizon agents. In International Conference on Learning Representations , Vol. 2026. 58413–58438. [30] Kaijie Zhu, Yuzhou Nie, Yijiang Li, Yiming Huang, Jialian Wu, Jiang Liu, Ximeng Sun, Zhenfei Yin, Lun Wang, Zicheng Liu, et al. 2026. Termigen: High-fidelity environment and robust trajectory synthesis for terminal agents. arXiv preprint arXiv:2602.07274 (2026). [31] Mingchen Zhuge, Wenyi Wang, Louis Kirsch, Francesco Faccio, Dmitrii Khizbullin, and Jürgen Schmidhuber. 2024. GPTSwarm: Language Agents as Optimizable Graphs. In Forty-first International Conference on Machine Learning .https://openreview.net/forum?id=uTC9AFXIhg Goal-Aware Dynamic Multi-Agent Collaboration for Long-Horizon Tasks 
+
+## A Details of the Audit 
+
+Configurations. We audit five configurations on the 45-task sub-set of Terminal-Bench 2 (4 easy, 26 medium and 15 hard tasks). The first three vary the harness with Opus 4.6 fixed. The last three vary the model with ReAct fixed. Trajectories whose verifier did not run are excluded, since they are neither passes nor failures. Table 3 lists the trajectories that remain. 
+
+Table 3: Audited single-agent configurations.                         
+
+> Model Harness Trajectories Steps Pass rate (%)
+> Opus 4.6 Terminus-KIRA 43 1544 62.8
+> Opus 4.6 ReAct 44 1262 43.2
+> Opus 4.6 Terminus-2 29 418 41.4
+> Sonnet 4.6 ReAct 32 456 62.5
+> Qwen3.7-Plus ReAct 45 1162 60.0
+
+Duty attribution. A judge splits the content each step generates into the seven duties of Table 4, as fractions that sum to one. The judge sees the task instruction and, for each step, the agent’s rea-soning, its command and the resulting observation. Our own step labels are not shown, since they would reveal the answer. Table 5 gives the settings. 
+
+Table 4: Duties used in the audit.         
+
+> Duty Definition plan deciding what to do next, ordering subgoals, track-ing the objective act issuing the command, or writing the code it con-tains interpret reading and making sense of the previous observa-tion verify checking whether the result meets the acceptance criteria self-correct diagnosing an earlier mistake and recovering from it off-task content unrelated to the task, or repeating covered ground other legitimate content that fits none of the above
+
+Table 5: Judge and metric settings.           
+
+> Setting Value Judge model GPT-5.5 , temperature 1.0 Steps per call 5Text per step reasoning 900, command 600, observation 400 characters Task instruction 1500 characters Dominant duty duty with the largest fraction Duty-switch rate share of adjacent steps with different dominant duties Position five equal trajectory segments Verification groups thirds by verification share, pooled Confidence intervals 2000 bootstrap draws over trajectories
+
+Context relevance. We sample 30 steps from each configuration, 6 from each of the five trajectory segments. A sampled step lies in a trajectory of at least six steps and has at least three steps before it. The judge sees the task, the current step and every earlier step with its observation. It lists the earlier steps whose content the current step needs. A step on the same topic or of the same duty is not listed unless its content is needed. The reported share is the number of listed steps over the number of earlier steps. Earlier observations are cut to 8000 characters, the length the harnesses keep in context, and the rendered history to 60000 characters. 
+
+## B Pseudo-code for GAD 
+
+Algorithm 1 presents the core workflow of GAD in sequential form. Lines 1–2 initialize the graph, shared results, environment, and root task. At each iteration, Lines 4–9 update node states, check stopping conditions, select a ready node, and generate an action from its local context. Lines 10–18 handle environment execution, decompo-sition, and retrieval. An accepted decomposition expands the graph, while a rejected request returns feedback. Lines 19–22 check node completion and either publish a verified result or retain feedback for repair. Line 24 returns a node to READY if it remains ACTIVE .The loop stops when the root passes verification, the budget runs out, or no ready nodes remain. Only root verification establishes task completion. In concurrent execution, the controller waits for running agents before treating an empty frontier as a stopping condition. 
+
+## C Implementation Details 
+
+We use Claude Sonnet 4.6 and Qwen3.7-Plus as the base models, with the same model for node execution and semantic verification within each setting. Tasks run in containerized environments, with Docker as the default backend. Table 6 summarizes the reference Growing-DAG V1.1 configuration. All methods use the same per-task execution budget within each evaluation setting. For Growing-DAG, tool and model-call budgets are shared by all workers within a task, and verification commands count toward the tool-call budget. No aggregate token limit is imposed. The working deadline is 18,000 seconds for Terminal-Bench and 3,000 or 4,500 seconds for Hard-51, depending on the evaluation setting. Additional harness time for cleanup and patch capture does not extend the model’s working deadline. Each worker receives the original task, its assigned node and acceptance conditions, parent and dependency information, re-cent local execution records, and relevant shared artifacts. Nodes are decomposed only when local execution evidence reveals pre-requisites. Retrieved candidates can be reused only after contract and dependency compatibility checks. A separate verifier evalu-ates the complete node goal and every acceptance clause; com-pleting child nodes alone does not verify their parent. The tem-plates below reproduce the reference worker instructions, including the verification-request format, with presentation-only formatting changes. Braced input fields are populated by the runtime. The worker prompt’s {max_children} and {max_routes_per_node} 
+
+take the configured values in Table 6. Xu Shen, Lingyong Yan, Shuaiqiang Wang, Jianmin Wu, Zhikai Chen, Jiliang Tang, and Jie Ren 
+
+Algorithm 1 Workflow of GAD 
+
+Require: Instruction 𝐼 , environment 𝑠 0, policy 𝜋 , budget 𝐵 
+
+Ensure: Final environment state and root completion status  
+
+> 1:
+
+Initialize G = ({ 𝑣 root }, ∅) , R ← ∅ , and 𝑠 ← 𝑠 0 
+
+> 2:
+
+Set root goal to 𝐼 , acceptance to full satisfaction of 𝐼 , and status to READY  
+
+> 3:
+
+while true do  
+
+> 4:
+
+Update node states from dependency and route outcomes, following Section 4.1  
+
+> 5:
+
+break if root is VERIFIED or budget is exhausted  
+
+> 6:
+
+Compute F by Eq. (6); break if F = ∅ 
+
+> 7:
+
+Select 𝑣 ∈ F ; launch an agent and set 𝜎 𝑣 ← ACTIVE  
+
+> 8:
+
+Construct 𝑐 𝑡,𝑣 by Eq. (7)  
+
+> 9:
+
+Sample 𝑢 𝑡,𝑣 ∼ 𝜋 (· | 𝑐 𝑡,𝑣 ); register evidence-backed findings in R 
+
+> 10:
+
+if 𝑢 𝑡,𝑣 requests RUN then  
+
+> 11:
+
+Execute its command; update 𝑠 and append observations to ℎ𝑣  
+
+> 12:
+
+else if 𝑢 𝑡,𝑣 requests DECOMPOSE then  
+
+> 13:
+
+Obtain (𝑏 𝑣 , 𝑓 𝑣 ) by checking 𝑑 𝑣 using Eq. (3)  
+
+> 14:
+
+If 𝑏 𝑣 = 0, retain 𝑓 𝑣 , set 𝑣 READY , and continue  
+
+> 15:
+
+Create or reuse C𝑣 and resolve dependency edges D𝑣  
+
+> 16:
+
+Expand G by Eq. (4); register 𝜌 𝑣,𝑘 = C𝑣 ; set 𝑣 WAITING  
+
+> 17:
+
+else if 𝑢 𝑡,𝑣 requests SEARCH then  
+
+> 18:
+
+Retrieve results using its query for the next context; set 
+
+𝑣 READY  
+
+> 19:
+
+else if 𝑢 𝑡,𝑣 requests VERIFY then  
+
+> 20:
+
+Compute 𝑞 𝑣 by Eq. (8)  
+
+> 21:
+
+if 𝑞 𝑣 = 1, set 𝑣 VERIFIED and publish its verified result in R 
+
+> 22:
+
+else retain verification feedback and set 𝑣 READY  
+
+> 23:
+
+end if  
+
+> 24:
+
+Return 𝑣 to READY if it remains ACTIVE  
+
+> 25:
+
+end while 
+
+## Role and Coordination Rules 
+
+You are a disposable LOCAL WORKER in a long-horizon terminal task system. There is NO Planner. You own ex-actly one obligation node in a lazily growing execution DAG. Do not produce a global plan. Reason only about this node, its parents/dependencies, local evidence, and retrieved reusable artifacts. The DAG is a hard coordination contract: 1. Work only on the assigned node. 2. A node may be solved directly; decomposition is NOT mandatory. 3. DECOMPOSE only after concrete local execution evi-dence reveals independent prerequisites/blockers. "The task is broad" is NOT sufficient. 4. Every DECOMPOSE must cite one or more prior local evidence step IDs; the runtime rejects uncited graph growth. 
+
+Table 6: Reference GAD hyperparameters and per-task bud-gets. Output allowances are initial per-response limits; re-sponse recovery may increase them up to 32,768 tokens. Saved run overrides take precedence.               
+
+> Hyperparameter Value Concurrent workers 3Recent local records (worker / verifier) 7 / 10 Retrieved artifacts per query 6Maximum nodes / depth 64 / 8 Maximum children per route 4Maximum routes per node 3Reuse candidate similarity threshold 0.72 Temperature (worker / verifier) 0.1 / 0.0 Initial output tokens (worker / verifier) 8,192 / 4,096 Tool / model calls per task 1,000 / 2,000 Aggregate token budget Unlimited Working deadline: Terminal-Bench (s) 18,000 Working deadline: Hard-51 (s) 3,000 or 4,500
+
+5. Decomposition creates ONE alternative AND-route: ev-ery child in that route must be VERIFIED before the parent can be retried. 6. The parent NEVER becomes verified merely because children finish. It must later pass its own acceptance check. 7. New children must be narrower/more local/more verifi-able than the parent. At most {max_children} children per route and {max_routes_per_node} routes per parent. 8. Prefer SEARCH/reuse over duplicate work. 9. Never access hidden benchmark solutions, hidden veri-fier state, credentials, or host data. Collaboration is artifact-mediated, not conversational. You may publish claims supported by PRIOR local step IDs. You cannot self-declare a claim VERIFIED: ordinary published facts become OBSERVED; hypotheses stay HYPOTHESIS. Only runtime verification creates VERIFIED artifacts. 
+
+## Execution and Retrieval 
+
+Output format: 
+
+Choose exactly ONE action and return exactly one JSON object (no markdown): 1) RUN one coherent shell command: 
+
+{"action":"RUN", "reason":"...", "mode":"INSPECT|MUTATE|TEST|SERVICE|OTHER", "command":"...", "write_targets":["relative/path/or/resource"], "publish":[{"kind":"fact|diagnostic|hypothesis |artifact","description":"...", "evidence_steps":[1], Goal-Aware Dynamic Multi-Agent Collaboration for Long-Horizon Tasks 
+
+"tags":["..."]}] }
+
+For INSPECT/TEST use write_targets=[] unless the com-mand intentionally mutates persistent state. For MU-TATE/SERVICE declare the smallest realistic write/resource targets; use ["*"] only if truly global/unknown. 2) SEARCH reusable artifacts: 
+
+{"action":"SEARCH","reason":"...", "query":"...","publish":[]} 
+
+## Evidence-Grounded Decomposition 
+
+3) DECOMPOSE this node into one new AND-route: 
+
+{"action":"DECOMPOSE", "reason":"evidence-grounded reason this node should grow children", "evidence_steps":[12], "route_label":"short approach name", "children":[ {"local_id":"c1", "goal":"one self-contained narrower obligation", "depends_on":[], "acceptance":[{"description":""}], "read_scope":["..."], "write_scope":["..."], "tags":["..."] }], "publish":[] }
+
+Child depends_on may reference local_id values from this same route or already-visible dependency node IDs. Do not reference the parent. 
+
+## Verification and Control Actions 
+
+4) VERIFY this node. If the current acceptance contract is missing/incomplete, propose up to 4 non-destructive checks: 
+
+{"action":"VERIFY", "reason":"why evidence suggests the node may be complete", "checks":[{"description":"...","command":"..."}], "publish":[] }
+
+Mechanical checks are preferred. If no command can rea-sonably verify the node, leave commands empty and a strict semantic verifier will inspect concrete evidence. 5) ABANDON only the CURRENT METHOD when it is unproductive. This does NOT mean the obligation is im-possible and does not fail the node: 
+
+{"action":"ABANDON","reason":"":[12],"publish":[]} 
+
+6) BLOCK only when concrete evidence shows this obliga-tion cannot currently proceed under its contract/environ-ment (e.g. unavailable required external resource). BLOCK is stronger than ABANDON and causes the containing route to fail so that a parent may try an alternative route: 
+
+{"action":"BLOCK","reason":"", "evidence_steps":[12], "publish":[]} 
+
+7) YIELD when another READY node should proceed or you have no useful next local action: 
+
+{"action":"YIELD","reason":"...","publish":[]} 
+
+Never invent command outputs. Do not repeat an un-changed failed command. Keep reason under 120 charac-ters. Use publish=[] unless a claim will help later. Keep each command focused and JSON complete. 
+
+## Local Input Context 
+
+Input Information (user message): 
+
+LOCAL NODE CONTEXT: {serialized_local_node_context} 
+
+The serialized context contains the following runtime fields: 
+
+• root_task : the original benchmark instruction. 
+
+• node : identifier, goal, depth, status, attempts, verification failures, acceptance conditions, scopes, tags, and runtime feedback. 
+
+• parents , dependencies , and 
+
+routes_from_this_node : relevant graph state and verified dependency artifacts. 
+
+• local_evidence and local_artifacts : recent execu-tion records and outputs of the assigned node. 
+
+• retrieved_artifacts and last_search_query :shared results retrieved by the runtime or an explicit search.

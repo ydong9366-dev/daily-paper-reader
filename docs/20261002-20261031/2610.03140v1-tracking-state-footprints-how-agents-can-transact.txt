@@ -1,0 +1,282 @@
+Title: Tracking State Footprints: How Agents Can Transact
+
+URL Source: https://arxiv.org/pdf/2610.03140v1
+
+Published Time: Mon, 05 Oct 2026 01:03:37 GMT
+
+Number of Pages: 8
+
+Markdown Content:
+# Tracking State Footprints: How Agents Can Transact 
+
+# Oto Mraz Rares Şerban Kyriakos Psarakis † Burcu Kulahcioglu Ozkan Asterios Katsifodimos 
+
+> †
+
+Ververica GmbH Delft University of Technology 
+
+## ABSTRACT 
+
+Can AI agents transact? We argue that they must: as multi-agent sys-tems (MASs) increasingly write code, deploy infrastructure, modify databases, and call web services, lost updates or stale reads can be catastrophic. Although MASs increasingly execute plans in parallel, current orchestrators do not track the state that agents read and write. As a result, concurrency anomalies manifest even in simple coding tasks. We frame MAS coordination as a data management problem and propose to describe agents by their state footprint : the state they read and write across their own local context and state, as well as the state of the orchestrator and external systems. We posit that MASs require guarantees similar to those of databases, but providing them raises new challenges and opportunities: unlike database transactions, agents do not read from a fixed schema or an isolated snapshot, and cannot be replayed deterministically upon failure. They can, however, resolve conflicts semantically instead of aborting, enabling new forms of concurrency control and conflict resolution. Towards agents that can transact, we outline a vision for next-generation agent orchestrators and transactional interfaces for external systems to participate in agentic transactions. 
+
+PVLDB Reference Format: 
+
+Oto Mraz, Rares Şerban, Kyriakos Psarakis, Burcu Kulahcioglu Ozkan, and Asterios Katsifodimos. Tracking State Footprints: How Agents Can Transact. PVLDB, 20(1): XXX-XXX, 2027. doi:XX.XX/XXX.XX 
+
+PVLDB Artifact Availability: 
+
+The source code, data, and/or other artifacts have been made available at https://github.com/delftdata/agenti-ai-guarantees. 
+
+## 1 INTRODUCTION 
+
+Recent advances in LLM agents enable collaborative multi-agent systems (MASs) to solve complex tasks, including bug fixing [12, 15, 45], deployment & incident management [32, 38], or supply chain control [32, 60]. In a typical MAS, a planner agent decom-poses a user’s goal into subtasks, and an orchestrator dispatches them to specialized worker agents, often in parallel to finish faster. The workers read and modify shared state along the way: a code repository, a database, or a third-party service. Yet, MASs remain unreliable in practice [51, 55]. The usual explanation lies in the mod-els: LLM agents are nondeterministic, prone to hallucinations that cascade into downstream agents [16, 27, 45, 48] or trigger endless thought loops [28]. In this paper, we argue that this unreliability lies not only in the models, but also in how their work is coordinated. 
+
+> This work is licensed under the Creative Commons BY-NC-ND 4.0 International License. Visit https://creativecommons.org/licenses/by-nc-nd/4.0/ to view a copy of this license. For any use beyond those covered by this license, obtain permission by emailing info@vldb.org. Copyright is held by the owner/author(s). Publication rights licensed to the VLDB Endowment. Proceedings of the VLDB Endowment, Vol. 20, No. 1 ISSN 2150-8097. doi:XX.XX/XXX.XX
+
+Consider a team of coding agents refactoring a codebase. A plan-ner splits the work into subtasks: one agent changes a core com-ponent, others update the code that uses it. Every agent completes its subtask successfully, yet the merged code fails its tests: some agents updated callers against the old version of the component, and two concurrent agents edited the same file, one silently over-writing the other. A better LLM would not have prevented either failure, since each agent acted correctly in isolation. The issue is that most of today’s orchestrators track control flow , i.e., which task runs after which, but not data flow , i.e., which state each task reads and writes [15, 27]. The ML community has greatly improved planning [19, 28, 52], collaboration [57, 62], speed, context capacity, and token costs, but these advances govern what agents decide, not how their access to state is coordinated. The data management community, in contrast, has long-established paradigms for concur-rency, fault tolerance, and consistency [3, 8, 59], yet these are not systematically applied to agentic orchestration. In this paper, we examine MAS coordination through a data management lens. Our central thesis is that reliability must come from the orches-trator, not the models alone: plans and actions come from LLMs and may be wrong, but the guarantees must come from a deterministic component. This component should record agents’ state accesses and enforce ordering regardless of how the model behaves. State is scattered across three scopes: the agent’s own context and local files, the orchestrator’s plan and task status, and external systems (code repositories, databases, web services). In this paper, we de-scribe a task by its footprint 1: the state it reads and writes across all three scopes. We outline how footprints underpin the guarantees that databases provide: atomicity, consistency, isolation, durability. Multi-agent orchestration presents new challenges. Unlike a database transaction, an agent does not read from a fixed schema but from whatever enters its context window. In addition, its execu-tion cannot be replayed deterministically in case of failure. At the same time, agents bring a capability that transactions lack: instead of aborting on a conflict, they can inspect it and perform seman-tic conflict resolution. MASs bear similarities to databases in the 
+
+guarantees they need, but not in the mechanisms that provide them. This paper makes the following contributions: 
+
+• We show that MAS coordination failures can stem from un-tracked data dependencies: orchestrators order tasks, but not the state they read and write (§3). We characterize anomalies on four coding tasks (§4). 
+
+• We identify three scopes of state in MASs (agent-local, orches-trator, and external) that differ in who can observe, revert, and reproduce them in case of conflict or failure (§5). 
+
+• We propose to track agentic tasks by their footprints : the state they read and write across all scopes, capturing conflicts that span scopes and may emerge dynamically during execution (§5). 
+
+> 1Picture an agent walking through local and external state, inspecting or modifying it along the way; the footprint is the trail it leaves. The term follows separation logic, where a program’s footprint is the set of locations it accesses [46]. arXiv:2610.03140v1 [cs.DB] 2 Oct 2026 USER prompts HARNESS loop, tool calls, LLM LLM thinks, proposes TOOLS local, DB, API LOOP UNTIL FINAL ANSWER prompt goal + constraints context + tool defs harness prepares the input tool call the model proposes parse + check schema · permission execute tool the harness makes the call tool output result · error · status context + tool output feed the result to the LLM next model round final answer or another tool call response harness reports to the user
+
+Figure 1: The main "loop" of a single agent. The LLM proposes 
+
+tool calls, while the harness controls the loop, manages state, validates permissions, and executes tools. 
+
+• We show how state footprints and provenance can underpin ACID guarantees, fault tolerance, and reuse, and identify open research questions each raises (§6). 
+
+• We outline how external systems can become agent-ready by exposing transactional interfaces that let orchestrators stage, validate, and revert state effects (§6.5). 
+
+## 2 A BRIEF INTRODUCTION TO MAS 
+
+Architecture. Within a single agent (Figure 1), execution proceeds via a closed loop between the LLM and runtime harness. The LLM is responsible for reasoning, decision-making, tool selection, and output evaluation. As LLMs operate strictly on text, they rely on a 
+
+harness , a wrapper around the LLM(s), that manages state, invokes tools, and executes code [14, 56]. The harness parses the output of an LLM, looking for special tags that LLMs are trained to produce in their output [35]. The harness invokes the requested tools and routes their results back to the LLM. An MAS coordinates an ensemble of such agents to solve a user-specified task. In an MAS, individual LLM agents assume dedicated roles (e.g., coding, testing, deploying) [24, 27, 45]. To orchestrate execution, a dedicated planner decomposes the high-level goal into structured subtasks with constraints [9, 20, 52, 62]. Plans manage a speed vs. correctness tradeoff and may be dynamically modified on the fly. The literature mainly distinguishes sequential and DAG-based topologies. A sequential plan executes subtasks strictly one by one. While safest to coordinate, sequential plans are also the slowest [45]. DAG-based topologies use scatter-gather patterns to run subtasks in parallel, merging the artifacts at the end [27]. 
+
+Historical evolution. Following AutoGPT [21], early MAS frame-works (2023–24) such as ChatDev [45] and LangChain [13] executed static plans with rigid coordination [20]: an intermediate failure re-quired a complete restart [28]. State management and idempotency were left to the user. Second-generation runtimes (2024–26) such as LangGraph [34], MetaGPT [27], AutoGen [54], and ChatDev 2.0 [15] introduced DAG-based execution with dynamic replan-ning [28], task verification, and self-healing. They can detect and resolve many failures without human intervention [7, 20, 57, 58], but without guarantees about the state their tasks share. Emerging         
+
+> T0 — core fix
+> writes dispatcher.py
+> T2 — auth callers
+> contrib/auth
+> +tests/auth
+> T1 — db signals
+> db/models/signals.py
+> +tests/signals
+> T3 — handlers
+> core/handlers
+> +tests/handlers
+> merge(T1, T2)
+> 2-way + test gate
+> global commit →push PR
+> full suite; buffered effect
+> signature reads signature reads attribute read shared fixture: tests/dispatch/tests.py
+> source writes source writes
+
+Figure 2: DAG for a refactoring task. The updated Signal def-inition (T0) is read concurrently by three tasks (T1–T3). Solid edges are planned reads of T0’s new signature; the dashed red edge is an unplanned read of the deleted attribute. T1 and T2 write a shared test file, with the write-write conflict resolved by a merge. All outputs are combined at a global commit, which validates the result before releasing the PR. 
+
+frameworks like EvoFlow [61] and EvoAgentX [53] evolve both execution plans and agent roles at runtime. Combined with the shift towards multi-modal agents [15], this flexibility exacerbates the challenges of shared state management, coordination, recover-ability, and reconciliation. Here we argue that the next generation of runtimes (2027+) must provide correctness guarantees via explicit concurrency control and data management principles. 
+
+## 3 MULTI-AGENT COORDINATION AS A DATA MANAGEMENT PROBLEM 
+
+MAS coordination is fundamentally a data management challenge: coordination correctness depends not only on control-flow (task ordering and temporal scheduling) but also on the data-flow : data dependencies [47], output visibility and isolation [1, 2, 26] across agents. Agent orchestrators so far primarily capture control flow [15, 27, 34], neglecting data dependencies arising from conflicting reads and writes to shared state. Agents may thus act on a stale or incon-sistent view of the state, causing failures that control-flow ordering alone cannot prevent. We illustrate the coordination problems on a seemingly simple agentic coding example, which shows that coor-dination and isolation schemes arise well beyond databases. 
+
+Example 3.1 (API refactoring task). Consider a SWE-bench-style [30] refactoring task to remove the deprecated providing_args 
+
+argument from Signal API [18] in Django [17]. The constructor used to accept an argument providing_args , removed in v4.0. The refactoring task has a fanout structure: one edit to the core 
+
+Signal definition (remove the constructor argument and delete the stored providing_args attribute), along with the edits of Signal 
+
+instantiations in subpackages ( db , contrib , core ), and test updates. 
+
+Agentic workflow. Figure 2 depicts the task workflow as a DAG that encodes task (control flow) dependencies. A supervisor agent decomposes the issue into a task editing the core Signal defini-tion (T0), three concurrent tasks (T1–T3), and dispatches them. The runtime executes the graph over shared state (code on a local filesys-tem). Worker T0 modifies the constructor signature and deletes the stored attribute. Workers T1–T3 each own an independent caller subpackage and its tests. The workers’ write sets initially appear disjoint, but parallel execution triggers two subtle anomalies:                       
+
+> 2H-O O-H H-O O-H H-O O-H 0500 Time (s)
+> Task 1 Task 2 Task 3
+> Execution Time
+> H-O O-H H-O O-H H-O O-H 0250 Tokens (k)
+> Task 1 Task 2 Task 3
+> Tokens Used
+> H-O O-H H-O O-H H-O O-H 02Cost ($)
+> Task 1 Task 2 Task 3
+> Monetary Cost
+> H-O O-H H-O O-H H-O O-H 0100 Pass (%)
+> Task 1 Task 2 Task 3
+> Accuracy
+> H-O O-H H-O O-H H-O O-H 0510 Nodes
+> Task 1 Task 2 Task 3
+> Total Nodes
+> H-O O-H H-O O-H H-O O-H 010 Anomalies
+> Task 1 Task 2 Task 3
+> Anomalies
+> Topology: Sequential Task-Ordered Uncoordinated Topology: Sequential Task-Ordered Uncoordinated Anomalies: RAW Violation Premature Consumption Node Error
+
+Figure 3: Performance of harness-authored plans for Tasks 1-4. The ticks denote the planner-agent pairs (Haiku (H), Opus (O)). A write-write conflict, silently reconciled. While T1 and T2’s assigned subpackages are disjoint, both write to a shared fixture, 
+
+tests/dispatch/tests.py , which the merge node reconciles. The task whose fixture is shadowed never executes its intended setup. The tests still pass, having silently run against the wrong fixture or missing intended test coverage. In contrast, T3 has no overlap and proceeds directly to the global commit node. The global commit integrates all subpackages, the merged test file, and validates the entire repository. If successful, the workflow’s only external side effect is released: pushing the branch and opening the PR. 
+
+An unplanned dependency, invisible until failure. The dashed red edge marks an unplanned dependency of T2 on T0. Besides mod-ifying the constructor signature, T0 also deletes the providing_args 
+
+attribute from Signal , which the plan did not expect any agent to depend on. Yet, T2 reads this attribute in a debug path, triggering a dynamic dependency on state removed by T0. Lacking a means to track this dependency, the conflict goes unnoticed until the final test suite fails, despite each task completing successfully. 
+
+Write-After-Write (WAW) violation. T1 and T2 collide on the shared test fixture tests/dispatch/tests.py . As the plan as-sumes their write sets are disjoint, it does not detect the overlapping targets prior to dispatch, causing one to overwrite the other silently. 
+
+Read-After-Write (RAW) violation. T2 correctly executes after T0 terminates, inheriting the updated constructor signature. How-ever, control-flow ordering only guarantees that T0 has finished, not that its side effects are semantically compatible with down-stream tasks. T0’s removal of the stored providing_args is one such side effect. T2’s debug path expects this field, but because this data dependency is unrepresented in the graph, the conflict bypasses ordering checks and surfaces only when post-merge tests execute the missing path. A RAW violation is similar to a stale read 
+
+in classical concurrency control, except that this data dependency is never expressed in a way for the workflow to catch. While WAW and RAW violations resemble those in traditional databases, where dependency problems are typically resolved by ordering, the violations in MAS require mechanisms beyond task ordering . In the RAW example, T2 ran after T0, yet the failure occurred regardless. The cause was not when T2 ran, but whether T0’s write was checked against a dependency. Similarly, fixing WAW requires not simply ordering tasks but dependency tracking and a merge strategy to reconcile two concurrent writes. 
+
+## 4 THE COST OF IGNORING DEPENDENCIES 
+
+We empirically evaluate how the MAS coordination issues in §3 manifest on four agentic coding tasks originating from SWE-Bench [30] using two LLMs and four execution topologies. To account for LLM nondeterminism, we report the averages over five runs. 
+
+Table 1: Coordination guarantees of the execution topologies. Execution Topology Task-Ordered Parallel Conflict-Ordered             
+
+> Sequential ✓✗✗
+> Uncoordinated ✗✓✗
+> Task-Ordered ✓✓✗
+> Conflict-Ordered ✓✓✓
+
+Models. We evaluate Claude Haiku 4.5 and Claude Opus 4.8 [5] alternating between planner and worker roles. To isolate baseline coordination behavior, we disable dynamic replanning. We expect the anomalies to carry over to dynamic plans, since each replanning step yields a new static plan that executes in the same way. 
+
+Tasks. We employ four coding tasks provided as GitHub issues [30]. The agents create a fix, checked by a set of tests. Task 1 fixes a pat-tern matching bug with localized symptoms, root-cause diagnosis, and a list of files to fix. It enables a static plan a priori. Task 2 resolves a mathematical error, only based on symptoms. Without systematic code analysis, the orchestrator must guess where the problem actu-ally lies. Task 3 repairs a media object merge fault. Symptoms and diagnosis are provided, but dynamic inter-agent communication is needed for a successful fix. Task 4 is the Django API refactor-ing task from Figure 2. We supply a human-authored plan to test dependency management during execution and recovery. 
+
+Topologies. Tasks execute under four predefined execution topolo-gies: Sequential (strict serialized execution), Uncoordinated (aggres-sive concurrency that relaxes dependencies to minimize execu-tion time), Task-Ordered (concurrent dispatch while enforcing task precedence), and Conflict-Ordered (concurrent execution that addi-tionally enforces data dependencies and conflict isolation). Table 1 summarizes the coordination guarantees each topology provides. 
+
+Metrics. We measure efficiency via execution time , total tokens used ,and monetary cost . The cost comprises input & output tokens, and cache reads & writes priced $0.1–5 and $0.5–25 per 1M tokens for Haiku and Opus [6]. Correctness is assessed by accuracy and the anomalies: 𝑖 ) node errors (an agent fails on its own input), 𝑖𝑖 ) prema-ture consumptions (reading partial outputs prior to task completion), 
+
+𝑖𝑖𝑖 ) RAW violations, and 𝑖𝑣 ) WAW violations as described in §3. 
+
+Missing data dependencies. As the harness increases parallelism, RAW violations and premature consumptions escalate due to the unmodeled data dependencies (Figure 3). Opus constructs more robust plans than Haiku, yielding fewer nodes and thus fewer anom-alies. To isolate planner quality from worker agent strength, we also tested a Haiku-Haiku setup (not plotted for lack of space). While reducing time and token costs, its anomaly rates closely mirror Haiku-Opus, confirming the need for sound data dependency man-agement. Task complexity dictates resilience to execution anomalies. In the easiest Task 1, downstream agents successfully self-healed             
+
+> 3Haiku Opus
+> 0100 Time (s)  Exec. Time
+> Haiku Opus
+> 0.0 0.5 Cost ($)  Cost
+> Haiku Opus
+> 0100 Pass (%)  Accuracy
+> Haiku Opus
+> 0123Anomalies  Anomalies
+> Anomalies: RAW WAW Node Err.
+> Topology: Sequential Task-Ordered Con fl ict-Ordered
+> Anomalies: RAW WAW Node Err.
+> Topology: Sequential Task-Ordered Con fl ict-Ordered
+
+Figure 4: Performance of hand-written plans for Task 4. 
+
+earlier faults even under uncoordinated execution, achieving up to 2 .4× latency reduction and ∼ 26% cost savings. Upon closer in-spection, the detailed instructions for Task 1 already contain all the load-bearing data dependencies. In Tasks 2 and 3, the limited problem diagnosis caused all planners to generate defective plans regardless of the topology. As with Task 1, parallelism consistently reduces execution time. 
+
+Repairing broken data dependencies. In Task 4, we test how failures induced by unconstrained concurrency can be fixed (Fig-ure 4). The trivial solution to run all subtasks sequentially succeeds without errors. A task-ordered topology reduces the duration by 
+
+∼ 40%, but only at the expense of correctness, and it does not save tokens either. Broken data dependencies induce RAW, WAW anom-alies, and occasional node errors. Finally, we fed the failed plan back into the planner to identify the missed dependencies and prepare an improved conflict-ordered plan. The repaired plan was success-ful for both LLM agents and still reduced the task duration 1 .23 ×
+
+compared to sequential execution, at comparable token cost. These results underscore the need for an agentic orchestrator with proper data management primitives. Such primitives could even salvage verified intermediate work in the failed plan for further time and cost savings. We outline the guarantees such an orchestrator must provide in Section 6. 
+
+## 5 THE THOUSAND FACES OF AGENTIC STATE 
+
+The anomalies of Section 4 arise because the state that agents read and write is scattered across components with very different proper-ties. We distinguish three scopes of state: agent-local, orchestrator, and external (Table 2). They differ along three axes that determine how conflicts can be detected and repaired: who can observe the state, whether it can be reverted , and whether it can be reproduced 
+
+after a failure. We describe each scope through Example 3.1. 
+
+Agent-local state is private to a single agent: its context, which mutates on every iteration of the agent loop, the status of its tool calls, and, depending on the deployment, a private filesystem or key-value store. Only the agent observes this state, and its most valuable part, the context, cannot be reproduced: it is the product of prior LLM generations rather than a deterministic function of the inputs. Suppose T2 crashes while updating contrib/auth , after reasoning through several candidate edits but before writing any. The repository is unaffected, but nothing records what T2 had already decided or partially produced, and its local filesystem may be left dirty. A restarted agent must either redo the reasoning or infer its predecessor’s progress from the partial changes left behind. 
+
+Orchestrator state comprises the cross-task runtime context main-tained by the orchestrator: execution plans, task and data depen-dency graphs, task status, and completion signals. As the owner, the 
+
+Table 2: State scopes in MAS, and their properties.           
+
+> Scope State Observable by Reversible Reproducible
+> Agent-local context, tool calls, unstaged files agent only via sandbox/ snapshot artifacts, not context Orchestration task graph, status, idempotency IDs orchestrator yes (owned) yes (logged) External repos, REST APIs, MCP, databases everyone if staged; else compensate only if idempotent
+
+orchestrator can observe, log, and revert it at will. Some systems additionally expose a shared blackboard that all agents read and write; since the orchestrator mediates every access, conflicts on it could, in principle, be detected. Recent work begins to bring concur-rency control to MAS workflows [37, 40], but to our knowledge, no orchestrator tracks conflicts over state that spans all three scopes. 
+
+External state resides outside the direct control of the orchestrator and the agents, e.g., repositories, databases, and third-party APIs. It is shared with other agents and outside consumers, and it persists after the workflow completes. A task that triggers a deployment through a third-party API produces an effect that is visible imme-diately, possibly to other consumers before any later task flags a conflict. Undoing it requires a compensating action, as in the saga pattern [22]; retrying it is safe only if the operation is idempotent. In both cases, external writes must be tracked for conflict detection. 
+
+Agent state footprints. The three scopes suggest an underlying model. Each task operates with a read set and a write set comprising items from any scope: a repository file, the agent’s context itself, a blackboard entry, or a tool call result. Together, they form the task’s state footprint . Two tasks conflict if one writes an item that the other reads or writes, and a schedule is conflict-ordered if every pair of conflicting tasks is ordered. Tracking an agent’s footprint is hard because the read and write sets are not fixed a priori. An agent’s read/write set is materialized in its context window, and new dependencies may emerge during execution. A sound approxi-mation is to record everything an agent observes through its tool calls and task inputs. Interestingly, one can treat agent searches like predicate reads. Since agents can perform semantic recovery 
+
+rather than rolling back to the state before a failed or conflicting task, an agent may be able to self-heal from a half-written file or a conflicting state mutation. But the orchestrator needs to have a complete picture of what state has been mutated, and this can be provided by our proposed state footprints. 
+
+## 6 VISION AND RESEARCH CHALLENGES 
+
+Making MAS reliable requires rethinking how transactional data-base guarantees meet the unique challenges of MAS. Existing work addresses individual pieces: isolation [37, 40], fault tolerance [7], and replanning [31], but none treat state management holistically across all three considered scopes. We argue that next-generation orchestrators should generalize: the state footprint of each task is de-clared or inferred (§5), and the orchestrator records the provenance linking each write to the tasks that consumed it. This separates nondeterministic LLM behavior from deterministic guarantees: the plan and task actions come from LLMs, which sample outputs and may be wrong, but the guarantees come from a deterministic or-chestrator that records footprints and enforces ordering regardless of LLM behavior. We outline this vision via well-established ACID concepts and identify open research questions. 
+
+> 4
+
+## 6.1 Atomicity and Reversibility 
+
+A database transaction’s writes target a single storage engine that can undo them. In contrast, an agent task may edit files in a local checkout, insert into a database, update configuration files, and call a web service, each with its own notion of versions, if any. Reverting any of these systems in isolation is well understood, e.g., git, filesystem sandboxes, ZFS snapshots, etc. But reverting a task 
+
+requires these heterogeneous systems to roll back together, to states corresponding to the same logical point . Coordinated rollback has been studied for relational databases, sagas [22], durable workflows [4, 49], and cloud applications [44], but not across a mix of these systems touched by a single agent. Parallelism compounds the problem: when concurrent agents write to shared (external) state, aborting one agent must not undo the effects of another. 
+
+Our vision. Every task execution should carry a transaction iden-tifier that propagates to every system it touches: the harness, the orchestrator, and each tool. Tool calls are recorded against this iden-tifier together with the task’s footprint (§5), so that the orchestrator can abort a task by reverting every write: through a snapshot where the system supports versions, and through a compensation action where it does not. Because agents spawn sub-agents, identifiers must nest, so that a sub-task can be aborted without aborting its parent. Footprints also scope aborts under parallelism: only the aborted task’s writes, and the tasks that read them, are undone, while concurrent tasks with disjoint footprints proceed. 
+
+Open research questions. (i) How can filesystems, databases, version control, and web services agree on versioning conventions so that one transaction identifier maps to a consistent snapshot in each? (ii) What is the right abort granularity for long-running agent tasks: the whole task, individual tool calls, or reasoning steps in between? (iii) When should an orchestrator roll back, and when should it let an agent repair its partial effects via semantic recovery? 
+
+## 6.2 Consistency and Isolation 
+
+Agents’ concurrent access to shared state may cause their actions to interfere, giving rise to concurrency anomalies such as lost updates, inconsistent reads, or writes that lead to an incorrect state. The ACID notion of consistency [23] requires that a transaction never leaves the database in violation of its integrity constraints; a seem-ingly simple invariant, but very hard to get right in databases. The agentic analogue is that an orchestration must preserve the task’s invariants . Those invariants, however, vary per task. In a coding task, a trivial invariant could be that the repository must compile and pass its tests. Orchestrator state poses little difficulty here: the orchestrator owns plans, dependency graphs, and task status, and can check their invariants directly. External state is different; its invariants are implicit and checked late (e.g., at git push ). In Ex-ample 3.1, T0’s removal of providing_args broke the invariant that every referenced attribute exists, yet the only check was a test suite at commit. That violation was caught because it failed loudly. However, the T1 and T2 fixture collision passed silently and could contaminate the remote repository. While the orchestrator state remained consistent throughout, the repository did not. Isolation governs when a transaction’s effects become visible to others. For external state, the answer differs by resource: a local checkout can hold writes from the remote repository but not from co-located tasks, whereas a third-party service exposes an effect immediately. Agentic isolation (in the database sense rather than sandboxing for security) also extends beyond data, e.g., acquiring a lock before triggering a deployment. The core difficulty, however, is that a task’s state footprint is unknown a priori: it spans scopes and emerges only during execution. Consider a write skew : a refactor-ing agent sees no references to providing_args and removes its definition, while a concurrent debugging agent sees the definition and adds a reference. They edit different files and merge without a textual conflict, yet violate the invariant that every reference re-solves. A strong guarantee is serializability [42], where tasks appear to execute atomically. However, this does not fit MASs, involving long-running, nested computations. 
+
+Our vision. Orchestrators should take responsibility for concur-rency control [11]: agents declare, or the orchestrator infers, tasks’ state footprints, and the orchestrator detects schedules that are not conflict-ordered before their effects are published. Isolation should then be defined per resource class, stating when a task’s effects become observable to tasks sharing local state and to outside observers. A detected conflict must invalidate both the conflicting writes and every decision derived from them 2. Rolling back is not the only remedy: with invariant-guided semantic recovery , agents revise invalidated decisions and repair conflicting effects, with ap-plication invariants serving as the acceptance criterion for the resulting state [33]. We envision novel hierarchies of agent-centric consistency [50] and isolation levels [2] tailored to MAS. 
+
+Open research questions. (i) How can invariants over internal and external state be specified, or inferred from user intent? (ii) At what granularity should observed reads be tracked (files, functions, or API contracts) to avoid false conflicts that needlessly limit parallelism? (iii) What agent-centric consistency and isolation levels can we devise to navigate performance-accuracy trade-offs? 
+
+## 6.3 Durability and Fault Tolerance 
+
+In MASs, “committed” (i.e., durable) requires a commit that spans many systems with different guarantees: a git push, a database write, a third-party API call. The orchestrator can only acknowledge a task as complete once each system acknowledges its part. Acknowl-edgments must be surfaced hierarchically, from external systems to tools, through the agent harness and all the way to the orchestrator. Upon failure, the standard remedy for recovery, replaying a failed task, assumes deterministic and idempotent execution. LLM agents offer neither: re-running a task samples a different output, and its tool calls may repeat external side effects. What can be recovered, and how, depends on the state scope (Table 2): versioned external state can be restored from a snapshot [10], unversioned effects re-quire compensation [22], derived artifacts can be recomputed, and agent context can only be regenerated by re-prompting. 
+
+Our vision. The provenance recorded alongside footprints should become part of a recovery log. On failure, the orchestrator discards only the state, causally downstream of the failed write, restores it per scope, and maintains a ledger of compensations for effects it cannot roll back. Tool calls carry idempotency keys derived from 
+
+> 2While LangGraph provides programmers with the means to handle state conflicts [34], it does not track the full state footprint proposed in this paper.
+> 5
+
+the task’s transaction identifier (§6.1), so that a replay does not repeat side effects that have already taken place. To make replay deterministic, the orchestrator should further log every LLM output and tool response of a task, as durable execution engines log activity results in their event history [49]. A replayed task consumes the logged results up to the point of failure instead of resampling them. External systems, in turn, must acknowledge when an effect has become durable and visible, not merely that a request was accepted. Instead of replaying a failed agent from scratch, the orchestrator can hand the recorded footprint and partial effects to a fresh agent, in order to attempt semantic recovery. Importantly, under paral-lelism, tasks whose footprints are not dependent on the failed task’s footprint can continue unaffected. 
+
+Open research questions. (i) What constitutes an agent’s foot-print checkpoint: can we checkpoint its context at an intermediate reasoning step, so that recovery need not restart the task? (ii) How can we extend existing recovery mechanisms to deal with heavy non-determinism? (iii) How can durability acknowledgments from heterogeneous systems compose into a single, trustworthy commit? 
+
+## 6.4 Reuse and Dynamic Replanning 
+
+Agents run loops: they try out branches of computation, evaluate their own progress, and revise their plans as they discover new information. Traditional systems would restart a failed task from scratch, discarding many iterations of costly reasoning. Unless the verified work of a failed run can be salvaged, a rerun re-executes ev-ery task, including those whose results were unaffected by missing dependencies. Reuse, however, requires knowing which intermedi-ate results remain valid. A result that was checkpointed before an agent discovered a new data source, for instance, may no longer be valid, while a result whose inputs have not changed is safe to keep. 
+
+Our vision. Footprints and provenance turn reuse into a valid-ity check. A task’s result remains valid if no item in its read set changed since the result was produced, much as incremental view maintenance decides which views to refresh. Replanning then be-comes a “diff” between the old and new plan rather than a restart. Within long-running loops, nested checkpoints in the style of Na-iad’s timestamps [41] allow an agent to resume from its last valid iteration instead of from the start. Under parallelism, a newly added dependency serializes only the conflicting tasks, so the rest of the plan keeps running concurrently. 
+
+Open research questions. (i) When is a checkpointed agent result reusable, given that a fresh run would sample different inputs and produce a different chain of thought? (ii) Can we build cost models to predict the trade-off between checkpointing cost and task replay? (iii) How should checkpoints be taken in nested agent loops so that recovery resumes mid-loop without persisting every iteration? 
+
+## 6.5 Agent-Ready External Systems 
+
+The mechanisms above assume that external systems cooperate, yet most were built for human-paced clients whose requests are infrequent, deliberate, and mostly correct. Agents invert this as-sumption: they explore through speculation [36], issue many re-quests in parallel, and many of their effects will later be aborted, retried, or compensated. An agent that mistakenly provisions vir-tual machines or triggers a payment leaves the orchestrator with no means of undoing the effect beyond an idempotency id and a compensation. We therefore argue that external stateful systems must be redesigned for abort-heavy, stateful workloads. 
+
+Our vision. We envision five primitives. First, external systems accept a form of transaction identifier of a task, propagate it to downstream calls, and can revert all associated effects. Second, writes are either (i) tentative by default and take effect only upon confirmation, following the try-confirm-cancel (TCC) pattern [25, 43] or (ii) compensable [22]. Third, writes can be conditioned on the state that their task reads, similarly to predicated single-shot transactions [29]. Fourth, every operation declares whether it is read-only, idempotent, or reversible, together with its inverse. Tool annotations of MCP [39] are already an early step in this direction. Fifth, and most importantly, external systems offer cheap state versioning/branching, so that parallel agents can each speculate on a private copy [36] and merge through a step that surfaces conflicts. 
+
+Open research questions. (i) Can we create protocols that carry transaction identifiers, read preconditions, visibility contracts, and share read/write sets across arbitrary agents and services? (ii) Agen-tic transactions run for minutes or hours; how should systems bound this retention, e.g., by expiring tentative writes into au-tomatic cancellations, without aborting legitimate long-running work? (iii) Are novel compensation “contracts”, apart from SAGAs and TCC, needed in order to support emerging agentic workloads? 
+
+## 7 THE ROAD AHEAD 
+
+The four guarantees we used here are not orthogonal: they rest on the same substrate, namely state footprints and the provenance that links each write to the tasks that read it. Atomicity uses write sets to determine what to undo. Isolation uses read and write sets to detect conflicts. Recovery uses provenance to discard only causally dependent downstream state. Reuse uses read sets to decide which results remain valid. What differs across scopes is only the guaran-tee enforcement mechanism, and in external state that mechanism must be exposed by the systems themselves. An orchestrator that records footprints can provide all four guarantees, and relax each independently where parallelism matters more than strictness. We focused on coding agents as the most mature agentic use case, and because git provides a natural transactional substrate: staging, atomic commits, and cheap rollback. Most domains lack such a sub-strate. Supply-chain operations, scheduling, and incident response operate without version control; effects are immediately visible and often irreversible. Human-in-the-loop checkpoints offer a safeguard today, but time-critical tasks demand autonomous execution. These domains need guarantees even more than coding does, and they depend most on external systems becoming agent-ready. One may argue that better models can make these concerns ob-solete. We argue for the opposite: stronger models will be trusted with longer tasks, more parallel agents, and more consequential side effects, which enlarges exactly the state that must be coordi-nated. Coordination, isolation, and recovery are properties of the system, not of the model. The data management community has spent decades of researching methods and abstractions. Agentic orchestration is where they are needed next. 
+
+> 6
+
+## REFERENCES 
+
+[1] Sarita V. Adve and Kourosh Gharachorloo. 1996. Shared Memory Consistency Models: A Tutorial. Computer 29, 12 (1996), 66–76. [2] Atul Adya. 1999. Weak Consistency: A Generalized Theory and Optimistic Im-plementations for Distributed Transactions . Ph.D. Dissertation. Massachusetts Institute of Technology, Cambridge, MA, USA. https://hdl.handle.net/1721.1/9333 [3] Ailidani Ailijiang, Aleksey Charapko, and Murat Demirbas. 2019. Dissecting the performance of strongly-consistent replication protocols. In Proceedings of the 2019 International Conference on Management of Data . 1696–1710. [4] Amazon Web Services. 2025. AWS Lambda Announces Durable Functions for Multi-Step Applications and AI Workflows. https://aws.amazon.com/about-aws/ whats-new/2025/12/lambda-durable-multi-step-applications-ai-workflows/. Ac-cessed: 2026-09-30. [5] Anthropic. 2024. The Claude 3 Model Family: Opus, Sonnet, Haiku . Model Card. Anthropic. https://www-cdn.anthropic.com/ de8ba9b01c9ab7cbabf5c33b80b7bbc618857627/Model_Card_Claude_3.pdf Accessed: 2026-07-30. [6] Anthropic. 2026. Pricing — Claude Platform Docs. https://platform.claude.com/ docs/en/about-claude/pricing. Accessed: 2026-07-30. [7] Shubhi Asthana, Chad DeLuca, and Hima Patel. 2026. Structured State Man-agement for Agentic Data Pipelines: Bounded Context, Schema Contracts, and Selective Recovery. Proceedings of the VLDB Endowment. ISSN 2150 (2026), 8097. [8] Peter Bailis, Aaron Davidson, Alan Fekete, Ali Ghodsi, Joseph M Hellerstein, and Ion Stoica. 2013. Highly available transactions: Virtues and limitations. 
+
+Proceedings of the VLDB Endowment 7, 3 (2013), 181–192. [9] Tanav Singh Bajaj, Nikhil Singh, Karan Anand, and Eishkaran Singh. 2026. Posi-tion: Safety and Fairness in Agentic AI Depend on Interaction Topology, Not on Model Scale or Alignment. arXiv preprint arXiv:2605.01147 (2026). [10] Philip A Bernstein and Nathan Goodman. 1983. Multiversion concurrency control—theory and algorithms. ACM Transactions on Database Systems (TODS) 
+
+8, 4 (1983), 465–483. [11] Philip A. Bernstein, Vassos Hadzilacos, and Nathan Goodman. 1987. Concurrency Control and Recovery in Database Systems . Addison-Wesley. [12] Islem Bouzenia, Premkumar Devanbu, and Michael Pradel. 2025. Repairagent: An autonomous, llm-based agent for program repair. In 2025 IEEE/ACM 47th International Conference on Software Engineering (ICSE) . IEEE, 2188–2200. [13] Harrison Chase. 2022. LangChain . https://github.com/langchain-ai/langchain [14] Yuheng Cheng, Ceyao Zhang, Zhengwen Zhang, Xiangrui Meng, Sirui Hong, Wenhao Li, Zihao Wang, Zekai Wang, Feng Yin, Junhua Zhao, et al. 2026. Explor-ing Large Language Model-Based Intelligent Agents: Definitions, Methods, and Prospects. Wiley Interdisciplinary Reviews: Data Mining and Knowledge Discovery 
+
+16, 3 (2026), e70111. [15] Yufan Dang, Shu Yao, Bowen Lai, Chenting Xu, Ruijie Shi, Wai-Shing Leung, Huatao Li, Chen Qian, and Zhiyuan Liu. 2026. ChatDev 2.0: A No-Code Multi-Agent Platform for Developing Everything. arXiv preprint arXiv:2609.00714 
+
+(2026). [16] Ahmed M Darwish, Essam A Rashed, and Ghada Khoriba. 2025. Mitigating llm hallucinations using a multi-agent framework. Information 16, 7 (2025), 517. [17] Django Software Foundation. [n.d.]. Django. https://www.djangoproject.com. Web framework. Accessed 2026-07-09. [18] Jon Dufresne. 2020. Ticket #31327: Deprecate providing_args argument from 
+
+Signal . https://code.djangoproject.com/ticket/31327. Deprecated in Django 3.1 (commit 769cee5); removed in Django 4.0. Accessed 2026-07-09. [19] Lutfi Eren Erdogan, Nicholas Lee, Sehoon Kim, Suhong Moon, Hiroki Furuta, Gopala Anumanchipalli, Kurt Keutzer, and Amir Gholami. 2025. Plan-and-Act: Improving Planning of Agents for Long-Horizon Tasks. In Proceedings of the 42nd International Conference on Machine Learning (ICML) (PMLR) , Vol. 267. 15419–15462. [20] Jinyuan Fang, Yanwen Peng, Xi Zhang, Yingxu Wang, Xinhao Yi, Guibin Zhang, Yi Xu, Bin Wu, Siwei Liu, Zihao Li, et al. 2025. A comprehensive survey of self-evolving ai agents: A new paradigm bridging foundation models and lifelong agentic systems. arXiv preprint arXiv:2508.07407 (2025). [21] Mehmet Fırat and Saniye Kuleli. 2023. What if GPT4 became autonomous: The Auto-GPT project and use cases. Journal of Emerging Computer Technologies 3, 1 (2023), 1–6. [22] Hector Garcia-Molina and Kenneth Salem. 1987. Sagas. ACM Sigmod Record 16, 3 (1987), 249–259. [23] Jim Gray and Andreas Reuter. 1992. Transaction processing: concepts and tech-niques . Elsevier. [24] Junda He, Christoph Treude, and David Lo. 2025. Llm-based multi-agent systems for software engineering: Literature review, vision, and the road ahead. ACM Transactions on Software Engineering and Methodology 34, 5 (2025), 1–30. [25] Pat Helland. 2007. Life beyond Distributed Transactions: an Apostate’s Opinion. In Third Biennial Conference on Innovative Data Systems Research (CIDR) .[26] Maurice Herlihy and J. Eliot B. Moss. 1993. Transactional Memory: Architectural Support for Lock-Free Data Structures. In ISCA . ACM, 289–300. [27] Sirui Hong, Mingchen Zhuge, Jonathan Chen, Xiawu Zheng, Yuheng Cheng, Jinlin Wang, Ceyao Zhang, Steven Yau, Zijuan Lin, Liyang Zhou, et al. 2024. MetaGPT: Meta programming for a multi-agent collaborative framework. In 
+
+International Conference on Learning Representations , Vol. 2024. 23247–23275. [28] Xu Huang, Weiwen Liu, Xiaolong Chen, Xingmei Wang, Hao Wang, Defu Lian, Yasheng Wang, Ruiming Tang, and Enhong Chen. 2024. Understanding the planning of LLM agents: A survey. arXiv preprint arXiv:2402.02716 (2024). [29] Joseph Idziorek, Alex Keyes, Colin Lazier, Somu Perianayagam, Prithvi Ra-manathan, James Christopher Sorenson III, Doug Terry, and Akshat Vig. 2023. Distributed Transactions at Scale in Amazon DynamoDB. In 2023 USENIX Annual Technical Conference (USENIX ATC) . USENIX Association, 705–717. [30] Carlos E. Jimenez, John Yang, Alexander Wettig, Shunyu Yao, Kexin Pei, Ofir Press, and Karthik Narasimhan. 2024. SWE-bench: Can Language Models Resolve Real-World GitHub Issues?. In International Conference on Learning Representa-tions (ICLR) .[31] Zoi Kaoudi and Ioana Giurgiu. 2026. Rethinking Query Optimization for Multi-Agent Systems [Vision]. arXiv:2512.11001 [cs.DB] https://arxiv.org/abs/2512. 11001 [32] Ronny Ko, Jiseong Chung, Shuyuan Zheng, Chuan Xiao, Tae-Wan Kim, Makoto Onizuka, and Won-Yong Shin. 2026. Seven security challenges in cross-domain multi-agent LLM systems. npj Artificial Intelligence (2026). [33] Shuvendu K. Lahiri. 2026. Intent Formalization: A Grand Challenge for Reliable Coding in the Age of AI Agents. arXiv:2603.17150 [cs.SE] https://arxiv.org/abs/ 2603.17150 [34] LangChain, Inc. 2024. LangGraph . https://github.com/langchain-ai/langgraph [35] Linzhang Li, Yixin Dong, Guanjie Wang, Ziyi Xu, Alexander Jiang, and Tianqi Chen. 2026. XGrammar-2: Dynamic and Efficient Structured Generation Engine for Agentic LLMs. In Proceedings of the ACM Conference on AI and Agentic Systems .1009–1022. [36] Shu Liu, Soujanya Ponnapalli, Shreya Shankar, Sepanta Zeighami, Alan Zhu, Shubham Agarwal, Ruiqi Chen, Samion Suwito, Shuo Yuan, Ion Stoica, Matei Zaharia, Alvin Cheung, Natacha Crooks, Joseph E. Gonzalez, and Aditya G. Parameswaran. 2026. Supporting Our AI Overlords: Redesigning Data Systems to be Agent-First. In 16th Annual Conference on Innovative Data Systems Research (CIDR) .[37] Hongtao Lyu, Dingyan Zhang, Mingyu Wu, Xingda Wei, and Haibo Chen. 2026. CoAgent: Concurrency Control for Multi-Agent Systems. arXiv preprint arXiv:2606.15376 (2026). [38] Arun Malik. 2026. Autonomous Incident Resolution at Hyperscale: An Agentic AI Architecture for Network Operations. arXiv preprint arXiv:2606.09122 (2026). [39] Model Context Protocol. 2025. Model Context Protocol Specification, Version 2025-06-18. https://modelcontextprotocol.io/specification/2025-06-18. [40] Barzan Mozafari. 2026. BEGIN AI TRANSACTION: Semantic Isolation for Durable AI Workflows. arXiv preprint arXiv:2608.05412 (2026). [41] Derek G Murray, Frank McSherry, Rebecca Isaacs, Michael Isard, Paul Barham, and Martín Abadi. 2013. Naiad: a timely dataflow system. In Proceedings of the Twenty-Fourth ACM Symposium on Operating Systems Principles . 439–455. [42] Christos H. Papadimitriou. 1979. The Serializability of Concurrent Database Updates. J. ACM 26, 4 (1979), 631–653. https://doi.org/10.1145/322154.322158 [43] Guy Pardon and Cesare Pautasso. 2014. Atomic Distributed Transactions: a RESTful Design. In Proceedings of the 23rd International Conference on World Wide Web (WWW Companion) . ACM, 943–948. https://doi.org/10.1145/2567948. 2579221 [44] Kyriakos Psarakis, George Christodoulou, Georgios Siachamis, Marios Fragk-oulis, and Asterios Katsifodimos. 2025. Styx: Transactional stateful functions on streaming dataflows. Proceedings of the ACM on Management of Data 3, 3 (2025), 1–28. [45] Chen Qian, Wei Liu, Hongzhang Liu, Nuo Chen, Yufan Dang, Jiahao Li, Cheng Yang, Weize Chen, Yusheng Su, Xin Cong, et al. 2024. Chatdev: Communicative agents for software development. In Proceedings of the 62nd annual meeting of the association for computational linguistics (volume 1: Long papers) . 15174–15186. [46] J. C. Reynolds. 2002. Separation Logic: A Logic for Shared Mutable Data Struc-tures. In Proceedings of the 17th Annual IEEE Symposium on Logic in Com-puter Science (LICS) . IEEE Computer Society, Copenhagen, Denmark, 55–74. https://doi.org/10.1109/LICS.2002.1029817 [47] Dennis E. Shasha and Marc Snir. 1988. Efficient and Correct Execution of Parallel Programs that Share Memory. ACM Trans. Program. Lang. Syst. 10, 2 (1988), 282–312. [48] Jinxin Shi, Jiabao Zhao, Xingjiao Wu, Ruyi Xu, Yuan-Hao Jiang, and Liang He. 2025. Mitigating reasoning hallucination through multi-agent collaborative filtering. Expert Systems with Applications 263 (2025), 125723. [49] Temporal Technologies. 2026. Temporal: Durable Execution Platform. https: //docs.temporal.io/. Accessed: 2026-09-30. [50] Paolo Viotti and Marko Vukolic. 2016. Consistency in Non-Transactional Dis-tributed Storage Systems. ACM Comput. Surv. 49, 1 (2016), 19:1–19:34. [51] Lei Wang, Chen Ma, Xueyang Feng, Zeyu Zhang, Hao Yang, Jingsen Zhang, Zhiyuan Chen, Jiakai Tang, Xu Chen, Yankai Lin, et al. 2024. A survey on large language model based autonomous agents. Frontiers of computer science 18, 6 
+
+> 7
+
+(2024), 186345. [52] Lei Wang, Wanyu Xu, Yihuai Lan, Zhiqiang Hu, Yunshi Lan, Roy Ka-Wei Lee, and Ee-Peng Lim. 2023. Plan-and-solve prompting: Improving zero-shot chain-of-thought reasoning by large language models. In Proceedings of the 61st annual meeting of the association for computational linguistics (volume 1: Long papers) .2609–2634. [53] Yingxu Wang, Siwei Liu, Jinyuan Fang, and Zaiqiao Meng. 2025. Evoagentx: An automated framework for evolving agentic workflows. In Proceedings of the 2025 Conference on Empirical Methods in Natural Language Processing: System Demonstrations . 643–655. [54] Qingyun Wu, Gagan Bansal, Jieyu Zhang, Yiran Wu, Beibin Li, Erkang Zhu, Li Jiang, Xiaoyun Zhang, Shaokun Zhang, Jiale Liu, Ahmed Hassan Awadallah, Ryen W White, Doug Burger, and Chi Wang. 2024. AutoGen: Enabling Next-Gen LLM Applications via Multi-Agent Conversation. In First Conference on Language Modeling (COLM) . https://openreview.net/forum?id=BAakY1hNKS [55] Tianbao Xie, Danyang Zhang, Jixuan Chen, Xiaochuan Li, Siheng Zhao, Ruisheng Cao, Toh J Hua, Zhoujun Cheng, Dongchan Shin, Fangyu Lei, et al. 2024. Os-world: Benchmarking multimodal agents for open-ended tasks in real computer environments. Advances in Neural Information Processing Systems 37 (2024), 52040–52094. [56] Ke Yang, Jiateng Liu, John Wu, Chaoqi Yang, Yi Fung, Sha Li, Zixuan Huang, Xu Cao, Xingyao Wang, Heng Ji, and ChengXiang Zhai. 2024. If LLM Is the Wizard, Then Code Is the Wand: A Survey on How Code Empowers Large Language Models to Serve as Intelligent Agents. In ICLR 2024 Workshop on Large Language Model (LLM) Agents . https://openreview.net/forum?id=8dmNOD9hbq [57] Yingxuan Yang, Huacan Chai, Shuai Shao, Yuanyi Song, Siyuan Qi, Renting Rui, and Weinan Zhang. 2026. Agentnet: Decentralized evolutionary coordination for llm-based multi-agent systems. Advances in Neural Information Processing Systems 38 (2026), 107309–107336. [58] Yingxuan Yang, Qiuying Peng, Jun Wang, Ying Wen, and Weinan Zhang. 2025. Unlocking the potential of decentralized llm-based mas: Privacy preservation and monetization in collective intelligence. In Proceedings of the 24th International Conference on Autonomous Agents and Multiagent Systems . 2896–2900. [59] Zhenkun Yang, Chuanhui Yang, Fusheng Han, Mingqiang Zhuang, Bing Yang, Zhifeng Yang, Xiaojun Cheng, Yuzhong Zhao, Wenhui Shi, Huafeng Xi, et al. 2022. OceanBase: A 707 Million tpmC Distributed Relational Database System. 
+
+Proc. VLDB Endow. 15, 12 (2022), 3385–3397. [60] Jiaheng Yin, Yongzhi Qi, Jianshen Zhang, Dongyang Geng, Zhengyu Chen, Hao Hu, Wei Qi, and Zuo-Jun Max Shen. 2025. Rethinking supply chain planning: A generative paradigm. arXiv preprint arXiv:2509.03811 (2025). [61] Guibin Zhang, Kaijie Chen, Guancheng Wan, Heng Chang, Hong Cheng, Kun Wang, Shuyue Hu, and Lei Bai. 2025. Evoflow: Evolving diverse agentic workflows on the fly. arXiv preprint arXiv:2502.07373 (2025). [62] Han Zhou, Xingchen Wan, Ruoxi Sun, Hamid Palangi, Shariq Iqbal, Ivan Vulić, Anna Korhonen, and Sercan Arik. 2026. Multi-agent design: Optimizing agents with better prompts and topologies. In International Conference on Learning Representations , Vol. 2026. 15844–15872.
